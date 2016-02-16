@@ -16,7 +16,7 @@ namespace Continuity.Controls
         #region Fields
 
         private static readonly string DRAG_DISTANCE = "(ScrollingProperties.Translation.X + SelectedIndex * FullWidth)";
-        private static readonly string DRAG_DIRECTION = $"{DRAG_DISTANCE} < 0";
+        private static readonly string DRAG_DIRECTION = $"({DRAG_DISTANCE} < 0)";
         private static readonly string DRAG_DISTANCE_PCT = $"{DRAG_DISTANCE} / FullWidth";
 
         private ScrollViewer _scrollViewer;
