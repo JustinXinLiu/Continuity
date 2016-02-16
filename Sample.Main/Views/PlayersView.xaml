@@ -1,0 +1,116 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:Sample.Main.Views"
+      xmlns:m="using:Sample.Main.Models"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:Continuity.Controls"
+      x:Class="Sample.Main.Views.PlayersView"
+      mc:Ignorable="d"
+      DataContext="{Binding Players, Source={StaticResource Locator}}"
+      x:Name="Self">
+
+    <Grid x:Name="LayoutRoot"> 
+        <controls:Tab x:Name="Tab">
+            <controls:TabItem Header="top 10">
+                <ListView ItemsSource="{x:Bind Vm.TopTenPlayers}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="m:Player">
+                            <Grid x:Name="Root"
+                                  Background="Transparent"
+                                  Height="80">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="3*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle x:Name="Avatar"
+                                           Width="80"
+                                           Height="80"
+                                           Grid.RowSpan="2"
+                                           Fill="Transparent"
+                                           Visibility="Collapsed" />
+                                <TextBlock x:Name="FullName"
+                                           Grid.RowSpan="2"
+                                           Text="{x:Bind FullName}"
+                                           FontWeight="SemiBold"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           Margin="12" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </controls:TabItem>
+            <controls:TabItem Header="mvp candidates">
+                <ListView ItemsSource="{x:Bind Vm.MvpCandidates}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="m:Player">
+                            <Grid x:Name="Root"
+                                  Background="Transparent"
+                                  Height="80">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="3*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle x:Name="Avatar"
+                                           Width="80"
+                                           Height="80"
+                                           Grid.RowSpan="2"
+                                           Fill="Transparent"
+                                           Visibility="Collapsed" />
+                                <TextBlock x:Name="FullName"
+                                           Grid.RowSpan="2"
+                                           Text="{x:Bind FullName}"
+                                           FontWeight="SemiBold"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           Margin="12" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </controls:TabItem>
+            <controls:TabItem Header="my favorite">
+                <ListView ItemsSource="{x:Bind Vm.MyFavoritePlayers}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="m:Player">
+                            <Grid x:Name="Root"
+                                  Background="Transparent"
+                                  Height="80">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="3*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle x:Name="Avatar"
+                                           Width="80"
+                                           Height="80"
+                                           Grid.RowSpan="2"
+                                           Fill="Transparent"
+                                           Visibility="Collapsed" />
+                                <TextBlock x:Name="FullName"
+                                           Grid.RowSpan="2"
+                                           Text="{x:Bind FullName}"
+                                           FontWeight="SemiBold"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           Margin="12" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </controls:TabItem>
+        </controls:Tab>
+    </Grid>
+</Page>

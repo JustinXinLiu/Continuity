@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Continuity.Extensions
 {
-    public static partial class Extensions
+    public static partial class UtilExtensions
     {
         public static float ToFloat(this double value)
         {

@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace Continuity.Extensions
 {
-    public static partial class Extensions
+    public static partial class AnimationExtensions
     {
         #region Composition
 

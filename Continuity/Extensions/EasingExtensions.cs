@@ -3,7 +3,7 @@ using Windows.UI.Composition;
 
 namespace Continuity.Extensions
 {
-    public static partial class Extensions
+    public static partial class EasingExtensions
     {
         public static CubicBezierEasingFunction CreateEaseInCubic(this Compositor compositor)
         {
