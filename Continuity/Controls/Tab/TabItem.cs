@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Continuity.Controls
 {
@@ -30,5 +31,10 @@ namespace Continuity.Controls
             }));
 
         #endregion
+
+        protected override void OnPointerWheelChanged(PointerRoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
