@@ -7,7 +7,6 @@ namespace Continuity.Controls
         public TabHeaderItem()
         {
             DefaultStyleKey = typeof(TabHeaderItem);
-            GroupName = "Headers";
         }
     }
 }

@@ -44,8 +44,8 @@ namespace Sample.Main.ViewModels
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            var id = long.Parse(parameter.ToString());
-            Player = await _playerService.GetPlayerAsync(id);
+            //var id = long.Parse(parameter.ToString());
+            //Player = await _playerService.GetPlayerAsync(id);
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)

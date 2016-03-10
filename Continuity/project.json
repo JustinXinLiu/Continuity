@@ -1,7 +1,8 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Win2D.uwp" : "1.15.0"
+    "Robmikh.Util.CompositionImageLoader": "0.2.1-alpha",
+    "Win2D.uwp": "1.16.0"
   },
   "frameworks": {
     "uap10.0": {}

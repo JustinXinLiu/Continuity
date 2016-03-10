@@ -18,7 +18,7 @@ namespace Continuity.Controls
         private static readonly string DRAG_DISTANCE = "(ScrollingProperties.Translation.X + SelectedIndex * FullWidth)";
         private static readonly string DRAG_DIRECTION = $"{DRAG_DISTANCE} < 0";
         private static readonly string DRAG_DISTANCE_PCT = $"{DRAG_DISTANCE} / FullWidth";
-        private static readonly string BUG_FIXING_EXPRESSION = "+ (0 + (0 + (0 + (0 + (0 + 0)))))";
+        //private static readonly string BUG_FIXING_EXPRESSION = "+ (0 + (0 + (0 + (0 + (0 + 0)))))";
 
         private ScrollViewer _scrollViewer;
         private Border _headersPanelHost;
@@ -155,61 +155,8 @@ namespace Continuity.Controls
 
             InitializeCombositionObjects();
 
-            SizeChanged += (s, e) =>
-            {
-                foreach (var item in Items)
-                {
-                    var tabItem = ContainerFromItem(item) as TabItem;
-
-                    if (tabItem != null)
-                    {
-                        tabItem.Width = ActualWidth;
-                        tabItem.Height = ActualHeight;
-
-                        UpdateScrollViewerHorizontalOffset(this, SelectedIndex);
-                    }
-                }
-            };
-
-            Loaded += (sender, args) =>
-            {
-                for (int i = 0; i < Items.Count; i++)
-                {
-                    var tabItem = ContainerFromIndex(i) as TabItem;
-
-                    if (tabItem != null)
-                    {
-                        var header = new TabHeaderItem
-                        {
-                            Content = tabItem.Header,
-                            ContentTemplate = HeaderTemplate,
-                            IsChecked = i == 0
-                        };
-
-                        header.Checked += (s, e) =>
-                        {
-                            UpdateHeaderVisuals();
-
-                            var h = (TabHeaderItem)s;
-                            SelectedIndex = GetHeaderIndex(h);
-                        };
-
-                        header.Unchecked += (s, e) =>
-                        {
-                            UpdateHeaderVisuals();
-                        };
-
-                        header.SizeChanged += async (s, e) =>
-                        {
-                            UpdateHeaderVisuals();
-
-                            await SyncUnderlineVisual();
-                        };
-
-                        Headers.Add(header);
-                    }
-                }
-            };
+            SizeChanged += OnTabSizeChanged;
+            Loaded += OnTabLoaded;
         }
 
         protected override DependencyObject GetContainerForItemOverride()
@@ -226,6 +173,76 @@ namespace Continuity.Controls
 
         #region Handlers
 
+        private void OnTabSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            foreach (var item in Items)
+            {
+                var tabItem = ContainerFromItem(item) as TabItem;
+
+                if (tabItem != null)
+                {
+                    tabItem.Width = ActualWidth;
+                    tabItem.Height = ActualHeight;
+
+                    UpdateScrollViewerHorizontalOffset(this, SelectedIndex);
+                }
+            }
+        }
+
+        private void OnTabLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnTabLoaded;
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                var tabItem = ContainerFromIndex(i) as TabItem;
+
+                if (tabItem != null)
+                {
+                    var header = new TabHeaderItem
+                    {
+                        Content = tabItem.Header,
+                        ContentTemplate = HeaderTemplate,
+                        IsChecked = i == 0
+                    };
+
+                    // Have to do this to avoid a bug where RadioButton's GroupName 
+                    // doesn't function properly after Reloaded.
+                    header.Loaded += (s, args) =>
+                    {
+                        var h = (TabHeaderItem)s;
+                        h.GroupName = "Headers";
+                    };
+                    header.Unloaded += (s, args) =>
+                    {
+                        var h = (TabHeaderItem)s;
+                        h.GroupName = string.Empty;
+                    };
+
+                    header.Checked += (s, args) =>
+                    {
+                        UpdateHeaderVisuals();
+
+                        var h = (TabHeaderItem)s;
+                        SelectedIndex = GetHeaderIndex(h);
+                    };
+                    header.Unchecked += (s, args) =>
+                    {
+                        UpdateHeaderVisuals();
+                    };
+
+                    header.SizeChanged += async (s, args) =>
+                    {
+                        UpdateHeaderVisuals();
+
+                        await SyncUnderlineVisual();
+                    };
+
+                    Headers.Add(header);
+                }
+            }
+        }
+
         private async void OnScrollViewerDirectManipulationStarted(object sender, object e)
         {
             _isAnimating = true;
@@ -240,7 +257,7 @@ namespace Continuity.Controls
             var toNextOffsetX = nextHeader == null ? 0 : nextHeader.OffsetX(currentHeader);
             var toPreviousOffsetX = previousHeader == null ? 0 : previousHeader.OffsetX(currentHeader);
 
-            _underlineOffsetAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} {BUG_FIXING_EXPRESSION} ? StartingOffsetX - ToNextOffsetX * {DRAG_DISTANCE_PCT} : StartingOffsetX + ToPreviousOffsetX * {DRAG_DISTANCE_PCT}");
+            _underlineOffsetAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? StartingOffsetX - ToNextOffsetX * {DRAG_DISTANCE_PCT} : StartingOffsetX + ToPreviousOffsetX * {DRAG_DISTANCE_PCT}");
             _underlineOffsetAnimation.SetScalarParameter("StartingOffsetX", startingOffsetX);
             _underlineOffsetAnimation.SetScalarParameter("ToNextOffsetX", toNextOffsetX);
             _underlineOffsetAnimation.SetScalarParameter("ToPreviousOffsetX", toPreviousOffsetX);
@@ -251,7 +268,7 @@ namespace Continuity.Controls
             var nextAndCurrentWidthDiff = nextHeader == null ? 0 : (GetHeaderTextBlock(nextHeader).ActualWidth - GetHeaderTextBlock(currentHeader).ActualWidth).ToFloat();
             var previousAndCurrentWidthDiff = previousHeader == null ? 0 : (GetHeaderTextBlock(previousHeader).ActualWidth - GetHeaderTextBlock(currentHeader).ActualWidth).ToFloat();
 
-            _underlineScaleAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} {BUG_FIXING_EXPRESSION} ? StartingScaleX - NextAndCurrentWidthDiff * {DRAG_DISTANCE_PCT} : StartingScaleX + PreviousAndCurrentWidthDiff * {DRAG_DISTANCE_PCT}");
+            _underlineScaleAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? StartingScaleX - NextAndCurrentWidthDiff * {DRAG_DISTANCE_PCT} : StartingScaleX + PreviousAndCurrentWidthDiff * {DRAG_DISTANCE_PCT}");
             _underlineScaleAnimation.SetScalarParameter("StartingScaleX", startingScaleX);
             _underlineScaleAnimation.SetScalarParameter("NextAndCurrentWidthDiff", nextAndCurrentWidthDiff);
             _underlineScaleAnimation.SetScalarParameter("PreviousAndCurrentWidthDiff", previousAndCurrentWidthDiff);
@@ -261,10 +278,10 @@ namespace Continuity.Controls
             _currentHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"Max(1 - Abs{DRAG_DISTANCE_PCT}, UncheckedStateOpacity)");
             SetSharedParameters(_currentHeaderOpacityAnimation);
 
-            _nextHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} {BUG_FIXING_EXPRESSION} ? UncheckedStateOpacity - {DRAG_DISTANCE_PCT} : UncheckedStateOpacity");
+            _nextHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? UncheckedStateOpacity - {DRAG_DISTANCE_PCT} : UncheckedStateOpacity");
             SetSharedParameters(_nextHeaderOpacityAnimation);
 
-            _previousHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} {BUG_FIXING_EXPRESSION} ? UncheckedStateOpacity : UncheckedStateOpacity + {DRAG_DISTANCE_PCT}");
+            _previousHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? UncheckedStateOpacity : UncheckedStateOpacity + {DRAG_DISTANCE_PCT}");
             SetSharedParameters(_previousHeaderOpacityAnimation);
 
             // Start all animations

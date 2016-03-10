@@ -8,12 +8,14 @@
       x:Class="Sample.Main.Views.PlayersView"
       mc:Ignorable="d"
       DataContext="{Binding Players, Source={StaticResource Locator}}"
-      x:Name="Self">
+      x:Name="Self"
+      NavigationCacheMode="Required">
 
-    <Grid x:Name="LayoutRoot"> 
+    <Grid x:Name="LayoutRoot">
         <controls:Tab x:Name="Tab">
             <controls:TabItem Header="top 10">
-                <ListView ItemsSource="{x:Bind Vm.TopTenPlayers}">
+                <ListView ItemsSource="{x:Bind Vm.TopTenPlayers}"
+                          SelectionChanged="ListView_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
                             <Grid x:Name="Root"
@@ -27,12 +29,11 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Rectangle x:Name="Avatar"
-                                           Width="80"
-                                           Height="80"
-                                           Grid.RowSpan="2"
-                                           Fill="Transparent"
-                                           Visibility="Collapsed" />
+                                <Image x:Name="Avatar"
+                                       Width="80"
+                                       Height="80"
+                                       Grid.RowSpan="2"
+                                       Source="{x:Bind AvatarUrl}" />
                                 <TextBlock x:Name="FullName"
                                            Grid.RowSpan="2"
                                            Text="{x:Bind FullName}"
@@ -45,7 +46,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </controls:TabItem>
-            <controls:TabItem Header="mvp candidates">
+            <controls:TabItem Header="mvp players">
                 <ListView ItemsSource="{x:Bind Vm.MvpCandidates}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
@@ -60,12 +61,11 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Rectangle x:Name="Avatar"
-                                           Width="80"
-                                           Height="80"
-                                           Grid.RowSpan="2"
-                                           Fill="Transparent"
-                                           Visibility="Collapsed" />
+                                <Image x:Name="Avatar"
+                                       Width="80"
+                                       Height="80"
+                                       Grid.RowSpan="2"
+                                       Source="{x:Bind AvatarUrl}" />
                                 <TextBlock x:Name="FullName"
                                            Grid.RowSpan="2"
                                            Text="{x:Bind FullName}"
@@ -78,7 +78,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </controls:TabItem>
-            <controls:TabItem Header="my favorite">
+            <controls:TabItem Header="fav">
                 <ListView ItemsSource="{x:Bind Vm.MyFavoritePlayers}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
@@ -93,12 +93,11 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Rectangle x:Name="Avatar"
-                                           Width="80"
-                                           Height="80"
-                                           Grid.RowSpan="2"
-                                           Fill="Transparent"
-                                           Visibility="Collapsed" />
+                                <Image x:Name="Avatar"
+                                       Width="80"
+                                       Height="80"
+                                       Grid.RowSpan="2"
+                                       Source="{x:Bind AvatarUrl}" />
                                 <TextBlock x:Name="FullName"
                                            Grid.RowSpan="2"
                                            Text="{x:Bind FullName}"
