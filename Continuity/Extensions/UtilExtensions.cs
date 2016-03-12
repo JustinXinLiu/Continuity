@@ -18,6 +18,11 @@ namespace Continuity.Extensions
             return (float)value;
         }
 
+        public static int ToInt(this float value)
+        {
+            return (int)value;
+        }
+
         public static List<FrameworkElement> Children(this DependencyObject parent)
         {
             var list = new List<FrameworkElement>();
@@ -145,6 +150,28 @@ namespace Continuity.Extensions
         {
             var position = element.RelativePosition(other);
             return position.X.ToFloat();
+        }
+
+        public static int Create(this Random random, int min, int max, 
+            Func<int, bool> regenerateIfMet = null, int regenrationMaxCount = 5)
+        {
+            var value = random.Next(min, max);
+
+            if (regenerateIfMet != null)
+            {
+                int i = 0;
+                while (i < regenrationMaxCount && regenerateIfMet(value))
+                {
+                    value = random.Next(min, max);
+                    i++;
+                }
+
+                return value;
+            }
+            else
+            {
+                return value;
+            }
         }
     }
 }

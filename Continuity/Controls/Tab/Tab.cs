@@ -105,7 +105,7 @@ namespace Continuity.Controls
 
         public static readonly DependencyProperty SelectedIndexProperty =
             DependencyProperty.Register("SelectedIndex", typeof(int), typeof(Tab),
-                new PropertyMetadata(0, async (s, dp) =>
+                new PropertyMetadata(0, (s, dp) =>
                 {
                     var self = (Tab)s;
                     var oldIndex = (int)dp.OldValue;
@@ -116,7 +116,7 @@ namespace Continuity.Controls
                     self.SelectionChanged?.Invoke(self, new TabSelectionChangedEventArgs(oldIndex, newIndex));
                     self.SyncCheckedTabHeaderItem(newIndex);
                     UpdateScrollViewerHorizontalOffset(self, newIndex);
-                    await self.SyncUnderlineVisual();
+                    self.SyncUnderlineVisual();
                 }));
 
         public object SelectedItem
@@ -231,11 +231,10 @@ namespace Continuity.Controls
                         UpdateHeaderVisuals();
                     };
 
-                    header.SizeChanged += async (s, args) =>
+                    header.SizeChanged += (s, args) =>
                     {
                         UpdateHeaderVisuals();
-
-                        await SyncUnderlineVisual();
+                        SyncUnderlineVisual();
                     };
 
                     Headers.Add(header);
@@ -338,7 +337,7 @@ namespace Continuity.Controls
             header.IsChecked = true;
         }
 
-        private async Task SyncUnderlineVisual()
+        private void SyncUnderlineVisual()
         {
             var header = TypedHeaders.Single((h) => h.IsChecked == true);
 
@@ -348,9 +347,8 @@ namespace Continuity.Controls
                 var offsetX = textBlock.OffsetX(_headersPanelHost);
                 var scaleX = textBlock.ActualWidth.ToFloat(); // The ActualWidth of the HeaderUnderline Rectangle is 1 so I ignored the /1 here
 
-                var offsetTask = _underline.StartOffsetAnimation(AnimationAxis.X, offsetX, 400, easing: _compositor.CreateEaseInOutCubic());
-                var scaleTask = _underline.StartScaleAnimation(AnimationAxis.X, scaleX, 400, easing: _compositor.CreateEaseInOutCubic());
-                await Task.WhenAll(offsetTask, scaleTask);
+                _underline.StartOffsetAnimation(AnimationAxis.X, offsetX, 400, easing: _compositor.CreateEaseInOutCubic());
+                _underline.StartScaleAnimation(AnimationAxis.X, scaleX, 400, easing: _compositor.CreateEaseInOutCubic());
             }
         }
 
