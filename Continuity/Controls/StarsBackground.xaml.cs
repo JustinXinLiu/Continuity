@@ -33,7 +33,7 @@ namespace Continuity.Controls
         private Inclinometer _inclinometer;
         private uint _desiredReportInterval;
         private ExpressionAnimation _skyViusalOffsetExpressionAnimation;
-        private Visual _skyOffsetReferenceVisual;
+        private CompositionPropertySet _reading;
 
         #endregion
 
@@ -93,7 +93,7 @@ namespace Continuity.Controls
         }
 
         public static readonly DependencyProperty NumberOfBigMovingStarsProperty =
-            DependencyProperty.Register("NumberOfBigMovingStars", typeof(int), typeof(StarsBackground), 
+            DependencyProperty.Register("NumberOfBigMovingStars", typeof(int), typeof(StarsBackground),
                 new PropertyMetadata(150));
 
         #endregion
@@ -126,7 +126,7 @@ namespace Continuity.Controls
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                _skyOffsetReferenceVisual.Offset = new Vector3(e.Reading.RollDegrees, e.Reading.PitchDegrees, 0.0f);
+                _reading.InsertVector3("Offset", new Vector3(e.Reading.RollDegrees, e.Reading.PitchDegrees, 0.0f));
             });
         }
 
@@ -194,6 +194,8 @@ namespace Continuity.Controls
             _skyVisual.Opacity = 0;
 
             _compositor = _skyVisual.Compositor;
+            _reading = _compositor.CreatePropertySet();
+            _reading.InsertVector3("Offset", new Vector3(0.0f, 0.0f, 0.0f));
             _imageLoader = ImageLoaderFactory.CreateImageLoader(_compositor);
             _circleBrush = _compositor.CreateSurfaceBrush();
             _circleBrush.Surface = _imageLoader.LoadImageFromUri(new Uri(StarUriString));
@@ -203,16 +205,13 @@ namespace Continuity.Controls
 
         private void SetupSkyVisualOffsetExpressionAnimation()
         {
-            _skyOffsetReferenceVisual = _compositor.CreateContainerVisual();
-            _skyVisual.Children.InsertAtBottom(_skyOffsetReferenceVisual);
-
             // Kick off an expression animation that links the roll & pitch degress to the -offset of the sky canvas visual
             // TODO: Need to constraint the offset (total offset < dimension * SkyVisualAreaRatio) with
             // CreateConditionalExpressionAnimation once the next mobile build is available.
             _skyViusalOffsetExpressionAnimation = _compositor.CreateExpressionAnimation(
-                "Vector3(SkyVisual.Offset.X - ReferenceVisual.Offset.X * Sensitivity, SkyVisual.Offset.Y - ReferenceVisual.Offset.Y * Sensitivity, 0.0f)");
+                "Vector3(SkyVisual.Offset.X - Reading.Offset.X * Sensitivity, SkyVisual.Offset.Y - Reading.Offset.Y * Sensitivity, 0.0f)");
             _skyViusalOffsetExpressionAnimation.SetReferenceParameter("SkyVisual", _skyVisual);
-            _skyViusalOffsetExpressionAnimation.SetReferenceParameter("ReferenceVisual", _skyOffsetReferenceVisual);
+            _skyViusalOffsetExpressionAnimation.SetReferenceParameter("Reading", _reading);
             _skyViusalOffsetExpressionAnimation.SetScalarParameter("Sensitivity", 0.2f);
             //_skyViusalOffsetExpressionAnimation.SetScalarParameter("MaxDimension", SkyVisualRadius * 2 * SkyVisualAreaRatio);
             _skyVisual.StartAnimation("Offset", _skyViusalOffsetExpressionAnimation);
