@@ -347,8 +347,8 @@ namespace Continuity.Controls
                 var offsetX = textBlock.OffsetX(_headersPanelHost);
                 var scaleX = textBlock.ActualWidth.ToFloat(); // The ActualWidth of the HeaderUnderline Rectangle is 1 so I ignored the /1 here
 
-                _underline.StartOffsetAnimation(AnimationAxis.X, offsetX, 400, easing: _compositor.CreateEaseInOutCubic());
-                _underline.StartScaleAnimation(AnimationAxis.X, scaleX, 400, easing: _compositor.CreateEaseInOutCubic());
+                _underline.StartOffsetAnimation(AnimationAxis.X, null, offsetX, 400, easing: _compositor.CreateEaseInOutCubic());
+                _underline.StartScaleAnimation(AnimationAxis.X, null, scaleX, 400, easing: _compositor.CreateEaseInOutCubic());
             }
         }
 
