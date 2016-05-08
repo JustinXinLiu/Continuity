@@ -96,6 +96,35 @@ namespace Continuity.Extensions
             }
         }
 
+        public static void StartSizeAnimation(this UIElement element, Vector2? from = null, Vector2? to = null,
+            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
+            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
+        {
+            CompositionScopedBatch batch = null;
+
+            var visual = element.Visual();
+            var compositor = visual.Compositor;
+
+            if (completed != null)
+            {
+                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
+                batch.Completed += (s, e) => completed();
+            }
+
+            if (to == null)
+            {
+                to = Vector2.One;
+            }
+
+            visual.StartAnimation("Size",
+                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
+
+            if (batch != null)
+            {
+                batch.End();
+            }
+        }
+
         public static void StartScaleAnimation(this UIElement element, Vector2? from = null, Vector2? to = null,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
@@ -222,6 +251,33 @@ namespace Continuity.Extensions
             }
         }
 
+        public static void StartSizeAnimation(this Visual visual, Vector2? from = null, Vector2? to = null,
+            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
+            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
+        {
+            CompositionScopedBatch batch = null;
+            var compositor = visual.Compositor;
+
+            if (completed != null)
+            {
+                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
+                batch.Completed += (s, e) => completed();
+            }
+
+            if (to == null)
+            {
+                to = Vector2.One;
+            }
+
+            visual.StartAnimation("Size",
+                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
+
+            if (batch != null)
+            {
+                batch.End();
+            }
+        }
+
         public static void StartScaleAnimation(this Visual visual, Vector2? from = null, Vector2? to = null,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
@@ -300,6 +356,20 @@ namespace Continuity.Extensions
 
             animation.Duration = TimeSpan.FromMilliseconds(duration);
             if (delay != 0) animation.DelayTime = TimeSpan.FromMilliseconds(delay);
+            if (from.HasValue) animation.InsertKeyFrame(0.0f, from.Value, easing);
+            animation.InsertKeyFrame(1.0f, to, easing);
+            animation.IterationBehavior = iterationBehavior;
+
+            return animation;
+        }
+
+        public static Vector2KeyFrameAnimation CreateVector2KeyFrameAnimation(this Compositor compositor, Vector2? from, Vector2 to,
+            double duration, double delay, CompositionEasingFunction easing, AnimationIterationBehavior iterationBehavior)
+        {
+            var animation = compositor.CreateVector2KeyFrameAnimation();
+
+            animation.Duration = TimeSpan.FromMilliseconds(duration);
+            animation.DelayTime = TimeSpan.FromMilliseconds(delay);
             if (from.HasValue) animation.InsertKeyFrame(0.0f, from.Value, easing);
             animation.InsertKeyFrame(1.0f, to, easing);
             animation.IterationBehavior = iterationBehavior;

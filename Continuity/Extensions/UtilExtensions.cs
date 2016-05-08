@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using Windows.Foundation;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
@@ -14,6 +16,11 @@ namespace Continuity.Extensions
     public static partial class UtilExtensions
     {
         public static float ToFloat(this double value)
+        {
+            return (float)value;
+        }
+
+        public static float ToFloat(this int value)
         {
             return (float)value;
         }
@@ -152,7 +159,7 @@ namespace Continuity.Extensions
             return position.X.ToFloat();
         }
 
-        public static int Create(this Random random, int min, int max, 
+        public static int Create(this Random random, int min, int max,
             Func<int, bool> regenerateIfMet = null, int regenrationMaxCount = 5)
         {
             var value = random.Next(min, max);
@@ -172,6 +179,28 @@ namespace Continuity.Extensions
             {
                 return value;
             }
+        }
+
+        public static void AddRangeOverTime<T>(this ObservableCollection<T> newCollection, IList<T> oldCollection, TimeSpan duration = default(TimeSpan))
+        {
+            if (duration == default(TimeSpan))
+            {
+                duration = TimeSpan.FromMilliseconds(50);
+            }
+
+            var observable = Observable.Generate(0, i => i <= oldCollection.Count - 1, i => ++i, i => oldCollection[i], i => duration);
+            observable.ObserveOnDispatcher().Subscribe((i) => newCollection.Add(i));
+        }
+
+        public static void ForEachOverTime<T>(this IList<T> oldCollection, Action<T> doWork, TimeSpan duration = default(TimeSpan))
+        {
+            if (duration == default(TimeSpan))
+            {
+                duration = TimeSpan.FromMilliseconds(50);
+            }
+
+            var observable = Observable.Generate(0, i => i <= oldCollection.Count - 1, i => ++i, i => oldCollection[i], i => duration);
+            observable.ObserveOnDispatcher().Subscribe((t) => doWork(t));
         }
     }
 }
