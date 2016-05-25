@@ -178,6 +178,32 @@ namespace Continuity.Extensions
             }
         }
 
+        public static void StartRotationAnimation(this UIElement element, Vector3 rotationAxis, float? from = null, float to = 0,
+            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
+            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
+        {
+            CompositionScopedBatch batch = null;
+
+            var visual = element.Visual();
+            var compositor = visual.Compositor;
+
+            if (completed != null)
+            {
+                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
+                batch.Completed += (s, e) => completed();
+            }
+
+            visual.RotationAxis = rotationAxis;
+
+            visual.StartAnimation("RotationAngleInDegrees",
+                compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
+
+            if (batch != null)
+            {
+                batch.End();
+            }
+        }
+
         public static void StartOpacityAnimation(this UIElement element, float? from = null, float to = 1.0f,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
@@ -195,6 +221,40 @@ namespace Continuity.Extensions
 
             visual.StartAnimation("Opacity", 
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
+
+            if (batch != null)
+            {
+                batch.End();
+            }
+        }
+
+        public static void StartClipAnimation(this Visual visual, ClipAnimationDirection direction, float to,
+            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
+            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
+        {
+            CompositionScopedBatch batch = null;
+
+            if (visual.Size.X == 0 || visual.Size.Y == 0)
+            {
+                throw new ArgumentException("The visual is not properly sized.");
+            }
+
+            var compositor = visual.Compositor;
+
+            if (visual.Clip == null)
+            {
+                var clip = compositor.CreateInsetClip();
+                visual.Clip = clip;
+            }
+
+            if (completed != null)
+            {
+                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
+                batch.Completed += (s, e) => completed();
+            }
+
+            visual.Clip.StartAnimation($"{direction.ToString()}Inset",
+                compositor.CreateScalarKeyFrameAnimation(null, to, duration, delay, easing, iterationBehavior));
 
             if (batch != null)
             {
@@ -319,6 +379,30 @@ namespace Continuity.Extensions
             }
 
             visual.StartAnimation($"Scale.{axis.ToString()}", 
+                compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
+
+            if (batch != null)
+            {
+                batch.End();
+            }
+        }
+
+        public static void StartRotationAnimation(this Visual visual, Vector3 rotationAxis, float? from = null, float to = 0,
+            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
+            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
+        {
+            CompositionScopedBatch batch = null;
+            var compositor = visual.Compositor;
+
+            if (completed != null)
+            {
+                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
+                batch.Completed += (s, e) => completed();
+            }
+
+            visual.RotationAxis = rotationAxis;
+
+            visual.StartAnimation("RotationAngleInDegrees",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
             if (batch != null)
