@@ -32,6 +32,8 @@ namespace Continuity.Controls
         private ExpressionAnimation _underlineOffsetAnimation, _underlineScaleAnimation;
         private ExpressionAnimation _currentHeaderOpacityAnimation, _nextHeaderOpacityAnimation, _previousHeaderOpacityAnimation;
 
+        private bool _isLoaded;
+
         #endregion
 
         public Tab()
@@ -208,10 +210,20 @@ namespace Continuity.Controls
 
                     // Have to do this to avoid a bug where RadioButton's GroupName 
                     // doesn't function properly after Reloaded.
-                    header.Loaded += (s, args) =>
+                    header.Loaded += async (s, args) =>
                     {
+                        // TODO: There should be a better way to handle this, at system level??
+                        // Put a short delay here to allow the system to calculate the Offset
+                        // before we can animate it.
+                        await Task.Delay(1000);
+
+                        _isLoaded = true;
+
                         var h = (TabHeaderItem)s;
                         h.GroupName = "Headers";
+
+                        UpdateHeaderVisuals();
+                        SyncUnderlineVisual();
                     };
                     header.Unloaded += (s, args) =>
                     {
@@ -233,8 +245,11 @@ namespace Continuity.Controls
 
                     header.SizeChanged += (s, args) =>
                     {
-                        UpdateHeaderVisuals();
-                        SyncUnderlineVisual();
+                        if (_isLoaded)
+                        {
+                            UpdateHeaderVisuals();
+                            SyncUnderlineVisual();
+                        }
                     };
 
                     Headers.Add(header);
