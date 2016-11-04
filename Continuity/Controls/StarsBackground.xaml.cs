@@ -172,11 +172,11 @@ namespace Continuity.Controls
 
         private async Task HideStatusBar()
         {
-            if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
-            {
-                var statusBar = StatusBar.GetForCurrentView();
-                await statusBar.HideAsync();
-            }
+            //if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
+            //{
+            //    var statusBar = StatusBar.GetForCurrentView();
+            //    await statusBar.HideAsync();
+            //}
         }
 
         private void InitializeCompositionVariables()

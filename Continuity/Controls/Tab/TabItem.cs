@@ -23,12 +23,21 @@ namespace Continuity.Controls
             DependencyProperty.Register("Header", typeof(object), typeof(TabItem), new PropertyMetadata(null, (s, dp) =>
             {
                 var value = dp.NewValue;
-                if (value is string)
-                {
-                    var self = ((TabItem)s);
-                    self.Header = self.Header.ToString().ToUpperInvariant();
-                }
+
+                if (!(value is string)) return;
+
+                var self = (TabItem)s;
+                self.Header = self.Header.ToString().ToUpperInvariant();
             }));
+
+        public Style HeaderIconStyle
+        {
+            get { return (Style)GetValue(HeaderIconStyleProperty); }
+            set { SetValue(HeaderIconStyleProperty, value); }
+        }
+
+        public static readonly DependencyProperty HeaderIconStyleProperty =
+            DependencyProperty.Register("HeaderIconStyle", typeof(Style), typeof(TabItem), new PropertyMetadata(null));
 
         #endregion
 

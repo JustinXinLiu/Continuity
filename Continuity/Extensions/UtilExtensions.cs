@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
@@ -10,17 +11,13 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Foundation = Windows.Foundation;
 
 namespace Continuity.Extensions
 {
-    public static partial class UtilExtensions
+    public static class UtilExtensions
     {
         public static float ToFloat(this double value)
-        {
-            return (float)value;
-        }
-
-        public static float ToFloat(this int value)
         {
             return (float)value;
         }
@@ -52,7 +49,17 @@ namespace Continuity.Extensions
         public static T GetChildByName<T>(this DependencyObject parent, string name)
         {
             var childControls = Children(parent);
-            var control = childControls.OfType<FrameworkElement>().Where(x => x.Name.Equals(name)).Cast<T>().First();
+            var controls = childControls.OfType<FrameworkElement>();
+
+            if (controls == null)
+            {
+                return default(T);
+            }
+
+            var control = controls
+                .Where(x => x.Name.Equals(name))
+                .Cast<T>()
+                .First();
 
             return control;
         }
@@ -117,10 +124,8 @@ namespace Continuity.Extensions
             {
                 return x > 0 ? global::Continuity.FlickDirection.Right : global::Continuity.FlickDirection.Left;
             }
-            else
-            {
-                return y > 0 ? global::Continuity.FlickDirection.Down : global::Continuity.FlickDirection.Up;
-            }
+
+            return y > 0 ? global::Continuity.FlickDirection.Down : global::Continuity.FlickDirection.Up;
         }
 
         public static void FillAnimation(this ManipulationCompletedRoutedEventArgs e, double fullDimension,
@@ -166,7 +171,7 @@ namespace Continuity.Extensions
 
             if (regenerateIfMet != null)
             {
-                int i = 0;
+                var i = 0;
                 while (i < regenrationMaxCount && regenerateIfMet(value))
                 {
                     value = random.Next(min, max);
@@ -175,10 +180,8 @@ namespace Continuity.Extensions
 
                 return value;
             }
-            else
-            {
-                return value;
-            }
+
+            return value;
         }
 
         public static void AddRangeOverTime<T>(this ObservableCollection<T> newCollection, IList<T> oldCollection, TimeSpan duration = default(TimeSpan))
@@ -189,7 +192,7 @@ namespace Continuity.Extensions
             }
 
             var observable = Observable.Generate(0, i => i <= oldCollection.Count - 1, i => ++i, i => oldCollection[i], i => duration);
-            observable.ObserveOnDispatcher().Subscribe((i) => newCollection.Add(i));
+            observable.ObserveOnDispatcher().Subscribe(newCollection.Add);
         }
 
         public static void ForEachOverTime<T>(this IList<T> oldCollection, Action<T> doWork, TimeSpan duration = default(TimeSpan))
@@ -200,7 +203,88 @@ namespace Continuity.Extensions
             }
 
             var observable = Observable.Generate(0, i => i <= oldCollection.Count - 1, i => ++i, i => oldCollection[i], i => duration);
-            observable.ObserveOnDispatcher().Subscribe((t) => doWork(t));
+            observable.ObserveOnDispatcher().Subscribe(doWork);
         }
+
+        public static bool IsFullyVisibile(this FrameworkElement element, FrameworkElement parent)
+        {
+            if (element == null || parent == null)
+                return false;
+
+            if (element.Visibility != Visibility.Visible)
+                return false;
+
+            var elementBounds = element.TransformToVisual(parent).TransformBounds(new Foundation.Rect(0, 0, element.ActualWidth, element.ActualHeight));
+            var containerBounds = new Foundation.Rect(0, 0, parent.ActualWidth, parent.ActualHeight);
+
+            var originalElementWidth = elementBounds.Width;
+            var originalElementHeight = elementBounds.Height;
+
+            elementBounds.Intersect(containerBounds);
+
+            var newElementWidth = elementBounds.Width;
+            var newElementHeight = elementBounds.Height;
+
+            return originalElementWidth.Equals(newElementWidth) && originalElementHeight.Equals(newElementHeight);
+        }
+
+        public static void ScrollToElement(this ScrollViewer scrollViewer, FrameworkElement element,
+            bool isVerticalScrolling = true, bool smoothScrolling = true, float? zoomFactor = null, bool bringToTopOrLeft = true)
+        {
+            if (!bringToTopOrLeft && element.IsFullyVisibile(scrollViewer))
+                return;
+
+            var contentArea = (FrameworkElement)scrollViewer.Content;
+            var position = element.RelativePosition(contentArea);
+
+            if (isVerticalScrolling)
+            {
+                scrollViewer.ChangeView(null, position.Y, zoomFactor, !smoothScrolling);
+            }
+            else
+            {
+                scrollViewer.ChangeView(position.X, null, zoomFactor, !smoothScrolling);
+            }
+        }
+
+        public static Task ChangeViewAsync(this ScrollViewer scrollViewer, double? horizontalOffset, double? verticalOffset, float? zoomFactor, bool disableAniamtion)
+        {
+            var taskSource = new TaskCompletionSource<bool>();
+            EventHandler<ScrollViewerViewChangedEventArgs> onViewChanged = null;
+
+            onViewChanged = (sender, e) =>
+            {
+                if (e.IsIntermediate)
+                    return;
+
+                scrollViewer.ViewChanged -= onViewChanged;
+                taskSource.SetResult(true);
+            };
+
+            scrollViewer.ViewChanged += onViewChanged;
+            scrollViewer.ChangeView(horizontalOffset, verticalOffset, zoomFactor, disableAniamtion);
+
+            return taskSource.Task;
+        }
+
+        public static async Task ScrollToElementAsync(this ScrollViewer scrollViewer, FrameworkElement element,
+            bool isVerticalScrolling = true, bool smoothScrolling = true, float? zoomFactor = null, bool bringToTopOrLeft = true)
+        {
+            if (!bringToTopOrLeft && element.IsFullyVisibile(scrollViewer))
+                return;
+
+            var contentArea = (FrameworkElement)scrollViewer.Content;
+            var position = element.RelativePosition(contentArea);
+
+            if (isVerticalScrolling)
+            {
+                await scrollViewer.ChangeViewAsync(null, position.Y, zoomFactor, !smoothScrolling);
+            }
+            else
+            {
+                await scrollViewer.ChangeViewAsync(position.X, null, zoomFactor, !smoothScrolling);
+            }
+        }
+
     }
 }

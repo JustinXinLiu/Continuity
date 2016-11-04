@@ -1,30 +1,20 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:Continuity"
                     xmlns:controls="using:Continuity.Controls"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
     <Style TargetType="controls:Tab">
-        <Setter Property="Foreground"
-                Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-        <Setter Property="Background"
-                Value="Transparent" />
-        <Setter Property="ScrollViewer.ZoomMode"
-                Value="Disabled" />
-        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
-                Value="False" />
-        <Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
-                Value="True" />
-        <Setter Property="IsTabStop"
-                Value="False" />
-        <Setter Property="TabNavigation"
-                Value="Once" />
-        <Setter Property="FontFamily"
-                Value="{ThemeResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize"
-                Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="TabNavigation" Value="Once" />
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -35,16 +25,20 @@
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Border Background="Transparent"
-                            Padding="12,24">
-                        <TextBlock x:Name="Header"
-                                   Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"
-                                   HorizontalAlignment="Center"
+                    <StackPanel x:Name="Header"
+                                Padding="12,0"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <ContentControl x:Name="Icon"
+                                        Foreground="{TemplateBinding BorderBrush}"
+                                        Style="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <TextBlock HorizontalAlignment="Center"
                                    FontSize="18"
                                    FontWeight="Black"
-                                   TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings" />
-                    </Border>
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"
+                                   TextLineBounds="Tight" />
+                    </StackPanel>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -59,32 +53,39 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Border x:Name="HeadersPanelHost" Padding="12,0">
-                            <StackPanel x:Name="HeadersPanel"
-                                        Orientation="Horizontal" />
+
+                        <ScrollViewer x:Name="HeadersPanelHost"
+                                      MinHeight="48"
+                                      Margin="{TemplateBinding HeadersPanelMargin}"
+                                      Padding="12,8,12,0"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      HorizontalScrollMode="Auto"
+                                      VerticalScrollBarVisibility="Disabled"
+                                      VerticalScrollMode="Disabled">
+                            <StackPanel x:Name="HeadersPanel" Orientation="Horizontal" />
+                        </ScrollViewer>
+                        <Border x:Name="SelectedHeaderIndicatorHost" VerticalAlignment="Bottom">
+                            <Rectangle x:Name="SelectedHeaderIndicator"
+                                       Width="1"
+                                       Height="3"
+                                       Margin="0"
+                                       HorizontalAlignment="Left"
+                                       Fill="Black"
+                                       UseLayoutRounding="False" />
                         </Border>
-                        <Rectangle x:Name="HeaderUnderline"
-                                   Fill="Black"
-                                   Height="3"
-                                   VerticalAlignment="Top"
-                                   Grid.Row="1"
-                                   Width="1"
-                                   HorizontalAlignment="Left"
-                                   UseLayoutRounding="False"
-                                   Margin="0,-12,0,0" />
                         <ScrollViewer x:Name="ScrollViewer"
+                                      Grid.Row="1"
+                                      Padding="{TemplateBinding Padding}"
                                       AutomationProperties.AccessibilityView="Raw"
                                       BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-                                      HorizontalScrollMode="Auto"
                                       HorizontalScrollBarVisibility="Hidden"
+                                      HorizontalScrollMode="Auto"
+                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                      IsHorizontalRailEnabled="True"
+                                      TabNavigation="{TemplateBinding TabNavigation}"
                                       VerticalScrollBarVisibility="Disabled"
                                       VerticalScrollMode="Disabled"
-                                      IsHorizontalRailEnabled="True"
-                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                      Padding="{TemplateBinding Padding}"
-                                      TabNavigation="{TemplateBinding TabNavigation}"
-                                      ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
-                                      Grid.Row="1">
+                                      ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
                             <ItemsPresenter />
                         </ScrollViewer>
                     </Grid>
@@ -94,53 +95,20 @@
     </Style>
 
     <Style TargetType="controls:TabItem">
-        <Setter Property="Background"
-                Value="Transparent" />
-        <Setter Property="TabNavigation"
-                Value="Local" />
-        <Setter Property="Padding"
-                Value="0" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="UseSystemFocusVisuals"
-                Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="TabNavigation" Value="Local" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TabItem">
                     <Grid x:Name="Root"
-                          BorderThickness="{TemplateBinding BorderThickness}"
                           Background="{TemplateBinding Background}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
                           d:DesignWidth="640"
                           d:DesignHeight="784">
-                        <Grid.Resources>
-                            <Style x:Key="BaseContentPresenterStyle"
-                                   TargetType="ContentPresenter">
-                                <Setter Property="FontFamily"
-                                        Value="XamlAutoFontFamily" />
-                                <Setter Property="FontWeight"
-                                        Value="SemiBold" />
-                                <Setter Property="FontSize"
-                                        Value="15" />
-                                <Setter Property="TextWrapping"
-                                        Value="Wrap" />
-                                <Setter Property="LineStackingStrategy"
-                                        Value="MaxHeight" />
-                                <Setter Property="TextLineBounds"
-                                        Value="Full" />
-                                <Setter Property="OpticalMarginAlignment"
-                                        Value="TrimSideBearings" />
-                            </Style>
-                            <Style x:Key="BodyContentPresenterStyle"
-                                   BasedOn="{StaticResource BaseContentPresenterStyle}"
-                                   TargetType="ContentPresenter">
-                                <Setter Property="FontWeight"
-                                        Value="Normal" />
-                                <Setter Property="FontSize"
-                                        Value="15" />
-                            </Style>
-                        </Grid.Resources>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
@@ -149,14 +117,14 @@
                                 <VisualState x:Name="Pressed" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
+
                         <ContentPresenter x:Name="ContentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           ContentTransitions="{TemplateBinding ContentTransitions}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          Margin="{TemplateBinding Padding}"
-                                          Style="{StaticResource BodyContentPresenterStyle}"
                                           TextWrapping="NoWrap" />
                     </Grid>
                 </ControlTemplate>
@@ -168,39 +136,69 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TabHeaderItem">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <!--<VisualStateManager.VisualStateGroups>
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.25">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver" />
-                                <VisualState x:Name="Pressed" />
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="ContentPresenterPointerVisual"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.8"
+                                                         d:IsOptimized="True" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="ContentPresenterPointerVisual"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="1"
+                                                         d:IsOptimized="True" />
+                                    </Storyboard>
+                                </VisualState>
                                 <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CheckStates">
                                 <VisualState x:Name="Checked" />
-                                <VisualState x:Name="Unchecked">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0"
-                                                         To="0.4"
-                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                         Storyboard.TargetName="ContentPresenter"
-                                                         d:IsOptimized="True" />
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualState x:Name="Unchecked" />
                                 <VisualState x:Name="Indeterminate" />
                             </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>-->
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Rectangle x:Name="PointerVisual"
+                                   Fill="LightGray"
+                                   Opacity="0" />
                         <ContentPresenter x:Name="ContentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          Tag="{TemplateBinding HeaderIconStyle}"
+                                          TextWrapping="NoWrap" />
+                        <ContentPresenter x:Name="ContentPresenterPointerVisual"
+                                          Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          Margin="{TemplateBinding Padding}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          Opacity="0"
+                                          Tag="{TemplateBinding HeaderIconStyle}"
                                           TextWrapping="NoWrap" />
-                    </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

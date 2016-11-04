@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
@@ -11,25 +12,44 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Continuity.Controls
 {
+    [TemplatePart(Name = PART_ScrollViewer, Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = PART_HeadersPanel, Type = typeof(StackPanel))]
+    [TemplatePart(Name = PART_HeadersPanelHost, Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = PART_SelectedHeaderIndicatorHost, Type = typeof(Border))]
+    [TemplatePart(Name = PART_SelectedHeaderIndicator, Type = typeof(Rectangle))]
     public sealed class Tab : ItemsControl
     {
         #region Fields
 
-        private static readonly string DRAG_DISTANCE = "(ScrollingProperties.Translation.X + SelectedIndex * FullWidth)";
-        private static readonly string DRAG_DIRECTION = $"{DRAG_DISTANCE} < 0";
-        private static readonly string DRAG_DISTANCE_PCT = $"{DRAG_DISTANCE} / FullWidth";
-        //private static readonly string BUG_FIXING_EXPRESSION = "+ (0 + (0 + (0 + (0 + (0 + 0)))))";
+        // ReSharper disable once InconsistentNaming
+        private const string BUG_FIXING_EXPRESSION_10586_ONLY = "+ (0 + (0 + (0 + (0 + (0 + 0)))))";
+
+        private const string PART_ScrollViewer = "ScrollViewer";
+        private const string PART_HeadersPanel = "HeadersPanel";
+        private const string PART_HeadersPanelHost = "HeadersPanelHost";
+        private const string PART_SelectedHeaderIndicatorHost = "SelectedHeaderIndicatorHost";
+        private const string PART_SelectedHeaderIndicator = "SelectedHeaderIndicator";
+
+        private const string Scroller = "ScrollingProperties";
+        private static readonly string ScrollerTranslationX = $"{Scroller}.Translation.X";
+        private static readonly string DragDistance = $"({ScrollerTranslationX} + SelectedIndex * FullWidth)";
+        private static readonly string DragDirection = $"{DragDistance} < 0";
+        private static readonly string DragDistancePct = $"{DragDistance} / FullWidth";
 
         private ScrollViewer _scrollViewer;
-        private Border _headersPanelHost;
+        private ScrollViewer _headersPanelHost;
         private StackPanel _headersPanel;
-        private Rectangle _underline;
+        private Border _selectedHeaderIndicatorHost;
+        private Rectangle _selectedHeaderIndicator;
         private bool _isAnimating;
+        private bool _isScrolling;
 
         private Compositor _compositor;
-        private CompositionPropertySet _scrollingProperties;
-        private Visual _underlineVisual;
-        private ExpressionAnimation _underlineOffsetAnimation, _underlineScaleAnimation;
+        private CompositionPropertySet _headersScrollingProperties;
+        private CompositionPropertySet _contentScrollingProperties;
+        private Visual _selectedHeaderIndicatorHostVisual;
+        private Visual _selectedHeaderIndicatorVisual;
+        private ExpressionAnimation _selectedVisualOffsetAnimation, _selectedVisualScaleAnimation;
         private ExpressionAnimation _currentHeaderOpacityAnimation, _nextHeaderOpacityAnimation, _previousHeaderOpacityAnimation;
 
         private bool _isLoaded;
@@ -49,15 +69,9 @@ namespace Continuity.Controls
 
         #region Properties
 
-        private UIElementCollection Headers
-        {
-            get { return _headersPanel.Children; }
-        }
+        private UIElementCollection Headers => _headersPanel.Children;
 
-        private List<TabHeaderItem> TypedHeaders
-        {
-            get { return Headers.OfType<TabHeaderItem>().ToList(); }
-        }
+        private List<TabHeaderItem> TypedHeaders => Headers.OfType<TabHeaderItem>().ToList();
 
         private ScrollViewer ScrollViewer
         {
@@ -72,10 +86,33 @@ namespace Continuity.Controls
 
                 _scrollViewer = value;
 
+                // ReSharper disable once InvertIf
                 if (_scrollViewer != null)
                 {
                     _scrollViewer.DirectManipulationStarted += OnScrollViewerDirectManipulationStarted;
                     _scrollViewer.DirectManipulationCompleted += OnScrollViewerDirectManipulationCompleted;
+                }
+            }
+        }
+
+        private ScrollViewer HeadersPanelHost
+        {
+            get { return _headersPanelHost; }
+            set
+            {
+                if (_headersPanelHost != null)
+                {
+                    _headersPanelHost.DirectManipulationStarted -= OnHeadersPanelHostDirectManipulationStarted;
+                    _headersPanelHost.DirectManipulationCompleted -= OnHeadersPanelHostDirectManipulationCompleted;
+                }
+
+                _headersPanelHost = value;
+
+                // ReSharper disable once InvertIf
+                if (_headersPanelHost != null)
+                {
+                    _headersPanelHost.DirectManipulationStarted += OnHeadersPanelHostDirectManipulationStarted;
+                    _headersPanelHost.DirectManipulationCompleted += OnHeadersPanelHostDirectManipulationCompleted;
                 }
             }
         }
@@ -93,8 +130,9 @@ namespace Continuity.Controls
                     var self = (Tab)s;
                     if (self._headersPanel == null) return;
 
-                    foreach (TabHeaderItem header in self.Headers)
+                    foreach (var elmement in self.Headers)
                     {
+                        var header = (TabHeaderItem)elmement;
                         header.ContentTemplate = dp.NewValue as DataTemplate;
                     }
                 }));
@@ -113,12 +151,11 @@ namespace Continuity.Controls
                     var oldIndex = (int)dp.OldValue;
                     var newIndex = (int)dp.NewValue;
 
-                    self.SelectedItem = self.Items[newIndex];
+                    self.SelectedItem = self.Items?[newIndex];
 
                     self.SelectionChanged?.Invoke(self, new TabSelectionChangedEventArgs(oldIndex, newIndex));
                     self.SyncCheckedTabHeaderItem(newIndex);
                     UpdateScrollViewerHorizontalOffset(self, newIndex);
-                    self.SyncUnderlineVisual();
                 }));
 
         public object SelectedItem
@@ -132,10 +169,20 @@ namespace Continuity.Controls
                 new PropertyMetadata(null, (s, dp) =>
                 {
                     var self = (Tab)s;
-                    var newIndex = self.Items.IndexOf(dp.NewValue);
+                    var newIndex = self.Items?.IndexOf(dp.NewValue);
 
-                    self.SelectedIndex = newIndex;
+                    self.SelectedIndex = newIndex ?? self.SelectedIndex;
                 }));
+
+        public Thickness HeadersPanelMargin
+        {
+            get { return (Thickness)GetValue(HeadersPanelMarginProperty); }
+            set { SetValue(HeadersPanelMarginProperty, value); }
+        }
+
+        public static readonly DependencyProperty HeadersPanelMarginProperty =
+            DependencyProperty.Register("HeadersPanelMargin", typeof(Thickness), typeof(Tab),
+                new PropertyMetadata(new Thickness()));
 
         #endregion
 
@@ -145,20 +192,16 @@ namespace Continuity.Controls
         {
             base.OnApplyTemplate();
 
-            ScrollViewer = GetTemplateChild<ScrollViewer>("ScrollViewer");
-            _headersPanel = GetTemplateChild<StackPanel>("HeadersPanel");
-            _headersPanelHost = GetTemplateChild<Border>("HeadersPanelHost");
-            _underline = GetTemplateChild<Rectangle>("HeaderUnderline");
+            ScrollViewer = GetTemplateChild<ScrollViewer>(PART_ScrollViewer);
+            _headersPanel = GetTemplateChild<StackPanel>(PART_HeadersPanel);
+            HeadersPanelHost = GetTemplateChild<ScrollViewer>(PART_HeadersPanelHost);
+            _selectedHeaderIndicatorHost = GetTemplateChild<Border>(PART_SelectedHeaderIndicatorHost);
+            _selectedHeaderIndicator = GetTemplateChild<Rectangle>(PART_SelectedHeaderIndicator);
 
-            //ScrollViewer.RegisterPropertyChangedCallback(ScrollViewer.HorizontalOffsetProperty, (s, dp) =>
-            //{
-            //    Debug.WriteLine($"HorizontalOffset {ScrollViewer.HorizontalOffset}");
-            //});
+            InitializeCompositionObjects();
 
-            InitializeCombositionObjects();
-
-            SizeChanged += OnTabSizeChanged;
-            Loaded += OnTabLoaded;
+            Loaded += OnLoaded;
+            SizeChanged += OnSizeChanged;
         }
 
         protected override DependencyObject GetContainerForItemOverride()
@@ -166,99 +209,106 @@ namespace Continuity.Controls
             return new TabItem();
         }
 
-        protected override void OnItemsChanged(object e)
-        {
-            base.OnItemsChanged(e);
-        }
-
         #endregion
 
         #region Handlers
 
-        private void OnTabSizeChanged(object sender, SizeChangedEventArgs e)
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            if (Items == null) return;
+
+            _selectedHeaderIndicatorHostVisual.Size = new Vector2(_selectedHeaderIndicatorHost.ActualWidth.ToFloat(),
+                _selectedHeaderIndicatorHost.ActualHeight.ToFloat());
+
             foreach (var item in Items)
             {
                 var tabItem = ContainerFromItem(item) as TabItem;
+                if (tabItem == null) continue;
 
-                if (tabItem != null)
-                {
-                    tabItem.Width = ActualWidth;
-                    tabItem.Height = ActualHeight;
-
-                    UpdateScrollViewerHorizontalOffset(this, SelectedIndex);
-                }
+                tabItem.Width = ActualWidth;
+                UpdateScrollViewerHorizontalOffset(this, SelectedIndex);
             }
         }
 
-        private void OnTabLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Loaded -= OnTabLoaded;
+            Loaded -= OnLoaded;
 
-            for (int i = 0; i < Items.Count; i++)
+            if (Items == null) return;
+
+            SetSelectedHeaderIndicatorVisualBoundaries();
+
+            for (var i = 0; i < Items.Count; i++)
             {
                 var tabItem = ContainerFromIndex(i) as TabItem;
 
-                if (tabItem != null)
+                if (tabItem == null) continue;
+
+                var header = new TabHeaderItem
                 {
-                    var header = new TabHeaderItem
-                    {
-                        Content = tabItem.Header,
-                        ContentTemplate = HeaderTemplate,
-                        IsChecked = i == 0
-                    };
+                    DataContext = Items[i],
+                    Content = tabItem.Header,
+                    HeaderIconStyle = tabItem.HeaderIconStyle,
+                    ContentTemplate = HeaderTemplate,
+                    IsChecked = i == 0
+                };
 
-                    // Have to do this to avoid a bug where RadioButton's GroupName 
-                    // doesn't function properly after Reloaded.
-                    header.Loaded += async (s, args) =>
-                    {
-                        // TODO: There should be a better way to handle this, at system level??
-                        // Put a short delay here to allow the system to calculate the Offset
-                        // before we can animate it.
-                        await Task.Delay(1000);
+                // Have to do this to avoid a bug where RadioButton's GroupName 
+                // doesn't function properly after Reloaded.
+                header.Loaded += async (s, args) =>
+                {
+                    // TODO: There should be a better way to handle this, at system level??
+                    // Put a short delay here to allow the system to calculate the Offset
+                    // before we can animate it.
+                    await Task.Delay(1000);
 
-                        _isLoaded = true;
+                    _isLoaded = true;
 
-                        var h = (TabHeaderItem)s;
-                        h.GroupName = "Headers";
+                    var h = (TabHeaderItem)s;
+                    h.GroupName = "Headers";
 
-                        UpdateHeaderVisuals();
-                        SyncUnderlineVisual();
-                    };
-                    header.Unloaded += (s, args) =>
-                    {
-                        var h = (TabHeaderItem)s;
-                        h.GroupName = string.Empty;
-                    };
+                    UpdateHeaderVisuals();
+                    SyncSelectedHeaderIndicatorVisual();
+                };
+                header.Unloaded += (s, args) =>
+                {
+                    var h = (TabHeaderItem)s;
+                    h.GroupName = string.Empty;
+                };
 
-                    header.Checked += (s, args) =>
-                    {
-                        UpdateHeaderVisuals();
+                header.Checked += async (s, args) =>
+                {
+                    UpdateHeaderVisuals();
 
-                        var h = (TabHeaderItem)s;
-                        SelectedIndex = GetHeaderIndex(h);
-                    };
-                    header.Unchecked += (s, args) =>
-                    {
-                        UpdateHeaderVisuals();
-                    };
+                    var h = (TabHeaderItem)s;
+                    SelectedIndex = GetHeaderIndex(h);
 
-                    header.SizeChanged += (s, args) =>
-                    {
-                        if (_isLoaded)
-                        {
-                            UpdateHeaderVisuals();
-                            SyncUnderlineVisual();
-                        }
-                    };
+                    // TODO: We might be able to monitor the scrolling on the HeadersPanelHost and sync the selection visual with the scrolling in real time.
+                    // OnHeadersPanelHostDirectManipulationStarted(null, null);
+                    await HeadersPanelHost.ScrollToElementAsync(header, false, bringToTopOrLeft: false);
+                    SyncSelectedHeaderIndicatorVisual();
+                };
+                header.Unchecked += (s, args) =>
+                {
+                    UpdateHeaderVisuals();
+                };
 
-                    Headers.Add(header);
-                }
+                header.SizeChanged += (s, args) =>
+                {
+                    if (!_isLoaded) return;
+
+                    UpdateHeaderVisuals();
+                    SyncSelectedHeaderIndicatorVisual();
+                };
+
+                Headers.Add(header);
             }
         }
 
         private async void OnScrollViewerDirectManipulationStarted(object sender, object e)
         {
+            if (_isScrolling) return;
+
             _isAnimating = true;
             ScrollViewer.HorizontalSnapPointsType = SnapPointsType.MandatorySingle;
 
@@ -267,46 +317,46 @@ namespace Continuity.Controls
             var nextHeader = SelectedIndex < Headers.Count - 1 ? TypedHeaders[SelectedIndex + 1] : null;
 
             // Create offset animation
-            var startingOffsetX = _underlineVisual.Offset.X;
-            var toNextOffsetX = nextHeader == null ? 0 : nextHeader.OffsetX(currentHeader);
-            var toPreviousOffsetX = previousHeader == null ? 0 : previousHeader.OffsetX(currentHeader);
+            var startingOffsetX = _selectedHeaderIndicatorVisual.Offset.X;
+            var toNextOffsetX = nextHeader?.RelativePosition(currentHeader).X.ToFloat() ?? 0;
+            var toPreviousOffsetX = previousHeader?.RelativePosition(currentHeader).X.ToFloat() ?? 0;
 
-            _underlineOffsetAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? StartingOffsetX - ToNextOffsetX * {DRAG_DISTANCE_PCT} : StartingOffsetX + ToPreviousOffsetX * {DRAG_DISTANCE_PCT}");
-            _underlineOffsetAnimation.SetScalarParameter("StartingOffsetX", startingOffsetX);
-            _underlineOffsetAnimation.SetScalarParameter("ToNextOffsetX", toNextOffsetX);
-            _underlineOffsetAnimation.SetScalarParameter("ToPreviousOffsetX", toPreviousOffsetX);
-            SetSharedParameters(_underlineOffsetAnimation);
+            _selectedVisualOffsetAnimation = _compositor.CreateExpressionAnimation($"{DragDirection} {BUG_FIXING_EXPRESSION_10586_ONLY} ? StartingOffsetX - ToNextOffsetX * {DragDistancePct} : StartingOffsetX + ToPreviousOffsetX * {DragDistancePct}");
+            _selectedVisualOffsetAnimation.SetScalarParameter("StartingOffsetX", startingOffsetX);
+            _selectedVisualOffsetAnimation.SetScalarParameter("ToNextOffsetX", toNextOffsetX);
+            _selectedVisualOffsetAnimation.SetScalarParameter("ToPreviousOffsetX", toPreviousOffsetX);
+            SetSharedParameters(_selectedVisualOffsetAnimation);
 
             // Create scale animation
-            var startingScaleX = _underlineVisual.Scale.X;
-            var nextAndCurrentWidthDiff = nextHeader == null ? 0 : (GetHeaderTextBlock(nextHeader).ActualWidth - GetHeaderTextBlock(currentHeader).ActualWidth).ToFloat();
-            var previousAndCurrentWidthDiff = previousHeader == null ? 0 : (GetHeaderTextBlock(previousHeader).ActualWidth - GetHeaderTextBlock(currentHeader).ActualWidth).ToFloat();
+            var startingScaleX = _selectedHeaderIndicatorVisual.Scale.X;
+            var nextAndCurrentWidthDiff = nextHeader == null ? 0 : (GetHeaderContainer(nextHeader).ActualWidth - GetHeaderContainer(currentHeader).ActualWidth).ToFloat();
+            var previousAndCurrentWidthDiff = previousHeader == null ? 0 : (GetHeaderContainer(previousHeader).ActualWidth - GetHeaderContainer(currentHeader).ActualWidth).ToFloat();
 
-            _underlineScaleAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? StartingScaleX - NextAndCurrentWidthDiff * {DRAG_DISTANCE_PCT} : StartingScaleX + PreviousAndCurrentWidthDiff * {DRAG_DISTANCE_PCT}");
-            _underlineScaleAnimation.SetScalarParameter("StartingScaleX", startingScaleX);
-            _underlineScaleAnimation.SetScalarParameter("NextAndCurrentWidthDiff", nextAndCurrentWidthDiff);
-            _underlineScaleAnimation.SetScalarParameter("PreviousAndCurrentWidthDiff", previousAndCurrentWidthDiff);
-            SetSharedParameters(_underlineScaleAnimation);
+            _selectedVisualScaleAnimation = _compositor.CreateExpressionAnimation($"{DragDirection} {BUG_FIXING_EXPRESSION_10586_ONLY} ? StartingScaleX - NextAndCurrentWidthDiff * {DragDistancePct} : StartingScaleX + PreviousAndCurrentWidthDiff * {DragDistancePct}");
+            _selectedVisualScaleAnimation.SetScalarParameter("StartingScaleX", startingScaleX);
+            _selectedVisualScaleAnimation.SetScalarParameter("NextAndCurrentWidthDiff", nextAndCurrentWidthDiff);
+            _selectedVisualScaleAnimation.SetScalarParameter("PreviousAndCurrentWidthDiff", previousAndCurrentWidthDiff);
+            SetSharedParameters(_selectedVisualScaleAnimation);
 
             // Create opacity animations
-            _currentHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"Max(1 - Abs{DRAG_DISTANCE_PCT}, UncheckedStateOpacity)");
+            _currentHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"Max(1 - Abs{DragDistancePct}, UncheckedStateOpacity)");
             SetSharedParameters(_currentHeaderOpacityAnimation);
 
-            _nextHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? UncheckedStateOpacity - {DRAG_DISTANCE_PCT} : UncheckedStateOpacity");
+            _nextHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DragDirection} {BUG_FIXING_EXPRESSION_10586_ONLY} ? UncheckedStateOpacity - {DragDistancePct} : UncheckedStateOpacity");
             SetSharedParameters(_nextHeaderOpacityAnimation);
 
-            _previousHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DRAG_DIRECTION} ? UncheckedStateOpacity : UncheckedStateOpacity + {DRAG_DISTANCE_PCT}");
+            _previousHeaderOpacityAnimation = _compositor.CreateExpressionAnimation($"{DragDirection} {BUG_FIXING_EXPRESSION_10586_ONLY} ? UncheckedStateOpacity : UncheckedStateOpacity + {DragDistancePct}");
             SetSharedParameters(_previousHeaderOpacityAnimation);
 
             // Start all animations
-            _underlineVisual.StartAnimation("Offset.X", _underlineOffsetAnimation);
-            _underlineVisual.StartAnimation("Scale.X", _underlineScaleAnimation);
+            _selectedHeaderIndicatorVisual.StartAnimation("Offset.X", _selectedVisualOffsetAnimation);
+            _selectedHeaderIndicatorVisual.StartAnimation("Scale.X", _selectedVisualScaleAnimation);
 
             currentHeader.Visual().StartAnimation("Opacity", _currentHeaderOpacityAnimation);
-            if (previousHeader != null) previousHeader.Visual().StartAnimation("Opacity", _previousHeaderOpacityAnimation);
-            if (nextHeader != null) nextHeader.Visual().StartAnimation("Opacity", _nextHeaderOpacityAnimation);
+            previousHeader?.Visual().StartAnimation("Opacity", _previousHeaderOpacityAnimation);
+            nextHeader?.Visual().StartAnimation("Opacity", _nextHeaderOpacityAnimation);
 
-            // Don't allow to swipe too fast.
+            // Don't allow swiping too fast.
             IsHitTestVisible = false;
             while (_isAnimating)
             {
@@ -323,15 +373,56 @@ namespace Continuity.Controls
             Debug.WriteLine($"Completed {SelectedIndex}");
         }
 
+        private void OnHeadersPanelHostDirectManipulationStarted(object sender, object e)
+        {
+            if (_isAnimating) return;
+
+            _isScrolling = true;
+
+            var header = TypedHeaders.Single(h => h.IsChecked == true);
+            if (GetHeaderIndex(header) != SelectedIndex) return;
+
+            var headerContainer = GetHeaderContainer(header);
+            // _headersPanel goes over the its parent ScrollViewer's viewport, so we need to use it.
+            var offsetX = headerContainer.RelativePosition(_headersPanel).X.ToFloat();
+
+            var offsetAnimation = _compositor.CreateExpressionAnimation($"CurrentOffsetX + {ScrollerTranslationX} + LeftMargin");
+            offsetAnimation.SetReferenceParameter(Scroller, _headersScrollingProperties);
+            offsetAnimation.SetScalarParameter("LeftMargin", 12.0f);
+            offsetAnimation.SetScalarParameter("CurrentOffsetX", offsetX);
+            _selectedHeaderIndicatorVisual.StartAnimation("Offset.X", offsetAnimation);
+        }
+
+        private void OnHeadersPanelHostDirectManipulationCompleted(object sender, object e)
+        {
+            _isScrolling = false;
+
+            _selectedHeaderIndicatorVisual.StopAnimation("Offset.X");
+            SyncSelectedHeaderIndicatorVisual();
+        }
+
         #endregion
 
         #region Methods
 
-        private void InitializeCombositionObjects()
+        private void InitializeCompositionObjects()
         {
-            _scrollingProperties = ScrollViewer.ScrollProperties();
-            _compositor = _scrollingProperties.Compositor;
-            _underlineVisual = _underline.Visual();
+            _headersScrollingProperties = HeadersPanelHost.ScrollProperties();
+            _contentScrollingProperties = ScrollViewer.ScrollProperties();
+            _compositor = _headersScrollingProperties.Compositor;
+            _selectedHeaderIndicatorVisual = _selectedHeaderIndicator.Visual();
+            _selectedHeaderIndicatorHostVisual = _selectedHeaderIndicatorHost.Visual();
+        }
+
+        private void SetSelectedHeaderIndicatorVisualBoundaries()
+        {
+            var clip = _compositor.CreateInsetClip();
+            clip.LeftInset = HeadersPanelMargin.Left.ToFloat();
+            clip.RightInset = HeadersPanelMargin.Right.ToFloat();
+            clip.TopInset = HeadersPanelMargin.Top.ToFloat();
+            clip.BottomInset = HeadersPanelMargin.Bottom.ToFloat();
+
+            _selectedHeaderIndicatorHostVisual.Clip = clip;
         }
 
         private int CalculateSelectedIndexBasedOnScrollViewerHorizontalOffset()
@@ -348,28 +439,27 @@ namespace Continuity.Controls
 
         private void SyncCheckedTabHeaderItem(int index)
         {
-            var header = TypedHeaders.Single((h) => GetHeaderIndex(h) == index);
+            var header = TypedHeaders.Single(h => GetHeaderIndex(h) == index);
             header.IsChecked = true;
         }
 
-        private void SyncUnderlineVisual()
+        private void SyncSelectedHeaderIndicatorVisual()
         {
-            var header = TypedHeaders.Single((h) => h.IsChecked == true);
+            var header = TypedHeaders.Single(h => h.IsChecked == true);
+            if (GetHeaderIndex(header) != SelectedIndex) return;
 
-            if (GetHeaderIndex(header) == SelectedIndex)
-            {
-                var textBlock = GetHeaderTextBlock(header);
-                var offsetX = textBlock.OffsetX(_headersPanelHost);
-                var scaleX = textBlock.ActualWidth.ToFloat(); // The ActualWidth of the HeaderUnderline Rectangle is 1 so I ignored the /1 here
+            var container = GetHeaderContainer(header);
+            var offsetX = container.RelativePosition(HeadersPanelHost).X.ToFloat() + 11.0f;
+            // The ActualWidth of the selected header indication Rectangle is 1 so I ignored the /1 here.
+            var scaleX = container.ActualWidth.ToFloat() - 24.0f;
 
-                _underline.StartOffsetAnimation(AnimationAxis.X, null, offsetX, 400, easing: _compositor.EaseInOutCubic());
-                _underline.StartScaleAnimation(AnimationAxis.X, null, scaleX, 400, easing: _compositor.EaseInOutCubic());
-            }
+            _selectedHeaderIndicatorVisual.StartOffsetAnimation(AnimationAxis.X, null, offsetX, 400, easing: _compositor.EaseInOutCubic());
+            _selectedHeaderIndicatorVisual.StartScaleAnimation(AnimationAxis.X, null, scaleX, 400, easing: _compositor.EaseInOutCubic());
         }
 
         private void SetSharedParameters(ExpressionAnimation animation)
         {
-            animation.SetReferenceParameter("ScrollingProperties", _scrollingProperties);
+            animation.SetReferenceParameter(Scroller, _contentScrollingProperties);
             animation.SetScalarParameter("FullWidth", ActualWidth.ToFloat());
             animation.SetScalarParameter("SelectedIndex", SelectedIndex);
             animation.SetScalarParameter("UncheckedStateOpacity", 0.4f);
@@ -379,13 +469,34 @@ namespace Continuity.Controls
         {
             foreach (var header in TypedHeaders)
             {
-                header.Visual().Opacity = header.IsChecked.Value ? 1.0f : 0.4f;
+                if (header.IsChecked.HasValue && header.IsChecked.Value)
+                {
+                    header.Visual().StartOpacityAnimation(null, 1.0f, 150.0f);
+                }
+                else
+                {
+                    header.Visual().StartOpacityAnimation(null, 0.4f, 150.0f);
+                }
             }
         }
 
-        private TextBlock GetHeaderTextBlock(TabHeaderItem header)
+        private static FrameworkElement GetHeaderContainer(TabHeaderItem header)
         {
-            return header.GetChildByName<TextBlock>("Header");
+            var container = header.Children().OfType<Panel>().FirstOrDefault();
+
+            if (container == null)
+            {
+                var textBlock = header.Children().OfType<TextBlock>().FirstOrDefault();
+
+                if (textBlock == null)
+                {
+                    throw new NullReferenceException("No header content found.");
+                }
+
+                return textBlock;
+            }
+
+            return container;
         }
 
         private int GetHeaderIndex(TabHeaderItem header)
@@ -397,17 +508,14 @@ namespace Continuity.Controls
         {
             var child = GetTemplateChild(name) as T;
 
-            if (child == null)
-            {
-                if (message == null)
-                {
-                    message = $"{name} should not be null! Check the default Generic.xaml.";
-                }
+            if (child != null) return child;
 
-                throw new NullReferenceException(message);
+            if (message == null)
+            {
+                message = $"{name} should not be null! Check the default Generic.xaml.";
             }
 
-            return child;
+            throw new NullReferenceException(message);
         }
 
         #endregion
