@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace Continuity.Extensions
 {
-    public static partial class AnimationExtensions
+    public static class AnimationExtensions
     {
         #region Composition
 
@@ -34,13 +34,10 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.Clip.StartAnimation($"{direction.ToString()}Inset", 
+            visual.Clip.StartAnimation($"{direction}Inset",
                 compositor.CreateScalarKeyFrameAnimation(null, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartOffsetAnimation(this UIElement element, AnimationAxis axis, float? from = null, float to = 0,
@@ -58,13 +55,10 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.StartAnimation($"Offset.{axis.ToString()}",
+            visual.StartAnimation($"Offset.{axis}",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartOffsetAnimation(this UIElement element, Vector3? from = null, Vector3? to = null,
@@ -87,13 +81,10 @@ namespace Continuity.Extensions
                 to = Vector3.Zero;
             }
 
-            visual.StartAnimation("Offset", 
+            visual.StartAnimation("Offset",
                 compositor.CreateVector3KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartSizeAnimation(this UIElement element, Vector2? from = null, Vector2? to = null,
@@ -119,10 +110,7 @@ namespace Continuity.Extensions
             visual.StartAnimation("Size",
                 compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartScaleAnimation(this UIElement element, Vector2? from = null, Vector2? to = null,
@@ -145,13 +133,10 @@ namespace Continuity.Extensions
                 to = Vector2.One;
             }
 
-            visual.StartAnimation("Scale", 
+            visual.StartAnimation("Scale",
                 compositor.CreateVector3KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartScaleAnimation(this UIElement element, AnimationAxis axis, float? from = null, float to = 0,
@@ -169,13 +154,10 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.StartAnimation($"Scale.{axis.ToString()}", 
+            visual.StartAnimation($"Scale.{axis}",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartRotationAnimation(this UIElement element, Vector3 rotationAxis, float? from = null, float to = 0,
@@ -198,10 +180,7 @@ namespace Continuity.Extensions
             visual.StartAnimation("RotationAngleInDegrees",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartOpacityAnimation(this UIElement element, float? from = null, float to = 1.0f,
@@ -219,13 +198,10 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.StartAnimation("Opacity", 
+            visual.StartAnimation("Opacity",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartClipAnimation(this Visual visual, ClipAnimationDirection direction, float to,
@@ -234,7 +210,7 @@ namespace Continuity.Extensions
         {
             CompositionScopedBatch batch = null;
 
-            if (visual.Size.X == 0 || visual.Size.Y == 0)
+            if (visual.Size.X.Equals(0) || visual.Size.Y.Equals(0))
             {
                 throw new ArgumentException("The visual is not properly sized.");
             }
@@ -253,13 +229,10 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.Clip.StartAnimation($"{direction.ToString()}Inset",
+            visual.Clip.StartAnimation($"{direction}Inset",
                 compositor.CreateScalarKeyFrameAnimation(null, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartOffsetAnimation(this Visual visual, AnimationAxis axis, float? from = null, float to = 0,
@@ -275,13 +248,10 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.StartAnimation($"Offset.{axis.ToString()}", 
+            visual.StartAnimation($"Offset.{axis}",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartOffsetAnimation(this Visual visual, Vector3? from = null, Vector3? to = null,
@@ -302,13 +272,10 @@ namespace Continuity.Extensions
                 to = Vector3.Zero;
             }
 
-            visual.StartAnimation("Offset", 
+            visual.StartAnimation("Offset",
                 compositor.CreateVector3KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartSizeAnimation(this Visual visual, Vector2? from = null, Vector2? to = null,
@@ -332,10 +299,7 @@ namespace Continuity.Extensions
             visual.StartAnimation("Size",
                 compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartScaleAnimation(this Visual visual, Vector2? from = null, Vector2? to = null,
@@ -356,13 +320,10 @@ namespace Continuity.Extensions
                 to = Vector2.One;
             }
 
-            visual.StartAnimation("Scale", 
+            visual.StartAnimation("Scale",
                 compositor.CreateVector3KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartScaleAnimation(this Visual visual, AnimationAxis axis, float? from = null, float to = 0,
@@ -378,13 +339,10 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.StartAnimation($"Scale.{axis.ToString()}", 
+            visual.StartAnimation($"Scale.{axis}",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartRotationAnimation(this Visual visual, Vector3 rotationAxis, float? from = null, float to = 0,
@@ -405,10 +363,7 @@ namespace Continuity.Extensions
             visual.StartAnimation("RotationAngleInDegrees",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
         public static void StartOpacityAnimation(this Visual visual, float? from = null, float to = 1.0f,
@@ -424,22 +379,19 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            visual.StartAnimation("Opacity", 
+            visual.StartAnimation("Opacity",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
-            if (batch != null)
-            {
-                batch.End();
-            }
+            batch?.End();
         }
 
-        public static ScalarKeyFrameAnimation CreateScalarKeyFrameAnimation(this Compositor compositor, float? from, float to, 
+        public static ScalarKeyFrameAnimation CreateScalarKeyFrameAnimation(this Compositor compositor, float? from, float to,
             double duration, double delay, CompositionEasingFunction easing, AnimationIterationBehavior iterationBehavior)
         {
             var animation = compositor.CreateScalarKeyFrameAnimation();
 
             animation.Duration = TimeSpan.FromMilliseconds(duration);
-            if (delay != 0) animation.DelayTime = TimeSpan.FromMilliseconds(delay);
+            if (!delay.Equals(0)) animation.DelayTime = TimeSpan.FromMilliseconds(delay);
             if (from.HasValue) animation.InsertKeyFrame(0.0f, from.Value, easing);
             animation.InsertKeyFrame(1.0f, to, easing);
             animation.IterationBehavior = iterationBehavior;
@@ -475,7 +427,7 @@ namespace Continuity.Extensions
             return animation;
         }
 
-        public static Vector3KeyFrameAnimation CreateVector3KeyFrameAnimation(this Compositor compositor, Vector3? from, Vector3 to, 
+        public static Vector3KeyFrameAnimation CreateVector3KeyFrameAnimation(this Compositor compositor, Vector3? from, Vector3 to,
             double duration, double delay, CompositionEasingFunction easing, AnimationIterationBehavior iterationBehavior)
         {
             var animation = compositor.CreateVector3KeyFrameAnimation();
@@ -502,17 +454,21 @@ namespace Continuity.Extensions
                 easing = new ExponentialEase();
             }
 
-            var db = new DoubleAnimation();
-            db.EnableDependentAnimation = enableDependentAnimation;
-            db.To = to;
-            db.From = from;
-            db.EasingFunction = easing;
-            db.Duration = TimeSpan.FromMilliseconds(duration);
+            var db = new DoubleAnimation
+            {
+                EnableDependentAnimation = enableDependentAnimation,
+                To = to,
+                From = @from,
+                EasingFunction = easing,
+                Duration = TimeSpan.FromMilliseconds(duration)
+            };
             Storyboard.SetTarget(db, target);
             Storyboard.SetTargetProperty(db, propertyPath);
 
-            var sb = new Storyboard();
-            sb.BeginTime = TimeSpan.FromMilliseconds(startTime);
+            var sb = new Storyboard
+            {
+                BeginTime = TimeSpan.FromMilliseconds(startTime)
+            };
 
             if (completed != null)
             {
