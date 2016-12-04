@@ -1,5 +1,4 @@
-﻿using Continuity.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,8 +8,9 @@ using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
+using Continuity.Extensions;
 
-namespace Continuity.Controls
+namespace Continuity.Controls.Tab
 {
     [TemplatePart(Name = PART_ScrollViewer, Type = typeof(ScrollViewer))]
     [TemplatePart(Name = PART_HeadersPanel, Type = typeof(StackPanel))]

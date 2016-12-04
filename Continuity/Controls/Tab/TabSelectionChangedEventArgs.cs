@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Continuity.Controls
+namespace Continuity.Controls.Tab
 {
     public class TabSelectionChangedEventArgs : EventArgs
     {

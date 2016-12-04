@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Continuity.Controls
+namespace Continuity.Controls.Tab
 {
     public sealed class TabItem : ContentControl
     {
