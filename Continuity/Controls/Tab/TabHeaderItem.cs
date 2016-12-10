@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Continuity.Controls.Tab
+namespace Continuity.Controls
 {
     public sealed class TabHeaderItem : RadioButton
     {

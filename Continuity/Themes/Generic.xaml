@@ -1,12 +1,11 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:Continuity.Controls"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:tab="using:Continuity.Controls.Tab"
-                    xmlns:parallax="using:Continuity.Controls.ParallaxListView"
                     mc:Ignorable="d">
 
-    <Style TargetType="tab:Tab">
+    <Style TargetType="controls:Tab">
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
@@ -45,11 +44,11 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="tab:Tab">
+                <ControlTemplate TargetType="controls:Tab">
                     <Grid x:Name="LayoutRoot"
-                          Background="{TemplateBinding Background}"
+                          d:DesignHeight="965"
                           d:DesignWidth="903"
-                          d:DesignHeight="965">
+                          Background="{TemplateBinding Background}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition />
@@ -95,7 +94,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="tab:TabItem">
+    <Style TargetType="controls:TabItem">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="TabNavigation" Value="Local" />
         <Setter Property="Padding" Value="0" />
@@ -104,12 +103,12 @@
         <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="tab:TabItem">
+                <ControlTemplate TargetType="controls:TabItem">
                     <Grid x:Name="Root"
-                          Background="{TemplateBinding Background}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
+                          d:DesignHeight="784"
                           d:DesignWidth="640"
-                          d:DesignHeight="784">
+                          Background="{TemplateBinding Background}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
@@ -133,10 +132,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="tab:TabHeaderItem">
+    <Style TargetType="controls:TabHeaderItem">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="tab:TabHeaderItem">
+                <ControlTemplate TargetType="controls:TabHeaderItem">
                     <Grid Background="{TemplateBinding Background}"
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}">
@@ -152,20 +151,20 @@
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="PointerOver">
                                     <Storyboard>
-                                        <DoubleAnimation Duration="0"
+                                        <DoubleAnimation d:IsOptimized="True"
                                                          Storyboard.TargetName="ContentPresenterPointerVisual"
                                                          Storyboard.TargetProperty="(UIElement.Opacity)"
                                                          To="0.8"
-                                                         d:IsOptimized="True" />
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <DoubleAnimation Duration="0"
+                                        <DoubleAnimation d:IsOptimized="True"
                                                          Storyboard.TargetName="ContentPresenterPointerVisual"
                                                          Storyboard.TargetProperty="(UIElement.Opacity)"
                                                          To="1"
-                                                         d:IsOptimized="True" />
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled" />
@@ -205,29 +204,46 @@
         </Setter>
     </Style>
 
-    <Style TargetType="parallax:ParallaxListView">
+    <Style TargetType="controls:ParallaxListView">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="parallax:ParallaxListView">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
+                <ControlTemplate TargetType="controls:ParallaxListView">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="parallax:ParallaxListViewItem">
+    <Style TargetType="controls:ParallaxListViewItem">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="parallax:ParallaxListViewItem">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
+                <ControlTemplate TargetType="controls:ParallaxListViewItem">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:Shadow">
+        <Setter Property="Background" Value="Black" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:Shadow">
+                    <Grid x:Name="Root">
+                        <Rectangle x:Name="ShadowShape"
+                                   Fill="{TemplateBinding Background}"
+                                   RadiusX="{TemplateBinding RadiusX}"
+                                   RadiusY="{TemplateBinding RadiusY}" />
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Stretch"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

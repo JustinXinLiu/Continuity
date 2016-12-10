@@ -1,0 +1,148 @@
+﻿<Page x:Class="Sample.FUI.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Controls="using:Continuity.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:Sample.FUI"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="#FF232021">
+        <Ellipse x:Name="Arc"
+                 Width="160"
+                 Height="160"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Fill="#FFF4F4F5"
+                 Stroke="Black"
+                 Visibility="Collapsed" />
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <Grid Margin="8" VerticalAlignment="Bottom">
+                <Controls:Shadow Width="16"
+                                 Height="100"
+                                 BlurRadius="16"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF131212">
+                    <Rectangle Fill="#FF232021"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+                <Controls:Shadow x:Name="Shadow1"
+                                 Width="16"
+                                 Height="100"
+                                 BlurRadius="16"
+                                 Opacity="0"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF9BA4A2">
+                    <Rectangle Fill="#FFFBFBFB"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+            </Grid>
+
+            <Grid Margin="8" VerticalAlignment="Bottom">
+                <Controls:Shadow Width="16"
+                                 Height="80"
+                                 BlurRadius="16"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF131212">
+                    <Rectangle Fill="#FF232021"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+                <Controls:Shadow x:Name="Shadow2"
+                                 Width="16"
+                                 Height="80"
+                                 BlurRadius="16"
+                                 Opacity="0"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF855A8C">
+                    <Rectangle Fill="#FFEE9DFD"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+            </Grid>
+
+            <Grid Margin="8" VerticalAlignment="Bottom">
+                <Controls:Shadow Width="16"
+                                 Height="60"
+                                 BlurRadius="16"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF131212">
+                    <Rectangle Fill="#FF232021"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+                <Controls:Shadow x:Name="Shadow3"
+                                 Width="16"
+                                 Height="60"
+                                 BlurRadius="16"
+                                 Opacity="0"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF62998D">
+                    <Rectangle Fill="#FF9DFDE8"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+            </Grid>
+
+            <Grid Margin="8" VerticalAlignment="Bottom">
+                <Controls:Shadow Width="16"
+                                 Height="16"
+                                 BlurRadius="16"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF131212">
+                    <Rectangle Fill="#FF232021"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+                <Controls:Shadow x:Name="Shadow4"
+                                 Width="16"
+                                 Height="16"
+                                 BlurRadius="16"
+                                 Opacity="0"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF925A5A">
+                    <Rectangle Fill="#FFFD9D9D"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+            </Grid>
+
+            <Grid Margin="8" VerticalAlignment="Bottom">
+                <Controls:Shadow Width="16"
+                                 Height="40"
+                                 BlurRadius="16"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF131212">
+                    <Rectangle Fill="#FF232021"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+                <Controls:Shadow x:Name="Shadow5"
+                                 Width="16"
+                                 Height="40"
+                                 BlurRadius="16"
+                                 Opacity="0"
+                                 RadiusX="8"
+                                 RadiusY="8"
+                                 Color="#FF9C9A62">
+                    <Rectangle Fill="#FFFDFA9D"
+                               RadiusX="8"
+                               RadiusY="8" />
+                </Controls:Shadow>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>

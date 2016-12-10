@@ -100,10 +100,10 @@ namespace Continuity.Controls
 
         #region Handlers
 
-        private async void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Loaded -= OnLoaded;
-            await HideStatusBar();
+            //await HideStatusBar();
 
             InitializeCompositionVariables();
             CreateStarsVisuals();
@@ -170,14 +170,14 @@ namespace Continuity.Controls
             _inclinometer.ReadingChanged -= OnInclinometerReadingChanged;
         }
 
-        private async Task HideStatusBar()
-        {
-            //if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
-            //{
-            //    var statusBar = StatusBar.GetForCurrentView();
-            //    await statusBar.HideAsync();
-            //}
-        }
+        //private async Task HideStatusBar()
+        //{
+        //    //if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
+        //    //{
+        //    //    var statusBar = StatusBar.GetForCurrentView();
+        //    //    await statusBar.HideAsync();
+        //    //}
+        //}
 
         private void InitializeCompositionVariables()
         {

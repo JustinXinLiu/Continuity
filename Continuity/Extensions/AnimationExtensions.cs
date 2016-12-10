@@ -19,7 +19,7 @@ namespace Continuity.Extensions
             var visual = element.Visual();
             // After we get the Visual of the View, we need to SIZE it 'cause by design the
             // Size is (0,0). Without doing this, clipping will not work.
-            visual.Size = new Vector2(element.ActualWidth.ToFloat(), element.ActualHeight.ToFloat());
+            visual.Size = element.RenderSize.ToVector2();
             var compositor = visual.Compositor;
 
             if (visual.Clip == null)
@@ -441,6 +441,81 @@ namespace Continuity.Extensions
             return animation;
         }
 
+        public static void EnableImplicitAnimation(this UIElement element, VisualPropertyType typeToAnimate,
+            double duration = 800, double delay = 0, CompositionEasingFunction easing = null)
+        {
+            var visual = element.Visual();
+            var compositor = visual.Compositor;
+
+            var animationCollection = compositor.CreateImplicitAnimationCollection();
+
+            foreach (var type in UtilExtensions.GetValues<VisualPropertyType>())
+            {
+                if (!typeToAnimate.HasFlag(type)) continue;
+
+                var animation = CreateAnimationByType(compositor, type, duration, delay, easing);
+
+                if (animation != null)
+                {
+                    animationCollection[type.ToString()] = animation;
+                }
+            }
+
+            visual.ImplicitAnimations = animationCollection;
+        }
+
+        public static void EnableImplicitAnimation(this Visual visual, VisualPropertyType typeToAnimate,
+            double duration = 800, double delay = 0, CompositionEasingFunction easing = null)
+        {
+            var compositor = visual.Compositor;
+
+            var animationCollection = compositor.CreateImplicitAnimationCollection();
+
+            foreach (var type in UtilExtensions.GetValues<VisualPropertyType>())
+            {
+                if (!typeToAnimate.HasFlag(type)) continue;
+
+                var animation = CreateAnimationByType(compositor, type, duration, delay, easing);
+
+                if (animation != null)
+                {
+                    animationCollection[type.ToString()] = animation;
+                }
+            }
+
+            visual.ImplicitAnimations = animationCollection;
+        }
+
+        private static KeyFrameAnimation CreateAnimationByType(Compositor compositor, VisualPropertyType type,
+            double duration = 800, double delay = 0, CompositionEasingFunction easing = null)
+        {
+            KeyFrameAnimation animation;
+
+            switch (type)
+            {
+                case VisualPropertyType.Offset:
+                case VisualPropertyType.Scale:
+                    animation = compositor.CreateVector3KeyFrameAnimation();
+                    break;
+                case VisualPropertyType.Size:
+                    animation = compositor.CreateVector2KeyFrameAnimation();
+                    break;
+                case VisualPropertyType.Opacity:
+                case VisualPropertyType.RotationAngleInDegrees:
+                    animation = compositor.CreateScalarKeyFrameAnimation();
+                    break;
+                default:
+                    return null;
+            }
+
+            animation.InsertExpressionKeyFrame(1.0f, "this.FinalValue", easing);
+            animation.Duration = TimeSpan.FromMilliseconds(duration);
+            animation.DelayTime = TimeSpan.FromMilliseconds(delay);
+            animation.Target = type.ToString();
+
+            return animation;
+        }
+
         #endregion
 
         #region Xaml Storyboard
@@ -458,7 +533,7 @@ namespace Continuity.Extensions
             {
                 EnableDependentAnimation = enableDependentAnimation,
                 To = to,
-                From = @from,
+                From = from,
                 EasingFunction = easing,
                 Duration = TimeSpan.FromMilliseconds(duration)
             };

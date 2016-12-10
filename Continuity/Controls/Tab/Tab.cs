@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
 using Continuity.Extensions;
 
-namespace Continuity.Controls.Tab
+namespace Continuity.Controls
 {
     [TemplatePart(Name = PART_ScrollViewer, Type = typeof(ScrollViewer))]
     [TemplatePart(Name = PART_HeadersPanel, Type = typeof(StackPanel))]

@@ -17,15 +17,9 @@ namespace Continuity.Extensions
 {
     public static class UtilExtensions
     {
-        public static float ToFloat(this double value)
-        {
-            return (float)value;
-        }
+        public static float ToFloat(this double value) => (float)value;
 
-        public static int ToInt(this float value)
-        {
-            return (int)value;
-        }
+        public static int ToInt(this float value) => (int)value;
 
         public static List<FrameworkElement> Children(this DependencyObject parent)
         {
@@ -92,15 +86,14 @@ namespace Continuity.Extensions
         //    batch.End();
         //}
 
-        public static CompositionPropertySet ScrollProperties(this ScrollViewer scrollViewer)
-        {
-            return ElementCompositionPreview.GetScrollViewerManipulationPropertySet(scrollViewer);
-        }
+        public static CompositionPropertySet ScrollProperties(this ScrollViewer scrollViewer) => 
+            ElementCompositionPreview.GetScrollViewerManipulationPropertySet(scrollViewer);
 
-        public static Visual Visual(this UIElement element)
-        {
-            return ElementCompositionPreview.GetElementVisual(element);
-        }
+        public static Visual Visual(this UIElement element) => 
+            ElementCompositionPreview.GetElementVisual(element);
+
+        public static void SetChildVisual(this UIElement element, Visual childVisual) => 
+            ElementCompositionPreview.SetElementChildVisual(element, childVisual);
 
         public static ContainerVisual ContainerVisual(this UIElement element)
         {
@@ -153,10 +146,8 @@ namespace Continuity.Extensions
             return ratio.ToFloat();
         }
 
-        public static Point RelativePosition(this UIElement element, UIElement other)
-        {
-            return element.TransformToVisual(other).TransformPoint(new Point(0, 0));
-        }
+        public static Point RelativePosition(this UIElement element, UIElement other) => 
+            element.TransformToVisual(other).TransformPoint(new Point(0, 0));
 
         public static float OffsetX(this UIElement element, UIElement other)
         {
@@ -286,5 +277,6 @@ namespace Continuity.Extensions
             }
         }
 
+        public static IEnumerable<T> GetValues<T>() => Enum.GetValues(typeof(T)).Cast<T>();
     }
 }

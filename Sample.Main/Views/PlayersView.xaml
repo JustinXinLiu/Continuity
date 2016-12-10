@@ -5,15 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:m="using:Sample.Main.Models"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:tab="using:Continuity.Controls.Tab"
       x:Name="Self"
       DataContext="{Binding Players, Source={StaticResource Locator}}"
       NavigationCacheMode="Required"
       mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot">
-        <tab:Tab x:Name="Tab">
-            <tab:TabItem Header="top 10">
+        <controls:Tab x:Name="Tab">
+            <controls:TabItem Header="top 10">
                 <ListView ItemsSource="{x:Bind Vm.TopTenPlayers}" SelectionChanged="ListView_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
@@ -44,8 +43,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </tab:TabItem>
-            <tab:TabItem Header="mvp players">
+            </controls:TabItem>
+            <controls:TabItem Header="mvp players">
                 <ListView ItemsSource="{x:Bind Vm.MvpCandidates}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
@@ -76,8 +75,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </tab:TabItem>
-            <tab:TabItem Header="fav">
+            </controls:TabItem>
+            <controls:TabItem Header="fav">
                 <ListView ItemsSource="{x:Bind Vm.MyFavoritePlayers}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
@@ -108,8 +107,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </tab:TabItem>
-        </tab:Tab>
+            </controls:TabItem>
+        </controls:Tab>
     </Grid>
 </Page>
 
