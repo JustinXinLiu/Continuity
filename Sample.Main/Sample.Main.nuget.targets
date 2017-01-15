@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(NuGetPackageRoot)' == ''">
     <NuGetPackageRoot>$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
   </PropertyGroup>
-  <ImportGroup>
-    <Import Project="$(NuGetPackageRoot)\Template10\1.1.2\build\uap10.0\Template10.targets" Condition="Exists('$(NuGetPackageRoot)\Template10\1.1.2\build\uap10.0\Template10.targets')" />
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)template10\1.1.2\build\uap10.0\Template10.targets" Condition="Exists('$(NuGetPackageRoot)template10\1.1.2\build\uap10.0\Template10.targets')" />
   </ImportGroup>
 </Project>

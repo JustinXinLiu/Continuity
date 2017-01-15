@@ -155,6 +155,12 @@ namespace Continuity.Extensions
             return position.X.ToFloat();
         }
 
+        public static float OffsetY(this UIElement element, UIElement other)
+        {
+            var position = element.RelativePosition(other);
+            return position.Y.ToFloat();
+        }
+
         public static int Create(this Random random, int min, int max,
             Func<int, bool> regenerateIfMet = null, int regenrationMaxCount = 5)
         {
