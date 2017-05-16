@@ -1,0 +1,15 @@
+﻿<Application x:Class="Reader.UWP.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             RequestedTheme="Light">
+
+   <Application.Resources>
+        <FontFamily x:Key="MontserratBlack">/Assets/Fonts/Montserrat-Black.ttf#Montserrat</FontFamily>
+        <FontFamily x:Key="MontserratSemiBold">/Assets/Fonts/Montserrat-SemiBold.ttf#Montserrat</FontFamily>
+        <FontFamily x:Key="MontserratRegular">/Assets/Fonts/Montserrat-Regular.ttf#Montserrat</FontFamily>
+        <FontFamily x:Key="MontserratLight">/Assets/Fonts/Montserrat-Light.ttf#Montserrat</FontFamily>
+
+        <FontFamily x:Key="MartelSemiBold">/Assets/Fonts/Martel-DemiBold.ttf#Martel</FontFamily>
+        <FontFamily x:Key="MartelRegular">/Assets/Fonts/Martel-Regular.ttf#Martel</FontFamily> 
+    </Application.Resources>
+</Application>

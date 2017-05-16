@@ -8,6 +8,5 @@
     <Import Project="$(NuGetPackageRoot)microsoft.net.native.sharedlibrary-x64\1.6.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.net.native.sharedlibrary-x64\1.6.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.net.native.sharedlibrary-arm\1.6.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.net.native.sharedlibrary-arm\1.6.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.net.native.compiler\1.6.0\build\Microsoft.Net.Native.Compiler.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.net.native.compiler\1.6.0\build\Microsoft.Net.Native.Compiler.targets')" />
-    <Import Project="$(NuGetPackageRoot)template10\1.1.12\build\uap10.0\Template10.targets" Condition="Exists('$(NuGetPackageRoot)template10\1.1.12\build\uap10.0\Template10.targets')" />
   </ImportGroup>
 </Project>

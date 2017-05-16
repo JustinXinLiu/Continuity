@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Continuity", "Continuity\Continuity.csproj", "{5E49EC20-DB7E-4846-BC93-118731B5BC1C}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Clock", "Sample.Clock\Sample.Clock.csproj", "{33FFA0B1-A03E-44CF-AE43-3961230BA3DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.FUI", "Sample.FUI\Sample.FUI.csproj", "{196A3311-9D3E-47A3-9297-F7D948D0C685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reader.UWP", "Reader.UWP\Reader.UWP.csproj", "{65C479A3-1B2E-4B21-9278-1D158C61D304}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,26 @@ Global
 		{196A3311-9D3E-47A3-9297-F7D948D0C685}.Release|x86.ActiveCfg = Release|x86
 		{196A3311-9D3E-47A3-9297-F7D948D0C685}.Release|x86.Build.0 = Release|x86
 		{196A3311-9D3E-47A3-9297-F7D948D0C685}.Release|x86.Deploy.0 = Release|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|ARM.ActiveCfg = Debug|ARM
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|ARM.Build.0 = Debug|ARM
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|ARM.Deploy.0 = Debug|ARM
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|x64.ActiveCfg = Debug|x64
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|x64.Build.0 = Debug|x64
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|x64.Deploy.0 = Debug|x64
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|x86.ActiveCfg = Debug|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|x86.Build.0 = Debug|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Debug|x86.Deploy.0 = Debug|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|Any CPU.ActiveCfg = Release|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|ARM.ActiveCfg = Release|ARM
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|ARM.Build.0 = Release|ARM
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|ARM.Deploy.0 = Release|ARM
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|x64.ActiveCfg = Release|x64
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|x64.Build.0 = Release|x64
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|x64.Deploy.0 = Release|x64
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|x86.ActiveCfg = Release|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|x86.Build.0 = Release|x86
+		{65C479A3-1B2E-4B21-9278-1D158C61D304}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{196A3311-9D3E-47A3-9297-F7D948D0C685}</ProjectGuid>
+    <ProjectGuid>{65C479A3-1B2E-4B21-9278-1D158C61D304}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sample.FUI</RootNamespace>
-    <AssemblyName>Sample.FUI</AssemblyName>
+    <RootNamespace>Reader.UWP</RootNamespace>
+    <AssemblyName>Reader.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.16190.0</TargetPlatformVersion>
@@ -16,7 +16,8 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Sample.FUI_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <PackageCertificateKeyFile>Reader.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -89,11 +90,36 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Fonts\Montserrat-Black.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-BlackItalic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Bold.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-BoldItalic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-ExtraBold.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-ExtraLight.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Italic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Light.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-LightItalic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Medium.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-MediumItalic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Regular.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-SemiBold.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Thin.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-ThinItalic.ttf" />
+    <Content Include="Assets\Fonts\Martel-Bold.ttf" />
+    <Content Include="Assets\Fonts\Martel-DemiBold.ttf" />
+    <Content Include="Assets\Fonts\Martel-ExtraBold.ttf" />
+    <Content Include="Assets\Fonts\Martel-Heavy.ttf" />
+    <Content Include="Assets\Fonts\Martel-Light.ttf" />
+    <Content Include="Assets\Fonts\Martel-Regular.ttf" />
+    <Content Include="Assets\Fonts\Martel-UltraLight.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LandingPage.xaml.cs">
-      <DependentUpon>LandingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -104,7 +130,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Sample.FUI_TemporaryKey.pfx" />
+    <None Include="Reader.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
@@ -121,10 +147,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="LandingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -132,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Continuity\Continuity.csproj">
-      <Project>{5e49ec20-db7e-4846-bc93-118731b5bc1c}</Project>
+      <Project>{5E49EC20-DB7E-4846-BC93-118731B5BC1C}</Project>
       <Name>Continuity</Name>
     </ProjectReference>
   </ItemGroup>
