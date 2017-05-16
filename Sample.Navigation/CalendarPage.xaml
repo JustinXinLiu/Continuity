@@ -1,4 +1,4 @@
-﻿<Page x:Class="Sample.Navigation.AppsPage"
+﻿<Page x:Class="Sample.Navigation.CalendarPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:Sample.Navigation"
@@ -8,8 +8,8 @@
 
     <Grid VerticalAlignment="Top"
           HorizontalAlignment="Left">
-        <Rectangle Fill="LightBlue"
-                   Width="80"
-                   Height="80" />
+        <Rectangle Fill="LightGray"
+                   Width="480"
+                   Height="480" />
     </Grid>
 </Page>

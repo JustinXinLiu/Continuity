@@ -12,12 +12,13 @@ namespace Sample.Navigation
             InitializeComponent();
 
             // The following cannot be done in XAML in this build yet.
-            MyNavigationView.AddMenuItem(Symbol.AllApps, "All Apps", (s, e) => RootFrame.Navigate(typeof(AppsPage)), true);
-            MyNavigationView.AddMenuItem(Symbol.Video, "Games", (s, e) => { });
-            MyNavigationView.AddMenuItem(Symbol.Calendar, "Calendar", (s, e) => { });
+            MyNavigationView.AddMenuItem(Symbol.AllApps, "All Applications", (s, e) => RootFrame.Navigate(typeof(AppsPage)), true);
+            MyNavigationView.AddMenuItem(Symbol.Video, "Games", (s, e) => RootFrame.Navigate(typeof(GamesPage)));
+            MyNavigationView.AddMenuItem(Symbol.Calendar, "Calendar", (s, e) => RootFrame.Navigate(typeof(CalendarPage)));
             MyNavigationView.AddMenuItemSeparator();
-            MyNavigationView.AddMenuItem(Symbol.Admin, "My Account", (s, e) => { });
-            
+            MyNavigationView.AddMenuItem(Symbol.Admin, "My Account", (s, e) => RootFrame.Navigate(typeof(AccountPage)));
+
+            MyNavigationView.SettingsInvoked += (s, e) => RootFrame.Navigate(typeof(SettingsPage));
             RootFrame.Navigate(typeof(AppsPage));
         }
     }

@@ -8,10 +8,11 @@
 
     <Grid>
         <NavigationView x:Name="MyNavigationView"
-                        Header="An extended NavigationView with fluent layout"
+                        Header="Fluent Layout"
                         AlwaysShowHeader="False"
                         IsSettingsVisible="True">
-            <Frame x:Name="RootFrame" />
+            <Frame x:Name="RootFrame"
+                   Margin="24" />
         </NavigationView>
     </Grid>
 </Page>
