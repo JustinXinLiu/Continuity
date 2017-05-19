@@ -10,36 +10,6 @@ namespace Continuity.Extensions
     {
         #region Composition
 
-        public static void StartClipAnimation(this FrameworkElement element, ClipAnimationDirection direction, float to,
-            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
-            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
-        {
-            CompositionScopedBatch batch = null;
-
-            var visual = element.Visual();
-            // After we get the Visual of the View, we need to SIZE it 'cause by design the
-            // Size is (0,0). Without doing this, clipping will not work.
-            visual.Size = element.RenderSize.ToVector2();
-            var compositor = visual.Compositor;
-
-            if (visual.Clip == null)
-            {
-                var clip = compositor.CreateInsetClip();
-                visual.Clip = clip;
-            }
-
-            if (completed != null)
-            {
-                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-                batch.Completed += (s, e) => completed();
-            }
-
-            visual.Clip.StartAnimation($"{direction}Inset",
-                compositor.CreateScalarKeyFrameAnimation(null, to, duration, delay, easing, iterationBehavior));
-
-            batch?.End();
-        }
-
         public static void StartOffsetAnimation(this UIElement element, AnimationAxis axis, float? from = null, float to = 0,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
@@ -200,37 +170,6 @@ namespace Continuity.Extensions
 
             visual.StartAnimation("Opacity",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
-
-            batch?.End();
-        }
-
-        public static void StartClipAnimation(this Visual visual, ClipAnimationDirection direction, float to,
-            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
-            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
-        {
-            CompositionScopedBatch batch = null;
-
-            if (visual.Size.X.Equals(0) || visual.Size.Y.Equals(0))
-            {
-                throw new ArgumentException("The visual is not properly sized.");
-            }
-
-            var compositor = visual.Compositor;
-
-            if (visual.Clip == null)
-            {
-                var clip = compositor.CreateInsetClip();
-                visual.Clip = clip;
-            }
-
-            if (completed != null)
-            {
-                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-                batch.Completed += (s, e) => completed();
-            }
-
-            visual.Clip.StartAnimation($"{direction}Inset",
-                compositor.CreateScalarKeyFrameAnimation(null, to, duration, delay, easing, iterationBehavior));
 
             batch?.End();
         }
