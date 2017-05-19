@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 
 namespace Continuity.Extensions
 {
-    public static class CompositionExtensions
+    public static partial class CompositionExtensions
     {
         public static void StartClipAnimation(this FrameworkElement element, ClipAnimationDirection direction, float to,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
@@ -107,7 +107,7 @@ namespace Continuity.Extensions
         }
 
         public static Task StartClipAnimationAsync(this Visual visual, ClipAnimationDirection direction, float to,
-            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
+            double duration = 800, int delay = 0, CompositionEasingFunction easing = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
         {
             CompositionScopedBatch batch;
