@@ -9,33 +9,7 @@ namespace Continuity.Extensions
     public static class AnimationExtensions
     {
         #region Composition
-
-        public static void StartSizeAnimation(this UIElement element, Vector2? from = null, Vector2? to = null,
-            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
-            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
-        {
-            CompositionScopedBatch batch = null;
-
-            var visual = element.Visual();
-            var compositor = visual.Compositor;
-
-            if (completed != null)
-            {
-                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-                batch.Completed += (s, e) => completed();
-            }
-
-            if (to == null)
-            {
-                to = Vector2.One;
-            }
-
-            visual.StartAnimation("Size",
-                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
-
-            batch?.End();
-        }
-
+   
         public static void StartScaleAnimation(this UIElement element, Vector2? from = null, Vector2? to = null,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
@@ -123,30 +97,6 @@ namespace Continuity.Extensions
 
             visual.StartAnimation("Opacity",
                 compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
-
-            batch?.End();
-        }
-
-        public static void StartSizeAnimation(this Visual visual, Vector2? from = null, Vector2? to = null,
-            double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
-            AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
-        {
-            CompositionScopedBatch batch = null;
-            var compositor = visual.Compositor;
-
-            if (completed != null)
-            {
-                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-                batch.Completed += (s, e) => completed();
-            }
-
-            if (to == null)
-            {
-                to = Vector2.One;
-            }
-
-            visual.StartAnimation("Size",
-                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
 
             batch?.End();
         }
