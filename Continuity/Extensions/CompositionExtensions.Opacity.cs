@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Windows.UI.Composition;
@@ -8,7 +8,7 @@ namespace Continuity.Extensions
 {
     public static partial class CompositionExtensions
     {
-        public static void StartSizeAnimation(this UIElement element, Vector2? from = null, Vector2? to = null,
+        public static void StartOpacityAnimation(this UIElement element, float? from = null, float to = 1.0f,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
         {
@@ -23,18 +23,13 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            if (to == null)
-            {
-                to = Vector2.One;
-            }
-
-            visual.StartAnimation("Size",
-                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
+            visual.StartAnimation("Opacity",
+                compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
             batch?.End();
         }
 
-        public static void StartSizeAnimation(this Visual visual, Vector2? from = null, Vector2? to = null,
+        public static void StartOpacityAnimation(this Visual visual, float? from = null, float to = 1.0f,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null, Action completed = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
         {
@@ -47,18 +42,13 @@ namespace Continuity.Extensions
                 batch.Completed += (s, e) => completed();
             }
 
-            if (to == null)
-            {
-                to = Vector2.One;
-            }
-
-            visual.StartAnimation("Size",
-                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
+            visual.StartAnimation("Opacity",
+                compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
             batch?.End();
         }
 
-        public static Task StartSizeAnimationAsync(this UIElement element, Vector2? from = null, Vector2? to = null,
+        public static Task StartOpacityAnimationAsync(this UIElement element, float? from = null, float to = 1.0f,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
         {
@@ -78,25 +68,20 @@ namespace Continuity.Extensions
             batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
             batch.Completed += Completed;
 
-            if (to == null)
-            {
-                to = Vector2.One;
-            }
 
-            visual.StartAnimation("Size",
-                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
+            visual.StartAnimation("Opacity",
+                compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
             batch.End();
 
             return taskSource.Task;
         }
 
-        public static Task StartSizeAnimationAsync(this Visual visual, Vector2? from = null, Vector2? to = null,
+        public static Task StartOpacityAnimationAsync(this Visual visual, float? from = null, float to = 1.0f,
             double duration = 800, int delay = 0, CompositionEasingFunction easing = null,
             AnimationIterationBehavior iterationBehavior = AnimationIterationBehavior.Count)
         {
             CompositionScopedBatch batch;
-
             var compositor = visual.Compositor;
 
             var taskSource = new TaskCompletionSource<bool>();
@@ -110,18 +95,13 @@ namespace Continuity.Extensions
             batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
             batch.Completed += Completed;
 
-            if (to == null)
-            {
-                to = Vector2.One;
-            }
 
-            visual.StartAnimation("Size",
-                compositor.CreateVector2KeyFrameAnimation(from, to.Value, duration, delay, easing, iterationBehavior));
+            visual.StartAnimation("Opacity",
+                compositor.CreateScalarKeyFrameAnimation(from, to, duration, delay, easing, iterationBehavior));
 
             batch.End();
 
             return taskSource.Task;
         }
-        
     }
 }
