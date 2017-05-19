@@ -504,11 +504,12 @@ namespace Continuity.Controls
             return Headers.IndexOf(header);
         }
 
-        T GetTemplateChild<T>(string name, string message = null) where T : DependencyObject
+        private T GetTemplateChild<T>(string name, string message = null) where T : DependencyObject
         {
-            var child = GetTemplateChild(name) as T;
-
-            if (child != null) return child;
+            if (GetTemplateChild(name) is T child)
+            {
+                return child;
+            }
 
             if (message == null)
             {

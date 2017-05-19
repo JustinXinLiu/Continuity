@@ -115,6 +115,7 @@
     <Compile Include="Controls\Tab\TabHeaderItem.cs" />
     <Compile Include="Controls\Tab\TabSelectionChangedEventArgs.cs" />
     <Compile Include="Controls\Tab\TabSelectionChangedEventHandler.cs" />
+    <Compile Include="Extensions\CompositionExtensions.Translation.cs" />
     <Compile Include="Extensions\CompositionExtensions.Size.cs" />
     <Compile Include="Extensions\CompositionExtensions.Offset.cs" />
     <Compile Include="Extensions\CompositionExtensions.Clip.cs" />
