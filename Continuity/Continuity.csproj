@@ -115,6 +115,8 @@
     <Compile Include="Controls\Tab\TabHeaderItem.cs" />
     <Compile Include="Controls\Tab\TabSelectionChangedEventArgs.cs" />
     <Compile Include="Controls\Tab\TabSelectionChangedEventHandler.cs" />
+    <Compile Include="Extensions\CompositionExtensions.Shadow.cs" />
+    <Compile Include="Extensions\CompositionExtensions.Implicit.cs" />
     <Compile Include="Extensions\CompositionExtensions.Rotation.cs" />
     <Compile Include="Extensions\CompositionExtensions.Opacity.cs" />
     <Compile Include="Extensions\CompositionExtensions.Scale.cs" />

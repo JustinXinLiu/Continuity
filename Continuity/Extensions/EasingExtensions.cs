@@ -3,7 +3,7 @@ using Windows.UI.Composition;
 
 namespace Continuity.Extensions
 {
-    public static partial class EasingExtensions
+    public static class EasingExtensions
     {
         #region Cubic
 
@@ -44,6 +44,25 @@ namespace Continuity.Extensions
         public static CubicBezierEasingFunction EaseInOutBack(this Compositor compositor)
         {
             return compositor.CreateCubicBezierEasingFunction(new Vector2(0.68f, -0.55f), new Vector2(0.265f, 1.55f));
+        }
+
+        #endregion
+
+        #region Quad
+
+        public static CubicBezierEasingFunction EaseInSine(this Compositor compositor)
+        {
+            return compositor.CreateCubicBezierEasingFunction(new Vector2(0.47f, 0f), new Vector2(0.745f, 0.715f));
+        }
+
+        public static CubicBezierEasingFunction EaseOutSine(this Compositor compositor)
+        {
+            return compositor.CreateCubicBezierEasingFunction(new Vector2(0.39f, 0.575f), new Vector2(0.565f, 1.0f));
+        }
+
+        public static CubicBezierEasingFunction EaseInOutSine(this Compositor compositor)
+        {
+            return compositor.CreateCubicBezierEasingFunction(new Vector2(0.445f, 0.05f), new Vector2(0.55f, 0.95f));
         }
 
         #endregion
