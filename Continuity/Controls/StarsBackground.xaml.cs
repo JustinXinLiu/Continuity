@@ -1,15 +1,13 @@
 ﻿using Continuity.Extensions;
-using Robmikh.Util.CompositionImageLoader;
 using System;
 using System.Numerics;
-using System.Threading.Tasks;
 using Windows.Devices.Sensors;
-using Windows.Foundation.Metadata;
 using Windows.UI.Composition;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Continuity.Controls
 {
@@ -23,9 +21,8 @@ namespace Continuity.Controls
     {
         #region Fields
 
-        private Random _random = new Random((int)DateTime.Now.Ticks);
+        private readonly Random _random = new Random((int)DateTime.Now.Ticks);
 
-        private IImageLoader _imageLoader;
         private CompositionSurfaceBrush _circleBrush;
         private Compositor _compositor;
         private ContainerVisual _skyVisual;
@@ -52,15 +49,12 @@ namespace Continuity.Controls
 
         #region Properties
 
-        private float SkyVisualRadius
-        {
-            get { return _skyVisual.Size.X / 2; }
-        }
+        private float SkyVisualRadius => _skyVisual.Size.X / 2;
 
         public string StarUriString
         {
-            get { return (string)GetValue(StarUriStringProperty); }
-            set { SetValue(StarUriStringProperty, value); }
+            get => (string)GetValue(StarUriStringProperty);
+            set => SetValue(StarUriStringProperty, value);
         }
 
         public static readonly DependencyProperty StarUriStringProperty =
@@ -69,8 +63,8 @@ namespace Continuity.Controls
 
         public float SkyVisualAreaRatio
         {
-            get { return (float)GetValue(SkyVisualAreaRatioProperty); }
-            set { SetValue(SkyVisualAreaRatioProperty, value); }
+            get => (float)GetValue(SkyVisualAreaRatioProperty);
+            set => SetValue(SkyVisualAreaRatioProperty, value);
         }
 
         public static readonly DependencyProperty SkyVisualAreaRatioProperty =
@@ -78,8 +72,8 @@ namespace Continuity.Controls
 
         public int NumberOfSmallTwinklingStars
         {
-            get { return (int)GetValue(NumberOfSmallTwinklingStarsProperty); }
-            set { SetValue(NumberOfSmallTwinklingStarsProperty, value); }
+            get => (int)GetValue(NumberOfSmallTwinklingStarsProperty);
+            set => SetValue(NumberOfSmallTwinklingStarsProperty, value);
         }
 
         public static readonly DependencyProperty NumberOfSmallTwinklingStarsProperty =
@@ -88,8 +82,8 @@ namespace Continuity.Controls
 
         public int NumberOfBigMovingStars
         {
-            get { return (int)GetValue(NumberOfBigMovingStarsProperty); }
-            set { SetValue(NumberOfBigMovingStarsProperty, value); }
+            get => (int)GetValue(NumberOfBigMovingStarsProperty);
+            set => SetValue(NumberOfBigMovingStarsProperty, value);
         }
 
         public static readonly DependencyProperty NumberOfBigMovingStarsProperty =
@@ -196,9 +190,8 @@ namespace Continuity.Controls
             _compositor = _skyVisual.Compositor;
             _reading = _compositor.CreatePropertySet();
             _reading.InsertVector3("Offset", new Vector3(0.0f, 0.0f, 0.0f));
-            _imageLoader = ImageLoaderFactory.CreateImageLoader(_compositor);
             _circleBrush = _compositor.CreateSurfaceBrush();
-            _circleBrush.Surface = _imageLoader.LoadImageFromUri(new Uri(StarUriString));
+            _circleBrush.Surface = LoadedImageSurface.StartLoadFromUri(new Uri(StarUriString));
 
             if (_inclinometer != null) SetupSkyVisualOffsetExpressionAnimation();
         }
