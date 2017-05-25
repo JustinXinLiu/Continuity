@@ -315,10 +315,7 @@ namespace Continuity.Controls
         }
 
         private void RecalculateLayout(double containerWidth)
-        {       
-            // width should be the displayable width
-            //containerWidth = containerWidth - Padding.Left - Padding.Top;
-
+        {      
             if (containerWidth > 0)
             {
                 var newWidth = CalculateItemWidth(containerWidth);
@@ -338,8 +335,8 @@ namespace Continuity.Controls
                 Column = column;
             }
 
-            public int Row { get; set; }
-            public int Column { get; set; }
+            public int Row { get; }
+            public int Column { get; }
         }
     }
 }
