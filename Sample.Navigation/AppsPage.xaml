@@ -8,8 +8,8 @@
 
     <Grid>
         <controls:AdaptiveGridView ItemsSource="{x:Bind Colors}"
-                                   ItemHeight="120"
-                                   DesiredWidth="120"
+                                   ItemHeight="200"
+                                   DesiredWidth="320"
                                    StretchContentForSingleRow="False">
             <controls:AdaptiveGridView.ItemTemplate>
                 <DataTemplate>

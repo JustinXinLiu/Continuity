@@ -126,8 +126,6 @@ namespace Continuity.Controls
 
             if (itemsWrapGrid.LastVisibleIndex <= 0)
             {
-                element.Opacity = 0;
-
                 if (_visibleItemContainers.ContainsKey(element))
                 {
                     _visibleItemContainers.Remove(element);
