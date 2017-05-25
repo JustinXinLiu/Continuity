@@ -6,10 +6,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Top"
-          HorizontalAlignment="Left">
+    <Grid>
         <Rectangle Fill="LightBlue"
-                   Width="80"
                    Height="80" />
     </Grid>
 </Page>
