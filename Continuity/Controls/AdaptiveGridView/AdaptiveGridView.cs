@@ -30,6 +30,12 @@ namespace Continuity.Controls
     public partial class AdaptiveGridView : GridView
     {
         private bool _isLoaded;
+        private ScrollMode _savedVerticalScrollMode;
+        private ScrollMode _savedHorizontalScrollMode;
+        private ScrollBarVisibility _savedVerticalScrollBarVisibility;
+        private ScrollBarVisibility _savedHorizontalScrollBarVisibility;
+        private Orientation _savedOrientation;
+        private bool _needToRestoreScrollStates;
 
         private bool _isAnimated;
         private readonly Dictionary<FrameworkElement, Position> _visibleItemContainers = new Dictionary<FrameworkElement, Position>();
@@ -267,34 +273,52 @@ namespace Continuity.Controls
 
                     if (itemsWrapGridPanel != null)
                     {
+                        _savedOrientation = itemsWrapGridPanel.Orientation;
                         itemsWrapGridPanel.Orientation = Orientation.Vertical;
                     }
 
                     SetBinding(MaxHeightProperty, b);
 
+                    _savedHorizontalScrollMode = ScrollViewer.GetHorizontalScrollMode(this);
+                    _savedVerticalScrollMode = ScrollViewer.GetVerticalScrollMode(this);
+                    _savedHorizontalScrollBarVisibility = ScrollViewer.GetHorizontalScrollBarVisibility(this);
+                    _savedVerticalScrollBarVisibility = ScrollViewer.GetVerticalScrollBarVisibility(this);
+                    _needToRestoreScrollStates = true;
+
                     ScrollViewer.SetVerticalScrollMode(this, ScrollMode.Disabled);
-                    ScrollViewer.SetVerticalScrollBarVisibility(this, ScrollBarVisibility.Disabled);
+                    ScrollViewer.SetVerticalScrollBarVisibility(this, ScrollBarVisibility.Hidden);
                     ScrollViewer.SetHorizontalScrollBarVisibility(this, ScrollBarVisibility.Visible);
                     ScrollViewer.SetHorizontalScrollMode(this, ScrollMode.Enabled);
                 }
                 else
                 {
                     ClearValue(MaxHeightProperty);
-                    if (itemsWrapGridPanel != null)
+
+                    if (!_needToRestoreScrollStates)
                     {
-                        itemsWrapGridPanel.Orientation = Orientation.Horizontal;
+                        return;
                     }
 
-                    ScrollViewer.SetVerticalScrollMode(this, ScrollMode.Enabled);
-                    ScrollViewer.SetVerticalScrollBarVisibility(this, ScrollBarVisibility.Visible);
-                    ScrollViewer.SetHorizontalScrollBarVisibility(this, ScrollBarVisibility.Disabled);
-                    ScrollViewer.SetHorizontalScrollMode(this, ScrollMode.Disabled);
+                    _needToRestoreScrollStates = false;
+
+                    if (itemsWrapGridPanel != null)
+                    {
+                        itemsWrapGridPanel.Orientation = _savedOrientation;
+                    }
+
+                    ScrollViewer.SetVerticalScrollMode(this, _savedVerticalScrollMode);
+                    ScrollViewer.SetVerticalScrollBarVisibility(this, _savedVerticalScrollBarVisibility);
+                    ScrollViewer.SetHorizontalScrollBarVisibility(this, _savedHorizontalScrollBarVisibility);
+                    ScrollViewer.SetHorizontalScrollMode(this, _savedHorizontalScrollMode);
                 }
             }
         }
 
         private void RecalculateLayout(double containerWidth)
-        {
+        {       
+            // width should be the displayable width
+            //containerWidth = containerWidth - Padding.Left - Padding.Top;
+
             if (containerWidth > 0)
             {
                 var newWidth = CalculateItemWidth(containerWidth);
