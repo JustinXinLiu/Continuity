@@ -1,24 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using Windows.Foundation;
 using Windows.UI;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 
 namespace Sample.Navigation
 {
     public sealed partial class AppsPage : Page
     {
+        public ObservableCollection<Color> Colors { get; } = new ObservableCollection<Color>();
+
         public AppsPage()
         {
             InitializeComponent();
 
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(200, 200));
-            ApplicationView.PreferredLaunchViewSize = new Size(640, 640);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            Loaded += (s, e) =>
+            {
+                foreach (var color in typeof(Colors).GetRuntimeProperties().Select(x => (Color)x.GetValue(null)))
+                {
+                    Colors.Add(color);
+                }
+            };
         }
-
-        private IEnumerable<Color> Colors => typeof(Colors).GetRuntimeProperties().Select(x => (Color) x.GetValue(null));
     }
 }

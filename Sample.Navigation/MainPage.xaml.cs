@@ -1,4 +1,5 @@
 ﻿using Windows.Foundation;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 
 namespace Sample.Navigation
@@ -9,6 +10,8 @@ namespace Sample.Navigation
         {
             InitializeComponent();
 
+            MaximizeWindowOnLoad();
+
             // The following cannot be done in XAML in this build yet.
             MyNavigationView.AddMenuItem(Symbol.AllApps, "All Applications", (s, e) => RootFrame.Navigate(typeof(AppsPage)), true);
             MyNavigationView.AddMenuItem(Symbol.Video, "Games", (s, e) => RootFrame.Navigate(typeof(GamesPage)));
@@ -18,6 +21,14 @@ namespace Sample.Navigation
 
             MyNavigationView.SettingsInvoked += (s, e) => RootFrame.Navigate(typeof(SettingsPage));
             RootFrame.Navigate(typeof(AppsPage));
+        }
+
+        private static void MaximizeWindowOnLoad()
+        {
+            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+
+            ApplicationView.PreferredLaunchViewSize = new Size(bounds.Width, bounds.Height);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
         }
     }
 

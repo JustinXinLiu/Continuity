@@ -45,6 +45,7 @@ namespace Continuity.Controls
         private const int InitialDelay = 400;
         private const int AnimationDuration = 360;
         private const int AnimationDelay = 100;
+        private const double ItemMargin = 8.0d;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AdaptiveGridView"/> class.
@@ -64,6 +65,7 @@ namespace Continuity.Controls
             var style = new Style(typeof(GridViewItem));
             style.Setters.Add(new Setter(HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch));
             style.Setters.Add(new Setter(VerticalContentAlignmentProperty, VerticalAlignment.Stretch));
+            style.Setters.Add(new Setter(MarginProperty, new Thickness(ItemMargin)));
             ItemContainerStyle = style;
 
             // Set up opacity and scale animations.
@@ -112,10 +114,12 @@ namespace Continuity.Controls
             element.SetBinding(HeightProperty, heightBinding);
             element.SetBinding(WidthProperty, widthBinding);
 
+            element.Opacity = 0;
+
             var itemsWrapGrid = ItemsPanelRoot as ItemsWrapGrid;
             if (itemsWrapGrid == null) return;
 
-            var numberOfColumns = (int)Math.Round(ActualWidth / ItemWidth);
+            var numberOfColumns = (int)Math.Round(ActualWidth / (ItemWidth + ItemMargin * 2));
             var index = IndexFromContainer(obj);
             var rowIndex = index % numberOfColumns;
             var colIndex = index / numberOfColumns;
@@ -150,7 +154,7 @@ namespace Continuity.Controls
         {
             await Task.Delay(InitialDelay);
 
-            var numberOfRows = Math.Ceiling(ActualHeight / ItemHeight);
+            var numberOfRows = Math.Ceiling(ActualHeight / (ItemHeight + ItemMargin * 2));
             var last = (numberOfRows - 1) + (numberOfColumns - 1);
 
             for (var i = 0; i <= last; i++)
@@ -185,8 +189,8 @@ namespace Continuity.Controls
             {
                 columns = Items.Count;
             }
-
-            return containerWidth / columns - 5;
+            
+            return (containerWidth - Padding.Left - Padding.Right) / columns - ItemMargin * 2 - 2.0d;
         }
 
         /// <summary>
@@ -312,15 +316,12 @@ namespace Continuity.Controls
         }
 
         private void RecalculateLayout(double containerWidth)
-        { 
-            // width should be the displayable width
-            containerWidth = containerWidth - Padding.Left - Padding.Top;
-
+        {
             if (containerWidth > 0)
             {
                 var newWidth = CalculateItemWidth(containerWidth);
 
-                if (double.IsNaN(ItemWidth) || Math.Abs(newWidth - ItemWidth) > 1)
+                if (newWidth > 0 && (double.IsNaN(ItemWidth) || Math.Abs(newWidth - ItemWidth) > 1))
                 {
                     ItemWidth = newWidth;
                 }

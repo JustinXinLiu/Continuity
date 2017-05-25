@@ -9,10 +9,11 @@
     <Grid>
         <controls:AdaptiveGridView ItemsSource="{x:Bind Colors}"
                                    ItemHeight="120"
-                                   DesiredWidth="120">
+                                   DesiredWidth="120"
+                                   StretchContentForSingleRow="False">
             <controls:AdaptiveGridView.ItemTemplate>
                 <DataTemplate>
-                    <Rectangle Opacity="0.8">
+                    <Rectangle>
                         <Rectangle.Fill>
                             <SolidColorBrush Color="{Binding}" />
                         </Rectangle.Fill>
