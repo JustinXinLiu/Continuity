@@ -114,8 +114,6 @@ namespace Continuity.Controls
             element.SetBinding(HeightProperty, heightBinding);
             element.SetBinding(WidthProperty, widthBinding);
 
-            element.Opacity = 0;
-
             var itemsWrapGrid = ItemsPanelRoot as ItemsWrapGrid;
             if (itemsWrapGrid == null) return;
 
@@ -126,6 +124,8 @@ namespace Continuity.Controls
 
             if (itemsWrapGrid.LastVisibleIndex <= 0)
             {
+                element.Opacity = 0;
+
                 if (_visibleItemContainers.ContainsKey(element))
                 {
                     _visibleItemContainers.Remove(element);
