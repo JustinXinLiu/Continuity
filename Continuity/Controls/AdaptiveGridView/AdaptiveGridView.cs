@@ -71,7 +71,7 @@ namespace Continuity.Controls
             _scaleAnimation = compositor.CreateVector3KeyFrameAnimation();
             _scaleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationDuration);
             _scaleAnimation.InsertKeyFrame(0, new Vector3(0.8f, 0.8f, 0));
-            _scaleAnimation.InsertKeyFrame(1, Vector3.One, EaseOutCubic(compositor));
+            _scaleAnimation.InsertKeyFrame(1, Vector3.One, compositor.EaseOutCubic());
 
             // Remove the default entrance transition if existed.
             RegisterPropertyChangedCallback(ItemContainerTransitionsProperty, (s, e) =>
@@ -169,9 +169,6 @@ namespace Continuity.Controls
             }
         }
 
-        private static CubicBezierEasingFunction EaseOutCubic(Compositor compositor) =>
-            compositor.CreateCubicBezierEasingFunction(new Vector2(0.215f, 0.61f), new Vector2(0.355f, 1.0f));
-
         /// <summary>
         /// Calculates the width of the grid items.
         /// </summary>
@@ -189,7 +186,7 @@ namespace Continuity.Controls
                 columns = Items.Count;
             }
 
-            return (containerWidth - Padding.Left - Padding.Right) / columns - 8.0d * 2 - 2.0d;
+            return containerWidth / columns - 5;
         }
 
         /// <summary>
@@ -233,16 +230,16 @@ namespace Continuity.Controls
             {
                 RecalculateLayout(e.NewSize.Width);
 
-                if (ItemsPanelRoot is ItemsWrapGrid itemsWrapGrid)
-                {
-                    for (var i = itemsWrapGrid.FirstVisibleIndex; i <= itemsWrapGrid.LastVisibleIndex; i++)
-                    {
-                        if (ContainerFromIndex(i) is GridViewItem container)
-                        {
-                            container.Animate(null, 1.0d, nameof(Opacity), AnimationDuration);
-                        }
-                    }
-                }
+                //if (ItemsPanelRoot is ItemsWrapGrid itemsWrapGrid)
+                //{
+                //    for (var i = itemsWrapGrid.FirstVisibleIndex; i <= itemsWrapGrid.LastVisibleIndex; i++)
+                //    {
+                //        if (ContainerFromIndex(i) is GridViewItem container)
+                //        {
+                //            container.Animate(null, 1.0d, nameof(Opacity), AnimationDuration);
+                //        }
+                //    }
+                //}
             }
         }
 
@@ -315,12 +312,15 @@ namespace Continuity.Controls
         }
 
         private void RecalculateLayout(double containerWidth)
-        {      
+        { 
+            // width should be the displayable width
+            containerWidth = containerWidth - Padding.Left - Padding.Top;
+
             if (containerWidth > 0)
             {
                 var newWidth = CalculateItemWidth(containerWidth);
 
-                if (newWidth > 0 && (double.IsNaN(ItemWidth) || Math.Abs(newWidth - ItemWidth) > 1))
+                if (double.IsNaN(ItemWidth) || Math.Abs(newWidth - ItemWidth) > 1)
                 {
                     ItemWidth = newWidth;
                 }
