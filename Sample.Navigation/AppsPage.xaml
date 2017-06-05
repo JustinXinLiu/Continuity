@@ -4,22 +4,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:controls="using:Continuity.Controls"
+      xmlns:ext="using:Continuity.Extensions"
+      xmlns:local="using:Sample.Navigation"
       mc:Ignorable="d">
 
-    <Grid>
-        <controls:AdaptiveGridView ItemsSource="{x:Bind Colors}"
+    <Grid x:Name="Root">
+        <controls:AdaptiveGridView ItemsSource="{x:Bind MyItems}"
                                    ItemHeight="200"
                                    DesiredWidth="320"
                                    StretchContentForSingleRow="False">
             <controls:AdaptiveGridView.ItemTemplate>
-                <DataTemplate>
-                    <Rectangle>
-                        <Rectangle.Fill>
-                            <SolidColorBrush Color="{Binding}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                <DataTemplate x:DataType="local:MyItem">
+                    <Grid SizeChanged="OnTileSizeChanged"
+                          PointerPressed="OnTilePointerPressed"
+                          PointerExited="OnTilePointerExited"
+                          PointerCanceled="OnTilePointerCanceled"
+                          PointerCaptureLost="OnTilePointerCaptureLost">
+                        <Rectangle x:Name="ColorElement">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image x:Name="ProjectPicture"
+                               Source="{x:Bind ext:UtilExtensions.ToBitmapImage(PictureUri)}"
+                               Stretch="UniformToFill" />
+                        <TextBlock Text="hohohohohohohoho"
+                                   controls:AdaptiveGridViewItem.IsTitle="True" />
+                        <TextBlock Text="Haha"
+                                   controls:AdaptiveGridViewItem.IsTitle="True" />
+
+                        <Rectangle x:Name="HitTestElement"
+                                   Fill="Transparent" />
+                    </Grid>
                 </DataTemplate>
             </controls:AdaptiveGridView.ItemTemplate>
-        </controls:AdaptiveGridView>
+        </controls:AdaptiveGridView> 
     </Grid>
 </Page>

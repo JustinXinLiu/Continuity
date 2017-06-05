@@ -8,9 +8,8 @@ namespace Sample.Navigation
     {
         public MainPage()
         {
+            //MaximizeWindowOnLoad();
             InitializeComponent();
-
-            MaximizeWindowOnLoad();
 
             // The following cannot be done in XAML in this build yet.
             MyNavigationView.AddMenuItem(Symbol.AllApps, "All Applications", (s, e) => RootFrame.Navigate(typeof(AppsPage)), true);

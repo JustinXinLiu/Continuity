@@ -58,6 +58,7 @@ namespace Continuity.Controls
             if (Items != null) Items.VectorChanged += ItemsOnVectorChanged;
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
+            ContainerContentChanging += OnContainerContentChanging;
 
             // Define ItemContainerStyle in code rather than using the DefaultStyle
             // to avoid having to define the entire style of a GridView. This can still
@@ -84,6 +85,25 @@ namespace Continuity.Controls
                     ItemContainerTransitions.Remove(entranceThemeTransition);
                 }
             });
+        }
+
+        private void OnContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            var containerVisual = args.ItemContainer.Visual();
+
+            if (args.InRecycleQueue)
+            {
+                containerVisual.ImplicitAnimations = null;
+            }
+            else
+            {
+                containerVisual.EnableImplicitAnimation(VisualPropertyType.Offset, 400.0d);
+            }
+        }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new AdaptiveGridViewItem();
         }
 
         /// <summary>

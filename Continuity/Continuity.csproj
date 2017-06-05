@@ -105,6 +105,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controls\AdaptiveGridView\AdaptiveGridView.cs" />
+    <Compile Include="Controls\AdaptiveGridView\AdaptiveGridViewItem.Properties.cs" />
+    <Compile Include="Controls\AdaptiveGridView\AdaptiveGridViewItem.cs" />
     <Compile Include="Controls\CardView\CardView.cs" />
     <Compile Include="Controls\CardView\CardViewItem.cs" />
     <Compile Include="Controls\FluentNavigationView\FluentNavigationMenuItem.cs" />
@@ -166,6 +168,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\AdaptiveGridView\AdaptiveGridView.Properties.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExpressionBuilder\ExpressionBuilder\ExpressionBuilder.csproj">
+      <Project>{97f79cb4-fb7b-4dc3-8a08-28fa5694a73c}</Project>
+      <Name>ExpressionBuilder</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

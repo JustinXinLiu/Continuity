@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Foundation = Windows.Foundation;
 
 namespace Continuity.Extensions
@@ -284,5 +285,7 @@ namespace Continuity.Extensions
         }
 
         public static IEnumerable<T> GetValues<T>() => Enum.GetValues(typeof(T)).Cast<T>();
+
+        public static BitmapImage ToBitmapImage(this string uri) => new BitmapImage(new Uri(uri));
     }
 }
