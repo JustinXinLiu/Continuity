@@ -252,16 +252,16 @@ namespace Continuity.Controls
             {
                 RecalculateLayout(e.NewSize.Width);
 
-                //if (ItemsPanelRoot is ItemsWrapGrid itemsWrapGrid)
-                //{
-                //    for (var i = itemsWrapGrid.FirstVisibleIndex; i <= itemsWrapGrid.LastVisibleIndex; i++)
-                //    {
-                //        if (ContainerFromIndex(i) is GridViewItem container)
-                //        {
-                //            container.Animate(null, 1.0d, nameof(Opacity), AnimationDuration);
-                //        }
-                //    }
-                //}
+                if (ItemsPanelRoot is ItemsWrapGrid itemsWrapGrid)
+                {
+                    for (var i = itemsWrapGrid.FirstVisibleIndex; i <= itemsWrapGrid.LastVisibleIndex; i++)
+                    {
+                        if (ContainerFromIndex(i) is GridViewItem container)
+                        {
+                            container.Animate(null, 1.0d, nameof(Opacity), AnimationDuration);
+                        }
+                    }
+                }
             }
         }
 
