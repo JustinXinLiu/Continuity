@@ -137,7 +137,7 @@ namespace Continuity.Controls
             var itemsWrapGrid = ItemsPanelRoot as ItemsWrapGrid;
             if (itemsWrapGrid == null) return;
 
-            var numberOfColumns = (int)Math.Round(ActualWidth / (ItemWidth + ItemMargin * 2));
+            var numberOfColumns = GetNumberOfColumns();
             var index = IndexFromContainer(obj);
             var rowIndex = index % numberOfColumns;
             var colIndex = index / numberOfColumns;
@@ -155,7 +155,7 @@ namespace Continuity.Controls
                 // When all items are visible, run the staggered animation in the end.
                 if (!_isAnimated && index == Items?.Count - 1)
                 {
-                    await RunStaggeredAnimationOnItemContainersAsync(numberOfColumns);
+                    await RunStaggeredAnimationOnItemContainersAsync();
                 }
             }
             else
@@ -164,14 +164,15 @@ namespace Continuity.Controls
                 _isAnimated = true;
 
                 // Only run the staggered animation once when all visible items are rendered.
-                await RunStaggeredAnimationOnItemContainersAsync(numberOfColumns);
+                await RunStaggeredAnimationOnItemContainersAsync();
             }
         }
 
-        private async Task RunStaggeredAnimationOnItemContainersAsync(int numberOfColumns)
+        private async Task RunStaggeredAnimationOnItemContainersAsync()
         {
             await Task.Delay(InitialDelay);
 
+            var numberOfColumns = GetNumberOfColumns();
             var numberOfRows = Math.Ceiling(ActualHeight / (ItemHeight + ItemMargin * 2));
             var last = (numberOfRows - 1) + (numberOfColumns - 1);
 
@@ -190,6 +191,8 @@ namespace Continuity.Controls
                 }
             }
         }
+        
+        private int GetNumberOfColumns() => (int)Math.Round(ActualWidth / ItemWidth);
 
         /// <summary>
         /// Calculates the width of the grid items.
