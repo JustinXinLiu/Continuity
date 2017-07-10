@@ -9,6 +9,12 @@ namespace Sample.Main
         public App()
         {
             InitializeComponent();
+
+            UnhandledException += OnAppUnhandledException;
+        }
+
+        private void OnAppUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
         }
 
         public override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)

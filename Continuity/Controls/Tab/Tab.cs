@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
 using Continuity.Extensions;
+using Windows.UI.Xaml.Media;
 
 namespace Continuity.Controls
 {
@@ -75,7 +76,7 @@ namespace Continuity.Controls
 
         private ScrollViewer ScrollViewer
         {
-            get { return _scrollViewer; }
+            get => _scrollViewer;
             set
             {
                 if (_scrollViewer != null)
@@ -97,7 +98,7 @@ namespace Continuity.Controls
 
         private ScrollViewer HeadersPanelHost
         {
-            get { return _headersPanelHost; }
+            get => _headersPanelHost;
             set
             {
                 if (_headersPanelHost != null)
@@ -119,10 +120,9 @@ namespace Continuity.Controls
 
         public DataTemplate HeaderTemplate
         {
-            get { return (DataTemplate)GetValue(HeaderTemplateProperty); }
-            set { SetValue(HeaderTemplateProperty, value); }
+            get => (DataTemplate)GetValue(HeaderTemplateProperty);
+            set => SetValue(HeaderTemplateProperty, value);
         }
-
         public static readonly DependencyProperty HeaderTemplateProperty =
             DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(Tab),
                 new PropertyMetadata(null, (s, dp) =>
@@ -139,10 +139,9 @@ namespace Continuity.Controls
 
         public int SelectedIndex
         {
-            get { return (int)GetValue(SelectedIndexProperty); }
-            set { SetValue(SelectedIndexProperty, value); }
+            get => (int)GetValue(SelectedIndexProperty);
+            set => SetValue(SelectedIndexProperty, value);
         }
-
         public static readonly DependencyProperty SelectedIndexProperty =
             DependencyProperty.Register("SelectedIndex", typeof(int), typeof(Tab),
                 new PropertyMetadata(0, (s, dp) =>
@@ -160,10 +159,9 @@ namespace Continuity.Controls
 
         public object SelectedItem
         {
-            get { return GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get => GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
         }
-
         public static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register("SelectedItem", typeof(object), typeof(Tab),
                 new PropertyMetadata(null, (s, dp) =>
@@ -176,13 +174,39 @@ namespace Continuity.Controls
 
         public Thickness HeadersPanelMargin
         {
-            get { return (Thickness)GetValue(HeadersPanelMarginProperty); }
-            set { SetValue(HeadersPanelMarginProperty, value); }
+            get => (Thickness)GetValue(HeadersPanelMarginProperty);
+            set => SetValue(HeadersPanelMarginProperty, value);
         }
-
         public static readonly DependencyProperty HeadersPanelMarginProperty =
             DependencyProperty.Register("HeadersPanelMargin", typeof(Thickness), typeof(Tab),
                 new PropertyMetadata(new Thickness()));
+
+        public Brush SelectedHeaderIndicatorBackground
+        {
+            get => (Brush)GetValue(SelectedHeaderIndicatorBackgroundProperty);
+            set => SetValue(SelectedHeaderIndicatorBackgroundProperty, value);
+        }
+        public static readonly DependencyProperty SelectedHeaderIndicatorBackgroundProperty =
+            DependencyProperty.Register("SelectedHeaderIndicatorBackground", typeof(Brush), typeof(Tab),
+                new PropertyMetadata(default(Brush)));
+
+        public Brush HeadersBackground
+        {
+            get => (Brush)GetValue(HeadersBackgroundProperty);
+            set => SetValue(HeadersBackgroundProperty, value);
+        }
+        public static readonly DependencyProperty HeadersBackgroundProperty =
+            DependencyProperty.Register("HeadersBackground", typeof(Brush), typeof(Tab),
+                new PropertyMetadata(default(Brush)));
+
+        public bool UseLineSelectionVisual
+        {
+            get => (bool)GetValue(UseLineSelectionVisualProperty);
+            set => SetValue(UseLineSelectionVisualProperty, value);
+        }
+        public static readonly DependencyProperty UseLineSelectionVisualProperty =
+            DependencyProperty.Register("UseLineSelectionVisual", typeof(bool), typeof(Tab),
+                new PropertyMetadata(false));
 
         #endregion
 
@@ -197,6 +221,10 @@ namespace Continuity.Controls
             HeadersPanelHost = GetTemplateChild<ScrollViewer>(PART_HeadersPanelHost);
             _selectedHeaderIndicatorHost = GetTemplateChild<Border>(PART_SelectedHeaderIndicatorHost);
             _selectedHeaderIndicator = GetTemplateChild<Rectangle>(PART_SelectedHeaderIndicator);
+
+            _selectedHeaderIndicatorHost.Margin = UseLineSelectionVisual ? new Thickness() : new Thickness(0, 8, 0, 0);
+            _selectedHeaderIndicatorHost.VerticalAlignment = UseLineSelectionVisual ? VerticalAlignment.Bottom : VerticalAlignment.Stretch;
+            _selectedHeaderIndicator.Height = UseLineSelectionVisual ? 3.0d : double.NaN;
 
             InitializeCompositionObjects();
 
@@ -449,9 +477,9 @@ namespace Continuity.Controls
             if (GetHeaderIndex(header) != SelectedIndex) return;
 
             var container = GetHeaderContainer(header);
-            var offsetX = container.RelativePosition(HeadersPanelHost).X.ToFloat() + 11.0f;
+            var offsetX = container.RelativePosition(HeadersPanelHost).X.ToFloat() + (UseLineSelectionVisual ? 11.0f : 0);
             // The ActualWidth of the selected header indication Rectangle is 1 so I ignored the /1 here.
-            var scaleX = container.ActualWidth.ToFloat() - 24.0f;
+            var scaleX = container.ActualWidth.ToFloat() - (UseLineSelectionVisual ? 24.0f : 0);
 
             _selectedHeaderIndicatorVisual.StartOffsetAnimation(AnimationAxis.X, null, offsetX, 400, easing: _compositor.EaseInOutCubic());
             _selectedHeaderIndicatorVisual.StartScaleAnimation(AnimationAxis.X, null, scaleX, 400, easing: _compositor.EaseInOutCubic());
