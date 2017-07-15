@@ -34,6 +34,7 @@
                                 VerticalAlignment="Center">
                         <ContentControl x:Name="Icon"
                                         Margin="0,2,8,0"
+                                        IsTabStop="False"
                                         Style="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" />
                         <TextBlock HorizontalAlignment="Center"
                                    FontFamily="{Binding FontFamily, RelativeSource={RelativeSource TemplatedParent}}"
@@ -140,6 +141,8 @@
     </Style>
 
     <Style TargetType="controls:TabHeaderItem">
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
