@@ -1,5 +1,7 @@
-﻿using Windows.Foundation;
+﻿using System.Linq;
+using Windows.Foundation;
 using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Sample.Navigation
@@ -11,14 +13,37 @@ namespace Sample.Navigation
             //MaximizeWindowOnLoad();
             InitializeComponent();
 
-            // The following cannot be done in XAML in this build yet.
-            MyNavigationView.AddMenuItem(Symbol.AllApps, "All Applications", (s, e) => RootFrame.Navigate(typeof(AppsPage)), true);
-            MyNavigationView.AddMenuItem(Symbol.Video, "Games", (s, e) => RootFrame.Navigate(typeof(GamesPage)));
-            MyNavigationView.AddMenuItem(Symbol.Calendar, "Calendar", (s, e) => RootFrame.Navigate(typeof(CalendarPage)));
-            MyNavigationView.AddMenuItemSeparator();
-            MyNavigationView.AddMenuItem(Symbol.Admin, "My Account", (s, e) => RootFrame.Navigate(typeof(AccountPage)));
+            MyNavigationView.ItemInvoked += (s, e) =>
+            {
+                switch (e.InvokedItem)
+                {
+                    case "All Applications":
+                        RootFrame.Navigate(typeof(AppsPage));
+                        break;
+                    case "Games":
+                        RootFrame.Navigate(typeof(GamesPage));
+                        break;
+                    case "Calendar":
+                        RootFrame.Navigate(typeof(CalendarPage));
+                        break;
+                    case "My Account":
+                        RootFrame.Navigate(typeof(AccountPage));
+                        break;
+                }
 
-            MyNavigationView.SettingsInvoked += (s, e) => RootFrame.Navigate(typeof(SettingsPage));
+                if (e.IsSettingsInvoked)
+                {
+                    RootFrame.Navigate(typeof(SettingsPage));
+                }
+            };
+
+            // The following cannot be done in XAML in this build yet.
+            MyNavigationView.AddMenuItem(Symbol.AllApps, "All Applications", true);
+            MyNavigationView.AddMenuItem(Symbol.Video, "Games");
+            MyNavigationView.AddMenuItem(Symbol.Calendar, "Calendar");
+            MyNavigationView.AddMenuItemSeparator();
+            MyNavigationView.AddMenuItem(Symbol.Admin, "My Account");
+
             RootFrame.Navigate(typeof(AppsPage));
         }
 
@@ -33,22 +58,30 @@ namespace Sample.Navigation
 
     public static class NavigationViewExtensions
     {
-        public static void AddMenuItem(this NavigationView navigationView, Symbol icon, string text,
-            TypedEventHandler<NavigationMenuItem, object> handler, bool selected = false)
+        public static void AddMenuItem(this NavigationView navigationView, Symbol icon, string text, bool isSelected = false)
         {
-            var item = new NavigationMenuItem
+            var item = new NavigationViewItem
             {
                 Icon = new SymbolIcon(icon),
-                Text = text,
-                IsSelected = selected
+                Content = text
             };
-            item.Invoked += handler;
+
+            if (isSelected)
+            {
+                item.Loaded += OnItemLoaded;
+                void OnItemLoaded(object sender, RoutedEventArgs e)
+                {
+                    item.Loaded -= OnItemLoaded;
+                    item.IsSelected = true;
+                }
+            }           
+
             navigationView.MenuItems.Add(item);
         }
 
         public static void AddMenuItemSeparator(this NavigationView navigationView)
         {
-            var item = new NavigationMenuItemSeparator();
+            var item = new NavigationViewItemSeparator();
             navigationView.MenuItems.Add(item);
         }
     }
