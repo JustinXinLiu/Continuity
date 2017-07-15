@@ -3,6 +3,7 @@ using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Continuity.Controls;
 
 namespace Sample.Navigation
 {
@@ -58,9 +59,9 @@ namespace Sample.Navigation
 
     public static class NavigationViewExtensions
     {
-        public static void AddMenuItem(this NavigationView navigationView, Symbol icon, string text, bool isSelected = false)
+        public static void AddMenuItem(this FluentNavigationView navigationView, Symbol icon, string text, bool isSelected = false)
         {
-            var item = new NavigationViewItem
+            var item = new FluentNavigationViewItem
             {
                 Icon = new SymbolIcon(icon),
                 Content = text

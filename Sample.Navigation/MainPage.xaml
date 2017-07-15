@@ -4,15 +4,16 @@
       xmlns:local="using:Sample.Navigation"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:Continuity.Controls"
       mc:Ignorable="d">
 
     <Grid>
-        <NavigationView x:Name="MyNavigationView"
+        <controls:FluentNavigationView x:Name="MyNavigationView"
                         Header="Fluent Layout"
                         AlwaysShowHeader="False"
                         IsSettingsVisible="True">
             <Frame x:Name="RootFrame"
                    Margin="24" />
-        </NavigationView>
+        </controls:FluentNavigationView>
     </Grid>
 </Page>

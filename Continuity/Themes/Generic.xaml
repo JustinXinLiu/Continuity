@@ -430,7 +430,7 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:FluidNavigationView">
+                <ControlTemplate TargetType="controls:FluentNavigationView">
                     <Grid x:Name="RootGrid">
 
                         <VisualStateManager.VisualStateGroups>
@@ -603,7 +603,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:FluidNavigationViewItem">
+                <ControlTemplate TargetType="controls:FluentNavigationViewItem">
                     <Grid
                         x:Name="LayoutRoot"
                         Height="40"
