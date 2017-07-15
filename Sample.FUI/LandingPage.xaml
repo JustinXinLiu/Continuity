@@ -13,7 +13,7 @@
                         TintColor="LightBlue"
                         TintOpacity="0.8"
                         FallbackColor="LightSkyBlue"
-                        FallbackForced="False" />
+                        AlwaysUseFallback="False" />
 
     <Style TargetType="Button" x:Key="ButtonRevealStyle">
       <Setter Property="Background" Value="{ThemeResource ButtonRevealBackground}" />
