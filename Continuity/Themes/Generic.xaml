@@ -7,8 +7,8 @@
 
     <Style TargetType="controls:Tab">
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-        <Setter Property="Background" Value="#FFF2F2F2" />
-        <Setter Property="SelectedHeaderIndicatorBackground" Value="#FFF2F2F2" />
+        <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
+        <Setter Property="SelectedHeaderIndicatorBackground" Value="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
         <Setter Property="HeadersBackground" Value="Transparent" />
         <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
@@ -16,7 +16,7 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="TabNavigation" Value="Once" />
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
