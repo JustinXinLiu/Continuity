@@ -181,6 +181,15 @@ namespace Continuity.Controls
             DependencyProperty.Register("HeadersPanelMargin", typeof(Thickness), typeof(Tab),
                 new PropertyMetadata(new Thickness()));
 
+        public HorizontalAlignment HeadersPanelHorizontalAlignment
+        {
+            get => (HorizontalAlignment)GetValue(HeadersPanelHorizontalAlignmentProperty);
+            set => SetValue(HeadersPanelHorizontalAlignmentProperty, value);
+        }
+        public static readonly DependencyProperty HeadersPanelHorizontalAlignmentProperty =
+            DependencyProperty.Register("HeadersPanelHorizontalAlignment", typeof(HorizontalAlignment), typeof(Tab),
+                new PropertyMetadata(HorizontalAlignment.Left));
+
         public Brush SelectedHeaderIndicatorBackground
         {
             get => (Brush)GetValue(SelectedHeaderIndicatorBackgroundProperty);
@@ -190,13 +199,13 @@ namespace Continuity.Controls
             DependencyProperty.Register("SelectedHeaderIndicatorBackground", typeof(Brush), typeof(Tab),
                 new PropertyMetadata(default(Brush)));
 
-        public Brush HeadersBackground
+        public Brush HeadersPanelBackground
         {
-            get => (Brush)GetValue(HeadersBackgroundProperty);
-            set => SetValue(HeadersBackgroundProperty, value);
+            get => (Brush)GetValue(HeadersPanelBackgroundProperty);
+            set => SetValue(HeadersPanelBackgroundProperty, value);
         }
-        public static readonly DependencyProperty HeadersBackgroundProperty =
-            DependencyProperty.Register("HeadersBackground", typeof(Brush), typeof(Tab),
+        public static readonly DependencyProperty HeadersPanelBackgroundProperty =
+            DependencyProperty.Register("HeadersPanelBackground", typeof(Brush), typeof(Tab),
                 new PropertyMetadata(default(Brush)));
 
         public bool UseLineSelectionVisual
@@ -232,10 +241,8 @@ namespace Continuity.Controls
             SizeChanged += OnSizeChanged;
         }
 
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new TabItem();
-        }
+        protected override DependencyObject GetContainerForItemOverride() => 
+            new TabItem();
 
         #endregion
 
@@ -384,7 +391,8 @@ namespace Continuity.Controls
             previousHeader?.Visual().StartAnimation("Opacity", _previousHeaderOpacityAnimation);
             nextHeader?.Visual().StartAnimation("Opacity", _nextHeaderOpacityAnimation);
 
-            // Don't allow swiping too fast.
+            // Don't allow swiping too fast. This is all because we don't have this -
+            // https://github.com/Microsoft/WindowsUIDevLabs/issues/181
             IsHitTestVisible = false;
             while (_isAnimating)
             {
@@ -456,7 +464,7 @@ namespace Continuity.Controls
         private int CalculateSelectedIndexBasedOnScrollViewerHorizontalOffset()
         {
             var index = ScrollViewer.HorizontalOffset / ActualWidth;
-            return (int)(Math.Round(index, MidpointRounding.AwayFromZero));
+            return (int)Math.Round(index, MidpointRounding.AwayFromZero);
         }
 
         private static void UpdateScrollViewerHorizontalOffset(Tab self, int newIndex)
@@ -510,18 +518,11 @@ namespace Continuity.Controls
 
         private static FrameworkElement GetHeaderContainer(TabHeaderItem header)
         {
-            var container = header.Children().OfType<Panel>().FirstOrDefault();
+            var container = header.Children().FirstOrDefault();
 
             if (container == null)
             {
-                var textBlock = header.Children().OfType<TextBlock>().FirstOrDefault();
-
-                if (textBlock == null)
-                {
-                    throw new NullReferenceException("No header content found.");
-                }
-
-                return textBlock;
+                throw new NullReferenceException("No header content found.");
             }
 
             return container;

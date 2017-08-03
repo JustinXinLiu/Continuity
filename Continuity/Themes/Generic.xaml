@@ -9,7 +9,7 @@
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
         <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
         <Setter Property="SelectedHeaderIndicatorBackground" Value="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
-        <Setter Property="HeadersBackground" Value="Transparent" />
+        <Setter Property="HeadersPanelBackground" Value="Transparent" />
         <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
@@ -57,7 +57,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Rectangle x:Name="HeadersBackgroundVisual" Fill="{TemplateBinding HeadersBackground}" />
+                        <Rectangle x:Name="HeadersBackgroundVisual" Fill="{TemplateBinding HeadersPanelBackground}" />
 
                         <Rectangle x:Name="BackgroundVisual"
                                    Grid.Row="1"
@@ -79,7 +79,9 @@
                                       HorizontalScrollMode="Auto"
                                       VerticalScrollBarVisibility="Disabled"
                                       VerticalScrollMode="Disabled">
-                            <StackPanel x:Name="HeadersPanel" Orientation="Horizontal" />
+                            <StackPanel x:Name="HeadersPanel" 
+                                        HorizontalAlignment="{TemplateBinding HeadersPanelHorizontalAlignment}" 
+                                        Orientation="Horizontal" />
                         </ScrollViewer>
 
                         <ScrollViewer x:Name="ScrollViewer"
