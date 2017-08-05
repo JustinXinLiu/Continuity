@@ -38,8 +38,10 @@ namespace Continuity.Controls
         private bool _needToRestoreScrollStates;
 
         private bool _isAnimated;
+        private bool _monitorFirstItemContainerLoadedEvent; // when first & last visible/cache indexes are populated
         private readonly Dictionary<FrameworkElement, Position> _visibleItemContainers = new Dictionary<FrameworkElement, Position>();
         private readonly Vector3KeyFrameAnimation _scaleAnimation;
+        private ItemsWrapGrid _virtualizedPanel;
 
         // Can be made as dependency properties
         private const int InitialDelay = 400;
@@ -111,9 +113,10 @@ namespace Continuity.Controls
         /// </summary>
         /// <param name="obj">The element that's used to display the specified item.</param>
         /// <param name="item">The item to display.</param>
-        protected override async void PrepareContainerForItemOverride(DependencyObject obj, object item)
+        protected override void PrepareContainerForItemOverride(DependencyObject obj, object item)
         {
             base.PrepareContainerForItemOverride(obj, item);
+
             var element = obj as FrameworkElement;
             if (element == null) return;
 
@@ -134,60 +137,74 @@ namespace Continuity.Controls
             element.SetBinding(HeightProperty, heightBinding);
             element.SetBinding(WidthProperty, widthBinding);
 
-            var itemsWrapGrid = ItemsPanelRoot as ItemsWrapGrid;
-            if (itemsWrapGrid == null) return;
-
-            var numberOfColumns = GetNumberOfColumns();
-            var index = IndexFromContainer(obj);
-            var rowIndex = index % numberOfColumns;
-            var colIndex = index / numberOfColumns;
-
-            if (itemsWrapGrid.LastVisibleIndex <= 0)
+            // First populate our local variable for referencing ItemsWrapGrid for the first time.
+            if (!_monitorFirstItemContainerLoadedEvent && _virtualizedPanel == null)
             {
-                element.Opacity = 0;
-
-                if (_visibleItemContainers.ContainsKey(element))
-                {
-                    _visibleItemContainers.Remove(element);
-                }
-                _visibleItemContainers.Add(element, new Position(rowIndex, colIndex));
-
-                // When all items are visible, run the staggered animation in the end.
-                if (!_isAnimated && index == Items?.Count - 1)
-                {
-                    await RunStaggeredAnimationOnItemContainersAsync();
-                }
+                _virtualizedPanel = ItemsPanelRoot as ItemsWrapGrid;
             }
-            else
+
+            // Then decide if we should run the animation.
+            if (_virtualizedPanel == null || _isAnimated) return;
+
+            Opacity = 0;
+
+            if (!_monitorFirstItemContainerLoadedEvent)
             {
-                if (_isAnimated) return;
-                _isAnimated = true;
+                _monitorFirstItemContainerLoadedEvent = true;
 
-                // Only run the staggered animation once when all visible items are rendered.
-                await RunStaggeredAnimationOnItemContainersAsync();
-            }
-        }
+                element.Loaded += OnContainerLoaded;
 
-        private async Task RunStaggeredAnimationOnItemContainersAsync()
-        {
-            await Task.Delay(InitialDelay);
-
-            var numberOfColumns = GetNumberOfColumns();
-            var numberOfRows = Math.Ceiling(ActualHeight / (ItemHeight + ItemMargin * 2));
-            var last = (numberOfRows - 1) + (numberOfColumns - 1);
-
-            for (var i = 0; i <= last; i++)
-            {
-                var sum = i;
-                var containers = _visibleItemContainers.Where(c => c.Value.Row + c.Value.Column == sum).Select(k => k.Key);
-
-                foreach (var container in containers)
+                // At this point, the index values are all ready to use.
+                async void OnContainerLoaded(object sender, RoutedEventArgs e)
                 {
-                    var containerVisual = ElementCompositionPreview.GetElementVisual(container);
-                    _scaleAnimation.DelayTime = TimeSpan.FromMilliseconds(AnimationDelay * i);
-                    containerVisual.CenterPoint = new Vector3((float)ItemWidth, (float)ItemHeight, 0) * 0.5f;
-                    containerVisual.StartAnimation(nameof(Visual.Scale), _scaleAnimation);
-                    container.Animate(null, 1.0d, nameof(Opacity), AnimationDuration, AnimationDelay * i);
+                    element.Loaded -= OnContainerLoaded;
+
+                    for (var i = _virtualizedPanel.FirstVisibleIndex; i <= _virtualizedPanel.LastVisibleIndex; i++)
+                    {
+                        var numberOfColumns = GetNumberOfColumns();
+                        var rowIndex = i % numberOfColumns;
+                        var colIndex = i / numberOfColumns;
+
+                        if (ContainerFromIndex(i) is FrameworkElement container)
+                        {
+                            container.Opacity = 0;
+
+                            if (_visibleItemContainers.ContainsKey(container))
+                            {
+                                _visibleItemContainers.Remove(container);
+                            }
+                            _visibleItemContainers.Add(container, new Position(rowIndex, colIndex));
+                        }
+
+                        Opacity = 1;
+                    }
+
+                    _isAnimated = true;
+                    await Task.Delay(InitialDelay);
+
+                    RunStaggeredDiagonalAnimationOnVisibleItemContainers();
+
+                    void RunStaggeredDiagonalAnimationOnVisibleItemContainers()
+                    {
+                        var numberOfColumns = GetNumberOfColumns();
+                        var numberOfRows = Math.Ceiling(ActualHeight / ItemHeight);
+                        var last = (numberOfRows - 1) + (numberOfColumns - 1);
+
+                        for (var i = 0; i <= last; i++)
+                        {
+                            var sum = i;
+                            var containers = _visibleItemContainers.Where(c => c.Value.Row + c.Value.Column == sum).Select(k => k.Key);
+
+                            foreach (var container in containers)
+                            {
+                                var containerVisual = ElementCompositionPreview.GetElementVisual(container);
+                                _scaleAnimation.DelayTime = TimeSpan.FromMilliseconds(AnimationDelay * i);
+                                containerVisual.CenterPoint = new Vector3((float)ItemWidth, (float)ItemHeight, 0) * 0.5f;
+                                containerVisual.StartAnimation(nameof(Visual.Scale), _scaleAnimation);
+                                container.Animate(null, 1.0d, nameof(Opacity), AnimationDuration, AnimationDelay * i);
+                            }
+                        }
+                    }
                 }
             }
         }
