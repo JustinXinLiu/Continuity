@@ -5,6 +5,7 @@
              xmlns:local="using:Continuity.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:media3D="using:Windows.UI.Xaml.Media.Media3D"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400">
@@ -12,7 +13,7 @@
     <Border x:Name="Sky"
             Background="Black">
         <Border.Transform3D>
-            <PerspectiveTransform3D />
+            <media3D:PerspectiveTransform3D />
         </Border.Transform3D>
     </Border>
 </UserControl>
