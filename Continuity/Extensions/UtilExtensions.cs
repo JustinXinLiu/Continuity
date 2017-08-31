@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Numerics;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -87,13 +88,16 @@ namespace Continuity.Extensions
         //    batch.End();
         //}
 
-        public static CompositionPropertySet ScrollProperties(this ScrollViewer scrollViewer) => 
+        public static CompositionPropertySet ScrollProperties(this ScrollViewer scrollViewer) =>
             ElementCompositionPreview.GetScrollViewerManipulationPropertySet(scrollViewer);
 
-        public static Visual Visual(this UIElement element) => 
+        public static Visual Visual(this UIElement element) =>
             ElementCompositionPreview.GetElementVisual(element);
 
-        public static void SetChildVisual(this UIElement element, Visual childVisual) => 
+        public static CompositionPropertySet GetPointerPositionProperties(this UIElement element) =>
+            ElementCompositionPreview.GetPointerPositionPropertySet(element);
+
+        public static void SetChildVisual(this UIElement element, Visual childVisual) =>
             ElementCompositionPreview.SetElementChildVisual(element, childVisual);
 
         public static ContainerVisual ContainerVisual(this UIElement element)
@@ -147,7 +151,7 @@ namespace Continuity.Extensions
             return ratio.ToFloat();
         }
 
-        public static Point RelativePosition(this UIElement element, UIElement other) => 
+        public static Point RelativePosition(this UIElement element, UIElement other) =>
             element.TransformToVisual(other).TransformPoint(new Point(0, 0));
 
         public static float OffsetX(this UIElement element, UIElement other)
@@ -287,5 +291,11 @@ namespace Continuity.Extensions
         public static IEnumerable<T> GetValues<T>() => Enum.GetValues(typeof(T)).Cast<T>();
 
         public static BitmapImage ToBitmapImage(this string uri) => new BitmapImage(new Uri(uri));
+
+        public static Vector2 GetDesiredSize(this UIElement element)
+        {
+            element.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            return element.DesiredSize.ToVector2();
+        }
     }
 }

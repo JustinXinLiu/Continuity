@@ -3,6 +3,7 @@
                     xmlns:controls="using:Continuity.Controls"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:lights="using:Continuity.Lights"
                     mc:Ignorable="d">
 
     <Style TargetType="controls:Tab">
@@ -1091,6 +1092,42 @@
                                    Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DragItemsCount}"
                                    TextTrimming="WordEllipsis"
                                    TextWrapping="Wrap" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:FluentButton">
+        <Setter Property="Background" Value="{ThemeResource ButtonBackground}" />
+        <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="40,24" />
+        <Setter Property="FontFamily" Value="Bahnschrift" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Black" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FluentButton">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <!--<Rectangle x:Name="HoverBackground" Fill="Transparent" />-->
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Padding="{TemplateBinding Padding}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          AutomationProperties.AccessibilityView="Raw" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
