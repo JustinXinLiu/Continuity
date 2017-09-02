@@ -3,61 +3,77 @@ using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Hosting;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Shapes;
 
 namespace Continuity.Extensions
 {
     public static partial class CompositionExtensions
     {
-        public static void StartDropShadowBlurRadiusAnimation(this DropShadow shadow, UIElement shadowContainer, Color shadowColor, 
-            Vector3? shadowOffset = null, float shadowOpacity = 1.0f, float blurRadius = 16.0f, int duration = 800)
+        public static void StartShadowBlurRadiusAnimation(this DropShadow shadow, Color? shadowColor = null,
+            Vector3? shadowOffset = null, float? fromShadowOpacity = null, float toShadowOpacity = 1.0f,
+            float? fromBlurRadius = null, float toBlurRadius = 16.0f, int duration = 800, int delay = 0,
+            UIElement maskingElement = null, Action completed = null)
         {
+            CompositionScopedBatch batch = null;
+
             var compositor = shadow.Compositor;
 
-            shadow.Color = shadowColor;
+            if (completed != null)
+            {
+                batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
+                batch.Completed += (s, e) => completed.Invoke();
+            }
 
-            if (shadowOffset == null)
+            if (maskingElement != null)
+            {
+                switch (maskingElement)
+                {
+                    case TextBlock textBlock:
+                        shadow.Mask = textBlock.GetAlphaMask();
+                        break;
+                    case Shape shape:
+                        shadow.Mask = shape.GetAlphaMask();
+                        break;
+                    case Image image:
+                        shadow.Mask = image.GetAlphaMask();
+                        break;
+                }
+            }
+
+            if (!shadowColor.HasValue)
+            {
+                shadowColor = Colors.Black;
+            }
+
+            shadow.Color = shadowColor.Value;
+
+            if (!shadowOffset.HasValue)
             {
                 shadowOffset = Vector3.Zero;
             }
 
-            shadow.Opacity = shadowOpacity;
+            var shadowOpacityAnimation = compositor.CreateScalarKeyFrameAnimation();
+            shadowOpacityAnimation.Duration = TimeSpan.FromMilliseconds(duration);
+            if (delay > 0) shadowOpacityAnimation.DelayTime = TimeSpan.FromMilliseconds(delay);
+            if (fromShadowOpacity.HasValue) shadowOpacityAnimation.InsertKeyFrame(0.0f, fromShadowOpacity.Value);
+            shadowOpacityAnimation.InsertKeyFrame(1.0f, toShadowOpacity);
+            shadow.StartAnimation(nameof(DropShadow.Opacity), shadowOpacityAnimation);
 
             var shadowBlurAnimation = compositor.CreateScalarKeyFrameAnimation();
             shadowBlurAnimation.Duration = TimeSpan.FromMilliseconds(duration);
-            shadowBlurAnimation.InsertKeyFrame(1.0f, blurRadius);
-            shadow.StartAnimation("BlurRadius", shadowBlurAnimation);
+            if (delay > 0) shadowBlurAnimation.DelayTime = TimeSpan.FromMilliseconds(delay);
+            if (fromBlurRadius.HasValue) shadowBlurAnimation.InsertKeyFrame(0.0f, fromBlurRadius.Value);
+            shadowBlurAnimation.InsertKeyFrame(1.0f, toBlurRadius);
+            shadow.StartAnimation(nameof(DropShadow.BlurRadius), shadowBlurAnimation);
 
             var shadowOffsetAnimation = compositor.CreateVector3KeyFrameAnimation();
             shadowOffsetAnimation.Duration = TimeSpan.FromMilliseconds(duration);
+            if (delay > 0) shadowOffsetAnimation.DelayTime = TimeSpan.FromMilliseconds(delay);
             shadowOffsetAnimation.InsertKeyFrame(1.0f, shadowOffset.Value);
-            shadow.StartAnimation("Offset", shadowOffsetAnimation);
+            shadow.StartAnimation(nameof(DropShadow.Offset), shadowOffsetAnimation);
 
-            var sprite = compositor.CreateSpriteVisual();
-            sprite.Size = shadowContainer.RenderSize.ToVector2();
-            sprite.Shadow = shadow;
-
-            ElementCompositionPreview.SetElementChildVisual(shadowContainer, sprite);
-        }
-
-        public static void StopDropShadowBlurRadiusAnimation(this DropShadow shadow, FrameworkElement shadowContainer, int duration = 400)
-        {
-            var compositor = shadow.Compositor;
-
-            var batch = compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-            batch.Completed += (s, e) => ElementCompositionPreview.SetElementChildVisual(shadowContainer, null);
-
-            var shadowBlurAnimation = compositor.CreateScalarKeyFrameAnimation();
-            shadowBlurAnimation.Duration = TimeSpan.FromMilliseconds(duration);
-            shadowBlurAnimation.InsertKeyFrame(1.0f, 0.0f);
-            shadow.StartAnimation("BlurRadius", shadowBlurAnimation);
-
-            var shadowOffsetAnimation = compositor.CreateVector3KeyFrameAnimation();
-            shadowOffsetAnimation.Duration = TimeSpan.FromMilliseconds(duration);
-            shadowOffsetAnimation.InsertKeyFrame(1.0f, Vector3.Zero);
-            shadow.StartAnimation("Offset", shadowOffsetAnimation);
-
-            batch.End();
+            batch?.End();
         }
     }
 }

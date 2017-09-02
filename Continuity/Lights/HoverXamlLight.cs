@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Continuity.Extensions;
 using Windows.UI;
 using Windows.UI.Composition;
@@ -7,7 +6,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using System.Numerics;
-using Windows.UI.Xaml.Controls.Primitives;
 using EF = ExpressionBuilder.ExpressionFunctions;
 using ExpressionBuilder;
 
@@ -23,16 +21,14 @@ namespace Continuity.Lights
 
         private const int IncreaseIntensityDuration = 400;
         private const int DecreaseIntensityDuration = 1200;
-        private const float InnerConeIntensity = 0.1f;
-        private const float OuterConeIntensity = 0.2f;
+        private const float InnerConeIntensity = 0.15f;
+        private const float OuterConeIntensity = 0.25f;
         private ScalarKeyFrameAnimation _lightIncreaseInnerConeIntensityAnimation;
         private ScalarKeyFrameAnimation _lightIncreaseOuterConeIntensityAnimation;
         private ScalarKeyFrameAnimation _lightDecreaseInnerConeIntensityAnimation;
         private ScalarKeyFrameAnimation _lightDecreaseOuterConeIntensityAnimation;
 
-        private static readonly Vector3 RestingOffset = new Vector3(0, 0, 400);
-        private Vector3KeyFrameAnimation _lightRestingOffsetAnimation;
-
+        private const float OffsetZRatio = 0.6f;
         private float _hoverOffsetZ;
         private Vector3Node _lightPositionExpressionNode;
 
@@ -80,8 +76,9 @@ namespace Continuity.Lights
             _lightIncreaseOuterConeIntensityAnimation = CreateLightIncreaseOuterConeIntensityAnimation();
             _lightDecreaseInnerConeIntensityAnimation = CreateLightDecreaseInnerConeIntensityAnimation();
             _lightDecreaseOuterConeIntensityAnimation = CreateLightDecreaseOuterConeIntensityAnimation();
-            _lightRestingOffsetAnimation = CreateLightRestingOffsetAnimation();
+
             _lightPositionExpressionNode = CreateLightPositionExpressionNode(newElement);
+            StartLightOffsetAnimation();
 
             SubscribeToPointerEvents();
 
@@ -92,14 +89,6 @@ namespace Continuity.Lights
                 if (newElement is FrameworkElement element)
                 {
                     element.SizeChanged += OnElementSizeChanged;
-                }
-                if (newElement is ButtonBase button)
-                {
-                    button.Click += OnElementClick;
-                }
-                else
-                {
-                    newElement.Tapped += OnElementTapped;
                 }
                 newElement.PointerEntered += OnElementPointerEntered;
                 newElement.PointerExited += OnElementPointerExited;
@@ -118,7 +107,6 @@ namespace Continuity.Lights
             _lightIncreaseOuterConeIntensityAnimation.Dispose();
             _lightDecreaseInnerConeIntensityAnimation.Dispose();
             _lightDecreaseOuterConeIntensityAnimation.Dispose();
-            _lightRestingOffsetAnimation.Dispose();
             _lightPositionExpressionNode.Dispose();
 
             void UnsubscribeFromPointerEvents()
@@ -126,14 +114,6 @@ namespace Continuity.Lights
                 if (oldElement is FrameworkElement element)
                 {
                     element.SizeChanged -= OnElementSizeChanged;
-                }
-                if (oldElement is ButtonBase button)
-                {
-                    button.Click -= OnElementClick;
-                }
-                else
-                {
-                    oldElement.Tapped -= OnElementTapped;
                 }
                 oldElement.PointerEntered -= OnElementPointerEntered;
                 oldElement.PointerExited -= OnElementPointerExited;
@@ -150,30 +130,11 @@ namespace Continuity.Lights
         private void OnElementSizeChanged(object sender, SizeChangedEventArgs e) => 
             _hoverOffsetZ = CalculateHoverOffsetZOnRenderSize((FrameworkElement)sender);
 
-        private void OnElementPointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            Debug.WriteLine("Entered");
-
+        private void OnElementPointerEntered(object sender, PointerRoutedEventArgs e) => 
             ShowLightAnimation();
-            StartLightOffsetAnimation();
-        }
 
-        private void OnElementClick(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Clicked");
-        }
-
-        private void OnElementTapped(object sender, TappedRoutedEventArgs e)
-        {
-            Debug.WriteLine("Tapped");
-        }
-
-        private void OnElementPointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            Debug.WriteLine("Exited");
-            
+        private void OnElementPointerExited(object sender, PointerRoutedEventArgs e) => 
             HideLightAnimation();
-        }
 
         #endregion
 
@@ -215,17 +176,6 @@ namespace Continuity.Lights
             return intensityAnimation;
         }
 
-        private Vector3KeyFrameAnimation CreateLightRestingOffsetAnimation()
-        {
-            var easing = _compositor.CreateCubicBezierEasingFunction(new Vector2(0.3f, 0.7f), new Vector2(0.9f, 0.5f));
-
-            var offsetAnimation = _compositor.CreateVector3KeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, RestingOffset, easing);
-            offsetAnimation.Duration = TimeSpan.FromMilliseconds(800);
-
-            return offsetAnimation;
-        }
-
         private Vector3Node CreateLightPositionExpressionNode(UIElement element)
         {
             var hoverPositionProperties = element.GetPointerPositionProperties();
@@ -254,13 +204,13 @@ namespace Continuity.Lights
         private float CalculateHoverOffsetZOnDesiredSize(UIElement element)
         {
             var desiredSize = element.GetDesiredSize();
-            return Math.Max(desiredSize.X, desiredSize.Y) / 2;
+            return Math.Max(desiredSize.X, desiredSize.Y) * OffsetZRatio;
         }
 
         private float CalculateHoverOffsetZOnRenderSize(UIElement element)
         {
             var desiredSize = element.RenderSize.ToVector2();
-            return Math.Max(desiredSize.X, desiredSize.Y) / 2;
+            return Math.Max(desiredSize.X, desiredSize.Y) * OffsetZRatio;
         }
 
         #endregion

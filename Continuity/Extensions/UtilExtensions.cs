@@ -108,6 +108,28 @@ namespace Continuity.Extensions
             return root;
         }
 
+        public static void SetDropShadow(this FrameworkElement element, DropShadow shadow, FrameworkElement sizingElement = null)
+        {
+            var compositor = shadow.Compositor;
+
+            var shadowVisual = compositor.CreateSpriteVisual();
+            shadowVisual.Shadow = shadow;
+
+            if (sizingElement == null)
+            {
+                sizingElement = element;
+            }
+
+            sizingElement.SizeChanged += (s, e) =>
+            {
+                if (e.PreviousSize.Equals(e.NewSize)) return;
+                shadowVisual.Size = sizingElement.RenderSize.ToVector2();
+            };
+            shadowVisual.Size = sizingElement.RenderSize.ToVector2();
+
+            element.SetChildVisual(shadowVisual);
+        }
+
         public static FlickDirection FlickDirection(this ManipulationCompletedRoutedEventArgs e)
         {
             if (!e.IsInertial)

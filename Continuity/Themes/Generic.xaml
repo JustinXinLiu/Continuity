@@ -1099,8 +1099,10 @@
     </Style>
 
     <Style TargetType="controls:FluentButton">
-        <Setter Property="Background" Value="{ThemeResource ButtonBackground}" />
-        <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
+        <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="4" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -1112,18 +1114,28 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:FluentButton">
-                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                    <Grid x:Name="RootGrid"
+                          BorderBrush="{TemplateBinding BorderBrush}" 
+                          BorderThickness="{TemplateBinding BorderThickness}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <!--<Rectangle x:Name="HoverBackground" Fill="Transparent" />-->
+                        <Rectangle x:Name="BackgroundShadowContainer" Fill="Transparent" />
+
+                        <Rectangle x:Name="Background" Fill="{TemplateBinding Background}" />
+
+                        <Rectangle x:Name="TextShadowContainer" 
+                                   Margin="{TemplateBinding Padding}"
+                                   Fill="Transparent" />
+
                         <ContentPresenter x:Name="ContentPresenter"
                                           Content="{TemplateBinding Content}"
                                           ContentTransitions="{TemplateBinding ContentTransitions}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Opacity="0.95"
                                           Padding="{TemplateBinding Padding}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
