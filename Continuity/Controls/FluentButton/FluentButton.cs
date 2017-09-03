@@ -42,7 +42,7 @@ namespace Continuity.Controls
             DefaultStyleKey = typeof(FluentButton);
 
             _compositor = Window.Current.Compositor;
-            _backgroundShadow = CreateDropShadow();
+            _backgroundShadow = CreateDropShadow(0.3f, 4.0f);
             _textShadow = CreateDropShadow();
 
             Loaded += OnLoaded;
@@ -72,18 +72,20 @@ namespace Continuity.Controls
 
             Lights.Add(new HoverXamlLight());
             Lights.Add(new AmbientXamlLight());
+            Lights.Add(new RippleXamlLight());
         }
 
         #endregion
 
         #region Event Handlers
 
-        private void OnLoaded(object sender, RoutedEventArgs e) => 
+        private void OnLoaded(object sender, RoutedEventArgs e) =>
             _contentTextBlock = _contentPresenter.Children().OfType<TextBlock>().FirstOrDefault();
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.PreviousSize.Equals(e.NewSize)) return;
+
             _rootGrid.Visual().CenterPoint = new Vector3(_rootGrid.RenderSize.ToVector2() / 2, 0.0f);
         }
 
@@ -109,7 +111,7 @@ namespace Continuity.Controls
         private void OnPointerExited(object sender, PointerRoutedEventArgs e)
         {
             _rootGrid.StartScaleAnimation(to: Vector2.One, duration: 300);
-            _backgroundShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.0f, toBlurRadius: 0.0f, duration: 500, delay: 100);
+            _backgroundShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.3f, toBlurRadius: 4.0f, duration: 500, delay: 100);
             _textShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.0f, toBlurRadius: 0.0f, duration: 300, maskingElement: _contentTextBlock);
         }
 
@@ -125,12 +127,12 @@ namespace Continuity.Controls
 
         #region Methods
 
-        private DropShadow CreateDropShadow(Color? color = null)
+        private DropShadow CreateDropShadow(float opacity = 0.0f, float blurRaidus = 0.0f, Color? color = null)
         {
             var shadow = _compositor.CreateDropShadow();
 
-            shadow.BlurRadius = 0.0f;
-            shadow.Opacity = 0.0f;
+            shadow.Opacity = opacity;
+            shadow.BlurRadius = blurRaidus;
 
             if (color.HasValue)
             {

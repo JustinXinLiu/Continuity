@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Numerics;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Continuity.Extensions;
 
 namespace Continuity.Lights
 {
@@ -18,9 +18,9 @@ namespace Continuity.Lights
 
         private Compositor _compositor;
 
-        private const float OffsetZRatio = 0.6f;
-        private float _hoverOffsetZ;
-        private Vector3KeyFrameAnimation _lightOffsetAnimation;
+        private const float OffsetZRatio = 2.0f;
+        private float _rippleOffsetZ;
+        private Vector3KeyFrameAnimation _lightRippleOffsetAnimation;
 
         #endregion
 
@@ -35,7 +35,7 @@ namespace Continuity.Lights
             "Color", typeof(Color), typeof(RippleXamlLight), new PropertyMetadata(Colors.White, (s, e) =>
             {
                 var self = (RippleXamlLight)s;
-                var newColor = (Color) e.NewValue;
+                var newColor = (Color)e.NewValue;
 
                 if (self.CompositionLight is SpotLight spotLight)
                 {
@@ -51,21 +51,30 @@ namespace Continuity.Lights
         protected override void OnConnected(UIElement newElement)
         {
             _compositor = Window.Current.Compositor;
-            var spotLight = _compositor.CreateSpotLight();
-            spotLight.InnerConeAngleInDegrees = 50f;
-            spotLight.InnerConeColor = Colors.FloralWhite;
-            spotLight.OuterConeAngleInDegrees = 0f;
-            spotLight.ConstantAttenuation = 1f;
-            spotLight.LinearAttenuation = 0.253f;
-            spotLight.QuadraticAttenuation = 0.58f;
 
+            var spotLight = CreateSpotLight();
             CompositionLight = spotLight;
 
-            _lightOffsetAnimation = CreateLightOffsetAnimation();
+            _lightRippleOffsetAnimation = CreateLightRippleOffsetAnimation();
 
             SubscribeToPointerEvents();
 
             AddTargetElement(GetId(), newElement);
+
+            SpotLight CreateSpotLight()
+            {
+                var light = _compositor.CreateSpotLight();
+
+                light.InnerConeColor = light.OuterConeColor = Color;
+                light.InnerConeAngleInDegrees = 90.0f;
+                light.OuterConeAngleInDegrees = 0.0f;
+                //light.LinearAttenuation = 0.2f;
+                //light.QuadraticAttenuation = 0.1f;
+                _rippleOffsetZ = CalculateRippleOffsetZOnDesizedSize(newElement);
+                light.Offset = new Vector3(0.0f, 0.0f, _rippleOffsetZ);
+
+                return light;
+            }
 
             void SubscribeToPointerEvents()
             {
@@ -73,14 +82,7 @@ namespace Continuity.Lights
                 {
                     element.SizeChanged += OnElementSizeChanged;
                 }
-                if (newElement is ButtonBase button)
-                {
-                    button.Click += OnElementClick;
-                }
-                else
-                {
-                    newElement.Tapped += OnElementTapped;
-                }
+                newElement.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(OnPointerPressed), true);
             }
         }
 
@@ -91,7 +93,7 @@ namespace Continuity.Lights
             RemoveTargetElement(GetId(), oldElement);
             CompositionLight.Dispose();
 
-            _lightOffsetAnimation.Dispose();
+            _lightRippleOffsetAnimation.Dispose();
 
             void UnsubscribeFromPointerEvents()
             {
@@ -99,14 +101,7 @@ namespace Continuity.Lights
                 {
                     element.SizeChanged -= OnElementSizeChanged;
                 }
-                if (oldElement is ButtonBase button)
-                {
-                    button.Click -= OnElementClick;
-                }
-                else
-                {
-                    oldElement.Tapped -= OnElementTapped;
-                }
+                oldElement.RemoveHandler(UIElement.PointerPressedEvent, new PointerEventHandler(OnPointerPressed));
             }
         }
 
@@ -116,38 +111,44 @@ namespace Continuity.Lights
 
         #region Event Handlers
 
-        private void OnElementSizeChanged(object sender, SizeChangedEventArgs e) =>
-            _hoverOffsetZ = CalculateHoverOffsetZOnRenderSize((FrameworkElement)sender);
-
-        private void OnElementClick(object sender, RoutedEventArgs e)
+        private void OnElementSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Debug.WriteLine("Clicked");
+            if (e.PreviousSize.Equals(e.NewSize)) return;
+
+            _rippleOffsetZ = CalculateRippleOffsetZOnRenderSize((FrameworkElement)sender);
         }
 
-        private void OnElementTapped(object sender, TappedRoutedEventArgs e)
-        {
-            Debug.WriteLine("Tapped");
-        }
+        private void OnPointerPressed(object sender, PointerRoutedEventArgs e) =>
+            StartLightRippleOffsetAnimation(e.GetCurrentPoint((UIElement)sender).Position.ToVector2());
 
         #endregion
 
         #region Methods
 
-        private Vector3KeyFrameAnimation CreateLightOffsetAnimation()
+        private Vector3KeyFrameAnimation CreateLightRippleOffsetAnimation()
         {
-            var easing = _compositor.CreateCubicBezierEasingFunction(new Vector2(0.3f, 0.7f), new Vector2(0.9f, 0.5f));
-
             var offsetAnimation = _compositor.CreateVector3KeyFrameAnimation();
-            //offsetAnimation.InsertKeyFrame(1.0f, RestingOffset, easing);
-            offsetAnimation.Duration = TimeSpan.FromMilliseconds(800);
+            offsetAnimation.Duration = TimeSpan.FromMilliseconds(1200);
 
             return offsetAnimation;
         }
 
-        private void StartLightOffsetAnimation() =>
-            CompositionLight?.StartAnimation("Offset", _lightOffsetAnimation);
+        private void StartLightRippleOffsetAnimation(Vector2 position)
+        {
+            var startingPoisition = new Vector3(position, 0.0f);
+            _lightRippleOffsetAnimation?.InsertKeyFrame(0.0f, startingPoisition);
+            _lightRippleOffsetAnimation?.InsertKeyFrame(1.0f, new Vector3(position.X, position.Y, _rippleOffsetZ));
 
-        private float CalculateHoverOffsetZOnRenderSize(UIElement element)
+            CompositionLight?.StartAnimation("Offset", _lightRippleOffsetAnimation);
+        }
+
+        private float CalculateRippleOffsetZOnDesizedSize(UIElement element)
+        {
+            var desiredSize = element.GetDesiredSize();
+            return Math.Max(desiredSize.X, desiredSize.Y) * OffsetZRatio;
+        }
+
+        private float CalculateRippleOffsetZOnRenderSize(UIElement element)
         {
             var desiredSize = element.RenderSize.ToVector2();
             return Math.Max(desiredSize.X, desiredSize.Y) * OffsetZRatio;

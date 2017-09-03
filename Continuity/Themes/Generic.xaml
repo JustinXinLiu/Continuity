@@ -1099,7 +1099,7 @@
     </Style>
 
     <Style TargetType="controls:FluentButton">
-        <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}" />
+        <Setter Property="Background" Value="#FF02C3E2" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="4" />
@@ -1135,7 +1135,7 @@
                                           Content="{TemplateBinding Content}"
                                           ContentTransitions="{TemplateBinding ContentTransitions}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          Opacity="0.95"
+                                          Opacity="0.9"
                                           Padding="{TemplateBinding Padding}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"

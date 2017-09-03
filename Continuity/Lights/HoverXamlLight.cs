@@ -60,16 +60,9 @@ namespace Continuity.Lights
 
         protected override void OnConnected(UIElement newElement)
         {
-            _hoverOffsetZ = CalculateHoverOffsetZOnDesiredSize(newElement);
-
             _compositor = Window.Current.Compositor;
-            var spotLight = _compositor.CreateSpotLight();
-            spotLight.CoordinateSpace = newElement.Visual();
-            spotLight.InnerConeColor = spotLight.OuterConeColor = Color;
-            spotLight.InnerConeIntensity = spotLight.OuterConeIntensity = 0.0f;
-            spotLight.InnerConeAngleInDegrees = 0.0f;
-            spotLight.OuterConeAngleInDegrees = 90.0f;
 
+            var spotLight = CreateSpotLight();
             CompositionLight = spotLight;
 
             _lightIncreaseInnerConeIntensityAnimation = CreateLightIncreaseInnerConeIntensityAnimation();
@@ -77,12 +70,25 @@ namespace Continuity.Lights
             _lightDecreaseInnerConeIntensityAnimation = CreateLightDecreaseInnerConeIntensityAnimation();
             _lightDecreaseOuterConeIntensityAnimation = CreateLightDecreaseOuterConeIntensityAnimation();
 
+            _hoverOffsetZ = CalculateHoverOffsetZOnDesiredSize(newElement);
             _lightPositionExpressionNode = CreateLightPositionExpressionNode(newElement);
             StartLightOffsetAnimation();
 
             SubscribeToPointerEvents();
 
             AddTargetElement(GetId(), newElement);
+
+            SpotLight CreateSpotLight()
+            {
+                var light = _compositor.CreateSpotLight();
+
+                light.InnerConeColor = light.OuterConeColor = Color;
+                light.InnerConeIntensity = light.OuterConeIntensity = 0.0f;
+                light.InnerConeAngleInDegrees = 0.0f;
+                light.OuterConeAngleInDegrees = 90.0f;
+
+                return light;
+            }
 
             void SubscribeToPointerEvents()
             {
@@ -127,13 +133,17 @@ namespace Continuity.Lights
 
         #region Event Handlers
 
-        private void OnElementSizeChanged(object sender, SizeChangedEventArgs e) => 
-            _hoverOffsetZ = CalculateHoverOffsetZOnRenderSize((FrameworkElement)sender);
+        private void OnElementSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.PreviousSize.Equals(e.NewSize)) return;
 
-        private void OnElementPointerEntered(object sender, PointerRoutedEventArgs e) => 
+            _hoverOffsetZ = CalculateHoverOffsetZOnRenderSize((FrameworkElement)sender);
+        }
+
+        private void OnElementPointerEntered(object sender, PointerRoutedEventArgs e) =>
             ShowLightAnimation();
 
-        private void OnElementPointerExited(object sender, PointerRoutedEventArgs e) => 
+        private void OnElementPointerExited(object sender, PointerRoutedEventArgs e) =>
             HideLightAnimation();
 
         #endregion

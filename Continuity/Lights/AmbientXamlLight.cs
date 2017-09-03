@@ -57,13 +57,21 @@ namespace Continuity.Lights
         protected override void OnConnected(UIElement newElement)
         {
             var compositor = Window.Current.Compositor;
-            var ambientLight = compositor.CreateAmbientLight();
-            ambientLight.Color = Color;
-            ambientLight.Intensity = Intensity.ToFloat();
 
+            var ambientLight = CreateAmbientLight();
             CompositionLight = ambientLight;
 
             AddTargetElement(GetId(), newElement);
+
+            AmbientLight CreateAmbientLight()
+            {
+                var light = compositor.CreateAmbientLight();
+
+                light.Color = Color;
+                light.Intensity = Intensity.ToFloat();
+
+                return light;
+            }
         }
 
         protected override void OnDisconnected(UIElement oldElement)

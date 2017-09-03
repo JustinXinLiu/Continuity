@@ -6,11 +6,8 @@
       xmlns:controls="using:Continuity.Controls"
       mc:Ignorable="d">
 
-    <StackPanel x:Name="LayoutRoot" Padding="40" Spacing="40">
-        <controls:FluentButton Background="LightGreen" Content="AREA 51" />
-        <controls:FluentButton Background="LightGoldenrodYellow" Content="AREA 51" />
-        <controls:FluentButton Background="LightSalmon" Content="AREA 51" />
-        <controls:FluentButton Background="LightBlue" Content="AREA 51" />
-    </StackPanel>
+    <Grid x:Name="LayoutRoot" Padding="40">
+        <controls:FluentButton Content="XAML LIGHT" />
+    </Grid>
 </Page>
 
