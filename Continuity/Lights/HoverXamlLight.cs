@@ -21,8 +21,8 @@ namespace Continuity.Lights
 
         private const int IncreaseIntensityDuration = 400;
         private const int DecreaseIntensityDuration = 1200;
-        private const float InnerConeIntensity = 0.15f;
-        private const float OuterConeIntensity = 0.25f;
+        private const float InnerConeIntensity = 0.2f;
+        private const float OuterConeIntensity = 0.3f;
         private ScalarKeyFrameAnimation _lightIncreaseInnerConeIntensityAnimation;
         private ScalarKeyFrameAnimation _lightIncreaseOuterConeIntensityAnimation;
         private ScalarKeyFrameAnimation _lightDecreaseInnerConeIntensityAnimation;

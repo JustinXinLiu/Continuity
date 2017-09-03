@@ -52,8 +52,6 @@ namespace Continuity.Controls
             AddHandler(PointerReleasedEvent, new PointerEventHandler(OnPointerReleased), true);
             PointerExited += OnPointerExited;
             PointerCanceled += OnPointerExited;
-            Click += OnClick;
-            Holding += OnHolding;
         }
 
         #region Overrides
@@ -91,20 +89,20 @@ namespace Continuity.Controls
 
         private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            _rootGrid.StartScaleAnimation(to: new Vector2(1.025f), duration: 400);
+            _rootGrid.StartScaleAnimation(to: new Vector2(1.015f), duration: 400);
             _backgroundShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.3f, toBlurRadius: 8.0f, duration: 600);
             _textShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.2f, toBlurRadius: 2.0f, duration: 300, delay: 200, maskingElement: _contentTextBlock);
         }
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            _rootGrid.StartScaleAnimation(to: new Vector2(0.975f), duration: 300);
+            _rootGrid.StartScaleAnimation(to: new Vector2(0.985f), duration: 300);
             _backgroundShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.4f, toBlurRadius: 6.0f, duration: 300);
         }
 
         private void OnPointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            _rootGrid.StartScaleAnimation(to: new Vector2(1.025f), duration: 200);
+            _rootGrid.StartScaleAnimation(to: new Vector2(1.015f), duration: 200);
             _backgroundShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.3f, toBlurRadius: 8.0f, duration: 300);
         }
 
@@ -113,14 +111,6 @@ namespace Continuity.Controls
             _rootGrid.StartScaleAnimation(to: Vector2.One, duration: 300);
             _backgroundShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.3f, toBlurRadius: 4.0f, duration: 500, delay: 100);
             _textShadow.StartShadowBlurRadiusAnimation(toShadowOpacity: 0.0f, toBlurRadius: 0.0f, duration: 300, maskingElement: _contentTextBlock);
-        }
-
-        private void OnClick(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void OnHolding(object sender, HoldingRoutedEventArgs e)
-        {
         }
 
         #endregion
