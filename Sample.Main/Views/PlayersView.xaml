@@ -66,8 +66,10 @@
     <Grid x:Name="LayoutRoot">
         <!--  UseLineSelectionVisual="True" SelectedHeaderIndicatorBackground="Black"  -->
         <controls:Tab x:Name="Tab">
-            <controls:TabItem Header="top 10" HeaderIconStyle="{StaticResource Snowflake}">
-                <ListView ItemsSource="{x:Bind Vm.TopTenPlayers}" SelectionChanged="ListView_SelectionChanged">
+            <controls:TabItem Header="top 10"
+                              HeaderIconStyle="{StaticResource Snowflake}">
+                <ListView ItemsSource="{x:Bind Vm.TopTenPlayers}"
+                          SelectionChanged="ListView_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
                             <Grid x:Name="Root"
@@ -98,7 +100,8 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </controls:TabItem>
-            <controls:TabItem Header="mvp players" HeaderIconStyle="{StaticResource World}">
+            <controls:TabItem Header="mvp players"
+                              HeaderIconStyle="{StaticResource World}">
                 <ListView ItemsSource="{x:Bind Vm.MvpCandidates}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
@@ -130,7 +133,8 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </controls:TabItem>
-            <controls:TabItem Header="fav" HeaderIconStyle="{StaticResource Heart}">
+            <controls:TabItem Header="fav"
+                              HeaderIconStyle="{StaticResource Heart}">
                 <ListView ItemsSource="{x:Bind Vm.MyFavoritePlayers}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Player">
