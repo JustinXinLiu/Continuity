@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Continuity", "Continuity\Continuity.csproj", "{5E49EC20-DB7E-4846-BC93-118731B5BC1C}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Navigation", "Sample.Navigation\Sample.Navigation.csproj", "{91824D6D-8BD8-4E5F-8232-F9C09F754D98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionBuilder", "ExpressionBuilder\ExpressionBuilder\ExpressionBuilder.csproj", "{97F79CB4-FB7B-4DC3-8A08-28FA5694A73C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.KlivaDesign", "Sample.KlivaDesign\Sample.KlivaDesign.csproj", "{D79ED8ED-D1E0-4A46-9021-32351F172CBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,8 +163,31 @@ Global
 		{97F79CB4-FB7B-4DC3-8A08-28FA5694A73C}.Release|x64.Build.0 = Release|x64
 		{97F79CB4-FB7B-4DC3-8A08-28FA5694A73C}.Release|x86.ActiveCfg = Release|x86
 		{97F79CB4-FB7B-4DC3-8A08-28FA5694A73C}.Release|x86.Build.0 = Release|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|ARM.Build.0 = Debug|ARM
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|ARM.Deploy.0 = Debug|ARM
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|x64.ActiveCfg = Debug|x64
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|x64.Build.0 = Debug|x64
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|x64.Deploy.0 = Debug|x64
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|x86.ActiveCfg = Debug|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|x86.Build.0 = Debug|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Debug|x86.Deploy.0 = Debug|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|Any CPU.ActiveCfg = Release|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|ARM.ActiveCfg = Release|ARM
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|ARM.Build.0 = Release|ARM
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|ARM.Deploy.0 = Release|ARM
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|x64.ActiveCfg = Release|x64
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|x64.Build.0 = Release|x64
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|x64.Deploy.0 = Release|x64
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|x86.ActiveCfg = Release|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|x86.Build.0 = Release|x86
+		{D79ED8ED-D1E0-4A46-9021-32351F172CBB}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFC8792F-3290-43BC-B68B-BF66940635D3}
 	EndGlobalSection
 EndGlobal

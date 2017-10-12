@@ -1,0 +1,22 @@
+﻿<Page x:Class="Sample.KlivaDesign.LandingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:Sample.KlivaDesign"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+      mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <maps:MapControl x:Name="ActivityMap"
+                         BusinessLandmarksVisible="False"
+                         LandmarksVisible="False"
+                         PedestrianFeaturesVisible="False"
+                         TrafficFlowVisible="False"
+                         TransitFeaturesEnabled="False"
+                         TransitFeaturesVisible="False"
+                         ZoomInteractionMode="PointerAndKeyboard"
+                         Style="Road">
+        </maps:MapControl>
+    </Grid>
+</Page>
