@@ -5,9 +5,183 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+      xmlns:models="using:Sample.KlivaDesign.Models"
       mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="ActivityTemplate" x:DataType="models:ActivitySummary">
+            <Grid x:Name="LayoutRoot"
+                  Background="#FF060809"
+                  Opacity="0.85">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="152" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Ellipse Width="80"
+                         Height="80"
+                         VerticalAlignment="Top"
+                         Margin="22,22,14,22"
+                         Stroke="#FFEAEAEA"
+                         StrokeThickness="2">
+                    <Ellipse.Fill>
+                        <ImageBrush Stretch="UniformToFill"
+                                    ImageSource="{x:Bind ProfileMediumFormatted}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Text="{x:Bind FullName}"
+                           Foreground="#FFBCBCBC"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center"
+                           Margin="22,0,14,20"
+                           FontWeight="SemiBold"
+                           FontSize="18" />
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{x:Bind Name}"
+                               Foreground="#FFBCBCBC"
+                               Margin="12,24,0,8"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               TextLineBounds="Tight"
+                               OpticalMarginAlignment="TrimSideBearings"
+                               Grid.ColumnSpan="2" />
+
+                    <TextBlock Foreground="#FF3E4244"
+                               Text="{x:Bind StartDate}"
+                               Grid.Row="1"
+                               Margin="12,0"
+                               Grid.ColumnSpan="2"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               OpticalMarginAlignment="TrimSideBearings" />
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Bottom"
+                                Margin="8,0,8,16">
+                        <Path Width="32"
+                              Height="32"
+                              Stretch="Uniform"
+                              Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
+                              Fill="#FF3E4244"
+                              UseLayoutRounding="False" />
+                        <TextBlock Foreground="#FFF4F4F4"
+                                   FontWeight="SemiBold"
+                                   FontSize="30"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,0,0">
+                    <Run Text="{x:Bind Distance}" />
+                    <Run Text="KM"
+                            Foreground="#FFBCBCBC"
+                            FontSize="16" />
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2"
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Bottom"
+                                Margin="8,0,8,16">
+                        <Path Width="32"
+                              Height="32"
+                              Stretch="Uniform"
+                              Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+                              Fill="#FF3E4244"
+                              UseLayoutRounding="False" />
+                        <TextBlock Foreground="#FFF4F4F4"
+                                   FontWeight="SemiBold"
+                                   FontSize="30"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,0,0">
+                    <Run Text="{x:Bind ElevationGain}" />
+                    <Run Text="M"
+                         Foreground="#FFBCBCBC"
+                         FontSize="16" />
+                        </TextBlock>
+                    </StackPanel>
+                    <Line Stroke="#FF3E4244"
+                          X2="1"
+                          Stretch="Fill"
+                          StrokeThickness="2"
+                          Margin="8,0,24,0"
+                          VerticalAlignment="Bottom"
+                          Grid.ColumnSpan="3"
+                          Grid.Row="2"
+                          Opacity="0.4" />
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      Grid.Column="1"
+                      HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="24,16,8,20">
+                        <Path Width="20"
+                              Height="20"
+                              Stretch="Uniform"
+                              Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
+                              Fill="#FF6EC120"
+                              UseLayoutRounding="False"
+                              Margin="0,0,0,-4" />
+                        <TextBlock Foreground="#FFF4F4F4"
+                                   Text="{x:Bind CommentCount}"
+                                   FontWeight="SemiBold"
+                                   FontSize="18"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center"
+                                   Margin="8,0,0,0" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="8,16,24,20"
+                                Grid.Column="1">
+                        <Path Width="20"
+                              Height="20"
+                              Stretch="Uniform"
+                              Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
+                              Fill="#FFF57327"
+                              UseLayoutRounding="False"
+                              Margin="0,-4,0,0" />
+                        <TextBlock Foreground="#FFF4F4F4"
+                                   Text="{x:Bind KudosCount}"
+                                   FontWeight="SemiBold"
+                                   FontSize="18"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center"
+                                   Margin="8,0,0,0" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid x:Name="Root"
+          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <maps:MapControl x:Name="ActivityMap"
                          BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
@@ -16,7 +190,24 @@
                          TransitFeaturesEnabled="False"
                          TransitFeaturesVisible="False"
                          ZoomInteractionMode="PointerAndKeyboard"
-                         Style="Road">
+                         Style="Road"
+                         d:IsHidden="True">
         </maps:MapControl>
+
+        <ListView x:Name="ActivityList"
+                  ItemsSource="{x:Bind ActivitySummaries}"
+                  ItemTemplate="{StaticResource ActivityTemplate}"
+                  ItemContainerStyle="{ThemeResource ListViewItemRevealBackgroundShowsAboveContentStyle}"
+                  Margin="24"
+                  Width="512"
+                  HorizontalAlignment="Left"
+                  FontFamily="Segoe UI">
+        </ListView>
+
+        <!--<TextBlock x:Name="ActivityImageIcon"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource PaneIconMaterialTextBlock}"
+                   Text="" />-->
     </Grid>
 </Page>

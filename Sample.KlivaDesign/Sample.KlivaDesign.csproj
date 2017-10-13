@@ -101,12 +101,17 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActivitySummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Avatars\bart.jpg" />
+    <Content Include="Assets\Avatars\glenn.jpg" />
+    <Content Include="Assets\Avatars\justin.jpg" />
+    <Content Include="Assets\Fonts\materialdesignicons-webfont.ttf" />
     <None Include="Sample.KlivaDesign_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -157,9 +162,7 @@
       <Name>ExpressionBuilder</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
