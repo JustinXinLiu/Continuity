@@ -140,7 +140,7 @@
                                                RevealBackground="{ThemeResource ListViewItemRevealBackground}"
                                                RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}"
                                                RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"
-                                               RevealBackgroundShowsAboveContent="True">
+                                               RevealBackgroundShowsAboveContent="False">
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
