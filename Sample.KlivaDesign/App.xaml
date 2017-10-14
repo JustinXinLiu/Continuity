@@ -20,22 +20,22 @@
                     Value="White" />
         </Style>
 
-        <Style x:Key="MapPointButtonStyle"
+        <Style x:Key="ButtonMapPointStyle"
                TargetType="Button">
             <Setter Property="Width"
-                    Value="24" />
+                    Value="36" />
             <Setter Property="Height"
-                    Value="24" />
+                    Value="36" />
             <Setter Property="Background"
                     Value="#FFFC6913" />
             <Setter Property="BorderBrush"
-                    Value="#FFF57327" />
+                    Value="#FFFFF1E9" />
             <Setter Property="HorizontalAlignment"
                     Value="Stretch" />
             <Setter Property="VerticalAlignment"
                     Value="Stretch" />
             <Setter Property="Padding"
-                    Value="6" />
+                    Value="12" />
             <Setter Property="UseSystemFocusVisuals"
                     Value="False" />
             <Setter Property="FocusVisualMargin"
@@ -71,7 +71,7 @@
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
                                             <Setter Target="Outer.(UIElement.Opacity)"
-                                                    Value="0.8" />
+                                                    Value="1" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Disabled" />
@@ -81,7 +81,7 @@
                             <Ellipse x:Name="Outer"
                                      Fill="{TemplateBinding BorderBrush}"
                                      RenderTransformOrigin="0.5,0.5"
-                                     Opacity="0.6">
+                                     Opacity="0.85">
                                 <Ellipse.RenderTransform>
                                     <CompositeTransform />
                                 </Ellipse.RenderTransform>
@@ -94,6 +94,89 @@
                                     <CompositeTransform />
                                 </Ellipse.RenderTransform>
                             </Ellipse>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonMapPinStyle"
+               TargetType="Button">
+            <Setter Property="Width"
+                    Value="36" />
+            <Setter Property="Height"
+                    Value="36" />
+            <Setter Property="Background"
+                    Value="#FF6EC120" />
+            <Setter Property="BorderBrush"
+                    Value="#FFF2FFE5" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalAlignment"
+                    Value="Stretch" />
+            <Setter Property="Padding"
+                    Value="8" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="False" />
+            <Setter Property="FocusVisualMargin"
+                    Value="-3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid"
+                              d:DesignWidth="24"
+                              d:DesignHeight="24">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0:0:0.25">
+                                            <VisualTransition.GeneratedEasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </VisualTransition.GeneratedEasingFunction>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                    Value="0.95" />
+                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                    Value="0.95" />
+                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                    Value="1.1" />
+                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                    Value="1.1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="Outer.(UIElement.Opacity)"
+                                                    Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Ellipse x:Name="Outer"
+                                     Fill="{TemplateBinding BorderBrush}"
+                                     RenderTransformOrigin="0.5,0.5"
+                                     Opacity="0.85">
+                                <Ellipse.RenderTransform>
+                                    <CompositeTransform />
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                            <Path x:Name="Inner"
+                                  Fill="{TemplateBinding Background}"
+                                  Margin="{TemplateBinding Padding}"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Uniform"
+                                  Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                                  UseLayoutRounding="False">
+                                <Path.RenderTransform>
+                                    <CompositeTransform />
+                                </Path.RenderTransform>
+                            </Path>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

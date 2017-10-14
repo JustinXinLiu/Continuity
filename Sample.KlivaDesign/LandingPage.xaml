@@ -182,7 +182,8 @@
           Background="#FF101416">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <maps:MapControl x:Name="ActivityMap"
                          BusinessLandmarksVisible="False"
@@ -194,18 +195,20 @@
                          ZoomInteractionMode="PointerAndKeyboard"
                          Style="Road"
                          d:IsHidden="True"
-                         Grid.RowSpan="2" />
+                         Grid.RowSpan="3" />
 
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind Path=ActivitySummaries}"
                   ItemTemplate="{StaticResource ActivityTemplate}"
                   ItemContainerStyle="{ThemeResource ListViewItemCustomRevealStyle}"
-                  Margin="24,0,24,0"
+                  Margin="24,0,0,0"
                   Padding="0,96,0,0"
                   Width="400"
                   HorizontalAlignment="Left"
-                  Grid.RowSpan="2" />
-        <ToggleButton Margin="36,24,36,24"
+                  Grid.RowSpan="3"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden" />
+        
+        <ToggleButton Margin="36,24,0,24"
                       Style="{StaticResource ToggleButtonRevealStyle}">
             <Path Width="24"
                   Height="24"
@@ -214,6 +217,8 @@
                   Fill="#FFF4F4F4"
                   UseLayoutRounding="False" />
         </ToggleButton>
+        
+        <Grid Grid.Row="2" />
 
         <!--<TextBlock x:Name="ActivityImageIcon"
                    VerticalAlignment="Center"

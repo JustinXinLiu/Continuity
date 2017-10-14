@@ -178,26 +178,15 @@ namespace Sample.KlivaDesign
                 new BasicGeoposition { Latitude = -37.87992, Longitude = 145.16356 }
             };
 
-            var polyLine = new MapPolyline { Path = new Geopath(geoPositions), StrokeThickness = 3, StrokeDashed = false, StrokeColor = Color.FromArgb(255, 245, 115, 39) }; /*#FFF57327*/
+            var polyLine = new MapPolyline { Path = new Geopath(geoPositions), StrokeThickness = 4, StrokeDashed = false, StrokeColor = Color.FromArgb(225, 245, 115, 39) }; /*#FFF57327*/
             ActivityMap.MapElements.Add(polyLine);
 
-            //foreach (var geoposition in geopositions)
-            //{
-            //    var startMapIcon = new MapIcon();
-            //    startMapIcon.Location = new Geopoint(geoposition);
-            //    startMapIcon.NormalizedAnchorPoint = new Point(0.5, 0.5);
-            //    //startMapIcon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Start.png"));
-            //    ActivityMap.MapElements.Add(startMapIcon);
-            //}
-
-            var mapPointButtonStyle = (Style)App.Current.Resources["MapPointButtonStyle"];
-
-            var startPoint = new Button { Style = mapPointButtonStyle };
+            var startPoint = new Button { Style = (Style)App.Current.Resources["ButtonMapPointStyle"] };
             ActivityMap.Children.Add(startPoint);
             MapControl.SetLocation(startPoint, new Geopoint(geoPositions.First()));
             MapControl.SetNormalizedAnchorPoint(startPoint, new Point(0.5, 0.5));
 
-            var endPoint = new Button { Style = mapPointButtonStyle };
+            var endPoint = new Button { Style = (Style)App.Current.Resources["ButtonMapPinStyle"] };
             ActivityMap.Children.Add(endPoint);
             MapControl.SetLocation(endPoint, new Geopoint(geoPositions.Last()));
             MapControl.SetNormalizedAnchorPoint(endPoint, new Point(0.5, 0.5));
