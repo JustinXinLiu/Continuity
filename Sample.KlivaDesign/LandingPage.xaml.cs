@@ -23,6 +23,7 @@ namespace Sample.KlivaDesign
             InitializeComponent();
 
             SetupMapStyle();
+            AnimateMapIn();
 
             Loaded += async (s, e) =>
             {
@@ -32,17 +33,9 @@ namespace Sample.KlivaDesign
                 PopulateActivities();
             };
 
-            void RemoveMapServiceTokenWarning()
+            void SetupMapStyle()
             {
-                var mapGrid = ActivityMap.GetChildByName<Grid>("MapGrid");
-                var border = mapGrid.Children().OfType<Border>().Last();
-                border.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void SetupMapStyle()
-        {
-            ActivityMap.StyleSheet = MapStyleSheet.ParseFromJson(@"
+                ActivityMap.StyleSheet = MapStyleSheet.ParseFromJson(@"
                 {
                     ""version"": ""1.*"",
                     ""settings"": {
@@ -148,6 +141,26 @@ namespace Sample.KlivaDesign
                     }
                 }
             ");
+            }
+
+            void AnimateMapIn()
+            {
+                ActivityMap.Visual().Opacity = 0;
+                ActivityMap.LoadingStatusChanged += ActivityMapLoadingStatusChanged;
+
+                void ActivityMapLoadingStatusChanged(MapControl sender, object args)
+                {
+                    ActivityMap.LoadingStatusChanged -= ActivityMapLoadingStatusChanged;
+                    ActivityMap.StartOpacityAnimation(null, 1.0f);
+                }
+            }
+
+            void RemoveMapServiceTokenWarning()
+            {
+                var mapGrid = ActivityMap.GetChildByName<Grid>("MapGrid");
+                var border = mapGrid.Children().OfType<Border>().Last();
+                border.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async Task DrawPolylineAsync()
