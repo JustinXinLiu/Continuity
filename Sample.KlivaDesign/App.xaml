@@ -4,6 +4,7 @@
              xmlns:local="using:Sample.KlivaDesign"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              mc:Ignorable="d"
              RequestedTheme="Light">
 
@@ -447,12 +448,12 @@
             </Setter>
         </Style>
 
-        <CornerRadius x:Key="ComboBoxCornerRadius">12</CornerRadius>
+        <CornerRadius x:Key="ComboBoxCornerRadius">8</CornerRadius>
         <CornerRadius x:Key="ComboBoxItemCornerRadius">8</CornerRadius>
 
         <Style TargetType="ComboBox">
             <Setter Property="Padding"
-                    Value="16,12" />
+                    Value="12,8" />
             <Setter Property="MinWidth"
                     Value="{ThemeResource ComboBoxThemeMinWidth}" />
             <Setter Property="Foreground"
@@ -488,7 +489,7 @@
             <Setter Property="FontFamily"
                     Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize"
-                    Value="{ThemeResource ControlContentThemeFontSize}" />
+                    Value="14" />
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="ItemsPanel">
@@ -748,7 +749,7 @@
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="0"
                                         CornerRadius="{StaticResource ComboBoxCornerRadius}"
-                                        Margin="0,-1,0,-1"
+                                        Margin="-4,-1,0,-1"
                                         HorizontalAlignment="Stretch">
                                     <ScrollViewer x:Name="ScrollViewer"
                                                   Foreground="{ThemeResource ComboBoxDropDownForeground}"
@@ -787,7 +788,7 @@
             <Setter Property="TabNavigation"
                     Value="Local" />
             <Setter Property="Padding"
-                    Value="12" />
+                    Value="8" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Stretch" />
             <Setter Property="UseSystemFocusVisuals"
@@ -801,7 +802,7 @@
                               BorderThickness="{TemplateBinding BorderThickness}"
                               Control.IsTemplateFocusTarget="True"
                               CornerRadius="{StaticResource ComboBoxItemCornerRadius}"
-                              Margin="6,0">
+                              Margin="6,2">
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -948,6 +949,47 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style TargetType="controls:RadialGauge">
+            <Setter Property="Width"
+                    Value="160" />
+            <Setter Property="Height"
+                    Value="160" />
+            <Setter Property="Minimum"
+                    Value="0" />
+            <Setter Property="Maximum"
+                    Value="100" />
+            <Setter Property="StepSize"
+                    Value="1" />
+            <Setter Property="IsInteractive"
+                    Value="False" />
+            <Setter Property="TickSpacing"
+                    Value="24" />
+            <Setter Property="ScaleWidth"
+                    Value="6" />
+            <Setter Property="MinAngle"
+                    Value="180" />
+            <Setter Property="MaxAngle"
+                    Value="45" />
+            <Setter Property="Unit"
+                    Value="Units" />
+            <Setter Property="ScaleBrush"
+                    Value="#FFBCBCBC" />
+            <Setter Property="TrailBrush"
+                    Value="#FFF53327" />
+            <Setter Property="TickBrush"
+                    Value="Transparent" />
+            <Setter Property="ScaleTickBrush"
+                    Value="Transparent" />
+            <Setter Property="UnitBrush"
+                    Value="Transparent" />
+            <Setter Property="ValueBrush"
+                    Value="Transparent" />
+            <Setter Property="NeedleWidth"
+                    Value="0" />
+            <Setter Property="TickLength"
+                    Value="0" />
         </Style>
     </Application.Resources>
 </Application>

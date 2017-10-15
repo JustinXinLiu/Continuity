@@ -7,6 +7,7 @@
       xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
       xmlns:models="using:Sample.KlivaDesign.Models"
       xmlns:brushes="using:Continuity.Brushes"
+      xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -204,7 +205,7 @@
                   ItemTemplate="{StaticResource ActivityTemplate}"
                   ItemContainerStyle="{ThemeResource ListViewItemCustomRevealStyle}"
                   Margin="24,0,0,0"
-                  Padding="0,174,0,0"
+                  Padding="0,164,0,0"
                   Width="400"
                   HorizontalAlignment="Left"
                   Grid.RowSpan="3"
@@ -292,23 +293,170 @@
                     Grid.Row="1"
                     Margin="24"
                     Spacing="12">
-            <Grid Width="480"
+            <Grid Width="560"
                   Height="160"
-                  CornerRadius="16">
+                  CornerRadius="16"
+                  Visibility="Collapsed">
                 <Grid.Background>
                     <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
                 </Grid.Background>
                 <Rectangle Fill="White"
                            Opacity="0.2" />
             </Grid>
-            <Grid Width="480"
+            <Grid x:Name="GaugePanel"
+                  Width="572"
                   Height="240"
-                  CornerRadius="16">
+                  CornerRadius="16"
+                  Padding="0,-1,0,0">
                 <Grid.Background>
                     <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
                 </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="12" />
+                </Grid.ColumnDefinitions>
+
                 <Rectangle Fill="White"
-                           Opacity="0.3" />
+                           Opacity="0.1"
+                           Grid.ColumnSpan="3" />
+
+                <Grid HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Margin="24">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <controls:RadialGauge Value="50" />
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="6"
+                                Margin="0,0,0,4">
+                        <Path Width="28"
+                              Height="28"
+                              Stretch="Uniform"
+                              Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
+                              Fill="#FF8C8C8C"
+                              UseLayoutRounding="False" />
+                        <TextBlock Foreground="#FFF53327"
+                                   FontWeight="SemiBold"
+                                   FontSize="24"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,0,0">
+                                <Run Text="5.9" />
+                                <Run Text="KM"
+                                     Foreground="#FFBCBCBC"
+                                     FontSize="12" />
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Foreground="#CC515354"
+                               Text="SPEED"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Grid.Row="1"
+                               HorizontalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="1"
+                                Margin="-24,32,0,0"
+                                Spacing="8"
+                                VerticalAlignment="Top">
+                        <TextBlock Foreground="#CC515354"
+                                   Text="MAX"
+                                   FontSize="12"
+                                   FontWeight="Bold" />
+                        <TextBlock Foreground="#FFF53327"
+                                   FontWeight="SemiBold"
+                                   FontSize="20"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   Margin="0,-2,0,0">
+                                <Run Text="11.9" />
+                                <Run Text="KM"
+                                     Foreground="#FFBCBCBC"
+                                     FontSize="12" />
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <Grid HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Margin="24"
+                      Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <controls:RadialGauge Value="75" />
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="6"
+                                Margin="0,0,0,4">
+                        <Path Width="28"
+                              Height="28"
+                              Stretch="Uniform"
+                              Data="M7.5,4A5.5,5.5 0 0,0 2,9.5C2,10 2.09,10.5 2.22,11H6.3L7.57,7.63C7.87,6.83 9.05,6.75 9.43,7.63L11.5,13L12.09,11.58C12.22,11.25 12.57,11 13,11H21.78C21.91,10.5 22,10 22,9.5A5.5,5.5 0 0,0 16.5,4C14.64,4 13,4.93 12,6.34C11,4.93 9.36,4 7.5,4V4M3,12.5A1,1 0 0,0 2,13.5A1,1 0 0,0 3,14.5H5.44L11,20C12,20.9 12,20.9 13,20L18.56,14.5H21A1,1 0 0,0 22,13.5A1,1 0 0,0 21,12.5H13.4L12.47,14.8C12.07,15.81 10.92,15.67 10.55,14.83L8.5,9.5L7.54,11.83C7.39,12.21 7.05,12.5 6.6,12.5H3Z"
+                              Fill="#FF8C8C8C"
+                              UseLayoutRounding="False"
+                              RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform ScaleX="0.9"
+                                                    ScaleY="0.9" />
+                            </Path.RenderTransform>
+                        </Path>
+                        <TextBlock Foreground="#FFF53327"
+                                   FontWeight="SemiBold"
+                                   FontSize="24"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,0,0">
+                                <Run Text="139" />
+                                <Run Text="BPM"
+                                     Foreground="#FFBCBCBC"
+                                     FontSize="12" />
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Foreground="#CC515354"
+                               Text="HEART RATE"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Grid.Row="1"
+                               HorizontalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="1"
+                                Margin="-24,32,0,0"
+                                Spacing="8"
+                                VerticalAlignment="Top">
+                        <TextBlock Foreground="#CC515354"
+                                   Text="MAX"
+                                   FontSize="12"
+                                   FontWeight="Bold" />
+                        <TextBlock Foreground="#FFF53327"
+                                   FontWeight="SemiBold"
+                                   FontSize="20"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   Margin="0,-2,0,0">
+                                <Run Text="165" />
+                                <Run Text="BPM"
+                                     Foreground="#FFBCBCBC"
+                                     FontSize="12" />
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </StackPanel>
     </Grid>
