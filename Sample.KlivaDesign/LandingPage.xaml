@@ -197,23 +197,25 @@
                          ZoomInteractionMode="PointerAndKeyboard"
                          Style="Road"
                          d:IsHidden="True"
-                         Grid.RowSpan="2"
-                         FontFamily="Segoe UI" />
+                         Grid.RowSpan="2" />
 
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind Path=ActivitySummaries}"
                   ItemTemplate="{StaticResource ActivityTemplate}"
                   ItemContainerStyle="{ThemeResource ListViewItemCustomRevealStyle}"
                   Margin="24,0,0,0"
-                  Padding="0,120,0,0"
+                  Padding="0,174,0,0"
                   Width="400"
                   HorizontalAlignment="Left"
                   Grid.RowSpan="3"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   d:IsHidden="True" />
-
         <Grid x:Name="TopPane"
               Padding="0,48,0,0">
+            <Rectangle Fill="#FF060809"
+                       Opacity="0.8"
+                       Margin="0,-48,0,0" />
+
             <TextBlock x:Name="Title"
                        Foreground="#FFF53327"
                        HorizontalAlignment="Center"
@@ -221,14 +223,7 @@
                        VerticalAlignment="Bottom"
                        FontSize="18"
                        FontWeight="Black"
-                       Margin="0,0,0,22"
-                       FontFamily="Segoe UI" />
-            <ComboBox Margin="24,0,24,12"
-                      VerticalAlignment="Center">
-                <ComboBoxItem Content="ALL ACTIVITIES" />
-                <ComboBoxItem Content="MY ACTIVITIES" />
-                <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
-            </ComboBox>
+                       Margin="0,0,0,22" />
 
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
@@ -282,21 +277,30 @@
             </StackPanel>
         </Grid>
 
+        <ComboBox Margin="48,24,24,12"
+                  VerticalAlignment="Top"
+                  SelectedIndex="0"
+                  Grid.Row="1">
+            <ComboBoxItem Content="ALL ACTIVITIES" />
+            <ComboBoxItem Content="MY ACTIVITIES" />
+            <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
+        </ComboBox>
+
         <StackPanel x:Name="RightPane"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Grid.Row="1"
                     Margin="24"
                     Spacing="12">
-        <Grid Width="480"
-              Height="160"
-              CornerRadius="16">
-            <Grid.Background>
-                <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
-            </Grid.Background>
-            <Rectangle Fill="White"
-                       Opacity="0.2" />
-        </Grid>
+            <Grid Width="480"
+                  Height="160"
+                  CornerRadius="16">
+                <Grid.Background>
+                    <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
+                </Grid.Background>
+                <Rectangle Fill="White"
+                           Opacity="0.2" />
+            </Grid>
             <Grid Width="480"
                   Height="240"
                   CornerRadius="16">
