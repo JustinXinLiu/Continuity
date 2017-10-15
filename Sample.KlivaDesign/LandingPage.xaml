@@ -7,6 +7,7 @@
       xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
       xmlns:models="using:Sample.KlivaDesign.Models"
       mc:Ignorable="d">
+    
     <Page.Resources>
         <DataTemplate x:Key="ActivityTemplate"
                       x:DataType="models:ActivitySummary">
@@ -182,9 +183,9 @@
           Background="#FF101416">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="5*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
+        
         <maps:MapControl x:Name="ActivityMap"
                          BusinessLandmarksVisible="False"
                          LandmarksVisible="False"
@@ -195,7 +196,7 @@
                          ZoomInteractionMode="PointerAndKeyboard"
                          Style="Road"
                          d:IsHidden="True"
-                         Grid.RowSpan="3" />
+                         Grid.RowSpan="2" />
 
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind Path=ActivitySummaries}"
@@ -206,26 +207,69 @@
                   Width="400"
                   HorizontalAlignment="Left"
                   Grid.RowSpan="3"
-                  ScrollViewer.VerticalScrollBarVisibility="Hidden" />
-        
-        <ToggleButton Margin="36,24,0,24"
-                      Style="{StaticResource ToggleButtonRevealStyle}">
-            <Path Width="24"
-                  Height="24"
-                  Stretch="Uniform"
-                  Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-                  Fill="#FFF4F4F4"
-                  UseLayoutRounding="False" />
-        </ToggleButton>
-        
-        <Grid Grid.Row="2" />
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  d:IsHidden="True" />
 
-        <!--<TextBlock x:Name="ActivityImageIcon"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Style="{StaticResource PaneIconMaterialTextBlock}"
-                   Text="" />-->
+        <Grid x:Name="TopPane">
+            <TextBlock Foreground="#FFF4F4F4"
+                       HorizontalAlignment="Center"
+                       Text="KLIVA"
+                       VerticalAlignment="Bottom"
+                       FontSize="18"
+                       FontWeight="Black"
+                       Margin="0,0,0,20" />
+            <ComboBox Margin="24,36,24,12"
+                      VerticalAlignment="Center">
+                <ComboBoxItem Content="ALL ACTIVITIES" />
+                <ComboBoxItem Content="MY ACTIVITIES" />
+                <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
+            </ComboBox>
 
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="24,36,24,12"
+                        Spacing="16">
+                <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
+                    <Path Width="20"
+                          Height="20"
+                          Stretch="Uniform"
+                          Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                          Fill="#FFF4F4F4"
+                          UseLayoutRounding="False" />
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
+                    <Path Width="20"
+                          Height="20"
+                          Stretch="Uniform"
+                          Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                          Fill="#FFF4F4F4"
+                          UseLayoutRounding="False" />
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
+                    <Path Width="20"
+                          Height="20"
+                          Stretch="Uniform"
+                          Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                          Fill="#FFF4F4F4"
+                          UseLayoutRounding="False" />
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
+                    <Path Width="20"
+                          Height="20"
+                          Stretch="Uniform"
+                          Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                          Fill="#FFF4F4F4"
+                          UseLayoutRounding="False" />
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
 
+        <Grid x:Name="RightPane"
+              Grid.Row="1"
+              Width="560"
+              HorizontalAlignment="Right"
+              CornerRadius="16"
+              Margin="24"
+              Background="#99FFFFFF" />
     </Grid>
 </Page>

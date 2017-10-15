@@ -23,15 +23,8 @@ namespace Sample.KlivaDesign
             InitializeComponent();
 
             SetupMapStyle();
-            AnimateMapIn();
-
-            Loaded += async (s, e) =>
-            {
-                RemoveMapServiceTokenWarning();
-
-                await DrawPolylineAsync();
-                PopulateActivities();
-            };
+            ShowMapAndPolyline();
+            PopulateActivities();
 
             void SetupMapStyle()
             {
@@ -143,15 +136,18 @@ namespace Sample.KlivaDesign
             ");
             }
 
-            void AnimateMapIn()
+            void ShowMapAndPolyline()
             {
                 ActivityMap.Visual().Opacity = 0;
                 ActivityMap.LoadingStatusChanged += ActivityMapLoadingStatusChanged;
 
-                void ActivityMapLoadingStatusChanged(MapControl sender, object args)
+                async void ActivityMapLoadingStatusChanged(MapControl sender, object args)
                 {
                     ActivityMap.LoadingStatusChanged -= ActivityMapLoadingStatusChanged;
+                    RemoveMapServiceTokenWarning();
+
                     ActivityMap.StartOpacityAnimation(null, 1.0f);
+                    await DrawPolylineAsync();
                 }
             }
 
@@ -191,11 +187,7 @@ namespace Sample.KlivaDesign
             MapControl.SetLocation(endPoint, new Geopoint(geoPositions.Last()));
             MapControl.SetNormalizedAnchorPoint(endPoint, new Point(0.5, 0.5));
 
-            var zoomed = false;
-            while (!zoomed)
-            {
-                zoomed = await ActivityMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions), null, MapAnimationKind.None);
-            }
+            await ActivityMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions), new Thickness(120), MapAnimationKind.Bow);
         }
 
         private void PopulateActivities()
