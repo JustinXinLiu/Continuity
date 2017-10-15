@@ -3,6 +3,7 @@ using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using Continuity.Extensions;
 using Continuity.Lights;
 using Microsoft.Graphics.Canvas.Effects;
 
@@ -10,16 +11,35 @@ namespace Continuity.Brushes
 {
     public class BackdropTintBlurBrush : XamlCompositionBrushBase
     {
+        #region Properties
+
         public Color TintColor
         {
             get => (Color)GetValue(TintColorProperty);
             set => SetValue(TintColorProperty, value);
         }
         public static readonly DependencyProperty TintColorProperty = DependencyProperty.Register(
-            "TintColor", typeof(Color), typeof(BackdropTintBlurBrush), new PropertyMetadata(Colors.Silver, (s, e) =>
-            {
-            }));
+            "TintColor", typeof(Color), typeof(BackdropTintBlurBrush), new PropertyMetadata(Colors.GhostWhite));
 
+        public double Duration
+        {
+            get => (double)GetValue(DurationProperty);
+            set => SetValue(DurationProperty, value);
+        }
+        public static readonly DependencyProperty DurationProperty = DependencyProperty.Register(
+            "Duration", typeof(double), typeof(BackdropTintBlurBrush), new PropertyMetadata(1000d));
+
+        public double BlurAmount
+        {
+            get => (double)GetValue(BlurAmountProperty);
+            set => SetValue(BlurAmountProperty, value);
+        }
+        public static readonly DependencyProperty BlurAmountProperty = DependencyProperty.Register(
+            "BlurAmount", typeof(double), typeof(BackdropTintBlurBrush), new PropertyMetadata(24d));
+
+        #endregion
+
+        #region Overrides
 
         protected override void OnConnected()
         {
@@ -29,12 +49,12 @@ namespace Continuity.Brushes
             bool usingFallback = !CompositionCapabilities.GetForCurrentView().AreEffectsSupported();
             if (usingFallback)
             {
-                // If Effects are not supported, use Fallback Solid Color
+                // If Effects are not supported, use Fallback Solid Color.
                 CompositionBrush = compositor.CreateColorBrush(FallbackColor);
                 return;
             }
 
-            // Define Effect graph
+            // Define Effect graph.
             var graphicsEffect = new BlendEffect
             {
                 Mode = BlendEffectMode.LinearBurn,
@@ -52,36 +72,31 @@ namespace Continuity.Brushes
                 }
             };
 
-            // Create EffectFactory and EffectBrush
+            // Create EffectFactory and EffectBrush.
             var effectFactory = compositor.CreateEffectFactory(graphicsEffect, new[] { "Blur.BlurAmount" });
             var effectBrush = effectFactory.CreateBrush();
 
-            // Create BackdropBrush
+            // Create BackdropBrush.
             var backdrop = compositor.CreateBackdropBrush();
             effectBrush.SetSourceParameter("backdrop", backdrop);
 
-            // Trivial looping animation to demonstrate animated effects
-            var duration = TimeSpan.FromSeconds(5);
             var blurAnimation = compositor.CreateScalarKeyFrameAnimation();
-            blurAnimation.InsertKeyFrame(0, 0, compositor.CreateLinearEasingFunction());
-            blurAnimation.InsertKeyFrame(0.5f, 24f, compositor.CreateLinearEasingFunction());
-            blurAnimation.InsertKeyFrame(1, 0, compositor.CreateLinearEasingFunction());
-            blurAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
-            blurAnimation.Duration = duration;
+            blurAnimation.InsertKeyFrame(0.0f, 0.0f);
+            blurAnimation.InsertKeyFrame(1.0f, BlurAmount.ToFloat(), compositor.CreateLinearEasingFunction());
+            blurAnimation.Duration = TimeSpan.FromMilliseconds(Duration);
             effectBrush.Properties.StartAnimation("Blur.BlurAmount", blurAnimation);
 
-            // Set EffectBrush to paint Xaml UIElement
+            // Set EffectBrush to paint Xaml UIElement.
             CompositionBrush = effectBrush;
         }
 
         protected override void OnDisconnected()
         {
-            // Dispose CompositionBrushes if XamlCompBrushBase is removed from tree
-            if (CompositionBrush != null)
-            {
-                CompositionBrush.Dispose();
-                CompositionBrush = null;
-            }
+            // Dispose CompositionBrushes if XamlCompBrushBase is removed from tree.
+            CompositionBrush?.Dispose();
+            CompositionBrush = null;
         }
+
+        #endregion
     }
 }

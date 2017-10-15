@@ -289,6 +289,32 @@ namespace Sample.KlivaDesign
                 CommentCount = 1,
                 KudosCount = 3
             });
+
+            ActivitySummaries.Add(new ActivitySummary
+            {
+                FullName = "Glenn",
+                ProfileMediumFormatted = "Assets/Avatars/glenn.jpg",
+                TypeImage = "",
+                Name = "Afternoon Ride",
+                StartDate = "1 day ago",
+                Distance = 0.6,
+                ElevationGain = 12,
+                CommentCount = 0,
+                KudosCount = 1
+            });
+
+            ActivitySummaries.Add(new ActivitySummary
+            {
+                FullName = "Glenn",
+                ProfileMediumFormatted = "Assets/Avatars/glenn.jpg",
+                TypeImage = "",
+                Name = "Night Ride",
+                StartDate = "1 day ago",
+                Distance = 12,
+                ElevationGain = 50,
+                CommentCount = 2,
+                KudosCount = 7
+            });
         }
     }
 }
