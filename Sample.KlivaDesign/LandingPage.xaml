@@ -162,7 +162,7 @@
                               Height="16"
                               Stretch="Uniform"
                               Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
-                              Fill="#FFF57327"
+                              Fill="#FFF53327"
                               UseLayoutRounding="False"
                               Margin="0,-4,0,0" />
                         <TextBlock Foreground="#FFF4F4F4"
@@ -196,7 +196,8 @@
                          ZoomInteractionMode="PointerAndKeyboard"
                          Style="Road"
                          d:IsHidden="True"
-                         Grid.RowSpan="2" />
+                         Grid.RowSpan="2"
+                         FontFamily="Segoe UI" />
 
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind Path=ActivitySummaries}"
@@ -211,13 +212,14 @@
                   d:IsHidden="True" />
 
         <Grid x:Name="TopPane">
-            <TextBlock Foreground="#FFF4F4F4"
+            <TextBlock Foreground="#FFF53327"
                        HorizontalAlignment="Center"
                        Text="KLIVA"
                        VerticalAlignment="Bottom"
                        FontSize="18"
                        FontWeight="Black"
-                       Margin="0,0,0,20" />
+                       Margin="0,0,0,20"
+                       FontFamily="Segoe UI" />
             <ComboBox Margin="24,36,24,12"
                       VerticalAlignment="Center">
                 <ComboBoxItem Content="ALL ACTIVITIES" />
@@ -230,32 +232,32 @@
                         Margin="24,36,24,12"
                         Spacing="16">
                 <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
-                    <Path Width="20"
-                          Height="20"
+                    <Path Width="16"
+                          Height="16"
                           Stretch="Uniform"
                           Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
                           Fill="#FFF4F4F4"
                           UseLayoutRounding="False" />
                 </ToggleButton>
                 <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
-                    <Path Width="20"
-                          Height="20"
+                    <Path Width="16"
+                          Height="16"
                           Stretch="Uniform"
                           Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
                           Fill="#FFF4F4F4"
                           UseLayoutRounding="False" />
                 </ToggleButton>
                 <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
-                    <Path Width="20"
-                          Height="20"
+                    <Path Width="16"
+                          Height="16"
                           Stretch="Uniform"
                           Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
                           Fill="#FFF4F4F4"
                           UseLayoutRounding="False" />
                 </ToggleButton>
                 <ToggleButton Style="{StaticResource ToggleButtonRevealStyle}">
-                    <Path Width="20"
-                          Height="20"
+                    <Path Width="16"
+                          Height="16"
                           Stretch="Uniform"
                           Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
                           Fill="#FFF4F4F4"

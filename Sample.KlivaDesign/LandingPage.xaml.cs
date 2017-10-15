@@ -146,7 +146,7 @@ namespace Sample.KlivaDesign
                     ActivityMap.LoadingStatusChanged -= ActivityMapLoadingStatusChanged;
                     RemoveMapServiceTokenWarning();
 
-                    ActivityMap.StartOpacityAnimation(null, 1.0f);
+                    ActivityMap.StartOpacityAnimation();
                     await DrawPolylineAsync();
                 }
             }
@@ -174,7 +174,13 @@ namespace Sample.KlivaDesign
                 new BasicGeoposition { Latitude = -37.87992, Longitude = 145.16356 }
             };
 
-            var polyLine = new MapPolyline { Path = new Geopath(geoPositions), StrokeThickness = 4, StrokeDashed = false, StrokeColor = Color.FromArgb(225, 245, 115, 39) }; /*#FFF57327*/
+            var polyLine = new MapPolyline
+            {
+                Path = new Geopath(geoPositions),
+                StrokeThickness = 4,
+                StrokeDashed = false,
+                StrokeColor = Color.FromArgb(200, 245, 51, 39)
+            }; 
             ActivityMap.MapElements.Add(polyLine);
 
             var startPoint = new Button { Style = (Style)App.Current.Resources["ButtonMapPointStyle"] };
@@ -187,7 +193,8 @@ namespace Sample.KlivaDesign
             MapControl.SetLocation(endPoint, new Geopoint(geoPositions.Last()));
             MapControl.SetNormalizedAnchorPoint(endPoint, new Point(0.5, 0.5));
 
-            await ActivityMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions), new Thickness(120), MapAnimationKind.Bow);
+            await ActivityMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions),
+                new Thickness(ActualWidth / 4, ActualHeight / 3, 0, 0), MapAnimationKind.Bow);
         }
 
         private void PopulateActivities()

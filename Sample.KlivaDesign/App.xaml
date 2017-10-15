@@ -27,7 +27,7 @@
             <Setter Property="Height"
                     Value="36" />
             <Setter Property="Background"
-                    Value="#FFFC6913" />
+                    Value="#FFF53327" />
             <Setter Property="BorderBrush"
                     Value="#FFFFF1E9" />
             <Setter Property="HorizontalAlignment"
@@ -372,6 +372,8 @@
                                     </VisualState>
                                     <VisualState x:Name="Checked">
                                         <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="#FFF53327" />
                                             <Setter Target="BackgroundVisual.Stroke"
                                                     Value="{ThemeResource ToggleButtonRevealBorderBrushChecked}" />
                                             <Setter Target="ContentPresenter.Foreground"
@@ -387,7 +389,7 @@
                                             <Setter Target="BackgroundVisual.(RevealBrush.State)"
                                                     Value="PointerOver" />
                                             <Setter Target="BackgroundVisual.Fill"
-                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPointerOver}" />
+                                                    Value="#FFF53327" />
                                             <Setter Target="BackgroundVisual.Stroke"
                                                     Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPointerOver}" />
                                             <Setter Target="ContentPresenter.Foreground"
@@ -403,7 +405,7 @@
                                             <Setter Target="BackgroundVisual.(RevealBrush.State)"
                                                     Value="Pressed" />
                                             <Setter Target="BackgroundVisual.Fill"
-                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPressed}" />
+                                                    Value="#CCF53327" />
                                             <Setter Target="BackgroundVisual.Stroke"
                                                     Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPressed}" />
                                             <Setter Target="ContentPresenter.Foreground"
