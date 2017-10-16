@@ -211,7 +211,7 @@
                   Grid.RowSpan="3"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   d:IsHidden="True" />
-        
+
         <Grid x:Name="TopPane"
               Padding="0,48,0,0">
             <Rectangle Fill="#FF060809"
@@ -231,7 +231,7 @@
                         HorizontalAlignment="Right"
                         Margin="24,0,48,12"
                         Spacing="16">
-                <RadioButton IsChecked="True" 
+                <RadioButton IsChecked="True"
                              Style="{StaticResource RadioButtonMenuRevealStyle}">
                     <Path Width="16"
                           Height="16"
@@ -336,9 +336,7 @@
                     </Grid.ColumnDefinitions>
                     <controls:RadialGauge Value="50" />
                     <StackPanel HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Spacing="6"
-                                Margin="0,0,0,4">
+                                VerticalAlignment="Center">
                         <Path Width="28"
                               Height="28"
                               Stretch="Uniform"
@@ -347,15 +345,13 @@
                               UseLayoutRounding="False" />
                         <TextBlock Foreground="#FFF53327"
                                    FontWeight="SemiBold"
-                                   FontSize="24"
-                                   TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings"
+                                   FontSize="12"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
-                                <Run Text="5.9" />
+                                <Run Text="5.9"
+                                     FontSize="24" />
                                 <Run Text="KM"
-                                     Foreground="#FFBCBCBC"
-                                     FontSize="12" />
+                                     Foreground="#FFBCBCBC" />
                         </TextBlock>
                     </StackPanel>
                     <TextBlock Foreground="#CC515354"
@@ -376,14 +372,14 @@
                                    FontWeight="Bold" />
                         <TextBlock Foreground="#FFF53327"
                                    FontWeight="SemiBold"
-                                   FontSize="20"
+                                   FontSize="12"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    Margin="0,-2,0,0">
-                                <Run Text="11.9" />
+                                <Run Text="11.9"
+                                     FontSize="20" />
                                 <Run Text="KM"
-                                     Foreground="#FFBCBCBC"
-                                     FontSize="12" />
+                                     Foreground="#FFBCBCBC" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
@@ -402,9 +398,7 @@
                     </Grid.ColumnDefinitions>
                     <controls:RadialGauge Value="75" />
                     <StackPanel HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Spacing="6"
-                                Margin="0,0,0,4">
+                                VerticalAlignment="Center">
                         <Path Width="28"
                               Height="28"
                               Stretch="Uniform"
@@ -413,21 +407,19 @@
                               UseLayoutRounding="False"
                               RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
-                                <CompositeTransform ScaleX="0.9"
-                                                    ScaleY="0.9" />
+                                <CompositeTransform ScaleX="0.85"
+                                                    ScaleY="0.85" />
                             </Path.RenderTransform>
                         </Path>
                         <TextBlock Foreground="#FFF53327"
                                    FontWeight="SemiBold"
-                                   FontSize="24"
-                                   TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings"
+                                   FontSize="12"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
-                                <Run Text="139" />
+                                <Run Text="139"
+                                     FontSize="24" />
                                 <Run Text="BPM"
-                                     Foreground="#FFBCBCBC"
-                                     FontSize="12" />
+                                     Foreground="#FFBCBCBC" />
                         </TextBlock>
                     </StackPanel>
                     <TextBlock Foreground="#CC515354"
@@ -448,14 +440,14 @@
                                    FontWeight="Bold" />
                         <TextBlock Foreground="#FFF53327"
                                    FontWeight="SemiBold"
-                                   FontSize="20"
+                                   FontSize="12"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    Margin="0,-2,0,0">
-                                <Run Text="165" />
+                                <Run Text="165"
+                                     FontSize="20" />
                                 <Run Text="BPM"
-                                     Foreground="#FFBCBCBC"
-                                     FontSize="12" />
+                                     Foreground="#FFBCBCBC" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
