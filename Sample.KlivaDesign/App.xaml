@@ -291,12 +291,12 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ToggleButtonRevealStyle"
-               TargetType="ToggleButton">
+        <Style x:Key="RadioButtonMenuRevealStyle"
+               TargetType="RadioButton">
             <Setter Property="Background"
                     Value="{ThemeResource ToggleButtonRevealBackground}" />
             <Setter Property="Foreground"
-                    Value="{ThemeResource ToggleButtonForeground}" />
+                    Value="#FFF4F4F4" />
             <Setter Property="BorderBrush"
                     Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
             <Setter Property="Padding"
@@ -315,9 +315,13 @@
                     Value="True" />
             <Setter Property="FocusVisualMargin"
                     Value="-3" />
+            <Setter Property="GroupName"
+                    Value="Menu" />
+            <Setter Property="MinWidth"
+                    Value="0" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
+                    <ControlTemplate TargetType="RadioButton">
                         <Grid x:Name="RootGrid">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -326,7 +330,6 @@
                                             <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
                                         </Storyboard>
                                     </VisualState>
-
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
                                             <Setter Target="BackgroundVisual.(RevealBrush.State)"
@@ -343,7 +346,6 @@
                                             <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
                                         </Storyboard>
                                     </VisualState>
-
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
                                             <Setter Target="BackgroundVisual.(RevealBrush.State)"
@@ -360,7 +362,6 @@
                                             <PointerDownThemeAnimation Storyboard.TargetName="BackgroundVisual" />
                                         </Storyboard>
                                     </VisualState>
-
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
                                             <Setter Target="BackgroundVisual.Fill"
@@ -435,6 +436,7 @@
                                      Stroke="{TemplateBinding BorderBrush}"
                                      StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}" />
                             <ContentPresenter x:Name="ContentPresenter"
+                                              Foreground="{TemplateBinding Foreground}"
                                               Content="{TemplateBinding Content}"
                                               ContentTransitions="{TemplateBinding ContentTransitions}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
