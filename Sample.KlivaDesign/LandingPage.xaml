@@ -215,7 +215,8 @@
         <Grid x:Name="TopPane">
             <Rectangle>
                 <Rectangle.Fill>
-                    <brushes:BackdropTintBlurBrush TintColor="#CC060809"
+                    <brushes:BackdropTintBlurBrush BlurAmount="12" 
+                                                   TintColor="#CC060809"
                                                    FallbackColor="#CC060809" />
                 </Rectangle.Fill>
             </Rectangle>
