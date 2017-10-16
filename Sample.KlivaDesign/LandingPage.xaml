@@ -212,11 +212,13 @@
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   d:IsHidden="True" />
 
-        <Grid x:Name="TopPane"
-              Padding="0,48,0,0">
-            <Rectangle Fill="#FF060809"
-                       Opacity="0.8"
-                       Margin="0,-48,0,0" />
+        <Grid x:Name="TopPane">
+            <Rectangle>
+                <Rectangle.Fill>
+                    <brushes:BackdropTintBlurBrush TintColor="#CC060809"
+                                                   FallbackColor="#CC060809" />
+                </Rectangle.Fill>
+            </Rectangle>
 
             <TextBlock x:Name="Title"
                        Foreground="#FFF53327"
@@ -225,11 +227,11 @@
                        VerticalAlignment="Bottom"
                        FontSize="18"
                        FontWeight="Black"
-                       Margin="0,0,0,22" />
+                       Margin="0,48,0,22" />
 
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
-                        Margin="24,0,48,12"
+                        Margin="24,48,48,12"
                         Spacing="16">
                 <RadioButton IsChecked="True"
                              Style="{StaticResource RadioButtonMenuRevealStyle}">
@@ -308,10 +310,9 @@
             <Grid x:Name="GaugePanel"
                   Width="572"
                   Height="240"
-                  CornerRadius="16"
-                  Padding="0,-1,0,0">
+                  CornerRadius="16">
                 <Grid.Background>
-                    <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
+                    <brushes:BackdropTintBlurBrush FallbackColor="#CC0C1012" />
                 </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

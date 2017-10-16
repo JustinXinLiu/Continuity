@@ -19,7 +19,7 @@ namespace Continuity.Brushes
             set => SetValue(TintColorProperty, value);
         }
         public static readonly DependencyProperty TintColorProperty = DependencyProperty.Register(
-            "TintColor", typeof(Color), typeof(BackdropTintBlurBrush), new PropertyMetadata(Colors.GhostWhite));
+            "TintColor", typeof(Color), typeof(BackdropTintBlurBrush), new PropertyMetadata(Colors.White));
 
         public double Duration
         {
