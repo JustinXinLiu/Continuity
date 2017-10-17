@@ -31,11 +31,12 @@ namespace Sample.FUI
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            UnhandledException += App_UnhandledException;
+            UnhandledException += App_UnhandledException; ;
         }
 
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
+            throw new NotImplementedException();
         }
 
         /// <summary>
