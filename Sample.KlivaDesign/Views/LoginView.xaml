@@ -9,10 +9,9 @@
              d:DesignWidth="400">
 
     <Grid>
-        <TextBlock Text="Logging in..."
-                   FontSize="24"
-                   Foreground="White"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill"
+                        ImageSource="../Assets/Backgrounds/running1.jpeg" />
+        </Grid.Background>
     </Grid>
 </UserControl>

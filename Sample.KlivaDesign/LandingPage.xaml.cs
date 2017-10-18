@@ -1,13 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Continuity.Extensions;
 
 namespace Sample.KlivaDesign
 {
     public sealed partial class LandingPage : Page
     {
+        #region Fields
+
         public static double WindowWidth { get; } = Window.Current.Bounds.Width;
         public static double WindowHeight { get; } = Window.Current.Bounds.Height;
+
+        private const int RenderingDelay = 400;
+
+        #endregion
 
         public LandingPage()
         {
@@ -35,12 +43,23 @@ namespace Sample.KlivaDesign
 
         private async Task LoginAsync()
         {
-            await Task.Delay(2000);
+            if (!IsUserLoggedIn())
+            {
+                FindName(nameof(LoginView));
+                await Task.Delay(1500);
+            }
 
             await ShowTopPanelAsync();
 
             await ScrollToViewAsync(nameof(ActivityView), ActivityView, 1);
             ActivityMenuItem.IsChecked = true;
+        }
+
+        private bool IsUserLoggedIn()
+        {
+            var random = new Random();
+            int probability = random.Next(100);
+            return probability <= 80;
         }
 
         #endregion
@@ -52,9 +71,9 @@ namespace Sample.KlivaDesign
             if (TopPane == null)
             {
                 FindName(nameof(TopPane));
-                //TopPane.EnableFluidVisibilityAnimation(showFromOffset: -100.0f, hideToOffset: 100.0f, showDuration: 1200, hideDuration: 400);
+                TopPane.EnableFluidVisibilityAnimation(showDuration: 1600, hideDuration: 400);
                 TopPane.Visibility = Visibility.Collapsed;
-                await Task.Yield();
+                await Task.Delay(RenderingDelay);
             }
 
             TopPane.Visibility = Visibility.Visible;
@@ -87,7 +106,7 @@ namespace Sample.KlivaDesign
             if (view == null)
             {
                 FindName(viewName);
-                await Task.Delay(400);
+                await Task.Delay(RenderingDelay);
             }
 
             MainScrollViewer.ChangeView(null, WindowHeight * positionIndex, null, false);

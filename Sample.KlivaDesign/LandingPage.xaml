@@ -23,22 +23,23 @@
                       Grid.RowSpan="2"
                       VerticalScrollBarVisibility="Hidden">
             <StackPanel x:Name="ViewsContainer">
-                <Border x:Name="LoginViewHost">
-                    <views:LoginView x:Name="LoginView" />
+                <Border>
+                    <views:LoginView x:Name="LoginView"
+                                     x:Load="False" />
                 </Border>
-                <Border x:Name="ActivityViewHost">
+                <Border>
                     <views:ActivityView x:Name="ActivityView"
                                         x:Load="False" />
                 </Border>
-                <Border x:Name="StatsViewHost">
+                <Border>
                     <views:StatsView x:Name="StatsView"
                                      x:Load="False" />
                 </Border>
-                <Border x:Name="AccountViewHost">
+                <Border>
                     <views:AccountView x:Name="AccountView"
                                        x:Load="False" />
                 </Border>
-                <Border x:Name="SettingsViewHost">
+                <Border>
                     <views:SettingsView x:Name="SettingsView"
                                         x:Load="False" />
                 </Border>
