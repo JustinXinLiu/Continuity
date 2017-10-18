@@ -8,5 +8,7 @@
 
     <Grid x:Name="LayoutRoot" Padding="40">
         <controls:FluentButton Content="XAML LIGHT" />
+        
+        <Rectangle x:Name="MyRectangle" Width="200" Height="200" Fill="LightGreen" HorizontalAlignment="Left" x:Load="False" />
     </Grid>
 </Page>

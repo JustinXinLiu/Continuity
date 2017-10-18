@@ -199,7 +199,8 @@
                          ZoomInteractionMode="PointerAndKeyboard"
                          Style="Road"
                          d:IsHidden="True"
-                         Grid.RowSpan="2" />
+                         Grid.RowSpan="2"
+                         IsTabStop="False" />
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind Path=ActivitySummaries}"
                   ItemTemplate="{StaticResource ActivityTemplate}"

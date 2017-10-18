@@ -23,14 +23,30 @@
                       Grid.RowSpan="2"
                       VerticalScrollBarVisibility="Hidden">
             <StackPanel x:Name="ViewsContainer">
-                <views:ActivityView />
-                <views:StatsView />
-                <views:AccountView />
-                <views:SettingsView />
+                <Border x:Name="LoginViewHost">
+                    <views:LoginView x:Name="LoginView" />
+                </Border>
+                <Border x:Name="ActivityViewHost">
+                    <views:ActivityView x:Name="ActivityView"
+                                        x:Load="False" />
+                </Border>
+                <Border x:Name="StatsViewHost">
+                    <views:StatsView x:Name="StatsView"
+                                     x:Load="False" />
+                </Border>
+                <Border x:Name="AccountViewHost">
+                    <views:AccountView x:Name="AccountView"
+                                       x:Load="False" />
+                </Border>
+                <Border x:Name="SettingsViewHost">
+                    <views:SettingsView x:Name="SettingsView"
+                                        x:Load="False" />
+                </Border>
             </StackPanel>
         </ScrollViewer>
 
-        <Grid x:Name="TopPane">
+        <Grid x:Name="TopPane"
+              x:Load="False">
             <Rectangle>
                 <Rectangle.Fill>
                     <brushes:BackdropTintBlurBrush BlurAmount="12"
@@ -52,8 +68,7 @@
                         HorizontalAlignment="Right"
                         Margin="24,48,48,12"
                         Spacing="16">
-                <RadioButton x:Name="ActivityMenuItem" 
-                             IsChecked="True"
+                <RadioButton x:Name="ActivityMenuItem"
                              Checked="OnActivityMenuItemChecked"
                              Style="{StaticResource RadioButtonMenuRevealStyle}">
                     <Path Width="16"

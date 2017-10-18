@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Continuity.Extensions;
 
 namespace Sample.FUI
 {
@@ -7,6 +10,16 @@ namespace Sample.FUI
         public LandingPage()
         {
             InitializeComponent();
+
+            Loaded += async (s, e) =>
+            {
+                FindName("MyRectangle");
+                MyRectangle.EnableFluidVisibilityAnimation();
+                MyRectangle.Visibility = Visibility.Collapsed;
+                await Task.Delay(2000);
+
+                MyRectangle.Visibility = Visibility.Visible;
+            };
         }
     }
 }

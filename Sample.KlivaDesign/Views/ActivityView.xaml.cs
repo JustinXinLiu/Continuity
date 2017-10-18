@@ -20,7 +20,7 @@ namespace Sample.KlivaDesign.Views
 
         public ActivityView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             SetupMapStyle();
             ShowMapAndPolyline();
@@ -193,8 +193,9 @@ namespace Sample.KlivaDesign.Views
             MapControl.SetLocation(endPoint, new Geopoint(geoPositions.Last()));
             MapControl.SetNormalizedAnchorPoint(endPoint, new Point(0.5, 0.5));
 
+            var margin = ActualWidth / 6;
             await ActivityMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions),
-                new Thickness(ActualWidth / 4, ActualHeight / 3, 0, 0), MapAnimationKind.Bow);
+                new Thickness(margin, margin, margin, margin), MapAnimationKind.Bow);
         }
 
         private void PopulateActivities()
