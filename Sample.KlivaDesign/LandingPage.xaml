@@ -21,7 +21,8 @@
         <ScrollViewer x:Name="MainScrollViewer"
                       VerticalSnapPointsType="Mandatory"
                       Grid.RowSpan="2"
-                      VerticalScrollBarVisibility="Hidden">
+                      VerticalScrollBarVisibility="Hidden"
+                      VerticalScrollMode="Disabled">
             <StackPanel x:Name="ViewsContainer">
                 <Border>
                     <views:LoginView x:Name="LoginView"
