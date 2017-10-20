@@ -11,7 +11,7 @@ namespace Sample.KlivaDesign
     {
         #region Fields
 
-        private const int RenderingDelay = 400;
+        private const int RenderingDelay = 200;
 
         #endregion
 
@@ -20,50 +20,10 @@ namespace Sample.KlivaDesign
             InitializeComponent();
 
             Loaded += OnLoaded;
-            SizeChanged += OnSizeChanged;
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e) =>
             await LoginAsync();
-
-        private async void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (e.PreviousSize.Height.Equals(e.NewSize.Height)) return;
-
-            var sizeChangedTasks = new List<Task>();
-
-            foreach (Border viewHost in ViewsContainer.Children)
-            {
-                var task = viewHost.SizeChangedAsync();
-                sizeChangedTasks.Add(task);
-
-                viewHost.Height = e.NewSize.Height;
-            };
-
-            await Task.WhenAll(sizeChangedTasks);
-
-            SyncScrollPosition();
-
-            void SyncScrollPosition()
-            {
-                if (ActivityMenuItem != null && ActivityMenuItem.IsChecked.Value)
-                {
-                    MainScrollViewer.ChangeView(null, e.NewSize.Height, null);
-                }
-                else if (StatsMenuItem != null && StatsMenuItem.IsChecked.Value)
-                {
-                    MainScrollViewer.ChangeView(null, e.NewSize.Height * 2, null);
-                }
-                else if (AccountMenuItem != null && AccountMenuItem.IsChecked.Value)
-                {
-                    MainScrollViewer.ChangeView(null, e.NewSize.Height * 3, null);
-                }
-                else if (SettingsMenuItem != null && SettingsMenuItem.IsChecked.Value)
-                {
-                    MainScrollViewer.ChangeView(null, e.NewSize.Height * 4, null);
-                }
-            }
-        }
 
         #region Login
 
@@ -77,7 +37,7 @@ namespace Sample.KlivaDesign
 
             await ShowTopPanelAsync();
 
-            await ScrollToViewAsync(nameof(ActivityView), ActivityView, 1);
+            await ScrollToViewAsync(nameof(ActivityView), ActivityView, ActivityHostView);
             ActivityMenuItem.IsChecked = true;
         }
 
@@ -112,22 +72,22 @@ namespace Sample.KlivaDesign
         #region Menu
 
         private async void OnActivityMenuItemChecked(object sender, RoutedEventArgs e) =>
-            await ScrollToViewAsync(nameof(ActivityView), ActivityView, 1);
+            await ScrollToViewAsync(nameof(ActivityView), ActivityView, ActivityHostView);
 
         private async void OnStatsMenuItemChecked(object sender, RoutedEventArgs e) =>
-            await ScrollToViewAsync(nameof(StatsView), StatsView, 2);
+            await ScrollToViewAsync(nameof(StatsView), StatsView, StatsHostView);
 
         private async void OnAccountMenuItemChecked(object sender, RoutedEventArgs e) =>
-            await ScrollToViewAsync(nameof(AccountView), AccountView, 3);
+            await ScrollToViewAsync(nameof(AccountView), AccountView, AccountHostView);
 
         private async void OnSettingsMenuItemChecked(object sender, RoutedEventArgs e) =>
-            await ScrollToViewAsync(nameof(SettingsView), SettingsView, 4);
+            await ScrollToViewAsync(nameof(SettingsView), SettingsView, SettingsHostView);
 
         #endregion
 
         #region Miscs
 
-        private async Task ScrollToViewAsync(string viewName, UserControl view, int positionIndex = 0)
+        private async Task ScrollToViewAsync(string viewName, UserControl view, FlipViewItem nextHostView)
         {
             if (view == null)
             {
@@ -135,7 +95,25 @@ namespace Sample.KlivaDesign
                 await Task.Delay(RenderingDelay);
             }
 
-            MainScrollViewer.ChangeView(null, Window.Current.Bounds.Height * positionIndex, null, false);
+            var currentViewIndex = HostFlipView.SelectedIndex;
+            var nextViewIndex = HostFlipView.IndexFromContainer(nextHostView);
+
+            if (currentViewIndex < nextViewIndex)
+            {
+                for (var i = currentViewIndex; i < nextViewIndex; i++)
+                {
+                    HostFlipView.SelectedIndex += 1;
+                    await Task.Yield();
+                }
+            }
+            else
+            {
+                for (var i = nextViewIndex; i < currentViewIndex; i++)
+                {
+                    HostFlipView.SelectedIndex -= 1;
+                    await Task.Yield();
+                }
+            }
         }
 
         #endregion

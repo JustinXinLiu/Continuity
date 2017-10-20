@@ -18,35 +18,31 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ScrollViewer x:Name="MainScrollViewer"
-                      VerticalSnapPointsType="Mandatory"
-                      VerticalSnapPointsAlignment="Center"
-                      Grid.RowSpan="2"
-                      VerticalScrollBarVisibility="Hidden"
-                      VerticalScrollMode="Disabled">
-            <StackPanel x:Name="ViewsContainer">
-                <Border>
-                    <views:LoginView x:Name="LoginView"
-                                     x:Load="False" />
-                </Border>
-                <Border>
-                    <views:ActivityView x:Name="ActivityView"
-                                        x:Load="False" />
-                </Border>
-                <Border>
-                    <views:StatsView x:Name="StatsView"
-                                     x:Load="False" />
-                </Border>
-                <Border>
-                    <views:AccountView x:Name="AccountView"
-                                       x:Load="False" />
-                </Border>
-                <Border>
-                    <views:SettingsView x:Name="SettingsView"
-                                        x:Load="False" />
-                </Border>
-            </StackPanel>
-        </ScrollViewer>
+        <FlipView Style="{StaticResource FlipViewNoButtonStyle}"
+                  ItemContainerStyle="{StaticResource FlipViewItemNoSwipeStyle}"
+                  x:Name="HostFlipView"
+                  Grid.RowSpan="2">
+            <FlipViewItem x:Name="LoginHostView">
+                <views:LoginView x:Name="LoginView"
+                                 x:Load="False" />
+            </FlipViewItem>
+            <FlipViewItem x:Name="ActivityHostView">
+                <views:ActivityView x:Name="ActivityView"
+                                    x:Load="False" />
+            </FlipViewItem>
+            <FlipViewItem x:Name="StatsHostView">
+                <views:StatsView x:Name="StatsView"
+                                 x:Load="False" />
+            </FlipViewItem>
+            <FlipViewItem x:Name="AccountHostView">
+                <views:AccountView x:Name="AccountView"
+                                   x:Load="False" />
+            </FlipViewItem>
+            <FlipViewItem x:Name="SettingsHostView">
+                <views:SettingsView x:Name="SettingsView"
+                                    x:Load="False" />
+            </FlipViewItem>
+        </FlipView>
 
         <Grid x:Name="TopPane"
               x:Load="False">

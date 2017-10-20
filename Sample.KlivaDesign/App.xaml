@@ -21,6 +21,112 @@
                     Value="White" />
         </Style>
 
+        <Style x:Key="FlipViewNoButtonStyle"
+               TargetType="FlipView">
+            <Setter Property="Background"
+                    Value="{ThemeResource FlipViewBackground}" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="TabNavigation"
+                    Value="Once" />
+            <Setter Property="IsTabStop"
+                    Value="False" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                    Value="Hidden" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                    Value="Hidden" />
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled"
+                    Value="False" />
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled"
+                    Value="False" />
+            <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled"
+                    Value="True" />
+            <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled"
+                    Value="True" />
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
+                    Value="False" />
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
+                    Value="True" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="False" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel AreScrollSnapPointsRegular="True"
+                                    Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="FlipView">
+                        <Grid Background="{TemplateBinding Background}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              BorderBrush="{TemplateBinding BorderBrush}">
+                            <ScrollViewer x:Name="ScrollingHost"
+                                          AutomationProperties.AccessibilityView="Raw"
+                                          BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                          HorizontalSnapPointsType="MandatorySingle"
+                                          IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                          IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                          IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                          IsTabStop="False"
+                                          IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                          IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                          Padding="{TemplateBinding Padding}"
+                                          TabNavigation="{TemplateBinding TabNavigation}"
+                                          VerticalSnapPointsType="MandatorySingle"
+                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          ZoomMode="Disabled">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                            <Button x:Name="PreviousButtonHorizontal"
+                                    HorizontalAlignment="Left"
+                                    Height="36"
+                                    IsTabStop="False"
+                                    UseSystemFocusVisuals="False"
+                                    VerticalAlignment="Center"
+                                    Width="20"
+                                    Visibility="Collapsed" />
+                            <Button x:Name="NextButtonHorizontal"
+                                    HorizontalAlignment="Right"
+                                    Height="36"
+                                    IsTabStop="False"
+                                    UseSystemFocusVisuals="False"
+                                    VerticalAlignment="Center"
+                                    Width="20"
+                                    Visibility="Collapsed" />
+                            <Button x:Name="PreviousButtonVertical"
+                                    HorizontalAlignment="Center"
+                                    Height="20"
+                                    IsTabStop="False"
+                                    UseSystemFocusVisuals="False"
+                                    VerticalAlignment="Top"
+                                    Width="36"
+                                    Visibility="Collapsed" />
+                            <Button x:Name="NextButtonVertical"
+                                    HorizontalAlignment="Center"
+                                    Height="20"
+                                    IsTabStop="False"
+                                    UseSystemFocusVisuals="False"
+                                    VerticalAlignment="Bottom"
+                                    Width="36"
+                                    Visibility="Collapsed" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FlipViewItemNoSwipeStyle"
+               TargetType="FlipViewItem">
+            <Setter Property="ManipulationMode"
+                    Value="None" />
+        </Style>
+
         <Style x:Key="ButtonMapPointStyle"
                TargetType="Button">
             <Setter Property="Width"
