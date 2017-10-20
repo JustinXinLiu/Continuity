@@ -857,7 +857,7 @@
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="0"
                                         CornerRadius="{StaticResource ComboBoxCornerRadius}"
-                                        Margin="-4,-1,0,-1"
+                                        Margin="-6,0,0,0"
                                         HorizontalAlignment="Stretch">
                                     <ScrollViewer x:Name="ScrollViewer"
                                                   Foreground="{ThemeResource ComboBoxDropDownForeground}"
@@ -896,7 +896,7 @@
             <Setter Property="TabNavigation"
                     Value="Local" />
             <Setter Property="Padding"
-                    Value="8" />
+                    Value="12,8" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Stretch" />
             <Setter Property="UseSystemFocusVisuals"
