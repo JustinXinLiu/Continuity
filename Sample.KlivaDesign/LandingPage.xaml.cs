@@ -3,15 +3,13 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Continuity.Extensions;
+using System.Collections.Generic;
 
 namespace Sample.KlivaDesign
 {
     public sealed partial class LandingPage : Page
     {
         #region Fields
-
-        public static double WindowWidth { get; } = Window.Current.Bounds.Width;
-        public static double WindowHeight { get; } = Window.Current.Bounds.Height;
 
         private const int RenderingDelay = 400;
 
@@ -28,15 +26,43 @@ namespace Sample.KlivaDesign
         private async void OnLoaded(object sender, RoutedEventArgs e) =>
             await LoginAsync();
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        private async void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.PreviousSize.Width.Equals(e.NewSize.Width)) return;
+            if (e.PreviousSize.Height.Equals(e.NewSize.Height)) return;
+
+            var sizeChangedTasks = new List<Task>();
 
             foreach (Border viewHost in ViewsContainer.Children)
             {
-                viewHost.Width = WindowWidth;
-                viewHost.Height = WindowHeight;
+                var task = viewHost.SizeChangedAsync();
+                sizeChangedTasks.Add(task);
+
+                viewHost.Height = e.NewSize.Height;
             };
+
+            await Task.WhenAll(sizeChangedTasks);
+
+            SyncScrollPosition();
+
+            void SyncScrollPosition()
+            {
+                if (ActivityMenuItem != null && ActivityMenuItem.IsChecked.Value)
+                {
+                    MainScrollViewer.ChangeView(null, e.NewSize.Height, null);
+                }
+                else if (StatsMenuItem != null && StatsMenuItem.IsChecked.Value)
+                {
+                    MainScrollViewer.ChangeView(null, e.NewSize.Height * 2, null);
+                }
+                else if (AccountMenuItem != null && AccountMenuItem.IsChecked.Value)
+                {
+                    MainScrollViewer.ChangeView(null, e.NewSize.Height * 3, null);
+                }
+                else if (SettingsMenuItem != null && SettingsMenuItem.IsChecked.Value)
+                {
+                    MainScrollViewer.ChangeView(null, e.NewSize.Height * 4, null);
+                }
+            }
         }
 
         #region Login
@@ -109,7 +135,7 @@ namespace Sample.KlivaDesign
                 await Task.Delay(RenderingDelay);
             }
 
-            MainScrollViewer.ChangeView(null, WindowHeight * positionIndex, null, false);
+            MainScrollViewer.ChangeView(null, Window.Current.Bounds.Height * positionIndex, null, false);
         }
 
         #endregion

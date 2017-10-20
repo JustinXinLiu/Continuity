@@ -20,6 +20,7 @@
 
         <ScrollViewer x:Name="MainScrollViewer"
                       VerticalSnapPointsType="Mandatory"
+                      VerticalSnapPointsAlignment="Center"
                       Grid.RowSpan="2"
                       VerticalScrollBarVisibility="Hidden"
                       VerticalScrollMode="Disabled">

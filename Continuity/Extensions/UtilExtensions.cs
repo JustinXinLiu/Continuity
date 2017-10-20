@@ -319,5 +319,20 @@ namespace Continuity.Extensions
             element.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
             return element.DesiredSize.ToVector2();
         }
+
+        public static Task SizeChangedAsync(this FrameworkElement element)
+        {
+            var taskSource = new TaskCompletionSource<bool>();
+
+            element.SizeChanged += OnSizeChanged;
+
+            void OnSizeChanged(object sender, SizeChangedEventArgs e)
+            {
+                element.SizeChanged -= OnSizeChanged;
+                taskSource.SetResult(true);
+            }
+
+            return taskSource.Task;
+        }
     }
 }
