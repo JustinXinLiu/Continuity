@@ -9,8 +9,8 @@
              xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              xmlns:models="using:Sample.KlivaDesign.Models"
              mc:Ignorable="d"
-             d:DesignHeight="800"
-             d:DesignWidth="1200">
+             d:DesignHeight="1500"
+             d:DesignWidth="2000">
 
     <UserControl.Resources>
         <DataTemplate x:Key="ActivityTemplate"
@@ -92,7 +92,7 @@
                                    Margin="12,0,0,0">
                     <Run Text="{x:Bind Distance}" />
                     <Run Text="KM"
-                         FontSize="12" />
+                            FontSize="12" />
                         </TextBlock>
                     </StackPanel>
 
@@ -115,7 +115,7 @@
                                    Margin="12,0,0,0">
                     <Run Text="{x:Bind ElevationGain}" />
                     <Run Text="M"
-                         FontSize="12" />
+                            FontSize="12" />
                         </TextBlock>
                     </StackPanel>
                     <Line Stroke="#FF8C8C8C"
@@ -179,6 +179,12 @@
     </UserControl.Resources>
 
     <Grid x:Name="Root">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"
+                              MinWidth="400" />
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="572" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition />
@@ -196,14 +202,13 @@
                          d:IsHidden="True"
                          Grid.RowSpan="2"
                          IsTabStop="False"
-                         FontFamily="Segoe UI" />
+                         Grid.ColumnSpan="3" />
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind Path=ActivitySummaries}"
                   ItemTemplate="{StaticResource ActivityTemplate}"
                   ItemContainerStyle="{ThemeResource ListViewItemCustomRevealStyle}"
                   Margin="24,0,0,0"
                   Padding="0,164,0,0"
-                  Width="400"
                   HorizontalAlignment="Left"
                   Grid.RowSpan="2"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
@@ -221,9 +226,9 @@
                     VerticalAlignment="Bottom"
                     Grid.Row="1"
                     Margin="24"
-                    Spacing="12">
+                    Spacing="12"
+                    Grid.Column="2">
             <Grid x:Name="DistancePanel"
-                  Width="560"
                   Height="240"
                   CornerRadius="16">
                 <Grid.RowDefinitions>
@@ -309,21 +314,16 @@
                         <Run Text="165"
                              FontSize="20" />
                         <Run Text="BPM"
-                             Foreground="#FFBCBCBC"
-                             FontFamily="Segoe UI" />
+                             Foreground="#FFBCBCBC" />
                     </TextBlock>
                     <TextBlock Foreground="#FF1E2428"
                                Text="ELEVATION GAIN"
                                FontSize="16"
                                FontWeight="SemiBold"
-                               HorizontalAlignment="Center"
-                               Grid.Column="1"
-                               Grid.Row="3"
-                               FontFamily="Segoe UI" />
+                               HorizontalAlignment="Center" />
                 </StackPanel>
             </Grid>
             <Grid x:Name="GaugePanel"
-                  Width="572"
                   Height="240"
                   CornerRadius="16">
                 <Grid.Background>
