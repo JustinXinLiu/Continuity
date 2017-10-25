@@ -16,8 +16,7 @@
         <DataTemplate x:Key="ActivityTemplate"
                       x:DataType="models:ActivitySummary">
             <Grid x:Name="LayoutRoot"
-                  CornerRadius="16"
-                  Loaded="OnActivityTemplateRootLoaded">
+                  CornerRadius="16">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -39,7 +38,7 @@
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock Text="{x:Bind FullName}"
-                           Opacity="0.8"
+                           Opacity="0.6"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Center"
                            Margin="22,0,14,18"
@@ -66,8 +65,8 @@
                                OpticalMarginAlignment="TrimSideBearings"
                                Grid.ColumnSpan="2" />
 
-                    <TextBlock Foreground="#FF8C8C8C"
-                               Text="{x:Bind StartDate}"
+                    <TextBlock Text="{x:Bind StartDate}"
+                               Opacity="0.6"
                                Grid.Row="1"
                                Margin="12,0,12,24"
                                Grid.ColumnSpan="2"
@@ -82,7 +81,7 @@
                               Height="24"
                               Stretch="Uniform"
                               Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
-                              Fill="#FF8C8C8C"
+                              Fill="#FF3E4244"
                               UseLayoutRounding="False" />
                         <TextBlock FontWeight="SemiBold"
                                    FontSize="24"
@@ -105,7 +104,7 @@
                               Height="24"
                               Stretch="Uniform"
                               Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
-                              Fill="#FF8C8C8C"
+                              Fill="#FF3E4244"
                               UseLayoutRounding="False" />
                         <TextBlock FontWeight="SemiBold"
                                    FontSize="24"
@@ -118,7 +117,7 @@
                             FontSize="12" />
                         </TextBlock>
                     </StackPanel>
-                    <Line Stroke="#FF8C8C8C"
+                    <Line Stroke="#FF3E4244"
                           X2="1"
                           Stretch="Fill"
                           StrokeThickness="1"
@@ -143,7 +142,7 @@
                               Height="16"
                               Stretch="Uniform"
                               Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
-                              Fill="#FF2885C9"
+                              Fill="#FF0D8AC6"
                               UseLayoutRounding="False"
                               Margin="0,0,0,-4" />
                         <TextBlock Text="{x:Bind CommentCount}"
@@ -162,7 +161,7 @@
                               Height="16"
                               Stretch="Uniform"
                               Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
-                              Fill="#FFF57327"
+                              Fill="#FFF53327"
                               UseLayoutRounding="False"
                               Margin="0,-4,0,0" />
                         <TextBlock Text="{x:Bind KudosCount}"
@@ -181,7 +180,7 @@
     <Grid x:Name="Root">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"
-                              MinWidth="400" />
+                              MinWidth="448" />
             <ColumnDefinition Width="7*" />
             <ColumnDefinition Width="5*"
                               MinWidth="640" />
@@ -231,7 +230,7 @@
                     Grid.Column="2">
             <Grid x:Name="DistancePanel"
                   Height="240"
-                  CornerRadius="16">
+                  CornerRadius="24">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="37*" />
@@ -247,11 +246,11 @@
                     <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
                 </Grid.Background>
                 <Rectangle Fill="White"
-                           Opacity="0.2"
+                           Opacity="0.6"
                            Grid.ColumnSpan="2"
                            Grid.RowSpan="5" />
 
-                <Rectangle Fill="#FF48A4D0"
+                <Rectangle Fill="#FF0D8AC6"
                            Height="4"
                            Margin="40,0,0,0"
                            RenderTransformOrigin="0.5,0.5"
@@ -284,7 +283,7 @@
                         <Run Text="22.6"
                              FontSize="20" />
                         <Run Text="KM"
-                             Foreground="#FFBCBCBC" />
+                             Foreground="#CC515354" />
                 </TextBlock>
 
                 <TextBlock Foreground="#FF1E2428"
@@ -303,7 +302,8 @@
 
                 <StackPanel Grid.Column="1"
                             Grid.Row="2"
-                            Margin="0,0,40,0">
+                            Margin="0,0,40,0"
+                            VerticalAlignment="Center">
                     <TextBlock Foreground="White"
                                FontWeight="SemiBold"
                                FontSize="12"
@@ -315,7 +315,7 @@
                         <Run Text="165"
                              FontSize="20" />
                         <Run Text="BPM"
-                             Foreground="#FFBCBCBC" />
+                             Foreground="#CC515354" />
                     </TextBlock>
                     <TextBlock Foreground="#FF1E2428"
                                Text="ELEVATION GAIN"
@@ -326,7 +326,7 @@
             </Grid>
             <Grid x:Name="GaugePanel"
                   Height="240"
-                  CornerRadius="16">
+                  CornerRadius="24">
                 <Grid.Background>
                     <brushes:BackdropTintBlurBrush FallbackColor="#CC0C1012" />
                 </Grid.Background>
@@ -337,7 +337,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Rectangle Fill="White"
-                           Opacity="0.1"
+                           Opacity="0.8"
                            Grid.ColumnSpan="3" />
 
                 <Grid HorizontalAlignment="Left"
@@ -368,10 +368,10 @@
                         <Run Text="5.9"
                              FontSize="24" />
                         <Run Text="KM"
-                             Foreground="#FFBCBCBC" />
+                             Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#CC515354"
+                    <TextBlock Foreground="#FF1E2428"
                                Text="SPEED"
                                FontSize="16"
                                FontWeight="SemiBold"
@@ -396,7 +396,7 @@
                         <Run Text="11.9"
                              FontSize="20" />
                         <Run Text="KM"
-                             Foreground="#FFBCBCBC" />
+                             Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
@@ -436,10 +436,10 @@
                         <Run Text="139"
                              FontSize="24" />
                         <Run Text="BPM"
-                             Foreground="#FFBCBCBC" />
+                             Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#CC515354"
+                    <TextBlock Foreground="#FF1E2428"
                                Text="HEART RATE"
                                FontSize="16"
                                FontWeight="SemiBold"
@@ -464,7 +464,7 @@
                         <Run Text="165"
                              FontSize="20" />
                         <Run Text="BPM"
-                             Foreground="#FFBCBCBC" />
+                             Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>

@@ -317,10 +317,5 @@ namespace Sample.KlivaDesign.Views
                 KudosCount = 7
             });
         }
-
-        private void OnActivityTemplateRootLoaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
