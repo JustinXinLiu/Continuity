@@ -233,9 +233,9 @@
                   CornerRadius="24">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="37*" />
-                    <RowDefinition Height="92*" />
-                    <RowDefinition Height="37*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -262,30 +262,49 @@
                     </Rectangle.RenderTransform>
                 </Rectangle>
 
-                <TextBlock Text="43:46"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           FontSize="20"
-                           TextLineBounds="Tight"
-                           OpticalMarginAlignment="TrimSideBearings"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Grid.Row="1" />
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center"
+                            Grid.Row="1">
+                    <Path Width="24"
+                          Height="24"
+                          Stretch="Uniform"
+                          Data="M4.94,6.35C4.55,5.96 4.55,5.32 4.94,4.93C5.33,4.54 5.96,4.54 6.35,4.93L13.07,10.31L13.42,10.59C14.2,11.37 14.2,12.64 13.42,13.42C12.64,14.2 11.37,14.2 10.59,13.42L10.31,13.07L4.94,6.35M12,20A8,8 0 0,0 20,12C20,9.79 19.1,7.79 17.66,6.34L19.07,4.93C20.88,6.74 22,9.24 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12H4A8,8 0 0,0 12,20M12,1A2,2 0 0,1 14,3A2,2 0 0,1 12,5A2,2 0 0,1 10,3A2,2 0 0,1 12,1Z"
+                          Fill="#FF8C8C8C"
+                          UseLayoutRounding="False"
+                          Margin="0,0,8,0" />
+                    <TextBlock Text="43:46"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               TextLineBounds="Tight"
+                               OpticalMarginAlignment="TrimSideBearings"
+                               VerticalAlignment="Center"
+                               FontFamily="Segoe UI" />
+                </StackPanel>
 
-                <TextBlock Foreground="White"
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Grid.Row="3">
+                    <Path Width="24"
+                          Height="24"
+                          Stretch="Uniform"
+                          Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                          Fill="#FF8C8C8C"
+                          UseLayoutRounding="False"
+                          Margin="0,0,8,0" />
+                    <TextBlock Foreground="White"
                            FontWeight="SemiBold"
                            FontSize="12"
                            TextLineBounds="Tight"
                            OpticalMarginAlignment="TrimSideBearings"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Grid.Row="3">
+                           VerticalAlignment="Center">
                         <Run Text="22.6"
                              FontSize="20" />
                         <Run Text="KM"
                              Foreground="#CC515354" />
                 </TextBlock>
-
+                </StackPanel>
+                
                 <TextBlock Foreground="#FF1E2428"
                            Text="MOVING TIME"
                            FontSize="16"
@@ -304,19 +323,28 @@
                             Grid.Row="2"
                             Margin="0,0,40,0"
                             VerticalAlignment="Center">
-                    <TextBlock Foreground="White"
-                               FontWeight="SemiBold"
-                               FontSize="12"
-                               TextLineBounds="Tight"
-                               OpticalMarginAlignment="TrimSideBearings"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Margin="0,0,0,8">
-                        <Run Text="165"
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,0,8">
+                        <Path Width="24"
+                              Height="24"
+                              Stretch="Uniform"
+                              Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+                              Fill="#FF8C8C8C"
+                              UseLayoutRounding="False"
+                              Margin="0,0,8,0" />
+                        <TextBlock Foreground="White"
+                                   VerticalAlignment="Center"
+                                   FontWeight="SemiBold"
+                                   FontSize="12"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings">
+                        <Run Text="47"
                              FontSize="20" />
                         <Run Text="BPM"
                              Foreground="#CC515354" />
-                    </TextBlock>
+                        </TextBlock>
+                    </StackPanel>
                     <TextBlock Foreground="#FF1E2428"
                                Text="ELEVATION GAIN"
                                FontSize="16"
@@ -337,7 +365,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Rectangle Fill="White"
-                           Opacity="0.8"
+                           Opacity="0.6"
                            Grid.ColumnSpan="3" />
 
                 <Grid HorizontalAlignment="Left"
@@ -360,7 +388,7 @@
                               Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
                               Fill="#FF8C8C8C"
                               UseLayoutRounding="False" />
-                        <TextBlock Foreground="#FFF53327"
+                        <TextBlock Foreground="White"
                                    FontWeight="SemiBold"
                                    FontSize="12"
                                    VerticalAlignment="Center"
@@ -368,7 +396,7 @@
                         <Run Text="5.9"
                              FontSize="24" />
                         <Run Text="KM"
-                             Foreground="#FF8C8C8C" />
+                             Foreground="#CC515354" />
                         </TextBlock>
                     </StackPanel>
                     <TextBlock Foreground="#FF1E2428"
@@ -383,11 +411,11 @@
                                 Margin="-24,32,0,0"
                                 Spacing="8"
                                 VerticalAlignment="Top">
-                        <TextBlock Foreground="#CC515354"
+                        <TextBlock Foreground="#FF1E2428"
                                    Text="MAX"
                                    FontSize="12"
                                    FontWeight="Bold" />
-                        <TextBlock Foreground="#FFF53327"
+                        <TextBlock Foreground="White"
                                    FontWeight="SemiBold"
                                    FontSize="12"
                                    TextLineBounds="Tight"
@@ -396,7 +424,7 @@
                         <Run Text="11.9"
                              FontSize="20" />
                         <Run Text="KM"
-                             Foreground="#FF8C8C8C" />
+                             Foreground="#CC515354" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
@@ -428,7 +456,7 @@
                                                     ScaleY="0.85" />
                             </Path.RenderTransform>
                         </Path>
-                        <TextBlock Foreground="#FFF53327"
+                        <TextBlock Foreground="White"
                                    FontWeight="SemiBold"
                                    FontSize="12"
                                    VerticalAlignment="Center"
@@ -436,7 +464,7 @@
                         <Run Text="139"
                              FontSize="24" />
                         <Run Text="BPM"
-                             Foreground="#FF8C8C8C" />
+                             Foreground="#CC515354" />
                         </TextBlock>
                     </StackPanel>
                     <TextBlock Foreground="#FF1E2428"
@@ -451,11 +479,11 @@
                                 Margin="-24,32,0,0"
                                 Spacing="8"
                                 VerticalAlignment="Top">
-                        <TextBlock Foreground="#CC515354"
+                        <TextBlock Foreground="#FF1E2428"
                                    Text="MAX"
                                    FontSize="12"
                                    FontWeight="Bold" />
-                        <TextBlock Foreground="#FFF53327"
+                        <TextBlock Foreground="White"
                                    FontWeight="SemiBold"
                                    FontSize="12"
                                    TextLineBounds="Tight"
@@ -464,7 +492,7 @@
                         <Run Text="165"
                              FontSize="20" />
                         <Run Text="BPM"
-                             Foreground="#FF8C8C8C" />
+                             Foreground="#CC515354" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
