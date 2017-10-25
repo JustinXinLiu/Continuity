@@ -9,14 +9,15 @@
              xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              xmlns:models="using:Sample.KlivaDesign.Models"
              mc:Ignorable="d"
-             d:DesignHeight="300"
-             d:DesignWidth="400">
+             d:DesignHeight="800"
+             d:DesignWidth="1200">
 
     <UserControl.Resources>
         <DataTemplate x:Key="ActivityTemplate"
                       x:DataType="models:ActivitySummary">
             <Grid x:Name="LayoutRoot"
-                  CornerRadius="16">
+                  CornerRadius="16"
+                  Loaded="OnActivityTemplateRootLoaded">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -38,7 +39,7 @@
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock Text="{x:Bind FullName}"
-                           Foreground="#FFBCBCBC"
+                           Opacity="0.8"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Center"
                            Margin="22,0,14,18"
@@ -57,7 +58,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="{x:Bind Name}"
-                               Foreground="#FFBCBCBC"
+                               Opacity="0.8"
                                Margin="12,24,0,8"
                                FontWeight="SemiBold"
                                FontSize="18"
@@ -65,7 +66,7 @@
                                OpticalMarginAlignment="TrimSideBearings"
                                Grid.ColumnSpan="2" />
 
-                    <TextBlock Foreground="#FF3E4244"
+                    <TextBlock Foreground="#FF8C8C8C"
                                Text="{x:Bind StartDate}"
                                Grid.Row="1"
                                Margin="12,0,12,24"
@@ -81,10 +82,9 @@
                               Height="24"
                               Stretch="Uniform"
                               Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
-                              Fill="#FF3E4244"
+                              Fill="#FF8C8C8C"
                               UseLayoutRounding="False" />
-                        <TextBlock Foreground="#FFF4F4F4"
-                                   FontWeight="SemiBold"
+                        <TextBlock FontWeight="SemiBold"
                                    FontSize="24"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
@@ -92,8 +92,7 @@
                                    Margin="12,0,0,0">
                     <Run Text="{x:Bind Distance}" />
                     <Run Text="KM"
-                            Foreground="#FFBCBCBC"
-                            FontSize="12" />
+                         FontSize="12" />
                         </TextBlock>
                     </StackPanel>
 
@@ -106,10 +105,9 @@
                               Height="24"
                               Stretch="Uniform"
                               Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
-                              Fill="#FF3E4244"
+                              Fill="#FF8C8C8C"
                               UseLayoutRounding="False" />
-                        <TextBlock Foreground="#FFF4F4F4"
-                                   FontWeight="SemiBold"
+                        <TextBlock FontWeight="SemiBold"
                                    FontSize="24"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
@@ -117,11 +115,10 @@
                                    Margin="12,0,0,0">
                     <Run Text="{x:Bind ElevationGain}" />
                     <Run Text="M"
-                            Foreground="#FFBCBCBC"
-                            FontSize="12" />
+                         FontSize="12" />
                         </TextBlock>
                     </StackPanel>
-                    <Line Stroke="#FF3E4244"
+                    <Line Stroke="#FF8C8C8C"
                           X2="1"
                           Stretch="Fill"
                           StrokeThickness="1"
@@ -146,11 +143,10 @@
                               Height="16"
                               Stretch="Uniform"
                               Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
-                              Fill="#FF6EC120"
+                              Fill="#FF2885C9"
                               UseLayoutRounding="False"
                               Margin="0,0,0,-4" />
-                        <TextBlock Foreground="#FFF4F4F4"
-                                   Text="{x:Bind CommentCount}"
+                        <TextBlock Text="{x:Bind CommentCount}"
                                    FontWeight="SemiBold"
                                    FontSize="14"
                                    TextLineBounds="Tight"
@@ -166,11 +162,10 @@
                               Height="16"
                               Stretch="Uniform"
                               Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
-                              Fill="#FFF53327"
+                              Fill="#FFF57327"
                               UseLayoutRounding="False"
                               Margin="0,-4,0,0" />
-                        <TextBlock Foreground="#FFF4F4F4"
-                                   Text="{x:Bind KudosCount}"
+                        <TextBlock Text="{x:Bind KudosCount}"
                                    FontWeight="SemiBold"
                                    FontSize="14"
                                    TextLineBounds="Tight"
@@ -200,7 +195,8 @@
                          Style="Road"
                          d:IsHidden="True"
                          Grid.RowSpan="2"
-                         IsTabStop="False" />
+                         IsTabStop="False"
+                         FontFamily="Segoe UI" />
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind Path=ActivitySummaries}"
                   ItemTemplate="{StaticResource ActivityTemplate}"
@@ -226,15 +222,105 @@
                     Grid.Row="1"
                     Margin="24"
                     Spacing="12">
-            <Grid Width="560"
-                  Height="160"
-                  CornerRadius="16"
-                  Visibility="Collapsed">
+            <Grid x:Name="DistancePanel"
+                  Width="560"
+                  Height="240"
+                  CornerRadius="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="37*" />
+                    <RowDefinition Height="92*" />
+                    <RowDefinition Height="37*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <Grid.Background>
                     <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
                 </Grid.Background>
                 <Rectangle Fill="White"
-                           Opacity="0.2" />
+                           Opacity="0.2"
+                           Grid.ColumnSpan="2"
+                           Grid.RowSpan="5" />
+
+                <Rectangle Fill="#FF48A4D0"
+                           Height="4"
+                           Margin="40,0,0,0"
+                           RenderTransformOrigin="0.5,0.5"
+                           UseLayoutRounding="False"
+                           d:LayoutRounding="Auto"
+                           Grid.Row="2">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="-15" />
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <TextBlock Text="43:46"
+                           Foreground="White"
+                           FontWeight="SemiBold"
+                           FontSize="20"
+                           TextLineBounds="Tight"
+                           OpticalMarginAlignment="TrimSideBearings"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Grid.Row="1" />
+
+                <TextBlock Foreground="White"
+                           FontWeight="SemiBold"
+                           FontSize="12"
+                           TextLineBounds="Tight"
+                           OpticalMarginAlignment="TrimSideBearings"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Grid.Row="3">
+                        <Run Text="22.6"
+                             FontSize="20" />
+                        <Run Text="KM"
+                             Foreground="#FFBCBCBC" />
+                </TextBlock>
+
+                <TextBlock Foreground="#FF1E2428"
+                           Text="MOVING TIME"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           Margin="0,24,0,8" />
+                <TextBlock Foreground="#FF1E2428"
+                           Text="TOTAL DISTANCE"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           Margin="0,8,0,24"
+                           Grid.Row="4" />
+
+                <StackPanel Grid.Column="1"
+                            Grid.Row="2"
+                            Margin="0,0,40,0">
+                    <TextBlock Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="12"
+                               TextLineBounds="Tight"
+                               OpticalMarginAlignment="TrimSideBearings"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,0,0,8">
+                        <Run Text="165"
+                             FontSize="20" />
+                        <Run Text="BPM"
+                             Foreground="#FFBCBCBC"
+                             FontFamily="Segoe UI" />
+                    </TextBlock>
+                    <TextBlock Foreground="#FF1E2428"
+                               Text="ELEVATION GAIN"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               Grid.Column="1"
+                               Grid.Row="3"
+                               FontFamily="Segoe UI" />
+                </StackPanel>
             </Grid>
             <Grid x:Name="GaugePanel"
                   Width="572"
