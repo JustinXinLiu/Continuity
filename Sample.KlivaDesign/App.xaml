@@ -1087,7 +1087,7 @@
             <Setter Property="ScaleBrush"
                     Value="#FFBCBCBC" />
             <Setter Property="TrailBrush"
-                    Value="#FFF53327" />
+                    Value="#CCF53327" />
             <Setter Property="TickBrush"
                     Value="Transparent" />
             <Setter Property="ScaleTickBrush"

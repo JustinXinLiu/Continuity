@@ -261,9 +261,10 @@ namespace Continuity.Controls
                 if (tabItem == null) continue;
 
                 tabItem.Width = ActualWidth;
-                UpdateScrollViewerHorizontalOffset(this, SelectedIndex);
-            }
-        }
+			}
+
+			UpdateScrollViewerHorizontalOffset(this, SelectedIndex);
+		}
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {

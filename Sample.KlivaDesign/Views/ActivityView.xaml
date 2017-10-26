@@ -8,11 +8,72 @@
              xmlns:brushes="using:Continuity.Brushes"
              xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              xmlns:models="using:Sample.KlivaDesign.Models"
+             xmlns:controls1="using:Continuity.Controls"
              mc:Ignorable="d"
              d:DesignHeight="1500"
              d:DesignWidth="2000">
 
     <UserControl.Resources>
+        <!--<Style x:Key="Segment"
+               TargetType="ContentControl">
+            <Setter Property="Width"
+                    Value="16" />
+            <Setter Property="Height"
+                    Value="16" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Kudos"
+               TargetType="ContentControl">
+            <Setter Property="Width"
+                    Value="16" />
+            <Setter Property="Height"
+                    Value="16" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Comment"
+               TargetType="ContentControl">
+            <Setter Property="Width"
+                    Value="16" />
+            <Setter Property="Height"
+                    Value="16" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+
         <DataTemplate x:Key="ActivityTemplate"
                       x:DataType="models:ActivitySummary">
             <Grid x:Name="LayoutRoot"
@@ -89,9 +150,9 @@
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
-                    <Run Text="{x:Bind Distance}" />
-                    <Run Text="KM"
-                            FontSize="12" />
+                            <Run Text="{x:Bind Distance}" />
+                            <Run Text="KM"
+                                 FontSize="12" />
                         </TextBlock>
                     </StackPanel>
 
@@ -112,9 +173,9 @@
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
-                    <Run Text="{x:Bind ElevationGain}" />
-                    <Run Text="M"
-                            FontSize="12" />
+                            <Run Text="{x:Bind ElevationGain}" />
+                            <Run Text="M"
+                                 FontSize="12" />
                         </TextBlock>
                     </StackPanel>
                     <Line Stroke="#FF3E4244"
@@ -221,16 +282,50 @@
             <ComboBoxItem Content="MY ACTIVITIES" />
             <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
         </ComboBox>
-        <StackPanel x:Name="RightPane"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Grid.Row="1"
-                    Margin="24"
-                    Spacing="12"
-                    Grid.Column="2">
+        <Grid x:Name="RightPane"
+              Opacity="0.9"
+              Background="#FF515354"
+              CornerRadius="24"
+              Margin="24"
+              Grid.Row="1"
+              Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <controls1:Tab x:Name="Tab"
+                           FontWeight="SemiBold"
+                           FontSize="16"
+                           Background="Gainsboro"
+                           SelectedHeaderIndicatorBackground="#FFF53327"
+                           HeadersPanelBackground="#FFF4F4F4"
+                           UseLineSelectionVisual="True"
+                           Grid.ColumnSpan="2">
+                <!--<controls1:Tab.Background>
+                    <brushes:BackdropTintBlurBrush FallbackColor="#FFBCBCBC" TintColor="White" />
+                </controls1:Tab.Background>-->
+
+                <controls1:TabItem Header="Kudos">
+                </controls1:TabItem>
+                <controls1:TabItem Header="Comments">
+                </controls1:TabItem>
+                <controls1:TabItem Header="Photos">
+                </controls1:TabItem>
+                <controls1:TabItem Header="Segments">
+                </controls1:TabItem>
+            </controls1:Tab>
+
             <Grid x:Name="DistancePanel"
                   Height="240"
-                  CornerRadius="24">
+                  CornerRadius="24"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -242,13 +337,6 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Grid.Background>
-                    <brushes:BackdropTintBlurBrush FallbackColor="#FF0C1012" />
-                </Grid.Background>
-                <Rectangle Fill="White"
-                           Opacity="0.6"
-                           Grid.ColumnSpan="2"
-                           Grid.RowSpan="5" />
 
                 <Rectangle Fill="#FF0D8AC6"
                            Height="4"
@@ -262,7 +350,7 @@
                     </Rectangle.RenderTransform>
                 </Rectangle>
 
-                <StackPanel Orientation="Horizontal" 
+                <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Grid.Row="1">
                     <Path Width="24"
@@ -293,30 +381,30 @@
                           UseLayoutRounding="False"
                           Margin="0,0,8,0" />
                     <TextBlock Foreground="White"
-                           FontWeight="SemiBold"
-                           FontSize="12"
-                           TextLineBounds="Tight"
-                           OpticalMarginAlignment="TrimSideBearings"
-                           VerticalAlignment="Center">
+                               FontWeight="SemiBold"
+                               FontSize="12"
+                               TextLineBounds="Tight"
+                               OpticalMarginAlignment="TrimSideBearings"
+                               VerticalAlignment="Center">
                         <Run Text="22.6"
                              FontSize="20" />
                         <Run Text="KM"
                              Foreground="#CC515354" />
-                </TextBlock>
+                    </TextBlock>
                 </StackPanel>
-                
-                <TextBlock Foreground="#FF1E2428"
+
+                <TextBlock Foreground="#FF060809"
                            Text="MOVING TIME"
                            FontSize="16"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"
-                           Margin="0,24,0,8" />
-                <TextBlock Foreground="#FF1E2428"
+                           Margin="6,24,0,8" />
+                <TextBlock Foreground="#FF060809"
                            Text="TOTAL DISTANCE"
                            FontSize="16"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"
-                           Margin="0,8,0,24"
+                           Margin="6,8,0,24"
                            Grid.Row="4" />
 
                 <StackPanel Grid.Column="1"
@@ -345,32 +433,30 @@
                              Foreground="#CC515354" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#FF1E2428"
+                    <TextBlock Foreground="#FF060809"
                                Text="ELEVATION GAIN"
                                FontSize="16"
                                FontWeight="SemiBold"
-                               HorizontalAlignment="Center" />
+                               HorizontalAlignment="Center"
+                               Margin="2,0,0,0" />
                 </StackPanel>
             </Grid>
-            <Grid x:Name="GaugePanel"
+
+            <Line X2="1"
+                  Opacity="0.2"
+                  Stroke="#FFF4F4F4"
+                  Stretch="Fill"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="2"
+                  VerticalAlignment="Top"
+                  Margin="48,4,40,0" />
+
+            <Grid x:Name="SpeedPanel"
                   Height="240"
-                  CornerRadius="24">
-                <Grid.Background>
-                    <brushes:BackdropTintBlurBrush FallbackColor="#CC0C1012" />
-                </Grid.Background>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="12" />
-                </Grid.ColumnDefinitions>
+                  Grid.Row="2">
 
-                <Rectangle Fill="White"
-                           Opacity="0.6"
-                           Grid.ColumnSpan="3" />
-
-                <Grid HorizontalAlignment="Left"
-                      VerticalAlignment="Center"
-                      Margin="24">
+                <Grid VerticalAlignment="Center"
+                      Margin="24,24,36,24">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
@@ -379,7 +465,8 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <controls:RadialGauge Value="50" />
+                    <controls:RadialGauge Value="50"
+                                          TrailBrush="#FF0D8AC6" />
                     <StackPanel HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
                         <Path Width="28"
@@ -393,17 +480,18 @@
                                    FontSize="12"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
-                        <Run Text="5.9"
-                             FontSize="24" />
-                        <Run Text="KM"
-                             Foreground="#CC515354" />
+                            <Run Text="5.9"
+                                 FontSize="24" />
+                            <Run Text="KM"
+                                 Foreground="#CC515354" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#FF1E2428"
+                    <TextBlock Foreground="#FF060809"
                                Text="SPEED"
                                FontSize="16"
                                FontWeight="SemiBold"
                                Grid.Row="1"
+                               Grid.ColumnSpan="2"
                                HorizontalAlignment="Center" />
 
                     <StackPanel Orientation="Horizontal"
@@ -411,7 +499,7 @@
                                 Margin="-24,32,0,0"
                                 Spacing="8"
                                 VerticalAlignment="Top">
-                        <TextBlock Foreground="#FF1E2428"
+                        <TextBlock Foreground="#FF060809"
                                    Text="MAX"
                                    FontSize="12"
                                    FontWeight="Bold" />
@@ -421,18 +509,22 @@
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    Margin="0,-2,0,0">
-                        <Run Text="11.9"
-                             FontSize="20" />
-                        <Run Text="KM"
-                             Foreground="#CC515354" />
+                            <Run Text="11.9"
+                                 FontSize="20" />
+                            <Run Text="KM"
+                                 Foreground="#CC515354" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
+            </Grid>
+            <Grid x:Name="HeartRatePanel"
+                  Height="240"
+                  CornerRadius="24"
+                  Grid.Row="2"
+                  Grid.Column="1">
 
-                <Grid HorizontalAlignment="Left"
-                      VerticalAlignment="Center"
-                      Margin="24"
-                      Grid.Column="1">
+                <Grid VerticalAlignment="Center"
+                      Margin="24,24,36,24">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
@@ -461,17 +553,18 @@
                                    FontSize="12"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
-                        <Run Text="139"
-                             FontSize="24" />
-                        <Run Text="BPM"
-                             Foreground="#CC515354" />
+                            <Run Text="139"
+                                 FontSize="24" />
+                            <Run Text="BPM"
+                                 Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#FF1E2428"
+                    <TextBlock Foreground="#FF060809"
                                Text="HEART RATE"
                                FontSize="16"
                                FontWeight="SemiBold"
                                Grid.Row="1"
+                               Grid.ColumnSpan="2"
                                HorizontalAlignment="Center" />
 
                     <StackPanel Orientation="Horizontal"
@@ -479,7 +572,7 @@
                                 Margin="-24,32,0,0"
                                 Spacing="8"
                                 VerticalAlignment="Top">
-                        <TextBlock Foreground="#FF1E2428"
+                        <TextBlock Foreground="#FF060809"
                                    Text="MAX"
                                    FontSize="12"
                                    FontWeight="Bold" />
@@ -489,14 +582,14 @@
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    Margin="0,-2,0,0">
-                        <Run Text="165"
-                             FontSize="20" />
-                        <Run Text="BPM"
-                             Foreground="#CC515354" />
+                            <Run Text="165"
+                                 FontSize="20" />
+                            <Run Text="BPM"
+                                 Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
             </Grid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

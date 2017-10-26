@@ -4,7 +4,10 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:lights="using:Continuity.Lights"
+                    xmlns:converters="using:Continuity.Converters"
                     mc:Ignorable="d">
+
+    <converters:VisibilityConverter x:Key="VisibilityConverter" />
 
     <Style TargetType="controls:Tab">
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
@@ -36,6 +39,7 @@
                         <ContentControl x:Name="Icon"
                                         Margin="0,2,8,0"
                                         IsTabStop="False"
+                                        Visibility="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibilityConverter}}"
                                         Style="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" />
                         <TextBlock HorizontalAlignment="Center"
                                    FontFamily="{Binding FontFamily, RelativeSource={RelativeSource TemplatedParent}}"
