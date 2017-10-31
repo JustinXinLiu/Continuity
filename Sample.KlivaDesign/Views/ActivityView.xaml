@@ -302,7 +302,7 @@
             <controls1:Tab x:Name="Tab"
                            FontWeight="SemiBold"
                            FontSize="16"
-                           Background="Gainsboro"
+                           Background="#FFDCDCDC"
                            SelectedHeaderIndicatorBackground="#FFF53327"
                            HeadersPanelBackground="#FFF4F4F4"
                            UseLineSelectionVisual="True"
@@ -311,13 +311,80 @@
                     <brushes:BackdropTintBlurBrush FallbackColor="#FFBCBCBC" TintColor="White" />
                 </controls1:Tab.Background>-->
 
+                <controls1:TabItem Header="Segments">
+                    <ListView ItemsSource="{x:Bind Segments}"
+                              ContainerContentChanging="OnSegmentsContainerContentChanging">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Segment">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="92" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Path Width="24"
+                                          Height="24"
+                                          Stretch="Uniform"
+                                          Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                                          Fill="#FFF4F4F4"
+                                          UseLayoutRounding="False"
+                                          Grid.RowSpan="2"
+                                          Margin="12" />
+                                    <TextBlock Text="{x:Bind Name}"
+                                               Foreground="#FF060809"
+                                               FontSize="16"
+                                               Grid.Column="1"
+                                               Grid.ColumnSpan="2"
+                                               Margin="0,12,0,0" />
+                                    <TextBlock Foreground="#FF515354"
+                                               FontWeight="SemiBold"
+                                               FontSize="8"
+                                               TextLineBounds="Tight"
+                                               Grid.Row="1"
+                                               Grid.Column="1"
+                                               OpticalMarginAlignment="TrimSideBearings"
+                                               VerticalAlignment="Stretch"
+                                               Margin="0,8,0,0">
+                                        <Run Text="{x:Bind Distance}"
+                                             FontSize="16" />
+                                        <Run Text="KM" />
+                                    </TextBlock>
+                                    <TextBlock Text="{x:Bind Time}"
+                                               Foreground="#FF515354"
+                                               FontWeight="SemiBold"
+                                               FontSize="16"
+                                               TextLineBounds="Tight"
+                                               OpticalMarginAlignment="TrimSideBearings"
+                                               VerticalAlignment="Stretch"
+                                               Grid.Row="1"
+                                               Grid.Column="2"
+                                               Margin="0,8,0,0" />
+                                    <TextBlock FontWeight="SemiBold"
+                                               FontSize="8"
+                                               Grid.RowSpan="2"
+                                               Grid.Column="3"
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,12,0">
+                                        <Run Text="{x:Bind Speed}"
+                                             FontSize="20" />
+                                        <Run Text="KM" /><Run Text="/H" />
+                                    </TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </controls1:TabItem>
                 <controls1:TabItem Header="Kudos">
                 </controls1:TabItem>
                 <controls1:TabItem Header="Comments">
                 </controls1:TabItem>
                 <controls1:TabItem Header="Photos">
-                </controls1:TabItem>
-                <controls1:TabItem Header="Segments">
                 </controls1:TabItem>
             </controls1:Tab>
 
@@ -366,8 +433,7 @@
                                FontSize="20"
                                TextLineBounds="Tight"
                                OpticalMarginAlignment="TrimSideBearings"
-                               VerticalAlignment="Center"
-                               FontFamily="Segoe UI" />
+                               VerticalAlignment="Center" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal"
@@ -389,7 +455,7 @@
                         <Run Text="22.6"
                              FontSize="20" />
                         <Run Text="KM"
-                             Foreground="#CC515354" />
+                             Foreground="#FF8C8C8C" />
                     </TextBlock>
                 </StackPanel>
 
@@ -430,7 +496,7 @@
                         <Run Text="47"
                              FontSize="20" />
                         <Run Text="BPM"
-                             Foreground="#CC515354" />
+                             Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
                     <TextBlock Foreground="#FF060809"
@@ -483,7 +549,8 @@
                             <Run Text="5.9"
                                  FontSize="24" />
                             <Run Text="KM"
-                                 Foreground="#CC515354" />
+                                 Foreground="#FF8C8C8C" /><Run Text="/H"
+                                                               Foreground="#668C8C8C" />
                         </TextBlock>
                     </StackPanel>
                     <TextBlock Foreground="#FF060809"
@@ -512,7 +579,8 @@
                             <Run Text="11.9"
                                  FontSize="20" />
                             <Run Text="KM"
-                                 Foreground="#CC515354" />
+                                 Foreground="#FF8C8C8C" /><Run Text="/H"
+                                                               Foreground="#668C8C8C" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>

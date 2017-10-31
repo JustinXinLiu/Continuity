@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="1500"
+    d:DesignWidth="2000">
 
     <Grid>
         <TextBlock Text="Account info..."
@@ -15,5 +15,31 @@
                    Foreground="White"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
+
+
+        <Grid x:Name="TestGrid"
+              Width="240"
+              Height="400"
+              Margin="120"
+              CornerRadius="40"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Right"><!--Width="640" Height="640"-->
+
+            <!--<Rectangle Fill="LightGreen"
+                       Width="240"
+                       Height="400"
+                       RadiusX="40"
+                       RadiusY="40"
+                       Opacity="0.4"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" />-->
+
+            <Ellipse x:Name="Shape"
+                     Fill="LightBlue"
+                     Width="640"
+                     Height="640"
+                     Opacity="0.4"
+                     Margin="-240" />
+        </Grid>
     </Grid>
 </UserControl>

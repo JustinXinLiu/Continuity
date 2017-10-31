@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Continuity.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -17,11 +19,17 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Sample.KlivaDesign.Views
 {
-    public sealed partial class AccountView : UserControl
-    {
-        public AccountView()
-        {
-            this.InitializeComponent();
-        }
-    }
+	public sealed partial class AccountView : UserControl
+	{
+		public AccountView()
+		{
+			this.InitializeComponent();
+
+			TestGrid.DoubleTapped += (s, e) =>
+			{
+				Shape.Visual().CenterPoint = new Vector3(320 + 120 - 40, 320 - 200 + 40, 0.0f);
+				Shape.StartScaleAnimation(to: new Vector2(0.125f), duration: 400);
+			};
+		}
+	}
 }

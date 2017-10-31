@@ -9,7 +9,9 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Media;
 using Continuity.Extensions;
+using Microsoft.Toolkit.Uwp.Helpers;
 using Sample.KlivaDesign.Models;
 
 namespace Sample.KlivaDesign.Views
@@ -17,14 +19,17 @@ namespace Sample.KlivaDesign.Views
     public sealed partial class ActivityView : UserControl
     {
         public ObservableCollection<ActivitySummary> ActivitySummaries { get; } = new ObservableCollection<ActivitySummary>();
+		public ObservableCollection<Segment> Segments { get; } = new ObservableCollection<Segment>();
 
-        public ActivityView()
+
+		public ActivityView()
         {
             InitializeComponent();
 
             SetupMapStyle();
             ShowMapAndPolyline();
             PopulateActivities();
+			PopulateSegments();
 
             void SetupMapStyle()
             {
@@ -317,5 +322,130 @@ namespace Sample.KlivaDesign.Views
                 KudosCount = 7
             });
         }
-    }
+
+		private void PopulateSegments()
+		{
+			Segments.Add(new Segment
+			{
+				Name = "166th down",
+				Distance = 0.5,
+				Time = "0:40",
+				Speed = 46.2
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "60 Acres Park to Wilmot Gateway Park (SRT)",
+				Distance = 6.1,
+				Time = "15:50",
+				Speed = 23.3
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "NE 116th St to NE 145th St (SRT)",
+				Distance = 3.2,
+				Time = "10:25",
+				Speed = 18.8
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "116 to 124",
+				Distance = 0.7,
+				Time = "11:28",
+				Speed = 8.1
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "124th to Bothell",
+				Distance = 7.3,
+				Time = "5:50",
+				Speed = 30.9
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "Full Moon TT - Sprint 01",
+				Distance = 1.6,
+				Time = "14:15",
+				Speed = 32.8
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "BrewWood",
+				Distance = 2.7,
+				Time = "2:50",
+				Speed = 32
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "Full Moon TT - Sprint 02",
+				Distance = 1.5,
+				Time = "22:44",
+				Speed = 33.6
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "522 Boogie",
+				Distance = 1.6,
+				Time = "5:48",
+				Speed = 29.8
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "N Creek Trail Climb",
+				Distance = 0.8,
+				Time = "4:25",
+				Speed = 27.4
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "522 to the powerlines on SRT TT",
+				Distance = 10.05,
+				Time = "13:02",
+				Speed = 27.6
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "405 to Wilmot",
+				Distance = 1.4,
+				Time = "3:17",
+				Speed = 28.5
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "Wilmot Gateway Park to Leary Way NE (SRT)",
+				Distance = 6.1,
+				Time = "13:05",
+				Speed = 28.2
+			});
+
+			Segments.Add(new Segment
+			{
+				Name = "WoodBrew",
+				Distance = 2.6,
+				Time = "5:48",
+				Speed = 27.9
+			});
+		}
+
+		private void OnSegmentsContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+		{
+			if (args.InRecycleQueue || args.ItemContainer == null) return;
+
+			//if (args.ItemIndex % 2 == 0)
+			//{
+			//	args.ItemContainer.Background = new SolidColorBrush("#40FFEBEA".ToColor());
+			//}
+		}
+	}
 }
