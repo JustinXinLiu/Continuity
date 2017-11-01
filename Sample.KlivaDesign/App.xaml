@@ -346,13 +346,13 @@
                                                FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
                                                FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
                                                PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
-                                               PointerOverBackground="#FFFFA8A1"
+                                               PointerOverBackground="#FFD1483F"
                                                PointerOverForeground="#FF060809"
-                                               SelectedBackground="#FFFF9C95"
+                                               SelectedBackground="#FFDD443B"
                                                SelectedForeground="#FF060809"
-                                               SelectedPointerOverBackground="#FFFF9C95"
-                                               PressedBackground="#FFFF837A"
-                                               SelectedPressedBackground="#FFFF837A"
+                                               SelectedPointerOverBackground="#FFD1483F"
+                                               PressedBackground="#FFF53327"
+                                               SelectedPressedBackground="#FFF53327"
                                                DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
                                                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
                                                ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
@@ -424,8 +424,6 @@
 
         <Style x:Key="ListViewItemCustomRevealStyle"
                TargetType="ListViewItem">
-            <Setter Property="Opacity"
-                    Value="0.85" />
             <Setter Property="Background"
                     Value="#FF060809" />
             <Setter Property="Foreground"

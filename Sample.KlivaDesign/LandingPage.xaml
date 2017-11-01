@@ -21,7 +21,8 @@
         <FlipView Style="{StaticResource FlipViewNoButtonStyle}"
                   ItemContainerStyle="{StaticResource FlipViewItemNoSwipeStyle}"
                   x:Name="HostFlipView"
-                  Grid.RowSpan="2">
+                  Grid.RowSpan="2"
+                  d:IsHidden="True">
             <FlipViewItem x:Name="LoginHostView">
                 <views:LoginView x:Name="LoginView"
                                  x:Load="False" />

@@ -8,10 +8,10 @@
              xmlns:brushes="using:Continuity.Brushes"
              xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              xmlns:models="using:Sample.KlivaDesign.Models"
-             xmlns:controls1="using:Continuity.Controls"
+             xmlns:continuity="using:Continuity.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="1500"
-             d:DesignWidth="2000">
+             d:DesignHeight="1200"
+             d:DesignWidth="1600">
 
     <UserControl.Resources>
         <!--<Style x:Key="Segment"
@@ -77,7 +77,7 @@
         <DataTemplate x:Key="ActivityTemplate"
                       x:DataType="models:ActivitySummary">
             <Grid x:Name="LayoutRoot"
-                  CornerRadius="16">
+                  MinWidth="320">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -87,8 +87,8 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Ellipse Width="64"
-                         Height="64"
+                <Ellipse Width="48"
+                         Height="48"
                          VerticalAlignment="Top"
                          Margin="22,22,14,22"
                          Stroke="#FFEAEAEA"
@@ -102,7 +102,7 @@
                            Opacity="0.6"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Center"
-                           Margin="22,0,14,18"
+                           Margin="22,0,12,14"
                            FontSize="14" />
 
                 <Grid Grid.Column="1">
@@ -121,7 +121,7 @@
                                Opacity="0.8"
                                Margin="12,24,0,8"
                                FontWeight="SemiBold"
-                               FontSize="18"
+                               FontSize="16"
                                TextLineBounds="Tight"
                                OpticalMarginAlignment="TrimSideBearings"
                                Grid.ColumnSpan="2" />
@@ -129,7 +129,7 @@
                     <TextBlock Text="{x:Bind StartDate}"
                                Opacity="0.6"
                                Grid.Row="1"
-                               Margin="12,0,12,24"
+                               Margin="12,0,12,16"
                                Grid.ColumnSpan="2"
                                FontSize="14"
                                OpticalMarginAlignment="TrimSideBearings" />
@@ -137,22 +137,22 @@
                     <StackPanel Grid.Row="2"
                                 Orientation="Horizontal"
                                 VerticalAlignment="Bottom"
-                                Margin="8,0,8,16">
-                        <Path Width="24"
-                              Height="24"
+                                Margin="8,0,8,12">
+                        <Path Width="20"
+                              Height="20"
                               Stretch="Uniform"
                               Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
                               Fill="#FF3E4244"
                               UseLayoutRounding="False" />
                         <TextBlock FontWeight="SemiBold"
-                                   FontSize="24"
+                                   FontSize="20"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
                             <Run Text="{x:Bind Distance}" />
                             <Run Text="KM"
-                                 FontSize="12" />
+                                 FontSize="10" />
                         </TextBlock>
                     </StackPanel>
 
@@ -160,22 +160,22 @@
                                 Grid.Column="1"
                                 Orientation="Horizontal"
                                 VerticalAlignment="Bottom"
-                                Margin="8,0,8,16">
-                        <Path Width="24"
-                              Height="24"
+                                Margin="8,0,8,12">
+                        <Path Width="20"
+                              Height="20"
                               Stretch="Uniform"
                               Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
                               Fill="#FF3E4244"
                               UseLayoutRounding="False" />
                         <TextBlock FontWeight="SemiBold"
-                                   FontSize="24"
+                                   FontSize="20"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0">
                             <Run Text="{x:Bind ElevationGain}" />
                             <Run Text="M"
-                                 FontSize="12" />
+                                 FontSize="10" />
                         </TextBlock>
                     </StackPanel>
                     <Line Stroke="#FF3E4244"
@@ -208,7 +208,7 @@
                               Margin="0,0,0,-4" />
                         <TextBlock Text="{x:Bind CommentCount}"
                                    FontWeight="SemiBold"
-                                   FontSize="14"
+                                   FontSize="12"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
@@ -227,7 +227,7 @@
                               Margin="0,-4,0,0" />
                         <TextBlock Text="{x:Bind KudosCount}"
                                    FontWeight="SemiBold"
-                                   FontSize="14"
+                                   FontSize="12"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
@@ -240,14 +240,14 @@
 
     <Grid x:Name="Root">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"
-                              MinWidth="448" />
-            <ColumnDefinition Width="7*" />
-            <ColumnDefinition Width="5*"
-                              MinWidth="640" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="640" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -261,36 +261,67 @@
                          ZoomInteractionMode="PointerAndKeyboard"
                          Style="Road"
                          d:IsHidden="True"
-                         Grid.RowSpan="2"
+                         Grid.RowSpan="4"
                          IsTabStop="False"
                          Grid.ColumnSpan="3" />
-        <ListView x:Name="ActivityList"
-                  ItemsSource="{x:Bind Path=ActivitySummaries}"
-                  ItemTemplate="{StaticResource ActivityTemplate}"
-                  ItemContainerStyle="{ThemeResource ListViewItemCustomRevealStyle}"
-                  Margin="24,0,0,0"
-                  Padding="0,164,0,0"
-                  HorizontalAlignment="Left"
-                  Grid.RowSpan="2"
-                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  d:IsHidden="True" />
-        <ComboBox Margin="48,24,24,12"
-                  VerticalAlignment="Top"
-                  SelectedIndex="0"
-                  Grid.Row="1">
+        <Border x:Name="ActionsPanel"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="3">
+            <Border.Background>
+                <brushes:BackdropTintBlurBrush BlurAmount="12"
+                                               TintColor="White"
+                                               FallbackColor="#FFBCBCBC" />
+            </Border.Background>
+            <Rectangle Opacity="0.7">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                                         StartPoint="0.5,0">
+                        <GradientStop Color="#FF0B0F11" />
+                        <GradientStop Color="#FF182127"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Border>
+        <ComboBox SelectedIndex="0"
+                  Grid.Row="1"
+                  Margin="16,12,0,6">
             <ComboBoxItem Content="ALL ACTIVITIES" />
             <ComboBoxItem Content="MY ACTIVITIES" />
             <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
         </ComboBox>
-        <Grid x:Name="RightPane"
-              Opacity="0.9"
-              Background="#FF515354"
+        <ListView x:Name="ActivityList"
+                  ItemsSource="{x:Bind Path=ActivitySummaries}"
+                  ItemTemplate="{StaticResource ActivityTemplate}"
+                  ItemContainerStyle="{ThemeResource ListViewItemCustomRevealStyle}"
+                  Grid.Row="2"
+                  Grid.ColumnSpan="3"
+                  ScrollViewer.VerticalScrollMode="Disabled"
+                  ScrollViewer.HorizontalScrollMode="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                  Padding="12,0,12,8">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+        <Grid x:Name="RightBlade"
               CornerRadius="24"
-              Margin="24"
-              Grid.Row="1"
-              Grid.Column="2">
+              Margin="16,120,16,16"
+              Grid.Row="3"
+              Grid.Column="2"
+              VerticalAlignment="Bottom"
+              BorderBrush="#CC182127"
+              BorderThickness="3">
+            <Grid.Background>
+                <brushes:BackdropTintBlurBrush BlurAmount="12"
+                                               TintColor="White"
+                                               FallbackColor="#FF182127" />
+            </Grid.Background>
             <Grid.RowDefinitions>
-                <RowDefinition />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -298,95 +329,6 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
-            <controls1:Tab x:Name="Tab"
-                           FontWeight="SemiBold"
-                           FontSize="16"
-                           Background="#FFDCDCDC"
-                           SelectedHeaderIndicatorBackground="#FFF53327"
-                           HeadersPanelBackground="#FFF4F4F4"
-                           UseLineSelectionVisual="True"
-                           Grid.ColumnSpan="2">
-                <!--<controls1:Tab.Background>
-                    <brushes:BackdropTintBlurBrush FallbackColor="#FFBCBCBC" TintColor="White" />
-                </controls1:Tab.Background>-->
-
-                <controls1:TabItem Header="Segments">
-                    <ListView ItemsSource="{x:Bind Segments}"
-                              ContainerContentChanging="OnSegmentsContainerContentChanging">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Segment">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="80" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="92" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Path Width="24"
-                                          Height="24"
-                                          Stretch="Uniform"
-                                          Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                                          Fill="#FFF4F4F4"
-                                          UseLayoutRounding="False"
-                                          Grid.RowSpan="2"
-                                          Margin="12" />
-                                    <TextBlock Text="{x:Bind Name}"
-                                               Foreground="#FF060809"
-                                               FontSize="16"
-                                               Grid.Column="1"
-                                               Grid.ColumnSpan="2"
-                                               Margin="0,12,0,0" />
-                                    <TextBlock Foreground="#FF515354"
-                                               FontWeight="SemiBold"
-                                               FontSize="8"
-                                               TextLineBounds="Tight"
-                                               Grid.Row="1"
-                                               Grid.Column="1"
-                                               OpticalMarginAlignment="TrimSideBearings"
-                                               VerticalAlignment="Stretch"
-                                               Margin="0,8,0,0">
-                                        <Run Text="{x:Bind Distance}"
-                                             FontSize="16" />
-                                        <Run Text="KM" />
-                                    </TextBlock>
-                                    <TextBlock Text="{x:Bind Time}"
-                                               Foreground="#FF515354"
-                                               FontWeight="SemiBold"
-                                               FontSize="16"
-                                               TextLineBounds="Tight"
-                                               OpticalMarginAlignment="TrimSideBearings"
-                                               VerticalAlignment="Stretch"
-                                               Grid.Row="1"
-                                               Grid.Column="2"
-                                               Margin="0,8,0,0" />
-                                    <TextBlock FontWeight="SemiBold"
-                                               FontSize="8"
-                                               Grid.RowSpan="2"
-                                               Grid.Column="3"
-                                               VerticalAlignment="Center"
-                                               Margin="0,0,12,0">
-                                        <Run Text="{x:Bind Speed}"
-                                             FontSize="20" />
-                                        <Run Text="KM" /><Run Text="/H" />
-                                    </TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </controls1:TabItem>
-                <controls1:TabItem Header="Kudos">
-                </controls1:TabItem>
-                <controls1:TabItem Header="Comments">
-                </controls1:TabItem>
-                <controls1:TabItem Header="Photos">
-                </controls1:TabItem>
-            </controls1:Tab>
 
             <Grid x:Name="DistancePanel"
                   Height="240"
@@ -459,13 +401,13 @@
                     </TextBlock>
                 </StackPanel>
 
-                <TextBlock Foreground="#FF060809"
+                <TextBlock Foreground="#FF3E4244"
                            Text="MOVING TIME"
                            FontSize="16"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"
                            Margin="6,24,0,8" />
-                <TextBlock Foreground="#FF060809"
+                <TextBlock Foreground="#FF3E4244"
                            Text="TOTAL DISTANCE"
                            FontSize="16"
                            FontWeight="SemiBold"
@@ -499,7 +441,7 @@
                              Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#FF060809"
+                    <TextBlock Foreground="#FF3E4244"
                                Text="ELEVATION GAIN"
                                FontSize="16"
                                FontWeight="SemiBold"
@@ -509,8 +451,7 @@
             </Grid>
 
             <Line X2="1"
-                  Opacity="0.2"
-                  Stroke="#FFF4F4F4"
+                  Stroke="#CC182127"
                   Stretch="Fill"
                   Grid.ColumnSpan="2"
                   Grid.Row="2"
@@ -522,7 +463,7 @@
                   Grid.Row="2">
 
                 <Grid VerticalAlignment="Center"
-                      Margin="24,24,36,24">
+                      Margin="24,24,36,16">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
@@ -553,7 +494,7 @@
                                                                Foreground="#668C8C8C" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#FF060809"
+                    <TextBlock Foreground="#FF3E4244"
                                Text="SPEED"
                                FontSize="16"
                                FontWeight="SemiBold"
@@ -566,7 +507,7 @@
                                 Margin="-24,32,0,0"
                                 Spacing="8"
                                 VerticalAlignment="Top">
-                        <TextBlock Foreground="#FF060809"
+                        <TextBlock Foreground="#FFBCBCBC"
                                    Text="MAX"
                                    FontSize="12"
                                    FontWeight="Bold" />
@@ -592,7 +533,7 @@
                   Grid.Column="1">
 
                 <Grid VerticalAlignment="Center"
-                      Margin="24,24,36,24">
+                      Margin="24,24,36,16">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
@@ -627,7 +568,7 @@
                                  Foreground="#FF8C8C8C" />
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Foreground="#FF060809"
+                    <TextBlock Foreground="#FF3E4244"
                                Text="HEART RATE"
                                FontSize="16"
                                FontWeight="SemiBold"
@@ -640,7 +581,7 @@
                                 Margin="-24,32,0,0"
                                 Spacing="8"
                                 VerticalAlignment="Top">
-                        <TextBlock Foreground="#FF060809"
+                        <TextBlock Foreground="#FFBCBCBC"
                                    Text="MAX"
                                    FontSize="12"
                                    FontWeight="Bold" />
@@ -659,5 +600,112 @@
                 </Grid>
             </Grid>
         </Grid>
+        <Border BorderBrush="#CC182127"
+                BorderThickness="3"
+                Margin="16,160,16,16"
+                Grid.Row="3"
+                CornerRadius="24">
+            <Grid x:Name="LeftBlade"
+                  CornerRadius="24">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <continuity:Tab x:Name="Tab"
+                                FontWeight="SemiBold"
+                                FontSize="16"
+                                SelectedHeaderIndicatorBackground="#FFF53327"
+                                HeadersPanelBackground="#FFF4F4F4"
+                                UseLineSelectionVisual="True"
+                                Grid.ColumnSpan="2">
+                    <continuity:Tab.Background>
+                        <brushes:BackdropTintBlurBrush BlurAmount="12" 
+                                                       TintColor="White"
+                                                       FallbackColor="#FFDCDCDC" />
+                    </continuity:Tab.Background>
+
+                    <continuity:TabItem Header="Segments">
+                        <ListView ItemsSource="{x:Bind Path=Segments}"
+                                  ContainerContentChanging="OnSegmentsContainerContentChanging">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Segment">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="92" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Path Width="24"
+                                              Height="24"
+                                              Stretch="Uniform"
+                                              Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                                              Fill="#FFF4F4F4"
+                                              UseLayoutRounding="False"
+                                              Grid.RowSpan="2"
+                                              Margin="12,12,24,12" />
+                                        <TextBlock Text="{x:Bind Name}"
+                                                   Foreground="#FFF4F4F4"
+                                                   FontSize="16"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Grid.Column="1"
+                                                   Grid.ColumnSpan="2"
+                                                   Margin="0,12,12,8" />
+                                        <TextBlock Foreground="#FFBCBCBC"
+                                                   FontWeight="SemiBold"
+                                                   FontSize="8"
+                                                   TextLineBounds="Tight"
+                                                   Grid.Row="1"
+                                                   Grid.Column="1"
+                                                   OpticalMarginAlignment="TrimSideBearings"
+                                                   VerticalAlignment="Stretch"
+                                                   Margin="0,8,0,0">
+                                            <Run Text="{x:Bind Distance}"
+                                                 FontSize="16" />
+                                            <Run Text="KM" />
+                                        </TextBlock>
+                                        <TextBlock Foreground="#FFBCBCBC"
+                                                   FontWeight="SemiBold"
+                                                   FontSize="8"
+                                                   TextLineBounds="Tight"
+                                                   OpticalMarginAlignment="TrimSideBearings"
+                                                   VerticalAlignment="Stretch"
+                                                   Grid.Row="1"
+                                                   Grid.Column="2"
+                                                   Margin="0,8,0,0">
+                                            <Run Text="{x:Bind Speed}"
+                                                 FontSize="16" />
+                                            <Run Text="KM/H" />     
+                                        </TextBlock>
+                                        <TextBlock Text="{x:Bind Time}"
+                                                   Foreground="White"
+                                                   FontWeight="SemiBold"
+                                                   FontSize="20"
+                                                   Grid.RowSpan="2"
+                                                   Grid.Column="3"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,12,0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </continuity:TabItem>
+                    <continuity:TabItem Header="Kudos" />
+                    <continuity:TabItem Header="Comments" />
+                    <continuity:TabItem Header="Photos" />
+                </continuity:Tab>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

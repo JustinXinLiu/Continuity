@@ -442,10 +442,14 @@ namespace Sample.KlivaDesign.Views
 		{
 			if (args.InRecycleQueue || args.ItemContainer == null) return;
 
-			//if (args.ItemIndex % 2 == 0)
-			//{
-			//	args.ItemContainer.Background = new SolidColorBrush("#40FFEBEA".ToColor());
-			//}
+			if (args.ItemIndex % 2 == 0)
+			{
+				args.ItemContainer.Background = new SolidColorBrush("#02FFEBEA".ToColor());
+			}
+			else
+			{
+				args.ItemContainer.Background = new SolidColorBrush("#05FFEBEA".ToColor());
+			}
 		}
 	}
 }
