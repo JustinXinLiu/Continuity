@@ -242,13 +242,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="640" />
+            <ColumnDefinition Width="596" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
 
         <maps:MapControl x:Name="ActivityMap"
@@ -261,7 +262,7 @@
                          ZoomInteractionMode="PointerAndKeyboard"
                          Style="Road"
                          d:IsHidden="True"
-                         Grid.RowSpan="4"
+                         Grid.RowSpan="5"
                          IsTabStop="False"
                          Grid.ColumnSpan="3" />
         <Border x:Name="ActionsPanel"
@@ -307,405 +308,411 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
+
         <Grid x:Name="RightBlade"
-              CornerRadius="24"
-              Margin="16,120,16,16"
-              Grid.Row="3"
+              Grid.Row="4"
               Grid.Column="2"
               VerticalAlignment="Bottom"
-              BorderBrush="#CC182127"
-              BorderThickness="3">
-            <Grid.Background>
-                <brushes:BackdropTintBlurBrush BlurAmount="12"
-                                               TintColor="White"
-                                               FallbackColor="#FF182127" />
-            </Grid.Background>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+              Margin="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="DistancePanel"
-                  Height="240"
-                  CornerRadius="24"
-                  Grid.Row="1"
-                  Grid.ColumnSpan="2">
+            <continuity:CircularToggleButton CornerRadius="0,12,12,0"
+                                             Margin="-4,32,0,0"
+                                             Grid.Column="1">
+                <continuity:CircularToggleButton.CheckedContent>
+                    <ContentControl Style="{StaticResource IconTrendStyle}" />
+                </continuity:CircularToggleButton.CheckedContent>
+                <ContentControl Margin="2"
+                                Style="{StaticResource IconCloseStyle}" />
+            </continuity:CircularToggleButton>
+
+            <Grid CornerRadius="24"
+                  BorderBrush="#CC182127"
+                  BorderThickness="3">
+                <Grid.Background>
+                    <brushes:BackdropTintBlurBrush BlurAmount="12"
+                                                   TintColor="White"
+                                                   FallbackColor="#FF182127" />
+                </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Rectangle Fill="#FF0D8AC6"
-                           Height="4"
-                           Margin="40,0,0,0"
-                           RenderTransformOrigin="0.5,0.5"
-                           UseLayoutRounding="False"
-                           d:LayoutRounding="Auto"
-                           Grid.Row="2">
-                    <Rectangle.RenderTransform>
-                        <CompositeTransform Rotation="-15" />
-                    </Rectangle.RenderTransform>
-                </Rectangle>
+                <Grid x:Name="DistancePanel"
+                      Height="240"
+                      CornerRadius="24"
+                      Grid.Row="1"
+                      Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Grid.Row="1">
-                    <Path Width="24"
-                          Height="24"
-                          Stretch="Uniform"
-                          Data="M4.94,6.35C4.55,5.96 4.55,5.32 4.94,4.93C5.33,4.54 5.96,4.54 6.35,4.93L13.07,10.31L13.42,10.59C14.2,11.37 14.2,12.64 13.42,13.42C12.64,14.2 11.37,14.2 10.59,13.42L10.31,13.07L4.94,6.35M12,20A8,8 0 0,0 20,12C20,9.79 19.1,7.79 17.66,6.34L19.07,4.93C20.88,6.74 22,9.24 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12H4A8,8 0 0,0 12,20M12,1A2,2 0 0,1 14,3A2,2 0 0,1 12,5A2,2 0 0,1 10,3A2,2 0 0,1 12,1Z"
-                          Fill="#FF8C8C8C"
-                          UseLayoutRounding="False"
-                          Margin="0,0,8,0" />
-                    <TextBlock Text="43:46"
-                               Foreground="White"
-                               FontWeight="SemiBold"
-                               FontSize="20"
-                               TextLineBounds="Tight"
-                               OpticalMarginAlignment="TrimSideBearings"
-                               VerticalAlignment="Center" />
-                </StackPanel>
+                    <Rectangle Fill="#FF0D8AC6"
+                               Height="4"
+                               Margin="40,0,0,0"
+                               RenderTransformOrigin="0.5,0.5"
+                               UseLayoutRounding="False"
+                               d:LayoutRounding="Auto"
+                               Grid.Row="2">
+                        <Rectangle.RenderTransform>
+                            <CompositeTransform Rotation="-15" />
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Grid.Row="3">
-                    <Path Width="24"
-                          Height="24"
-                          Stretch="Uniform"
-                          Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                          Fill="#FF8C8C8C"
-                          UseLayoutRounding="False"
-                          Margin="0,0,8,0" />
-                    <TextBlock Foreground="White"
-                               FontWeight="SemiBold"
-                               FontSize="12"
-                               TextLineBounds="Tight"
-                               OpticalMarginAlignment="TrimSideBearings"
-                               VerticalAlignment="Center">
-                        <Run Text="22.6"
-                             FontSize="20" />
-                        <Run Text="KM"
-                             Foreground="#FF8C8C8C" />
-                    </TextBlock>
-                </StackPanel>
-
-                <TextBlock Foreground="#FF3E4244"
-                           Text="MOVING TIME"
-                           FontSize="16"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"
-                           Margin="6,24,0,8" />
-                <TextBlock Foreground="#FF3E4244"
-                           Text="TOTAL DISTANCE"
-                           FontSize="16"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"
-                           Margin="6,8,0,24"
-                           Grid.Row="4" />
-
-                <StackPanel Grid.Column="1"
-                            Grid.Row="2"
-                            Margin="0,0,40,0"
-                            VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center"
-                                Margin="0,0,0,8">
+                                Grid.Row="1">
                         <Path Width="24"
                               Height="24"
                               Stretch="Uniform"
-                              Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+                              Data="M4.94,6.35C4.55,5.96 4.55,5.32 4.94,4.93C5.33,4.54 5.96,4.54 6.35,4.93L13.07,10.31L13.42,10.59C14.2,11.37 14.2,12.64 13.42,13.42C12.64,14.2 11.37,14.2 10.59,13.42L10.31,13.07L4.94,6.35M12,20A8,8 0 0,0 20,12C20,9.79 19.1,7.79 17.66,6.34L19.07,4.93C20.88,6.74 22,9.24 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12H4A8,8 0 0,0 12,20M12,1A2,2 0 0,1 14,3A2,2 0 0,1 12,5A2,2 0 0,1 10,3A2,2 0 0,1 12,1Z"
+                              Fill="#FF8C8C8C"
+                              UseLayoutRounding="False"
+                              Margin="0,0,8,0" />
+                        <TextBlock Text="43:46"
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   FontSize="20"
+                                   TextLineBounds="Tight"
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Grid.Row="3">
+                        <Path Width="24"
+                              Height="24"
+                              Stretch="Uniform"
+                              Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
                               Fill="#FF8C8C8C"
                               UseLayoutRounding="False"
                               Margin="0,0,8,0" />
                         <TextBlock Foreground="White"
-                                   VerticalAlignment="Center"
                                    FontWeight="SemiBold"
                                    FontSize="12"
                                    TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings">
-                        <Run Text="47"
-                             FontSize="20" />
-                        <Run Text="BPM"
-                             Foreground="#FF8C8C8C" />
-                        </TextBlock>
+                                   OpticalMarginAlignment="TrimSideBearings"
+                                   VerticalAlignment="Center"><Run Text="22.6"
+                                                                   FontSize="20" /><Run Text=" " /><Run Text="KM"
+                                                                                                        Foreground="#FF8C8C8C" /></TextBlock>
                     </StackPanel>
+
                     <TextBlock Foreground="#FF3E4244"
-                               Text="ELEVATION GAIN"
+                               Text="MOVING TIME"
                                FontSize="16"
                                FontWeight="SemiBold"
                                HorizontalAlignment="Center"
-                               Margin="2,0,0,0" />
-                </StackPanel>
-            </Grid>
-
-            <Line X2="1"
-                  Stroke="#CC182127"
-                  Stretch="Fill"
-                  Grid.ColumnSpan="2"
-                  Grid.Row="2"
-                  VerticalAlignment="Top"
-                  Margin="48,4,40,0" />
-
-            <Grid x:Name="SpeedPanel"
-                  Height="240"
-                  Grid.Row="2">
-
-                <Grid VerticalAlignment="Center"
-                      Margin="24,24,36,16">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <controls:RadialGauge Value="50"
-                                          TrailBrush="#FF0D8AC6" />
-                    <StackPanel HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                        <Path Width="28"
-                              Height="28"
-                              Stretch="Uniform"
-                              Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
-                              Fill="#FF8C8C8C"
-                              UseLayoutRounding="False" />
-                        <TextBlock Foreground="White"
-                                   FontWeight="SemiBold"
-                                   FontSize="12"
-                                   VerticalAlignment="Center"
-                                   Margin="12,0,0,0">
-                            <Run Text="5.9"
-                                 FontSize="24" />
-                            <Run Text="KM"
-                                 Foreground="#FF8C8C8C" /><Run Text="/H"
-                                                               Foreground="#668C8C8C" />
-                        </TextBlock>
-                    </StackPanel>
+                               Margin="6,24,0,8" />
                     <TextBlock Foreground="#FF3E4244"
-                               Text="SPEED"
+                               Text="TOTAL DISTANCE"
                                FontSize="16"
                                FontWeight="SemiBold"
-                               Grid.Row="1"
-                               Grid.ColumnSpan="2"
-                               HorizontalAlignment="Center" />
+                               HorizontalAlignment="Center"
+                               Margin="6,8,0,24"
+                               Grid.Row="4" />
 
-                    <StackPanel Orientation="Horizontal"
-                                Grid.Column="1"
-                                Margin="-24,32,0,0"
-                                Spacing="8"
-                                VerticalAlignment="Top">
-                        <TextBlock Foreground="#FFBCBCBC"
-                                   Text="MAX"
-                                   FontSize="12"
-                                   FontWeight="Bold" />
-                        <TextBlock Foreground="White"
+                    <StackPanel Grid.Column="1"
+                                Grid.Row="2"
+                                Margin="0,0,40,0"
+                                VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,8">
+                            <Path Width="24"
+                                  Height="24"
+                                  Stretch="Uniform"
+                                  Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+                                  Fill="#FF8C8C8C"
+                                  UseLayoutRounding="False"
+                                  Margin="0,0,8,0" />
+                            <TextBlock Foreground="White"
+                                       VerticalAlignment="Center"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"
+                                       TextLineBounds="Tight"
+                                       OpticalMarginAlignment="TrimSideBearings"><Run Text="47"
+                                                                                      FontSize="20" /><Run Text=" " /><Run Text="BPM"
+                                                                                                                           Foreground="#FF8C8C8C" /></TextBlock>
+                        </StackPanel>
+                        <TextBlock Foreground="#FF3E4244"
+                                   Text="ELEVATION GAIN"
+                                   FontSize="16"
                                    FontWeight="SemiBold"
-                                   FontSize="12"
-                                   TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings"
-                                   Margin="0,-2,0,0">
-                            <Run Text="11.9"
-                                 FontSize="20" />
-                            <Run Text="KM"
-                                 Foreground="#FF8C8C8C" /><Run Text="/H"
-                                                               Foreground="#668C8C8C" />
-                        </TextBlock>
+                                   HorizontalAlignment="Center"
+                                   Margin="2,0,0,0" />
                     </StackPanel>
                 </Grid>
-            </Grid>
-            <Grid x:Name="HeartRatePanel"
-                  Height="240"
-                  CornerRadius="24"
-                  Grid.Row="2"
-                  Grid.Column="1">
 
-                <Grid VerticalAlignment="Center"
-                      Margin="24,24,36,16">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <controls:RadialGauge Value="75" />
-                    <StackPanel HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                        <Path Width="28"
-                              Height="28"
-                              Stretch="Uniform"
-                              Data="M7.5,4A5.5,5.5 0 0,0 2,9.5C2,10 2.09,10.5 2.22,11H6.3L7.57,7.63C7.87,6.83 9.05,6.75 9.43,7.63L11.5,13L12.09,11.58C12.22,11.25 12.57,11 13,11H21.78C21.91,10.5 22,10 22,9.5A5.5,5.5 0 0,0 16.5,4C14.64,4 13,4.93 12,6.34C11,4.93 9.36,4 7.5,4V4M3,12.5A1,1 0 0,0 2,13.5A1,1 0 0,0 3,14.5H5.44L11,20C12,20.9 12,20.9 13,20L18.56,14.5H21A1,1 0 0,0 22,13.5A1,1 0 0,0 21,12.5H13.4L12.47,14.8C12.07,15.81 10.92,15.67 10.55,14.83L8.5,9.5L7.54,11.83C7.39,12.21 7.05,12.5 6.6,12.5H3Z"
-                              Fill="#FF8C8C8C"
-                              UseLayoutRounding="False"
-                              RenderTransformOrigin="0.5,0.5">
-                            <Path.RenderTransform>
-                                <CompositeTransform ScaleX="0.85"
-                                                    ScaleY="0.85" />
-                            </Path.RenderTransform>
-                        </Path>
-                        <TextBlock Foreground="White"
-                                   FontWeight="SemiBold"
-                                   FontSize="12"
-                                   VerticalAlignment="Center"
-                                   Margin="12,0,0,0">
-                            <Run Text="139"
-                                 FontSize="24" />
-                            <Run Text="BPM"
-                                 Foreground="#FF8C8C8C" />
-                        </TextBlock>
-                    </StackPanel>
-                    <TextBlock Foreground="#FF3E4244"
-                               Text="HEART RATE"
-                               FontSize="16"
-                               FontWeight="SemiBold"
-                               Grid.Row="1"
-                               Grid.ColumnSpan="2"
-                               HorizontalAlignment="Center" />
+                <Line X2="1"
+                      Stroke="#CC182127"
+                      Stretch="Fill"
+                      Grid.ColumnSpan="2"
+                      Grid.Row="2"
+                      VerticalAlignment="Top"
+                      Margin="48,4,40,0" />
 
-                    <StackPanel Orientation="Horizontal"
-                                Grid.Column="1"
-                                Margin="-24,32,0,0"
-                                Spacing="8"
-                                VerticalAlignment="Top">
-                        <TextBlock Foreground="#FFBCBCBC"
-                                   Text="MAX"
-                                   FontSize="12"
-                                   FontWeight="Bold" />
-                        <TextBlock Foreground="White"
+                <Grid x:Name="SpeedPanel"
+                      Height="240"
+                      Grid.Row="2">
+
+                    <Grid VerticalAlignment="Center"
+                          Margin="24,24,6,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <controls:RadialGauge Value="50"
+                                              TrailBrush="#FF0D8AC6" />
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <Path Width="28"
+                                  Height="28"
+                                  Stretch="Uniform"
+                                  Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
+                                  Fill="#FF8C8C8C"
+                                  UseLayoutRounding="False" />
+                            <TextBlock Foreground="White"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"
+                                       Margin="12,0,0,0"><Run Text="5.9"
+                                                              FontSize="24" /><Run Text=" " /><Run Text="KM"
+                                                                                                   Foreground="#FF8C8C8C" /><Run Text="/H"
+                                                                                                                                 Foreground="#668C8C8C" /></TextBlock>
+                        </StackPanel>
+                        <TextBlock Foreground="#FF3E4244"
+                                   Text="SPEED"
+                                   FontSize="16"
                                    FontWeight="SemiBold"
-                                   FontSize="12"
-                                   TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings"
-                                   Margin="0,-2,0,0">
-                            <Run Text="165"
-                                 FontSize="20" />
-                            <Run Text="BPM"
-                                 Foreground="#FF8C8C8C" />
-                        </TextBlock>
-                    </StackPanel>
+                                   Grid.Row="1"
+                                   Grid.ColumnSpan="2"
+                                   HorizontalAlignment="Center" />
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Column="1"
+                                    Margin="-24,32,0,0"
+                                    Spacing="8"
+                                    VerticalAlignment="Top">
+                            <TextBlock Foreground="#FFBCBCBC"
+                                       Text="MAX"
+                                       FontSize="12"
+                                       FontWeight="Bold" />
+                            <TextBlock Foreground="White"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"
+                                       TextLineBounds="Tight"
+                                       OpticalMarginAlignment="TrimSideBearings"
+                                       Margin="0,-2,0,0"><Run Text="11.9"
+                                                              FontSize="20" /><Run Text=" " /><Run Text="KM"
+                                                                                                   Foreground="#FF8C8C8C" /><Run Text="/H"
+                                                                                                                                 Foreground="#668C8C8C" /></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid x:Name="HeartRatePanel"
+                      Height="240"
+                      CornerRadius="24"
+                      Grid.Row="2"
+                      Grid.Column="1">
+
+                    <Grid VerticalAlignment="Center"
+                          Margin="0,24,36,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <controls:RadialGauge Value="75" />
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <Path Width="28"
+                                  Height="28"
+                                  Stretch="Uniform"
+                                  Data="M7.5,4A5.5,5.5 0 0,0 2,9.5C2,10 2.09,10.5 2.22,11H6.3L7.57,7.63C7.87,6.83 9.05,6.75 9.43,7.63L11.5,13L12.09,11.58C12.22,11.25 12.57,11 13,11H21.78C21.91,10.5 22,10 22,9.5A5.5,5.5 0 0,0 16.5,4C14.64,4 13,4.93 12,6.34C11,4.93 9.36,4 7.5,4V4M3,12.5A1,1 0 0,0 2,13.5A1,1 0 0,0 3,14.5H5.44L11,20C12,20.9 12,20.9 13,20L18.56,14.5H21A1,1 0 0,0 22,13.5A1,1 0 0,0 21,12.5H13.4L12.47,14.8C12.07,15.81 10.92,15.67 10.55,14.83L8.5,9.5L7.54,11.83C7.39,12.21 7.05,12.5 6.6,12.5H3Z"
+                                  Fill="#FF8C8C8C"
+                                  UseLayoutRounding="False"
+                                  RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <CompositeTransform ScaleX="0.85"
+                                                        ScaleY="0.85" />
+                                </Path.RenderTransform>
+                            </Path>
+                            <TextBlock Foreground="White"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"
+                                       Margin="12,0,0,0"><Run Text="139"
+                                                              FontSize="24" /><Run Text=" " /><Run Text="BPM"
+                                                                                                   Foreground="#FF8C8C8C" /></TextBlock>
+                        </StackPanel>
+                        <TextBlock Foreground="#FF3E4244"
+                                   Text="HEART RATE"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Grid.Row="1"
+                                   Grid.ColumnSpan="2"
+                                   HorizontalAlignment="Center" />
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Column="1"
+                                    Margin="-24,32,0,0"
+                                    Spacing="8"
+                                    VerticalAlignment="Top">
+                            <TextBlock Foreground="#FFBCBCBC"
+                                       Text="MAX"
+                                       FontSize="12"
+                                       FontWeight="Bold" />
+                            <TextBlock Foreground="White"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"
+                                       TextLineBounds="Tight"
+                                       OpticalMarginAlignment="TrimSideBearings"
+                                       Margin="0,-2,0,0"><Run Text="165"
+                                                              FontSize="20" /><Run Text=" " /><Run Text="BPM"
+                                                                                                   Foreground="#FF8C8C8C" /></TextBlock>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
-        <Border BorderBrush="#CC182127"
-                BorderThickness="3"
-                Margin="16,160,16,16"
-                Grid.Row="3"
-                CornerRadius="24">
-            <Grid x:Name="LeftBlade"
-                  CornerRadius="24">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
 
-                <continuity:Tab x:Name="Tab"
-                                FontWeight="SemiBold"
-                                FontSize="16"
-                                SelectedHeaderIndicatorBackground="#FFF53327"
-                                HeadersPanelBackground="#FFF4F4F4"
-                                UseLineSelectionVisual="True"
-                                Grid.ColumnSpan="2">
-                    <continuity:Tab.Background>
-                        <brushes:BackdropTintBlurBrush BlurAmount="12" 
-                                                       TintColor="White"
-                                                       FallbackColor="#FFDCDCDC" />
-                    </continuity:Tab.Background>
+        <Grid x:Name="LeftBlade"
+              Margin="12"
+              Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-                    <continuity:TabItem Header="Segments">
-                        <ListView ItemsSource="{x:Bind Path=Segments}"
-                                  ContainerContentChanging="OnSegmentsContainerContentChanging">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Segment">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="80" />
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="92" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
+            <continuity:CircularToggleButton Margin="0,32,-4,0">
+                <continuity:CircularToggleButton.Content>
+                    <ContentControl Margin="2"
+                                    Style="{StaticResource IconCloseStyle}" />
+                </continuity:CircularToggleButton.Content>
+                <continuity:CircularToggleButton.CheckedContent>
+                    <ContentControl Style="{StaticResource IconMoreStyle}" />
+                </continuity:CircularToggleButton.CheckedContent>
+            </continuity:CircularToggleButton>
 
-                                        <Path Width="24"
-                                              Height="24"
-                                              Stretch="Uniform"
-                                              Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                                              Fill="#FFF4F4F4"
-                                              UseLayoutRounding="False"
-                                              Grid.RowSpan="2"
-                                              Margin="12,12,24,12" />
-                                        <TextBlock Text="{x:Bind Name}"
-                                                   Foreground="#FFF4F4F4"
-                                                   FontSize="16"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   Grid.Column="1"
-                                                   Grid.ColumnSpan="2"
-                                                   Margin="0,12,12,8" />
-                                        <TextBlock Foreground="#FFBCBCBC"
-                                                   FontWeight="SemiBold"
-                                                   FontSize="8"
-                                                   TextLineBounds="Tight"
-                                                   Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   OpticalMarginAlignment="TrimSideBearings"
-                                                   VerticalAlignment="Stretch"
-                                                   Margin="0,8,0,0">
+            <Border BorderBrush="#CC182127"
+                    BorderThickness="3"
+                    CornerRadius="24"
+                    Grid.Column="1">
+                <Border CornerRadius="24">
+                    <continuity:Tab x:Name="Tab"
+                                    FontWeight="SemiBold"
+                                    FontSize="16"
+                                    SelectedHeaderIndicatorBackground="#FFF53327"
+                                    HeadersPanelBackground="#FFF4F4F4"
+                                    UseLineSelectionVisual="True">
+                        <continuity:Tab.Background>
+                            <brushes:BackdropTintBlurBrush BlurAmount="12"
+                                                           TintColor="White"
+                                                           FallbackColor="#FFDCDCDC" />
+                        </continuity:Tab.Background>
+
+                        <continuity:TabItem Header="Segments">
+                            <ListView ItemsSource="{x:Bind Path=Segments}"
+                                      ContainerContentChanging="OnSegmentsContainerContentChanging">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Segment">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="92" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <Path Width="24"
+                                                  Height="24"
+                                                  Stretch="Uniform"
+                                                  Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                                                  Fill="#FFF4F4F4"
+                                                  UseLayoutRounding="False"
+                                                  Grid.RowSpan="2"
+                                                  Margin="12,12,24,12" />
+                                            <TextBlock Text="{x:Bind Name}"
+                                                       Foreground="#FFF4F4F4"
+                                                       FontSize="16"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       Grid.Column="1"
+                                                       Grid.ColumnSpan="2"
+                                                       Margin="0,12,12,8" />
+                                            <TextBlock Foreground="#FFBCBCBC"
+                                                       FontWeight="SemiBold"
+                                                       FontSize="8"
+                                                       TextLineBounds="Tight"
+                                                       Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       OpticalMarginAlignment="TrimSideBearings"
+                                                       VerticalAlignment="Stretch"
+                                                       Margin="0,8,0,0">
                                             <Run Text="{x:Bind Distance}"
                                                  FontSize="16" />
                                             <Run Text="KM" />
-                                        </TextBlock>
-                                        <TextBlock Foreground="#FFBCBCBC"
-                                                   FontWeight="SemiBold"
-                                                   FontSize="8"
-                                                   TextLineBounds="Tight"
-                                                   OpticalMarginAlignment="TrimSideBearings"
-                                                   VerticalAlignment="Stretch"
-                                                   Grid.Row="1"
-                                                   Grid.Column="2"
-                                                   Margin="0,8,0,0">
+                                            </TextBlock>
+                                            <TextBlock Foreground="#FFBCBCBC"
+                                                       FontWeight="SemiBold"
+                                                       FontSize="8"
+                                                       TextLineBounds="Tight"
+                                                       OpticalMarginAlignment="TrimSideBearings"
+                                                       VerticalAlignment="Stretch"
+                                                       Grid.Row="1"
+                                                       Grid.Column="2"
+                                                       Margin="0,8,0,0">
                                             <Run Text="{x:Bind Speed}"
                                                  FontSize="16" />
-                                            <Run Text="KM/H" />     
-                                        </TextBlock>
-                                        <TextBlock Text="{x:Bind Time}"
-                                                   Foreground="White"
-                                                   FontWeight="SemiBold"
-                                                   FontSize="20"
-                                                   Grid.RowSpan="2"
-                                                   Grid.Column="3"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,0,12,0" />
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </continuity:TabItem>
-                    <continuity:TabItem Header="Kudos" />
-                    <continuity:TabItem Header="Comments" />
-                    <continuity:TabItem Header="Photos" />
-                </continuity:Tab>
-            </Grid>
-        </Border>
+                                            <Run Text="KM/H" />
+                                            </TextBlock>
+                                            <TextBlock Text="{x:Bind Time}"
+                                                       Foreground="White"
+                                                       FontWeight="SemiBold"
+                                                       FontSize="20"
+                                                       Grid.RowSpan="2"
+                                                       Grid.Column="3"
+                                                       VerticalAlignment="Center"
+                                                       Margin="0,0,12,0" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </continuity:TabItem>
+                        <continuity:TabItem Header="Kudos" />
+                        <continuity:TabItem Header="Comments" />
+                        <continuity:TabItem Header="Photos" />
+                    </continuity:Tab>
+                </Border>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

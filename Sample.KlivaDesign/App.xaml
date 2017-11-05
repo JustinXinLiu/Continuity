@@ -11,6 +11,76 @@
     <Application.Resources>
         <FontFamily x:Key="MaterialDesignFont">/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons</FontFamily>
 
+        <Style x:Key="IconBaseStyle"
+               TargetType="ContentControl">
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="MaxWidth"
+                    Value="24" />
+            <Setter Property="MaxHeight"
+                    Value="24" />
+            <Setter Property="MinWidth"
+                    Value="0" />
+            <Setter Property="MinHeight"
+                    Value="0" />
+        </Style>
+
+        <Style x:Key="IconCloseStyle"
+               BasedOn="{StaticResource IconBaseStyle}"
+               TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path x:Name="logo_drawboard_mini"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconTrendStyle"
+               BasedOn="{StaticResource IconBaseStyle}"
+               TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path x:Name="logo_drawboard_mini"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconMoreStyle"
+               BasedOn="{StaticResource IconBaseStyle}"
+               TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path x:Name="logo_drawboard_mini"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="PaneIconMaterialTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontFamily"
@@ -83,38 +153,6 @@
                                           ZoomMode="Disabled">
                                 <ItemsPresenter />
                             </ScrollViewer>
-                            <Button x:Name="PreviousButtonHorizontal"
-                                    HorizontalAlignment="Left"
-                                    Height="36"
-                                    IsTabStop="False"
-                                    UseSystemFocusVisuals="False"
-                                    VerticalAlignment="Center"
-                                    Width="20"
-                                    Visibility="Collapsed" />
-                            <Button x:Name="NextButtonHorizontal"
-                                    HorizontalAlignment="Right"
-                                    Height="36"
-                                    IsTabStop="False"
-                                    UseSystemFocusVisuals="False"
-                                    VerticalAlignment="Center"
-                                    Width="20"
-                                    Visibility="Collapsed" />
-                            <Button x:Name="PreviousButtonVertical"
-                                    HorizontalAlignment="Center"
-                                    Height="20"
-                                    IsTabStop="False"
-                                    UseSystemFocusVisuals="False"
-                                    VerticalAlignment="Top"
-                                    Width="36"
-                                    Visibility="Collapsed" />
-                            <Button x:Name="NextButtonVertical"
-                                    HorizontalAlignment="Center"
-                                    Height="20"
-                                    IsTabStop="False"
-                                    UseSystemFocusVisuals="False"
-                                    VerticalAlignment="Bottom"
-                                    Width="36"
-                                    Visibility="Collapsed" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -284,6 +322,139 @@
                                     <CompositeTransform />
                                 </Path.RenderTransform>
                             </Path>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonIconStyle"
+               TargetType="Button">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Width"
+                    Value="48" />
+            <Setter Property="Height"
+                    Value="48" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="False" />
+            <Setter Property="Padding"
+                    Value="14" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="Root"
+                              Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="{TemplateBinding BorderThickness}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0:0:0.25">
+                                            <VisualTransition.GeneratedEasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </VisualTransition.GeneratedEasingFunction>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="PART_HoverVisual"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="0.5" />
+                                            <DoubleAnimation Duration="0"
+                                                             Storyboard.TargetName="ContentPresenter"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                             To="1.1"
+                                                             d:IsOptimized="True" />
+                                            <DoubleAnimation Duration="0"
+                                                             Storyboard.TargetName="ContentPresenter"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                             To="1.1"
+                                                             d:IsOptimized="True" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0"
+                                                             Storyboard.TargetName="ContentPresenter"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                             To="1.2"
+                                                             d:IsOptimized="True" />
+                                            <DoubleAnimation Duration="0"
+                                                             Storyboard.TargetName="ContentPresenter"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                             To="1.2"
+                                                             d:IsOptimized="True" />
+                                            <DoubleAnimation Storyboard.TargetName="PART_HoverVisual"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="0.65" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0"
+                                                            To="#FF3E4244"
+                                                            Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="ContentPresenter"
+                                                            d:IsOptimized="True" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0"
+                                                             Storyboard.TargetName="PART_FocusVisual"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="1" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused" />
+                                    <VisualState x:Name="PointerFocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                            <Border x:Name="PART_HoverVisual"
+                                    Background="#FFFFEBEA"
+                                    Opacity="0" />
+                            <Border x:Name="PART_FocusVisual"
+                                    Grid.RowSpan="2"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    BorderBrush="White"
+                                    BorderThickness="2"
+                                    Opacity="0" />
+                            <ContentControl x:Name="ContentPresenter"
+                                            Margin="{TemplateBinding Padding}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            AutomationProperties.AccessibilityView="Raw"
+                                            BorderBrush="{StaticResource Brush.Transparent}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Content="{TemplateBinding Content}"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            RenderTransformOrigin="0.5,0.5">
+                                <ContentControl.RenderTransform>
+                                    <CompositeTransform />
+                                </ContentControl.RenderTransform>
+                            </ContentControl>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

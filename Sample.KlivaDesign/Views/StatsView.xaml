@@ -10,7 +10,7 @@
     d:DesignWidth="400">
 
     <Grid>
-        <TextBlock Text="Personal Stats..."
+        <TextBlock Text="Personal Stats (coming soon)..."
                    FontSize="24"
                    Foreground="White"
                    HorizontalAlignment="Center"

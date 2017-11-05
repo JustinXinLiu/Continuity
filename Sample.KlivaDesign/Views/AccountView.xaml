@@ -10,7 +10,7 @@
     d:DesignWidth="2000">
 
     <Grid>
-        <TextBlock Text="Account info..."
+        <TextBlock Text="Account info (coming soon)..."
                    FontSize="24"
                    Foreground="White"
                    HorizontalAlignment="Center"

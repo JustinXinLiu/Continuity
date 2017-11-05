@@ -9,7 +9,7 @@
              d:DesignWidth="400">
 
     <Grid>
-        <TextBlock Text="Settings..."
+        <TextBlock Text="Settings (coming soon)..."
                    FontSize="24"
                    Foreground="White"
                    HorizontalAlignment="Center"
