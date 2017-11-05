@@ -532,7 +532,7 @@
                                                ContentMargin="{TemplateBinding Padding}"
                                                CheckMode="{ThemeResource ListViewItemCheckMode}"
                                                RevealBackground="{ThemeResource ListViewItemRevealBackground}"
-                                               RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}"
+                                               RevealBorderThickness="0"
                                                RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}">
 
                             <VisualStateManager.VisualStateGroups>
@@ -596,9 +596,9 @@
         <Style x:Key="ListViewItemCustomRevealStyle"
                TargetType="ListViewItem">
             <Setter Property="Background"
-                    Value="#FF060809" />
+                    Value="#FF1D2126" />
             <Setter Property="Foreground"
-                    Value="#FFF4F4F4" />
+                    Value="White" />
             <Setter Property="Padding"
                     Value="0" />
             <Setter Property="Margin"
@@ -624,11 +624,11 @@
                                                FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
                                                PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
                                                PointerOverBackground="#FF182127"
-                                               PointerOverForeground="#FFF4F4F4"
+                                               PointerOverForeground="White"
                                                SelectedBackground="#FFF4F4F4"
                                                SelectedForeground="#FF182127"
                                                SelectedPointerOverBackground="#FFF4F4F4"
-                                               PressedBackground="#FFF4F4F4"
+                                               PressedBackground="#FF0B0F11"
                                                SelectedPressedBackground="#FFF4F4F4"
                                                DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
                                                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
@@ -638,7 +638,7 @@
                                                ContentMargin="{TemplateBinding Padding}"
                                                CheckMode="{ThemeResource ListViewItemCheckMode}"
                                                RevealBackground="{ThemeResource ListViewItemRevealBackground}"
-                                               RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}"
+                                               RevealBorderThickness="0"
                                                RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"
                                                RevealBackgroundShowsAboveContent="False">
 
@@ -705,7 +705,7 @@
             <Setter Property="Background"
                     Value="{ThemeResource ToggleButtonRevealBackground}" />
             <Setter Property="Foreground"
-                    Value="#FFF4F4F4" />
+                    Value="#FF2A3037" />
             <Setter Property="BorderBrush"
                     Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
             <Setter Property="Padding"

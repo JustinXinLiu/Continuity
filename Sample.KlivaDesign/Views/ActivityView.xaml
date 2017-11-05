@@ -274,12 +274,12 @@
                                                TintColor="White"
                                                FallbackColor="#FFBCBCBC" />
             </Border.Background>
-            <Rectangle Opacity="0.7">
+            <Rectangle Opacity="0.4">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1"
                                          StartPoint="0.5,0">
-                        <GradientStop Color="#FF0B0F11" />
-                        <GradientStop Color="#FF182127"
+                        <GradientStop Color="#FF171211" />
+                        <GradientStop Color="#FF171211"
                                       Offset="1" />
                     </LinearGradientBrush>
                 </Rectangle.Fill>
@@ -293,7 +293,7 @@
             <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
         </ComboBox>
         <ListView x:Name="ActivityList"
-                  ItemsSource="{x:Bind Path=ActivitySummaries}"
+                  ItemsSource="{x:Bind ActivitySummaries}"
                   ItemTemplate="{StaticResource ActivityTemplate}"
                   ItemContainerStyle="{ThemeResource ListViewItemCustomRevealStyle}"
                   Grid.Row="2"
@@ -637,7 +637,7 @@
                         </continuity:Tab.Background>
 
                         <continuity:TabItem Header="Segments">
-                            <ListView ItemsSource="{x:Bind Path=Segments}"
+                            <ListView ItemsSource="{x:Bind Segments}"
                                       ContainerContentChanging="OnSegmentsContainerContentChanging">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="models:Segment">
