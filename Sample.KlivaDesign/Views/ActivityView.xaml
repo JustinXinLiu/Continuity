@@ -247,7 +247,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="174" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
@@ -268,26 +268,21 @@
         <Border x:Name="ActionsPanel"
                 Grid.Row="1"
                 Grid.RowSpan="2"
-                Grid.ColumnSpan="3">
+                Grid.ColumnSpan="3"
+                Visibility="Collapsed">
             <Border.Background>
                 <brushes:BackdropTintBlurBrush BlurAmount="12"
-                                               TintColor="White"
+                                               TintColor="#CC060809"
                                                FallbackColor="#FFBCBCBC" />
             </Border.Background>
-            <Rectangle Opacity="0.4">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1"
-                                         StartPoint="0.5,0">
-                        <GradientStop Color="#FF171211" />
-                        <GradientStop Color="#FF171211"
-                                      Offset="1" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
         </Border>
-        <ComboBox SelectedIndex="0"
+        <ComboBox x:Name="ActivityType" 
+                  SelectedIndex="0"
                   Grid.Row="1"
-                  Margin="16,12,0,6">
+                  Margin="16,12,0,6"
+                  Opacity="0"
+                  Visibility="Collapsed"
+                  d:IsHidden="True">
             <ComboBoxItem Content="ALL ACTIVITIES" />
             <ComboBoxItem Content="MY ACTIVITIES" />
             <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
@@ -301,7 +296,10 @@
                   ScrollViewer.VerticalScrollMode="Disabled"
                   ScrollViewer.HorizontalScrollMode="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                  Padding="12,0,12,8">
+                  Padding="12,0,12,8"
+                  IsItemClickEnabled="True"
+                  ContainerContentChanging="OnActivityListContainerContentChanging"
+                  ItemClick="OnActivityListItemClick">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsStackPanel Orientation="Horizontal" />
@@ -310,28 +308,23 @@
         </ListView>
 
         <Grid x:Name="RightBlade"
+              Height="486"
+              VerticalAlignment="Bottom"
               Grid.Row="4"
               Grid.Column="2"
-              VerticalAlignment="Bottom"
-              Margin="12">
+              Margin="12"
+              d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <continuity:CircularToggleButton CornerRadius="0,12,12,0"
-                                             Margin="-4,32,0,0"
-                                             Grid.Column="1">
-                <continuity:CircularToggleButton.CheckedContent>
-                    <ContentControl Style="{StaticResource IconTrendStyle}" />
-                </continuity:CircularToggleButton.CheckedContent>
-                <ContentControl Margin="2"
-                                Style="{StaticResource IconCloseStyle}" />
-            </continuity:CircularToggleButton>
-
-            <Grid CornerRadius="24"
+            <Grid x:Name="RightBladeContent"
+                  CornerRadius="24"
                   BorderBrush="#CC182127"
-                  BorderThickness="3">
+                  BorderThickness="3"
+                  Visibility="Collapsed"
+                  SizeChanged="OnRightBladeContentSizeChanged">
                 <Grid.Background>
                     <brushes:BackdropTintBlurBrush BlurAmount="12"
                                                    TintColor="White"
@@ -599,30 +592,38 @@
                     </Grid>
                 </Grid>
             </Grid>
+
+            <continuity:CircularToggleButton x:Name="RightBladeToggle"
+                                             CheckedCornerRadius="0,18,18,0"
+                                             Margin="-3,32,0,0"
+                                             Grid.Column="1"
+                                             Visibility="Collapsed"
+                                             Checked="OnRightBladeToggleChecked"
+                                             Unchecked="OnRightBladeToggleUnchecked">
+                <continuity:CircularToggleButton.CheckedContent>
+                    <ContentControl Margin="3"
+                                    Style="{StaticResource IconCloseStyle}" />
+                </continuity:CircularToggleButton.CheckedContent>
+                <ContentControl Style="{StaticResource IconTrendStyle}" />
+            </continuity:CircularToggleButton>
         </Grid>
 
         <Grid x:Name="LeftBlade"
               Margin="12"
-              Grid.Row="4">
+              Grid.Row="4"
+              d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <continuity:CircularToggleButton Margin="0,32,-4,0">
-                <continuity:CircularToggleButton.Content>
-                    <ContentControl Margin="2"
-                                    Style="{StaticResource IconCloseStyle}" />
-                </continuity:CircularToggleButton.Content>
-                <continuity:CircularToggleButton.CheckedContent>
-                    <ContentControl Style="{StaticResource IconMoreStyle}" />
-                </continuity:CircularToggleButton.CheckedContent>
-            </continuity:CircularToggleButton>
-
-            <Border BorderBrush="#CC182127"
+            <Border x:Name="LeftBladeContent"
+                    BorderBrush="#CC182127"
                     BorderThickness="3"
                     CornerRadius="24"
-                    Grid.Column="1">
+                    Grid.Column="1"
+                    Visibility="Collapsed"
+                    SizeChanged="OnLeftBladeContentSizeChanged">
                 <Border CornerRadius="24">
                     <continuity:Tab x:Name="Tab"
                                     FontWeight="SemiBold"
@@ -676,11 +677,8 @@
                                                        Grid.Column="1"
                                                        OpticalMarginAlignment="TrimSideBearings"
                                                        VerticalAlignment="Stretch"
-                                                       Margin="0,8,0,0">
-                                            <Run Text="{x:Bind Distance}"
-                                                 FontSize="16" />
-                                            <Run Text="KM" />
-                                            </TextBlock>
+                                                       Margin="0,8,0,0"><Run Text="{x:Bind Distance}"
+                                                                             FontSize="16" /><Run Text=" " /><Run Text="KM" /></TextBlock>
                                             <TextBlock Foreground="#FFBCBCBC"
                                                        FontWeight="SemiBold"
                                                        FontSize="8"
@@ -689,11 +687,8 @@
                                                        VerticalAlignment="Stretch"
                                                        Grid.Row="1"
                                                        Grid.Column="2"
-                                                       Margin="0,8,0,0">
-                                            <Run Text="{x:Bind Speed}"
-                                                 FontSize="16" />
-                                            <Run Text="KM/H" />
-                                            </TextBlock>
+                                                       Margin="0,8,0,0"><Run Text="{x:Bind Speed}"
+                                                                             FontSize="16" /><Run Text=" " /><Run Text="KM/H" /></TextBlock>
                                             <TextBlock Text="{x:Bind Time}"
                                                        Foreground="White"
                                                        FontWeight="SemiBold"
@@ -713,6 +708,18 @@
                     </continuity:Tab>
                 </Border>
             </Border>
+
+            <continuity:CircularToggleButton x:Name="LeftBladeToggle"
+                                             Margin="0,32,-3,0"
+                                             Visibility="Collapsed"
+                                             Checked="OnLeftBladeToggleChecked"
+                                             Unchecked="OnLeftBladeToggleUnchecked">
+                <continuity:CircularToggleButton.CheckedContent>
+                    <ContentControl Margin="3"
+                                    Style="{StaticResource IconCloseStyle}" />
+                </continuity:CircularToggleButton.CheckedContent>
+                <ContentControl Style="{StaticResource IconMoreStyle}" />
+            </continuity:CircularToggleButton>
         </Grid>
     </Grid>
 </UserControl>

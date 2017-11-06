@@ -56,7 +56,7 @@
             </Rectangle>
 
             <TextBlock x:Name="Title"
-                       Foreground="#FFF53327"
+                       Foreground="White"
                        HorizontalAlignment="Center"
                        Text="KLIVA"
                        VerticalAlignment="Bottom"

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Continuity.Extensions;
-using System.Collections.Generic;
 
 namespace Sample.KlivaDesign
 {
@@ -13,7 +12,7 @@ namespace Sample.KlivaDesign
 
         private const int RenderingDelay = 200;
 
-        #endregion
+		#endregion
 
         public LandingPage()
         {
@@ -39,13 +38,15 @@ namespace Sample.KlivaDesign
 
             await ScrollToViewAsync(nameof(ActivityView), ActivityView, ActivityHostView);
             ActivityMenuItem.IsChecked = true;
-        }
+
+			
+		}
 
         private bool IsUserLoggedIn()
         {
             var random = new Random();
             int probability = random.Next(100);
-            return probability <= 80;
+            return probability <= 1;
         }
 
         #endregion

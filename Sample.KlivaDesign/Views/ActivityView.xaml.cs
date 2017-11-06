@@ -13,27 +13,31 @@ using Windows.UI.Xaml.Media;
 using Continuity.Extensions;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Sample.KlivaDesign.Models;
+using System.Numerics;
+using Windows.UI.Xaml.Controls.Primitives;
+using Continuity;
 
 namespace Sample.KlivaDesign.Views
 {
-    public sealed partial class ActivityView : UserControl
-    {
-        public ObservableCollection<ActivitySummary> ActivitySummaries { get; } = new ObservableCollection<ActivitySummary>();
+	public sealed partial class ActivityView : UserControl
+	{
+		public ObservableCollection<ActivitySummary> ActivitySummaries { get; } = new ObservableCollection<ActivitySummary>();
 		public ObservableCollection<Segment> Segments { get; } = new ObservableCollection<Segment>();
 
-
 		public ActivityView()
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 
-            SetupMapStyle();
-            ShowMapAndPolyline();
-            PopulateActivities();
+			SetupMapStyle();
+			ShowMapAndPolyline();
+			PopulateActivities();
 			PopulateSegments();
 
-            void SetupMapStyle()
-            {
-                ActivityMap.StyleSheet = MapStyleSheet.ParseFromJson(@"
+			EnableAnimations();
+
+			void SetupMapStyle()
+			{
+				ActivityMap.StyleSheet = MapStyleSheet.ParseFromJson(@"
                 {
                     ""version"": ""1.*"",
                     ""settings"": {
@@ -139,189 +143,205 @@ namespace Sample.KlivaDesign.Views
                     }
                 }
             ");
-            }
+			}
 
-            void ShowMapAndPolyline()
-            {
-                ActivityMap.Visual().Opacity = 0;
-                ActivityMap.LoadingStatusChanged += ActivityMapLoadingStatusChanged;
+			void ShowMapAndPolyline()
+			{
+				ActivityMap.Visual().Opacity = 0;
+				ActivityMap.LoadingStatusChanged += ActivityMapLoadingStatusChanged;
 
-                async void ActivityMapLoadingStatusChanged(MapControl sender, object args)
-                {
-                    ActivityMap.LoadingStatusChanged -= ActivityMapLoadingStatusChanged;
-                    RemoveMapServiceTokenWarning();
+				async void ActivityMapLoadingStatusChanged(MapControl sender, object args)
+				{
+					ActivityMap.LoadingStatusChanged -= ActivityMapLoadingStatusChanged;
+					RemoveMapServiceTokenWarning();
 
-                    ActivityMap.StartOpacityAnimation();
-                    await DrawPolylineAsync();
-                }
-            }
+					ActivityMap.StartOpacityAnimation();
+					await DrawPolylineAsync();
+				}
+			}
 
-            void RemoveMapServiceTokenWarning()
-            {
-                var mapGrid = ActivityMap.GetChildByName<Grid>("MapGrid");
-                var border = mapGrid.Children().OfType<Border>().Last();
-                border.Visibility = Visibility.Collapsed;
-            }
-        }
+			void RemoveMapServiceTokenWarning()
+			{
+				var mapGrid = ActivityMap.GetChildByName<Grid>("MapGrid");
+				var border = mapGrid.Children().OfType<Border>().Last();
+				border.Visibility = Visibility.Collapsed;
+			}
 
-        private async Task DrawPolylineAsync()
-        {
-            var geoPositions = new List<BasicGeoposition>
-            {
-                new BasicGeoposition { Latitude = -37.88385, Longitude = 145.18219 },
-                new BasicGeoposition { Latitude = -37.88334, Longitude = 145.17769 },
-                new BasicGeoposition { Latitude = -37.88385, Longitude = 145.17745 },
-                new BasicGeoposition { Latitude = -37.88336, Longitude = 145.17674 },
-                new BasicGeoposition { Latitude = -37.88268, Longitude = 145.17029 },
-                new BasicGeoposition { Latitude = -37.88148, Longitude = 145.17013 },
-                new BasicGeoposition { Latitude = -37.88081, Longitude = 145.16776 },
-                new BasicGeoposition { Latitude = -37.88066, Longitude = 145.16563 },
-                new BasicGeoposition { Latitude = -37.87992, Longitude = 145.16356 }
-            };
+			void EnableAnimations()
+			{
+				ActionsPanel.EnableFluidVisibilityAnimation(AnimationAxis.Y, -174.0f, -174.0f, showDuration: 400, hideDuration: 400);
+				//ActivityType.EnableFluidVisibilityAnimation(showFromOffset: 12.0f, hideToOffset: -12.0f, showDuration: 400, hideDuration: 400);
 
-            var polyLine = new MapPolyline
-            {
-                Path = new Geopath(geoPositions),
-                StrokeThickness = 4,
-                StrokeDashed = false,
-                StrokeColor = Color.FromArgb(200, 245, 51, 39)
-            };
-            ActivityMap.MapElements.Add(polyLine);
+				LeftBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
+				RightBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
+				LeftBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
+				RightBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
+			}
+		}
 
-            var startPoint = new Button { Style = (Style)App.Current.Resources["ButtonMapPointStyle"] };
-            ActivityMap.Children.Add(startPoint);
-            MapControl.SetLocation(startPoint, new Geopoint(geoPositions.First()));
-            MapControl.SetNormalizedAnchorPoint(startPoint, new Point(0.5, 0.5));
+		private async Task DrawPolylineAsync()
+		{
+			var geoPositions = new List<BasicGeoposition>
+			{
+				new BasicGeoposition { Latitude = -37.88385, Longitude = 145.18219 },
+				new BasicGeoposition { Latitude = -37.88334, Longitude = 145.17769 },
+				new BasicGeoposition { Latitude = -37.88385, Longitude = 145.17745 },
+				new BasicGeoposition { Latitude = -37.88336, Longitude = 145.17674 },
+				new BasicGeoposition { Latitude = -37.88268, Longitude = 145.17029 },
+				new BasicGeoposition { Latitude = -37.88148, Longitude = 145.17013 },
+				new BasicGeoposition { Latitude = -37.88081, Longitude = 145.16776 },
+				new BasicGeoposition { Latitude = -37.88066, Longitude = 145.16563 },
+				new BasicGeoposition { Latitude = -37.87992, Longitude = 145.16356 }
+			};
 
-            var endPoint = new Button { Style = (Style)App.Current.Resources["ButtonMapPinStyle"] };
-            ActivityMap.Children.Add(endPoint);
-            MapControl.SetLocation(endPoint, new Geopoint(geoPositions.Last()));
-            MapControl.SetNormalizedAnchorPoint(endPoint, new Point(0.5, 0.5));
+			var polyLine = new MapPolyline
+			{
+				Path = new Geopath(geoPositions),
+				StrokeThickness = 4,
+				StrokeDashed = false,
+				StrokeColor = Color.FromArgb(200, 245, 51, 39)
+			};
+			ActivityMap.MapElements.Add(polyLine);
 
-            var margin = ActualWidth / 6;
-            await ActivityMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions),
-                new Thickness(margin, margin, margin, margin), MapAnimationKind.Bow);
-        }
+			var startPoint = new Button { Style = (Style)App.Current.Resources["ButtonMapPointStyle"] };
+			ActivityMap.Children.Add(startPoint);
+			MapControl.SetLocation(startPoint, new Geopoint(geoPositions.First()));
+			MapControl.SetNormalizedAnchorPoint(startPoint, new Point(0.5, 0.5));
 
-        private void PopulateActivities()
-        {
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Justin",
-                ProfileMediumFormatted = "../Assets/Avatars/justin.jpg",
-                TypeImage = "",
-                Name = "Morning Ride",
-                StartDate = "34 minutes ago",
-                Distance = 12.3,
-                ElevationGain = 37,
-                CommentCount = 1,
-                KudosCount = 0
-            });
+			var endPoint = new Button { Style = (Style)App.Current.Resources["ButtonMapPinStyle"] };
+			ActivityMap.Children.Add(endPoint);
+			MapControl.SetLocation(endPoint, new Geopoint(geoPositions.Last()));
+			MapControl.SetNormalizedAnchorPoint(endPoint, new Point(0.5, 0.5));
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Bart",
-                ProfileMediumFormatted = "../Assets/Avatars/bart.jpg",
-                TypeImage = "",
-                Name = "Morning Ride",
-                StartDate = "6 hours ago",
-                Distance = 16.1,
-                ElevationGain = 44,
-                CommentCount = 3,
-                KudosCount = 5
-            });
+			var margin = ActualWidth / 4;
+			await ActivityMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions),
+				new Thickness(margin, margin, margin, margin), MapAnimationKind.Bow);
+		}
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Glenn",
-                ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
-                TypeImage = "",
-                Name = "Night Ride",
-                StartDate = "1 day ago",
-                Distance = 72.9,
-                ElevationGain = 121,
-                CommentCount = 13,
-                KudosCount = 27
-            });
+		private async void PopulateActivities()
+		{
+			await Task.Delay(1000);
+			ActionsPanel.Visibility = Visibility.Visible;
+			ActivityType.Visibility = Visibility.Visible;
+			ActivityType.Animate(null, 1.0d, nameof(Opacity));
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Glenn",
-                ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
-                TypeImage = "",
-                Name = "Night Ride",
-                StartDate = "1 day ago",
-                Distance = 2.9,
-                ElevationGain = 77,
-                CommentCount = 2,
-                KudosCount = 33
-            });
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Justin",
+				ProfileMediumFormatted = "../Assets/Avatars/justin.jpg",
+				TypeImage = "",
+				Name = "Morning Ride",
+				StartDate = "34 minutes ago",
+				Distance = 12.3,
+				ElevationGain = 37,
+				CommentCount = 1,
+				KudosCount = 0
+			});
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Bart",
-                ProfileMediumFormatted = "../Assets/Avatars/bart.jpg",
-                TypeImage = "",
-                Name = "Night Ride",
-                StartDate = "1 day ago",
-                Distance = 67.8,
-                ElevationGain = 99,
-                CommentCount = 12,
-                KudosCount = 7
-            });
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Bart",
+				ProfileMediumFormatted = "../Assets/Avatars/bart.jpg",
+				TypeImage = "",
+				Name = "Morning Ride",
+				StartDate = "6 hours ago",
+				Distance = 16.1,
+				ElevationGain = 44,
+				CommentCount = 3,
+				KudosCount = 5
+			});
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Justin",
-                ProfileMediumFormatted = "../Assets/Avatars/justin.jpg",
-                TypeImage = "",
-                Name = "Night Ride",
-                StartDate = "2 days ago",
-                Distance = 7.9,
-                ElevationGain = 23,
-                CommentCount = 55,
-                KudosCount = 12
-            });
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Glenn",
+				ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
+				TypeImage = "",
+				Name = "Night Ride",
+				StartDate = "1 day ago",
+				Distance = 72.9,
+				ElevationGain = 121,
+				CommentCount = 13,
+				KudosCount = 27
+			});
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Bart",
-                ProfileMediumFormatted = "../Assets/Avatars/bart.jpg",
-                TypeImage = "",
-                Name = "Night Ride",
-                StartDate = "4 days ago",
-                Distance = 143.8,
-                ElevationGain = 212,
-                CommentCount = 1,
-                KudosCount = 3
-            });
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Glenn",
+				ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
+				TypeImage = "",
+				Name = "Night Ride",
+				StartDate = "1 day ago",
+				Distance = 2.9,
+				ElevationGain = 77,
+				CommentCount = 2,
+				KudosCount = 33
+			});
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Glenn",
-                ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
-                TypeImage = "",
-                Name = "Afternoon Ride",
-                StartDate = "1 day ago",
-                Distance = 0.6,
-                ElevationGain = 12,
-                CommentCount = 0,
-                KudosCount = 1
-            });
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Bart",
+				ProfileMediumFormatted = "../Assets/Avatars/bart.jpg",
+				TypeImage = "",
+				Name = "Night Ride",
+				StartDate = "1 day ago",
+				Distance = 67.8,
+				ElevationGain = 99,
+				CommentCount = 12,
+				KudosCount = 7
+			});
 
-            ActivitySummaries.Add(new ActivitySummary
-            {
-                FullName = "Glenn",
-                ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
-                TypeImage = "",
-                Name = "Night Ride",
-                StartDate = "1 day ago",
-                Distance = 12,
-                ElevationGain = 50,
-                CommentCount = 2,
-                KudosCount = 7
-            });
-        }
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Justin",
+				ProfileMediumFormatted = "../Assets/Avatars/justin.jpg",
+				TypeImage = "",
+				Name = "Night Ride",
+				StartDate = "2 days ago",
+				Distance = 7.9,
+				ElevationGain = 23,
+				CommentCount = 55,
+				KudosCount = 12
+			});
+
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Bart",
+				ProfileMediumFormatted = "../Assets/Avatars/bart.jpg",
+				TypeImage = "",
+				Name = "Night Ride",
+				StartDate = "4 days ago",
+				Distance = 143.8,
+				ElevationGain = 212,
+				CommentCount = 1,
+				KudosCount = 3
+			});
+
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Glenn",
+				ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
+				TypeImage = "",
+				Name = "Afternoon Ride",
+				StartDate = "1 day ago",
+				Distance = 0.6,
+				ElevationGain = 12,
+				CommentCount = 0,
+				KudosCount = 1
+			});
+
+			ActivitySummaries.Add(new ActivitySummary
+			{
+				FullName = "Glenn",
+				ProfileMediumFormatted = "../Assets/Avatars/glenn.jpg",
+				TypeImage = "",
+				Name = "Night Ride",
+				StartDate = "1 day ago",
+				Distance = 12,
+				ElevationGain = 50,
+				CommentCount = 2,
+				KudosCount = 7
+			});
+		}
 
 		private void PopulateSegments()
 		{
@@ -438,6 +458,8 @@ namespace Sample.KlivaDesign.Views
 			});
 		}
 
+		#region Blades event handlers
+
 		private void OnSegmentsContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
 		{
 			if (args.InRecycleQueue || args.ItemContainer == null) return;
@@ -451,5 +473,65 @@ namespace Sample.KlivaDesign.Views
 				args.ItemContainer.Background = new SolidColorBrush("#05FFEBEA".ToColor());
 			}
 		}
+
+		private void OnLeftBladeContentSizeChanged(object sender, SizeChangedEventArgs e) =>
+			LeftBladeContent.Visual().CenterPoint = new Vector3(0.0f, (LeftBladeToggle.Margin.Top + LeftBladeToggle.ActualHeight / 2).ToFloat(), 0.0f);
+
+		private void OnLeftBladeToggleChecked(object sender, RoutedEventArgs e) =>
+			LeftBladeContent.Visibility = Visibility.Visible;
+
+		private void OnLeftBladeToggleUnchecked(object sender, RoutedEventArgs e) =>
+			LeftBladeContent.Visibility = Visibility.Collapsed;
+
+		private void OnRightBladeContentSizeChanged(object sender, SizeChangedEventArgs e) =>
+			RightBladeContent.Visual().CenterPoint = new Vector3(RightBladeContent.ActualWidth.ToFloat(), (RightBladeToggle.Margin.Top + RightBladeToggle.ActualHeight / 2).ToFloat(), 0.0f);
+
+		private void OnRightBladeToggleChecked(object sender, RoutedEventArgs e) =>
+			RightBladeContent.Visibility = Visibility.Visible;
+
+		private void OnRightBladeToggleUnchecked(object sender, RoutedEventArgs e) =>
+			RightBladeContent.Visibility = Visibility.Collapsed;
+
+		#endregion
+
+		#region ActivityList event handlers
+
+		private void OnActivityListContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+		{
+			if (!args.InRecycleQueue)
+			{
+				args.ItemContainer.Loaded += OnItemContainerLoaded;
+			}
+
+			void OnItemContainerLoaded(object s, RoutedEventArgs e)
+			{
+				args.ItemContainer.Loaded -= OnItemContainerLoaded;
+
+				// Don't animate if we're not in the visible viewport
+				if (ActivityList.ItemsPanelRoot is ItemsStackPanel itemsPanel &&
+					args.ItemContainer.Children().OfType<ListViewItemPresenter>().SingleOrDefault() is ListViewItemPresenter itemPresenter &&
+					args.ItemIndex >= itemsPanel.FirstVisibleIndex && args.ItemIndex <= itemsPanel.LastVisibleIndex)
+				{
+					var itemVisual = itemPresenter.Visual();
+					itemVisual.Opacity = 0.0f;
+					itemVisual.CenterPoint = new Vector3(itemPresenter.RenderSize.ToVector2() / 2, 0f);
+					var delay = (args.ItemIndex - itemsPanel.FirstVisibleIndex) * 100;
+
+					itemVisual.StartOpacityAnimation(delay: delay);
+					itemVisual.StartScaleAnimation(new Vector2(0.6f), Vector2.One, delay: delay);
+				}
+			}
+		}
+
+		private void OnActivityListItemClick(object sender, ItemClickEventArgs e)
+		{
+			LeftBladeToggle.Visibility = Visibility.Visible;
+			RightBladeToggle.Visibility = Visibility.Visible;
+
+			RightBladeToggle.IsChecked = true;
+			LeftBladeToggle.IsChecked = true;
+		}
+
+		#endregion
 	}
 }
