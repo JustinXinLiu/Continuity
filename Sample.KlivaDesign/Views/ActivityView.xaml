@@ -240,9 +240,9 @@
 
     <Grid x:Name="Root">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="596" />
+            <ColumnDefinition Width="2.5*" />
+            <ColumnDefinition Width="2.5*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
@@ -260,11 +260,12 @@
                          TransitFeaturesEnabled="False"
                          TransitFeaturesVisible="False"
                          ZoomInteractionMode="PointerAndKeyboard"
+                         TiltInteractionMode="PointerAndKeyboard"
                          Style="Road"
-                         d:IsHidden="True"
                          Grid.RowSpan="5"
                          IsTabStop="False"
-                         Grid.ColumnSpan="3" />
+                         Grid.ColumnSpan="3"
+                         d:IsHidden="True" />
         <Border x:Name="ActionsPanel"
                 Grid.Row="1"
                 Grid.RowSpan="2"
@@ -276,17 +277,18 @@
                                                FallbackColor="#FFBCBCBC" />
             </Border.Background>
         </Border>
-        <ComboBox x:Name="ActivityType" 
+
+        <ComboBox x:Name="ActivityType"
                   SelectedIndex="0"
                   Grid.Row="1"
                   Margin="16,12,0,6"
                   Opacity="0"
-                  Visibility="Collapsed"
-                  d:IsHidden="True">
+                  Visibility="Collapsed">
             <ComboBoxItem Content="ALL ACTIVITIES" />
             <ComboBoxItem Content="MY ACTIVITIES" />
             <ComboBoxItem Content="FRIENDS' ACTIVITIES" />
         </ComboBox>
+
         <ListView x:Name="ActivityList"
                   ItemsSource="{x:Bind ActivitySummaries}"
                   ItemTemplate="{StaticResource ActivityTemplate}"
@@ -308,15 +310,14 @@
         </ListView>
 
         <Grid x:Name="RightBlade"
-              Height="486"
               VerticalAlignment="Bottom"
+              HorizontalAlignment="Right"
               Grid.Row="4"
               Grid.Column="2"
-              Margin="12"
-              d:IsHidden="True">
+              Margin="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="37" />
             </Grid.ColumnDefinitions>
 
             <Grid x:Name="RightBladeContent"
@@ -341,10 +342,10 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid x:Name="DistancePanel"
-                      Height="240"
-                      CornerRadius="24"
                       Grid.Row="1"
-                      Grid.ColumnSpan="2">
+                      Grid.ColumnSpan="2"
+                      Width="528"
+                      Height="240">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -462,10 +463,8 @@
                       VerticalAlignment="Top"
                       Margin="48,4,40,0" />
 
-                <Grid x:Name="SpeedPanel"
-                      Height="240"
-                      Grid.Row="2">
-
+                <Border x:Name="SpeedPanel"
+                        Grid.Row="2">
                     <Grid VerticalAlignment="Center"
                           Margin="24,24,6,16">
                         <Grid.RowDefinitions>
@@ -523,13 +522,10 @@
                                                                                                                                  Foreground="#668C8C8C" /></TextBlock>
                         </StackPanel>
                     </Grid>
-                </Grid>
-                <Grid x:Name="HeartRatePanel"
-                      Height="240"
-                      CornerRadius="24"
-                      Grid.Row="2"
-                      Grid.Column="1">
-
+                </Border>
+                <Border x:Name="HeartRatePanel"
+                        Grid.Row="2"
+                        Grid.Column="1">
                     <Grid VerticalAlignment="Center"
                           Margin="0,24,36,16">
                         <Grid.RowDefinitions>
@@ -590,7 +586,7 @@
                                                                                                    Foreground="#FF8C8C8C" /></TextBlock>
                         </StackPanel>
                     </Grid>
-                </Grid>
+                </Border>
             </Grid>
 
             <continuity:CircularToggleButton x:Name="RightBladeToggle"
@@ -610,8 +606,7 @@
 
         <Grid x:Name="LeftBlade"
               Margin="12"
-              Grid.Row="4"
-              d:IsHidden="True">
+              Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
@@ -669,8 +664,7 @@
                                                        Grid.Column="1"
                                                        Grid.ColumnSpan="2"
                                                        Margin="0,12,12,8" />
-                                            <TextBlock Foreground="#FFBCBCBC"
-                                                       FontWeight="SemiBold"
+                                            <TextBlock FontWeight="SemiBold"
                                                        FontSize="8"
                                                        TextLineBounds="Tight"
                                                        Grid.Row="1"
@@ -679,8 +673,7 @@
                                                        VerticalAlignment="Stretch"
                                                        Margin="0,8,0,0"><Run Text="{x:Bind Distance}"
                                                                              FontSize="16" /><Run Text=" " /><Run Text="KM" /></TextBlock>
-                                            <TextBlock Foreground="#FFBCBCBC"
-                                                       FontWeight="SemiBold"
+                                            <TextBlock FontWeight="SemiBold"
                                                        FontSize="8"
                                                        TextLineBounds="Tight"
                                                        OpticalMarginAlignment="TrimSideBearings"

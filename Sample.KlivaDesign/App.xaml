@@ -469,7 +469,7 @@
             <Setter Property="Background"
                     Value="{ThemeResource ListViewItemBackground}" />
             <Setter Property="Foreground"
-                    Value="#FF060809" />
+                    Value="#FFBCBCBC" />
             <Setter Property="TabNavigation"
                     Value="Local" />
             <Setter Property="IsHoldingEnabled"
@@ -517,13 +517,13 @@
                                                FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
                                                FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
                                                PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
-                                               PointerOverBackground="#FFD1483F"
-                                               PointerOverForeground="#FF060809"
-                                               SelectedBackground="#FFDD443B"
-                                               SelectedForeground="#FF060809"
-                                               SelectedPointerOverBackground="#FFD1483F"
-                                               PressedBackground="#FFF53327"
-                                               SelectedPressedBackground="#FFF53327"
+                                               PointerOverBackground="#FF0B0F11"
+                                               PointerOverForeground="White"
+                                               SelectedBackground="#FFF53327"
+                                               SelectedForeground="White"
+                                               SelectedPointerOverBackground="#FFF53327"
+                                               PressedBackground="#FFFA291C"
+                                               SelectedPressedBackground="#FFFA291C"
                                                DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
                                                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
                                                ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
@@ -846,6 +846,163 @@
                                      StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}" />
                             <ContentPresenter x:Name="ContentPresenter"
                                               Foreground="{TemplateBinding Foreground}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              AutomationProperties.AccessibilityView="Raw" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ToggleButtonRevealStyle"
+               TargetType="ToggleButton">
+            <Setter Property="Background"
+                    Value="{ThemeResource ToggleButtonRevealBackground}" />
+            <Setter Property="Foreground"
+                    Value="#FF2A3037" />
+            <Setter Property="BorderBrush"
+                    Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
+            <Setter Property="Padding"
+                    Value="12" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight"
+                    Value="Normal" />
+            <Setter Property="FontSize"
+                    Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="True" />
+            <Setter Property="FocusVisualMargin"
+                    Value="-3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPointerOver}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushPointerOver}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundPointerOver}" />
+                                        </VisualState.Setters>
+
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="Pressed" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPressed}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushPressed}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundPressed}" />
+                                        </VisualState.Setters>
+
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundDisabled}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundDisabled}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushChecked}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundChecked}" />
+                                        </VisualState.Setters>
+
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPointerOver}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
+                                        </VisualState.Setters>
+
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="Pressed" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="#CCF53327" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPressed}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundCheckedPressed}" />
+                                        </VisualState.Setters>
+
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedDisabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundCheckedDisabled}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundCheckedDisabled}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                            <Ellipse x:Name="BackgroundVisual"
+                                     Fill="{TemplateBinding Background}"
+                                     Stroke="{TemplateBinding BorderBrush}"
+                                     StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}" />
+                            <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"
                                               ContentTransitions="{TemplateBinding ContentTransitions}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"

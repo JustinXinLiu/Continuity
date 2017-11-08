@@ -46,7 +46,8 @@
         </FlipView>
 
         <Grid x:Name="TopPane"
-              x:Load="False">
+              x:Load="False"
+              Visibility="Collapsed">
             <Rectangle>
                 <Rectangle.Fill>
                     <brushes:BackdropTintBlurBrush BlurAmount="12"

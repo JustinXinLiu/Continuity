@@ -29,10 +29,6 @@ namespace Sample.KlivaDesign.Views
 			InitializeComponent();
 
 			SetupMapStyle();
-			ShowMapAndPolyline();
-			PopulateActivities();
-			PopulateSegments();
-
 			EnableAnimations();
 
 			void SetupMapStyle()
@@ -145,6 +141,27 @@ namespace Sample.KlivaDesign.Views
             ");
 			}
 
+			void EnableAnimations()
+			{
+				ActionsPanel.EnableFluidVisibilityAnimation(AnimationAxis.Y, -174.0f, -174.0f, showDuration: 400, hideDuration: 400);
+				//ActivityType.EnableFluidVisibilityAnimation(showFromOffset: 12.0f, hideToOffset: -12.0f, showDuration: 400, hideDuration: 400);
+
+				LeftBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
+				RightBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
+				LeftBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
+				RightBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
+			}
+		}
+
+		public async Task InitializeAsync()
+		{
+			ShowMapAndPolyline();
+
+			await Task.Delay(1000);
+
+			PopulateActivities();
+			PopulateSegments();
+
 			void ShowMapAndPolyline()
 			{
 				ActivityMap.Visual().Opacity = 0;
@@ -157,25 +174,22 @@ namespace Sample.KlivaDesign.Views
 
 					ActivityMap.StartOpacityAnimation();
 					await DrawPolylineAsync();
+					AnimateMapProperties();
+
+					void RemoveMapServiceTokenWarning()
+					{
+						var mapGrid = ActivityMap.GetChildByName<Grid>("MapGrid");
+						var border = mapGrid.Children().OfType<Border>().Last();
+						border.Visibility = Visibility.Collapsed;
+					}
+
+					void AnimateMapProperties()
+					{
+						ActivityMap.Animate(null, 45.0d, nameof(ActivityMap.Heading), 800, enableDependentAnimation: true);
+						ActivityMap.Animate(null, 75.0d, nameof(ActivityMap.DesiredPitch), 800, enableDependentAnimation: true);
+						ActivityMap.Animate(null, 14.5d, nameof(ActivityMap.ZoomLevel), 800, enableDependentAnimation: true);
+					}
 				}
-			}
-
-			void RemoveMapServiceTokenWarning()
-			{
-				var mapGrid = ActivityMap.GetChildByName<Grid>("MapGrid");
-				var border = mapGrid.Children().OfType<Border>().Last();
-				border.Visibility = Visibility.Collapsed;
-			}
-
-			void EnableAnimations()
-			{
-				ActionsPanel.EnableFluidVisibilityAnimation(AnimationAxis.Y, -174.0f, -174.0f, showDuration: 400, hideDuration: 400);
-				//ActivityType.EnableFluidVisibilityAnimation(showFromOffset: 12.0f, hideToOffset: -12.0f, showDuration: 400, hideDuration: 400);
-
-				LeftBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
-				RightBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
-				LeftBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
-				RightBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
 			}
 		}
 
@@ -218,9 +232,8 @@ namespace Sample.KlivaDesign.Views
 				new Thickness(margin, margin, margin, margin), MapAnimationKind.Bow);
 		}
 
-		private async void PopulateActivities()
+		private void PopulateActivities()
 		{
-			await Task.Delay(1000);
 			ActionsPanel.Visibility = Visibility.Visible;
 			ActivityType.Visibility = Visibility.Visible;
 			ActivityType.Animate(null, 1.0d, nameof(Opacity));
