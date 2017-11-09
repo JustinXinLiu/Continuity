@@ -144,7 +144,7 @@ namespace Sample.KlivaDesign.Views
 			void EnableAnimations()
 			{
 				ActionsPanel.EnableFluidVisibilityAnimation(AnimationAxis.Y, -174.0f, -174.0f, showDuration: 400, hideDuration: 400);
-				ActivityType.EnableFluidVisibilityAnimation(AnimationAxis.Y, showFromOffset: 12.0f, hideToOffset: -12.0f, showDuration: 400, hideDuration: 400);
+				ActivityType.EnableFluidVisibilityAnimation(AnimationAxis.Y, 12.0f, -12.0f, showDuration: 400, hideDuration: 400, showDelay: 800);
 
 				LeftBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
 				RightBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
@@ -496,7 +496,7 @@ namespace Sample.KlivaDesign.Views
 		private void OnLeftBladeToggleUnchecked(object sender, RoutedEventArgs e) =>
 			LeftBladeContent.Visibility = Visibility.Collapsed;
 
-		private void OnRightBladeContentSizeChanged(object sender, SizeChangedEventArgs e) => 
+		private void OnRightBladeContentSizeChanged(object sender, SizeChangedEventArgs e) =>
 			RightBladeContent.Visual().CenterPoint = new Vector3(RightBladeContent.ActualWidth.ToFloat(), (RightBladeToggle.Margin.Top + RightBladeToggle.ActualHeight / 2).ToFloat(), 0.0f);
 
 		private void OnRightBladeToggleChecked(object sender, RoutedEventArgs e) =>

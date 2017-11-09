@@ -325,7 +325,7 @@
                   CornerRadius="24"
                   BorderBrush="#CC182127"
                   BorderThickness="3"
-                  Visibility="Visible"
+                  Visibility="Collapsed"
                   SizeChanged="OnRightBladeContentSizeChanged">
                 <Grid.Background>
                     <brushes:BackdropTintBlurBrush BlurAmount="12"
