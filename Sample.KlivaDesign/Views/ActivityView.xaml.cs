@@ -144,7 +144,7 @@ namespace Sample.KlivaDesign.Views
 			void EnableAnimations()
 			{
 				ActionsPanel.EnableFluidVisibilityAnimation(AnimationAxis.Y, -174.0f, -174.0f, showDuration: 400, hideDuration: 400);
-				//ActivityType.EnableFluidVisibilityAnimation(showFromOffset: 12.0f, hideToOffset: -12.0f, showDuration: 400, hideDuration: 400);
+				ActivityType.EnableFluidVisibilityAnimation(AnimationAxis.Y, showFromOffset: 12.0f, hideToOffset: -12.0f, showDuration: 400, hideDuration: 400);
 
 				LeftBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
 				RightBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
@@ -188,6 +188,7 @@ namespace Sample.KlivaDesign.Views
 						ActivityMap.Animate(null, 45.0d, nameof(ActivityMap.Heading), 800, enableDependentAnimation: true);
 						ActivityMap.Animate(null, 75.0d, nameof(ActivityMap.DesiredPitch), 800, enableDependentAnimation: true);
 						ActivityMap.Animate(null, 14.5d, nameof(ActivityMap.ZoomLevel), 800, enableDependentAnimation: true);
+
 					}
 				}
 			}
@@ -236,7 +237,6 @@ namespace Sample.KlivaDesign.Views
 		{
 			ActionsPanel.Visibility = Visibility.Visible;
 			ActivityType.Visibility = Visibility.Visible;
-			ActivityType.Animate(null, 1.0d, nameof(Opacity));
 
 			ActivitySummaries.Add(new ActivitySummary
 			{
@@ -496,7 +496,7 @@ namespace Sample.KlivaDesign.Views
 		private void OnLeftBladeToggleUnchecked(object sender, RoutedEventArgs e) =>
 			LeftBladeContent.Visibility = Visibility.Collapsed;
 
-		private void OnRightBladeContentSizeChanged(object sender, SizeChangedEventArgs e) =>
+		private void OnRightBladeContentSizeChanged(object sender, SizeChangedEventArgs e) => 
 			RightBladeContent.Visual().CenterPoint = new Vector3(RightBladeContent.ActualWidth.ToFloat(), (RightBladeToggle.Margin.Top + RightBladeToggle.ActualHeight / 2).ToFloat(), 0.0f);
 
 		private void OnRightBladeToggleChecked(object sender, RoutedEventArgs e) =>
