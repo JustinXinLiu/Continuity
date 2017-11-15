@@ -96,8 +96,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CircularToggleButton.cs" />
-    <Compile Include="Controls\DistancePanel.xaml.cs">
-      <DependentUpon>DistancePanel.xaml</DependentUpon>
+    <Compile Include="Controls\DistanceGauge.xaml.cs">
+      <DependentUpon>DistanceGauge.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\HeartRateGauge.xaml.cs">
       <DependentUpon>HeartRateGauge.xaml</DependentUpon>
@@ -161,7 +161,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\DistancePanel.xaml">
+    <Page Include="Controls\DistanceGauge.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

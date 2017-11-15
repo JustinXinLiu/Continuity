@@ -150,6 +150,8 @@ namespace Sample.KlivaDesign.Views
 				RightBladeToggle.EnableFluidVisibilityAnimation(centerPoint: new Vector3(20.0f, 20.0f, 0.0f), showFromScale: 0.2f, hideToScale: 0.2f, showDuration: 400, hideDuration: 400);
 				LeftBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
 				RightBladeContent.EnableFluidVisibilityAnimation(showFromScale: 0.0f, hideToScale: 0.0f, showDuration: 400, hideDuration: 400);
+
+				RightBladeToggle.EnableImplicitAnimation(VisualPropertyType.Offset, duration: 400);
 			}
 		}
 
