@@ -102,10 +102,10 @@
                                 Value="TimeIcon" />
                         <Setter Target="DistanceText.(RelativePanel.AlignHorizontalCenterWith)"
                                 Value="LocationIcon" />
-                        <Setter Target="TimeText.(TextBlock.TextLineBounds)"
-                                Value="Full" />
-                        <Setter Target="DistanceText.(TextBlock.TextLineBounds)"
-                                Value="Full" />
+                        <Setter Target="TimeText.Margin"
+                                Value="0,4,0,0" />
+                        <Setter Target="DistanceText.Margin"
+                                Value="0,4,0,0" />
                     </VisualState.Setters>
                 </VisualState>
 
