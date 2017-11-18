@@ -602,7 +602,7 @@
             <Setter Property="Padding"
                     Value="0" />
             <Setter Property="Margin"
-                    Value="4" />
+                    Value="6,4" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">

@@ -27,6 +27,8 @@
                     <VisualState.Setters>
                         <Setter Target="MaxValueText.Visibility"
                                 Value="Collapsed" />
+                        <Setter Target="AvgValueText.FontSize"
+                                Value="20" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -44,6 +46,8 @@
                                 Value="Collapsed" />
                         <Setter Target="AvgValueWrapper.(FrameworkElement.HorizontalAlignment)"
                                 Value="Center" />
+                        <Setter Target="AvgValueText.FontSize"
+                                Value="20" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -65,6 +69,8 @@
                                 Value="Center" />
                         <Setter Target="AvgValueWrapper.Margin"
                                 Value="0" />
+                        <Setter Target="AvgValueText.FontSize"
+                                Value="20" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -106,7 +112,8 @@
                          Margin="12,0,0,0">
                     <TextBlock Foreground="White"
                                FontWeight="SemiBold"
-                               FontSize="12"><Run Text="{x:Bind AverageValue, Mode=OneWay}"
+                               FontSize="12"><Run x:Name="AvgValueText"
+                                                  Text="{x:Bind AverageValue, Mode=OneWay}"
                                                   FontSize="24" /><Run Text=" " /><Run Text="BPM"
                                                                                        Foreground="#FF8C8C8C" /></TextBlock>
                 </Viewbox>

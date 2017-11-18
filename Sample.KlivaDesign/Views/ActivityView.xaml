@@ -15,70 +15,10 @@
              d:DesignWidth="1600">
 
     <UserControl.Resources>
-        <!--<Style x:Key="Segment"
-               TargetType="ContentControl">
-            <Setter Property="Width"
-                    Value="16" />
-            <Setter Property="Height"
-                    Value="16" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ContentControl">
-                        <Path Margin="{TemplateBinding Padding}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                              Fill="{TemplateBinding Foreground}"
-                              Stretch="Uniform" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="Kudos"
-               TargetType="ContentControl">
-            <Setter Property="Width"
-                    Value="16" />
-            <Setter Property="Height"
-                    Value="16" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ContentControl">
-                        <Path Margin="{TemplateBinding Padding}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
-                              Fill="{TemplateBinding Foreground}"
-                              Stretch="Uniform" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="Comment"
-               TargetType="ContentControl">
-            <Setter Property="Width"
-                    Value="16" />
-            <Setter Property="Height"
-                    Value="16" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ContentControl">
-                        <Path Margin="{TemplateBinding Padding}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
-                              Fill="{TemplateBinding Foreground}"
-                              Stretch="Uniform" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
-
         <DataTemplate x:Key="ActivityTemplate"
                       x:DataType="models:ActivitySummary">
             <Grid x:Name="LayoutRoot"
-                  MinWidth="320">
+                  MinWidth="308">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -91,7 +31,7 @@
                 <Ellipse Width="48"
                          Height="48"
                          VerticalAlignment="Top"
-                         Margin="22,22,14,22"
+                         Margin="24,22,14,22"
                          Stroke="#FFEAEAEA"
                          StrokeThickness="0">
                     <Ellipse.Fill>
@@ -120,7 +60,7 @@
 
                     <TextBlock Text="{x:Bind Name}"
                                Opacity="0.8"
-                               Margin="12,24,0,8"
+                               Margin="8,24,0,4"
                                FontWeight="SemiBold"
                                FontSize="16"
                                TextLineBounds="Tight"
@@ -130,7 +70,7 @@
                     <TextBlock Text="{x:Bind StartDate}"
                                Opacity="0.6"
                                Grid.Row="1"
-                               Margin="12,0,12,16"
+                               Margin="8,0,12,16"
                                Grid.ColumnSpan="2"
                                FontSize="14"
                                OpticalMarginAlignment="TrimSideBearings" />
@@ -143,17 +83,17 @@
                               Height="20"
                               Stretch="Uniform"
                               Data="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"
-                              Fill="#FF3E4244"
+                              Fill="#668C8C8C"
                               UseLayoutRounding="False" />
                         <TextBlock FontWeight="SemiBold"
-                                   FontSize="20"
+                                   FontSize="10"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
-                                   Margin="12,0,0,0">
-                            <Run Text="{x:Bind Distance}" />
-                            <Run Text="KM"
-                                 FontSize="10" />
+                                   Margin="8,0,0,0">
+                            <Run Text="{x:Bind Distance}"
+                                 FontSize="20" />
+                            <Run Text="KM" />
                         </TextBlock>
                     </StackPanel>
 
@@ -166,19 +106,20 @@
                               Height="20"
                               Stretch="Uniform"
                               Data="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
-                              Fill="#FF3E4244"
+                              Fill="#668C8C8C"
                               UseLayoutRounding="False" />
                         <TextBlock FontWeight="SemiBold"
-                                   FontSize="20"
+                                   FontSize="10"
                                    TextLineBounds="Tight"
                                    OpticalMarginAlignment="TrimSideBearings"
                                    VerticalAlignment="Center"
-                                   Margin="12,0,0,0">
-                            <Run Text="{x:Bind ElevationGain}" />
-                            <Run Text="M"
-                                 FontSize="10" />
+                                   Margin="8,0,0,0">
+                            <Run Text="{x:Bind ElevationGain}"
+                                 FontSize="20" />
+                            <Run Text="M" />
                         </TextBlock>
                     </StackPanel>
+                    
                     <Line Stroke="#FF3E4244"
                           X2="1"
                           Stretch="Fill"
@@ -187,7 +128,7 @@
                           VerticalAlignment="Bottom"
                           Grid.ColumnSpan="3"
                           Grid.Row="2"
-                          Opacity="0.4" />
+                          Opacity="0" />
                 </Grid>
 
                 <Grid Grid.Row="1"
@@ -267,6 +208,7 @@
                          IsTabStop="False"
                          Grid.ColumnSpan="3"
                          d:IsHidden="True" />
+        
         <Border x:Name="ActionsPanel"
                 Grid.Row="1"
                 Grid.RowSpan="2"
@@ -282,7 +224,7 @@
         <ComboBox x:Name="ActivityType"
                   SelectedIndex="0"
                   Grid.Row="1"
-                  Margin="16,12,0,6"
+                  Margin="28,12,0,6"
                   Opacity="0"
                   Visibility="Collapsed">
             <ComboBoxItem Content="ALL ACTIVITIES" />

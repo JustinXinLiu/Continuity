@@ -60,14 +60,54 @@
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--<VisualState>
+                <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="900" />
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
+                        <Setter Target="ElevationPanel.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="DistanceLine.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="TimePanel.(Grid.Row)"
+                                Value="1" />
+                        <Setter Target="TimeCaption.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="TimePanel.(Grid.ColumnSpan)"
+                                Value="1" />
+                        <Setter Target="DistancePanel.(Grid.Row)"
+                                Value="1" />
+                        <Setter Target="DistanceCaption.(Grid.Row)"
+                                Value="2" />
+                        <Setter Target="DistancePanel.(Grid.ColumnSpan)"
+                                Value="1" />
+                        <Setter Target="DistanceCaption.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="DistancePanel.(Grid.Column)"
+                                Value="1" />
+                        <Setter Target="TimePanel.Margin"
+                                Value="32,0,0,0" />
+                        <Setter Target="DistancePanel.Margin"
+                                Value="12,0,24,0" />
+                        <Setter Target="TimeText.(RelativePanel.Below)"
+                                Value="TimeIcon" />
+                        <Setter Target="DistanceText.(RelativePanel.Below)"
+                                Value="LocationIcon" />
+                        <Setter Target="TimeIcon.(RelativePanel.AlignHorizontalCenterWithPanel)"
+                                Value="True" />
+                        <Setter Target="LocationIcon.(RelativePanel.AlignHorizontalCenterWithPanel)"
+                                Value="True" />
+                        <Setter Target="TimeText.(RelativePanel.AlignHorizontalCenterWith)"
+                                Value="TimeIcon" />
+                        <Setter Target="DistanceText.(RelativePanel.AlignHorizontalCenterWith)"
+                                Value="LocationIcon" />
+                        <Setter Target="TimeText.(TextBlock.TextLineBounds)"
+                                Value="Full" />
+                        <Setter Target="DistanceText.(TextBlock.TextLineBounds)"
+                                Value="Full" />
                     </VisualState.Setters>
-                </VisualState>-->
+                </VisualState>
 
                 <VisualState>
                     <VisualState.StateTriggers>
@@ -103,6 +143,10 @@
                                 Value="Collapsed" />
                         <Setter Target="LocationIcon.Visibility"
                                 Value="Collapsed" />
+                        <Setter Target="TimeText.Margin"
+                                Value="0,32,0,0" />
+                        <Setter Target="DistanceText.Margin"
+                                Value="0,32,0,0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -148,11 +192,10 @@
                    Grid.Row="1"
                    Grid.ColumnSpan="2" />
 
-        <StackPanel x:Name="TimePanel"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Grid.Row="2"
-                    Grid.ColumnSpan="2">
+        <RelativePanel x:Name="TimePanel"
+                       HorizontalAlignment="Center"
+                       Grid.Row="2"
+                       Grid.ColumnSpan="2">
             <Path x:Name="TimeIcon"
                   Width="24"
                   Height="24"
@@ -168,10 +211,12 @@
                        FontSize="20"
                        TextLineBounds="Tight"
                        OpticalMarginAlignment="TrimSideBearings"
-                       VerticalAlignment="Center" />
-        </StackPanel>
-        <StackPanel x:Name="DistancePanel"
-                    Orientation="Horizontal"
+                       VerticalAlignment="Center"
+                       RelativePanel.RightOf="TimeIcon"
+                       RelativePanel.AlignVerticalCenterWithPanel="True" />
+        </RelativePanel>
+
+        <RelativePanel x:Name="DistancePanel"
                     HorizontalAlignment="Center"
                     Grid.Row="4"
                     Grid.ColumnSpan="2"
@@ -190,10 +235,12 @@
                        FontSize="12"
                        TextLineBounds="Tight"
                        OpticalMarginAlignment="TrimSideBearings"
+                       RelativePanel.RightOf="LocationIcon"
+                       RelativePanel.AlignVerticalCenterWithPanel="True"
                        VerticalAlignment="Center"><Run Text="22.6"
                                                        FontSize="20" /><Run Text=" " /><Run Text="KM"
                                                                                             Foreground="#FF8C8C8C" /></TextBlock>
-        </StackPanel>
+        </RelativePanel>
 
         <TextBlock x:Name="DistanceCaption"
                    Foreground="#FF3E4244"
