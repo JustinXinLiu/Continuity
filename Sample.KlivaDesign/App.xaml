@@ -33,8 +33,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ContentControl">
-                        <Path x:Name="logo_drawboard_mini"
-                              Margin="{TemplateBinding Padding}"
+                        <Path Margin="{TemplateBinding Padding}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
@@ -51,8 +50,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ContentControl">
-                        <Path x:Name="logo_drawboard_mini"
-                              Margin="{TemplateBinding Padding}"
+                        <Path Margin="{TemplateBinding Padding}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Data="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
@@ -69,11 +67,61 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ContentControl">
-                        <Path x:Name="logo_drawboard_mini"
-                              Margin="{TemplateBinding Padding}"
+                        <Path Margin="{TemplateBinding Padding}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Data="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconKudosStyle"
+               BasedOn="{StaticResource IconBaseStyle}"
+               TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconKudosOutlineStyle"
+               BasedOn="{StaticResource IconBaseStyle}"
+               TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V10.09L23,12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconAchievementStyle"
+               BasedOn="{StaticResource IconBaseStyle}"
+               TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M20.2,2H19.5H18C17.1,2 16,3 16,4H8C8,3 6.9,2 6,2H4.5H3.8H2V11C2,12 3,13 4,13H6.2C6.6,15 7.9,16.7 11,17V19.1C8.8,19.3 8,20.4 8,21.7V22H16V21.7C16,20.4 15.2,19.3 13,19.1V17C16.1,16.7 17.4,15 17.8,13H20C21,13 22,12 22,11V2H20.2M4,11V4H6V6V11C5.1,11 4.3,11 4,11M20,11C19.7,11 18.9,11 18,11V6V4H20V11Z"
                               Fill="{TemplateBinding Foreground}"
                               Stretch="Uniform" />
                     </ControlTemplate>
@@ -838,8 +886,8 @@
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
-
                             </VisualStateManager.VisualStateGroups>
+                            
                             <Ellipse x:Name="BackgroundVisual"
                                      Fill="{TemplateBinding Background}"
                                      Stroke="{TemplateBinding BorderBrush}"
@@ -859,7 +907,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ToggleButtonRevealStyle"
+        <Style x:Key="ToggleButtonKudosStyle"
                TargetType="ToggleButton">
             <Setter Property="Background"
                     Value="{ThemeResource ToggleButtonRevealBackground}" />
@@ -947,6 +995,8 @@
                                                     Value="{ThemeResource ToggleButtonRevealBorderBrushChecked}" />
                                             <Setter Target="ContentPresenter.Foreground"
                                                     Value="{ThemeResource ToggleButtonForegroundChecked}" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -963,6 +1013,8 @@
                                                     Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPointerOver}" />
                                             <Setter Target="ContentPresenter.Foreground"
                                                     Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -979,6 +1031,8 @@
                                                     Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPressed}" />
                                             <Setter Target="ContentPresenter.Foreground"
                                                     Value="{ThemeResource ToggleButtonForegroundCheckedPressed}" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -993,15 +1047,28 @@
                                                     Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedDisabled}" />
                                             <Setter Target="ContentPresenter.Foreground"
                                                     Value="{ThemeResource ToggleButtonForegroundCheckedDisabled}" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
-
                             </VisualStateManager.VisualStateGroups>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
                             <Ellipse x:Name="BackgroundVisual"
                                      Fill="{TemplateBinding Background}"
                                      Stroke="{TemplateBinding BorderBrush}"
-                                     StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}" />
+                                     StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}"
+                                     Grid.ColumnSpan="2" />
+
+                            <ContentControl x:Name="KudosOutlineIcon" Style="{StaticResource IconKudosOutlineStyle}" />
+
+                            <ContentControl x:Name="KudosIcon" Opacity="0" Style="{StaticResource IconKudosStyle}" />
+
                             <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"
                                               ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -1009,7 +1076,8 @@
                                               Padding="{TemplateBinding Padding}"
                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              AutomationProperties.AccessibilityView="Raw" />
+                                              AutomationProperties.AccessibilityView="Raw" 
+                                              Grid.Column="1" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

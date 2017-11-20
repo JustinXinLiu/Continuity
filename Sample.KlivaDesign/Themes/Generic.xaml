@@ -256,4 +256,128 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="controls:ExtendedButton">
+        <Setter Property="Background"
+                Value="#FFF59127" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="BorderBrush"
+                Value="{ThemeResource ButtonRevealBorderBrush}" />
+        <Setter Property="BorderThickness"
+                Value="{ThemeResource ButtonRevealBorderThemeThickness}" />
+        <Setter Property="Padding"
+                Value="8" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontWeight"
+                Value="SemiBold" />
+        <Setter Property="FontSize"
+                Value="12" />
+        <Setter Property="UseSystemFocusVisuals"
+                Value="True" />
+        <Setter Property="FocusVisualMargin"
+                Value="-3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ExtendedButton">
+                    <Grid x:Name="RootGrid"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          CornerRadius="{TemplateBinding CornerRadius}"
+                          Padding="{TemplateBinding Padding}">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.(RevealBrush.State)"
+                                                Value="PointerOver" />
+                                        <Setter Target="RootGrid.Background"
+                                                Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
+                                        <Setter Target="ContentPresenter.BorderBrush"
+                                                Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
+                                        <Setter Target="ContentPresenter.Foreground"
+                                                Value="{ThemeResource ButtonForegroundPointerOver}" />
+                                        <Setter Target="Icon.Foreground"
+                                                Value="{ThemeResource ButtonForegroundPointerOver}" />
+                                    </VisualState.Setters>
+
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.(RevealBrush.State)"
+                                                Value="Pressed" />
+                                        <Setter Target="RootGrid.Background"
+                                                Value="{ThemeResource ButtonRevealBackgroundPressed}" />
+                                        <Setter Target="ContentPresenter.BorderBrush"
+                                                Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
+                                        <Setter Target="ContentPresenter.Foreground"
+                                                Value="{ThemeResource ButtonForegroundPressed}" />
+                                        <Setter Target="Icon.Foreground"
+                                                Value="{ThemeResource ButtonForegroundPressed}" />
+                                    </VisualState.Setters>
+
+                                    <Storyboard>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.Background"
+                                                Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
+                                        <Setter Target="ContentPresenter.BorderBrush"
+                                                Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
+                                        <Setter Target="ContentPresenter.Foreground"
+                                                Value="{TemplateBinding ButtonForegroundDisabled}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ContentControl x:Name="Icon"
+                                        Width="16"
+                                        Height="16"
+                                        Margin="0,0,4,0"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        ContentTransitions="{TemplateBinding ContentTransitions}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        AutomationProperties.AccessibilityView="Raw"
+                                        Style="{TemplateBinding IconStyle}" />
+
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          AutomationProperties.AccessibilityView="Raw"
+                                          Grid.Column="1" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

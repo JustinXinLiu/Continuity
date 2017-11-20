@@ -24,27 +24,48 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="90" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Ellipse Width="48"
-                         Height="48"
-                         VerticalAlignment="Top"
-                         Margin="24,22,14,22"
-                         Stroke="#FFEAEAEA"
-                         StrokeThickness="0">
-                    <Ellipse.Fill>
-                        <ImageBrush Stretch="UniformToFill"
-                                    ImageSource="{x:Bind ProfileMediumFormatted}" />
-                    </Ellipse.Fill>
-                </Ellipse>
-                <TextBlock Text="{x:Bind FullName}"
-                           Opacity="0.6"
-                           VerticalAlignment="Bottom"
-                           HorizontalAlignment="Center"
-                           Margin="22,0,12,14"
-                           FontSize="14" />
+                <Grid VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Ellipse Width="48"
+                             Height="48"
+                             Margin="24,22,14,4"
+                             Stroke="#ffffff"
+                             StrokeThickness="0">
+                        <Ellipse.Fill>
+                            <ImageBrush Stretch="UniformToFill"
+                                        ImageSource="{x:Bind ProfileMediumFormatted}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    
+                    <Border Width="24"
+                             Height="24"
+                            CornerRadius="12"
+                             Margin="24,22,14,4"
+                             Background="#FFEAEAEA"
+                             Opacity="0.4"
+                             RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <CompositeTransform TranslateX="12" />
+                        </Border.RenderTransform>
+                    </Border>
+                    
+                    <TextBlock Text="{x:Bind FullName}"
+                               TextWrapping="Wrap"
+                               Opacity="0.6"
+                               HorizontalAlignment="Center"
+                               Margin="22,0,12,14"
+                               FontSize="14"
+                               VerticalAlignment="Top"
+                               Grid.Row="1" />
+                </Grid>
 
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -70,7 +91,7 @@
                     <TextBlock Text="{x:Bind StartDate}"
                                Opacity="0.6"
                                Grid.Row="1"
-                               Margin="8,0,12,16"
+                               Margin="8,0"
                                Grid.ColumnSpan="2"
                                FontSize="14"
                                OpticalMarginAlignment="TrimSideBearings" />
@@ -119,7 +140,7 @@
                             <Run Text="M" />
                         </TextBlock>
                     </StackPanel>
-                    
+
                     <Line Stroke="#FF3E4244"
                           X2="1"
                           Stretch="Fill"
@@ -147,7 +168,7 @@
                               Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
                               Fill="#FF0D8AC6"
                               UseLayoutRounding="False"
-                              Margin="0,0,0,-4" />
+                              Margin="0,0,0,-2" />
                         <TextBlock Text="{x:Bind CommentCount}"
                                    FontWeight="SemiBold"
                                    FontSize="12"
@@ -176,6 +197,16 @@
                                    Margin="8,0,0,0" />
                     </StackPanel>
                 </Grid>
+
+                <continuity:ExtendedButton CornerRadius="0,16,0,16"
+                                           Content="{x:Bind AchievementCount}"
+                                           Visibility="{x:Bind AchievementVisible}"
+                                           IconStyle="{StaticResource IconAchievementStyle}" 
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Right"
+                                           Grid.Column="1"
+                                           Margin="0,-12,-10,0"
+                                           Padding="8,16,16,8" />
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
@@ -208,7 +239,7 @@
                          IsTabStop="False"
                          Grid.ColumnSpan="3"
                          d:IsHidden="True" />
-        
+
         <Border x:Name="ActionsPanel"
                 Grid.Row="1"
                 Grid.RowSpan="2"

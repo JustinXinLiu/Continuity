@@ -12,5 +12,7 @@
         public double ElevationGain { get; set; }
         public int CommentCount { get; set; }
         public int KudosCount { get; set; }
+	    public int AchievementCount { get; set; }
+	    public bool AchievementVisible => AchievementCount > 0;
     }
 }

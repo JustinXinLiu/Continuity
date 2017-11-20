@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ExtendedButton.cs" />
     <Compile Include="Controls\CircularToggleButton.cs" />
     <Compile Include="Controls\DistanceGauge.xaml.cs">
       <DependentUpon>DistanceGauge.xaml</DependentUpon>

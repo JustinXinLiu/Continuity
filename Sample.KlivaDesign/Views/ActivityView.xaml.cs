@@ -250,7 +250,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 12.3,
 				ElevationGain = 37,
 				CommentCount = 1,
-				KudosCount = 0
+				KudosCount = 0,
+				AchievementCount = 0
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -263,7 +264,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 16.1,
 				ElevationGain = 44,
 				CommentCount = 3,
-				KudosCount = 5
+				KudosCount = 5,
+				AchievementCount = 3
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -276,7 +278,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 72.9,
 				ElevationGain = 121,
 				CommentCount = 13,
-				KudosCount = 27
+				KudosCount = 27,
+				AchievementCount = 51
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -289,7 +292,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 2.9,
 				ElevationGain = 77,
 				CommentCount = 2,
-				KudosCount = 33
+				KudosCount = 33,
+				AchievementCount = 0
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -302,7 +306,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 67.8,
 				ElevationGain = 99,
 				CommentCount = 12,
-				KudosCount = 7
+				KudosCount = 7,
+				AchievementCount = 0
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -315,7 +320,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 7.9,
 				ElevationGain = 23,
 				CommentCount = 55,
-				KudosCount = 12
+				KudosCount = 12,
+				AchievementCount = 0
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -328,7 +334,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 143.8,
 				ElevationGain = 212,
 				CommentCount = 1,
-				KudosCount = 3
+				KudosCount = 3,
+				AchievementCount = 121
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -341,7 +348,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 0.6,
 				ElevationGain = 12,
 				CommentCount = 0,
-				KudosCount = 1
+				KudosCount = 1,
+				AchievementCount = 0
 			});
 
 			ActivitySummaries.Add(new ActivitySummary
@@ -354,7 +362,8 @@ namespace Sample.KlivaDesign.Views
 				Distance = 12,
 				ElevationGain = 50,
 				CommentCount = 2,
-				KudosCount = 7
+				KudosCount = 7,
+				AchievementCount = 2
 			});
 		}
 
