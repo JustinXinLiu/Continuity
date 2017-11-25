@@ -259,8 +259,8 @@
 
     <Style TargetType="controls:ExtendedButton">
         <Setter Property="Background"
-                Value="#FFF59127" />
-        <Setter Property="Foreground"
+                Value="#FFF2CA16" />
+        <Setter Property="IconForeground"
                 Value="White" />
         <Setter Property="BorderBrush"
                 Value="{ThemeResource ButtonRevealBorderBrush}" />
@@ -268,6 +268,8 @@
                 Value="{ThemeResource ButtonRevealBorderThemeThickness}" />
         <Setter Property="Padding"
                 Value="8" />
+        <Setter Property="IconMargin"
+                Value="0,0,4,0" />
         <Setter Property="HorizontalAlignment"
                 Value="Left" />
         <Setter Property="VerticalAlignment"
@@ -308,10 +310,10 @@
                                                 Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
                                         <Setter Target="ContentPresenter.BorderBrush"
                                                 Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
-                                        <Setter Target="ContentPresenter.Foreground"
+                                        <!--<Setter Target="ContentPresenter.Foreground"
                                                 Value="{ThemeResource ButtonForegroundPointerOver}" />
                                         <Setter Target="Icon.Foreground"
-                                                Value="{ThemeResource ButtonForegroundPointerOver}" />
+                                                Value="{ThemeResource ButtonForegroundPointerOver}" />-->
                                     </VisualState.Setters>
 
                                     <Storyboard>
@@ -327,10 +329,10 @@
                                                 Value="{ThemeResource ButtonRevealBackgroundPressed}" />
                                         <Setter Target="ContentPresenter.BorderBrush"
                                                 Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
-                                        <Setter Target="ContentPresenter.Foreground"
+                                        <!--<Setter Target="ContentPresenter.Foreground"
                                                 Value="{ThemeResource ButtonForegroundPressed}" />
                                         <Setter Target="Icon.Foreground"
-                                                Value="{ThemeResource ButtonForegroundPressed}" />
+                                                Value="{ThemeResource ButtonForegroundPressed}" />-->
                                     </VisualState.Setters>
 
                                     <Storyboard>
@@ -345,7 +347,7 @@
                                         <Setter Target="ContentPresenter.BorderBrush"
                                                 Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
                                         <Setter Target="ContentPresenter.Foreground"
-                                                Value="{TemplateBinding ButtonForegroundDisabled}" />
+                                                Value="{ThemeResource ButtonForegroundDisabled}" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -359,8 +361,8 @@
                         <ContentControl x:Name="Icon"
                                         Width="16"
                                         Height="16"
-                                        Margin="0,0,4,0"
-                                        Foreground="{TemplateBinding Foreground}"
+                                        Margin="{TemplateBinding IconMargin}"
+                                        Foreground="{TemplateBinding IconForeground}"
                                         ContentTransitions="{TemplateBinding ContentTransitions}"
                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"

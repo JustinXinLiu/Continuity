@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Continuity.Controls
 {
@@ -20,6 +21,23 @@ namespace Continuity.Controls
 		}
 		public static readonly DependencyProperty IconStyleProperty =
 			DependencyProperty.Register("IconStyle", typeof(Style), typeof(ExtendedButton), new PropertyMetadata(null));
+
+		public Brush IconForeground
+		{
+			get => (Brush)GetValue(IconForegroundProperty);
+			set => SetValue(IconForegroundProperty, value);
+		}
+		public static readonly DependencyProperty IconForegroundProperty =
+			DependencyProperty.Register("IconForeground", typeof(Brush), typeof(ExtendedButton), new PropertyMetadata(null));
+
+		public Thickness IconMargin
+		{
+			get => (Thickness)GetValue(IconMarginProperty);
+			set => SetValue(IconMarginProperty, value);
+		}
+		public static readonly DependencyProperty IconMarginProperty =
+			DependencyProperty.Register("IconMargin", typeof(Thickness), typeof(ExtendedButton), new PropertyMetadata(null));
+
 
 		public ExtendedButton()
 		{

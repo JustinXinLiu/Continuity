@@ -160,23 +160,12 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Horizontal"
-                                Margin="24,16,8,20">
-                        <Path Width="16"
-                              Height="16"
-                              Stretch="Uniform"
-                              Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
-                              Fill="#FF0D8AC6"
-                              UseLayoutRounding="False"
-                              Margin="0,0,0,-2" />
-                        <TextBlock Text="{x:Bind CommentCount}"
-                                   FontWeight="SemiBold"
-                                   FontSize="12"
-                                   TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings"
-                                   VerticalAlignment="Center"
-                                   Margin="8,0,0,0" />
-                    </StackPanel>
+                    <continuity:ExtendedButton Margin="16,8,0,12"
+                                               Background="Transparent"
+                                               IconForeground="#FF0D8AC6"
+                                               IconMargin="0,0,8,0"
+                                               Content="{x:Bind CommentCount}"
+                                               IconStyle="{StaticResource IconCommentStyle}" />
 
                     <StackPanel Orientation="Horizontal"
                                 Margin="8,16,24,20"
@@ -198,7 +187,8 @@
                     </StackPanel>
                 </Grid>
 
-                <continuity:ExtendedButton CornerRadius="0,16,0,16"
+                <continuity:ExtendedButton Foreground="White" 
+                                           CornerRadius="0,16,0,16"
                                            Content="{x:Bind AchievementCount}"
                                            Visibility="{x:Bind AchievementVisible}"
                                            IconStyle="{StaticResource IconAchievementStyle}" 

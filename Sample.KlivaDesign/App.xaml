@@ -129,6 +129,27 @@
             </Setter>
         </Style>
 
+        <Style x:Key="IconCommentStyle"
+               BasedOn="{StaticResource IconBaseStyle}"
+               TargetType="ContentControl">
+            <Setter Property="Width"
+                    Value="16" />
+            <Setter Property="Height"
+                    Value="16" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Path Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Uniform" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="PaneIconMaterialTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontFamily"
@@ -474,7 +495,7 @@
                                     <VisualState x:Name="PointerFocused" />
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
+
                             <Border x:Name="PART_HoverVisual"
                                     Background="#FFFFEBEA"
                                     Opacity="0" />
@@ -887,7 +908,7 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
+
                             <Ellipse x:Name="BackgroundVisual"
                                      Fill="{TemplateBinding Background}"
                                      Stroke="{TemplateBinding BorderBrush}"
@@ -916,7 +937,7 @@
             <Setter Property="BorderBrush"
                     Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
             <Setter Property="Padding"
-                    Value="12" />
+                    Value="8" />
             <Setter Property="HorizontalAlignment"
                     Value="Left" />
             <Setter Property="VerticalAlignment"
@@ -924,9 +945,9 @@
             <Setter Property="FontFamily"
                     Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontWeight"
-                    Value="Normal" />
+                    Value="SemiBold" />
             <Setter Property="FontSize"
-                    Value="{ThemeResource ControlContentThemeFontSize}" />
+                    Value="12" />
             <Setter Property="UseSystemFocusVisuals"
                     Value="True" />
             <Setter Property="FocusVisualMargin"
@@ -1053,21 +1074,30 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Ellipse x:Name="BackgroundVisual"
                                      Fill="{TemplateBinding Background}"
                                      Stroke="{TemplateBinding BorderBrush}"
                                      StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}"
                                      Grid.ColumnSpan="2" />
 
-                            <ContentControl x:Name="KudosOutlineIcon" Style="{StaticResource IconKudosOutlineStyle}" />
+                            <ContentControl x:Name="KudosOutlineIcon" 
+                                            Width="16"
+                                            Height="16"
+                                            Margin="0,0,4,0"
+                                            Style="{StaticResource IconKudosOutlineStyle}" />
 
-                            <ContentControl x:Name="KudosIcon" Opacity="0" Style="{StaticResource IconKudosStyle}" />
+                            <ContentControl x:Name="KudosIcon" 
+                                            Width="16"
+                                            Height="16"
+                                            Margin="0,0,4,0"
+                                            Opacity="0" 
+                                            Style="{StaticResource IconKudosStyle}" />
 
                             <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"

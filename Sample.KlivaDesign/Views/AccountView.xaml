@@ -10,6 +10,8 @@
              d:DesignWidth="2000">
 
     <Grid>
+        <ToggleButton Content="12" Style="{StaticResource ToggleButtonKudosStyle}" VerticalAlignment="Top" Margin="4" />
+
         <TextBlock Text="Account info (coming soon)..."
                    FontSize="24"
                    Foreground="White"
