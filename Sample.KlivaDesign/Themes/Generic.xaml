@@ -259,7 +259,9 @@
 
     <Style TargetType="controls:ExtendedButton">
         <Setter Property="Background"
-                Value="#FFF2CA16" />
+                Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="White" />
         <Setter Property="IconForeground"
                 Value="White" />
         <Setter Property="BorderBrush"
@@ -310,10 +312,6 @@
                                                 Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
                                         <Setter Target="ContentPresenter.BorderBrush"
                                                 Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
-                                        <!--<Setter Target="ContentPresenter.Foreground"
-                                                Value="{ThemeResource ButtonForegroundPointerOver}" />
-                                        <Setter Target="Icon.Foreground"
-                                                Value="{ThemeResource ButtonForegroundPointerOver}" />-->
                                     </VisualState.Setters>
 
                                     <Storyboard>
@@ -329,10 +327,6 @@
                                                 Value="{ThemeResource ButtonRevealBackgroundPressed}" />
                                         <Setter Target="ContentPresenter.BorderBrush"
                                                 Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
-                                        <!--<Setter Target="ContentPresenter.Foreground"
-                                                Value="{ThemeResource ButtonForegroundPressed}" />
-                                        <Setter Target="Icon.Foreground"
-                                                Value="{ThemeResource ButtonForegroundPressed}" />-->
                                     </VisualState.Setters>
 
                                     <Storyboard>

@@ -160,34 +160,21 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <continuity:ExtendedButton Margin="16,8,0,12"
-                                               Background="Transparent"
+                    <continuity:ExtendedButton Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
+                                               Margin="16,8,0,12"
                                                IconForeground="#FF0D8AC6"
                                                IconMargin="0,0,8,0"
                                                Content="{x:Bind CommentCount}"
                                                IconStyle="{StaticResource IconCommentStyle}" />
 
-                    <StackPanel Orientation="Horizontal"
-                                Margin="8,16,24,20"
-                                Grid.Column="1">
-                        <Path Width="16"
-                              Height="16"
-                              Stretch="Uniform"
-                              Data="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
-                              Fill="#FFF53327"
-                              UseLayoutRounding="False"
-                              Margin="0,-4,0,0" />
-                        <TextBlock Text="{x:Bind KudosCount}"
-                                   FontWeight="SemiBold"
-                                   FontSize="12"
-                                   TextLineBounds="Tight"
-                                   OpticalMarginAlignment="TrimSideBearings"
-                                   VerticalAlignment="Center"
-                                   Margin="8,0,0,0" />
-                    </StackPanel>
+                    <ToggleButton Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
+                                  Content="{x:Bind KudosCount}" 
+                                  Margin="0,8,16,12"
+                                  Grid.Column="1"
+                                  Style="{StaticResource ToggleButtonKudosStyle}" />
                 </Grid>
 
-                <continuity:ExtendedButton Foreground="White" 
+                <continuity:ExtendedButton Background="#FFE1B904"
                                            CornerRadius="0,16,0,16"
                                            Content="{x:Bind AchievementCount}"
                                            Visibility="{x:Bind AchievementVisible}"
@@ -260,6 +247,7 @@
                   Grid.Row="2"
                   Grid.ColumnSpan="3"
                   ScrollViewer.VerticalScrollMode="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                   ScrollViewer.HorizontalScrollMode="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                   Padding="12,0,12,8"

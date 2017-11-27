@@ -931,11 +931,13 @@
         <Style x:Key="ToggleButtonKudosStyle"
                TargetType="ToggleButton">
             <Setter Property="Background"
-                    Value="{ThemeResource ToggleButtonRevealBackground}" />
+                    Value="Transparent" />
             <Setter Property="Foreground"
-                    Value="#FF2A3037" />
+                    Value="White" />
             <Setter Property="BorderBrush"
-                    Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
+                    Value="{ThemeResource ButtonRevealBorderBrush}" />
+            <Setter Property="BorderThickness"
+                    Value="{ThemeResource ButtonRevealBorderThemeThickness}" />
             <Setter Property="Padding"
                     Value="8" />
             <Setter Property="HorizontalAlignment"
@@ -955,119 +957,136 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
-                        <Grid x:Name="RootGrid">
+                        <Grid x:Name="RootGrid"
+                              Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              Padding="{TemplateBinding Padding}">
+                            
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="CheckedPointerOver"
+                                                          GeneratedDuration="0"
+                                                          To="Checked">
+                                            <VisualTransition.GeneratedEasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </VisualTransition.GeneratedEasingFunction>
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                                                                               Storyboard.TargetName="KudosOutlineIcon">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                          Value="-15" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4"
+                                                                          Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                                                                               Storyboard.TargetName="KudosIcon">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                          Value="-15" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4"
+                                                                          Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+
                                     <VisualState x:Name="Normal">
                                         <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
                                                     Value="PointerOver" />
-                                            <Setter Target="BackgroundVisual.Fill"
-                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPointerOver}" />
-                                            <Setter Target="BackgroundVisual.Stroke"
-                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushPointerOver}" />
-                                            <Setter Target="ContentPresenter.Foreground"
-                                                    Value="{ThemeResource ToggleButtonForegroundPointerOver}" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
+                                            <!--<Setter Target="RootGrid.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />-->
                                         </VisualState.Setters>
 
                                         <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
 
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
                                                     Value="Pressed" />
-                                            <Setter Target="BackgroundVisual.Fill"
-                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPressed}" />
-                                            <Setter Target="BackgroundVisual.Stroke"
-                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushPressed}" />
-                                            <Setter Target="ContentPresenter.Foreground"
-                                                    Value="{ThemeResource ToggleButtonForegroundPressed}" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPressed}" />
+                                            <Setter Target="RootGrid.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
-                                            <PointerDownThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
 
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.Fill"
-                                                    Value="{ThemeResource ToggleButtonRevealBackgroundDisabled}" />
-                                            <Setter Target="BackgroundVisual.Stroke"
-                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushDisabled}" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
+                                            <Setter Target="RootGrid.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
                                             <Setter Target="ContentPresenter.Foreground"
-                                                    Value="{ThemeResource ToggleButtonForegroundDisabled}" />
+                                                    Value="{ThemeResource ButtonForegroundDisabled}" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Checked">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.Fill"
-                                                    Value="#FFF53327" />
-                                            <Setter Target="BackgroundVisual.Stroke"
-                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushChecked}" />
-                                            <Setter Target="ContentPresenter.Foreground"
-                                                    Value="{ThemeResource ToggleButtonForegroundChecked}" />
                                             <Setter Target="KudosIcon.Opacity"
                                                     Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="CheckedPointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
                                                     Value="PointerOver" />
-                                            <Setter Target="BackgroundVisual.Fill"
-                                                    Value="#FFF53327" />
-                                            <Setter Target="BackgroundVisual.Stroke"
-                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPointerOver}" />
-                                            <Setter Target="ContentPresenter.Foreground"
-                                                    Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
+                                            <Setter Target="ContentPresenter.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
                                             <Setter Target="KudosIcon.Opacity"
                                                     Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="CheckedPressed">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
                                                     Value="Pressed" />
-                                            <Setter Target="BackgroundVisual.Fill"
-                                                    Value="#CCF53327" />
-                                            <Setter Target="BackgroundVisual.Stroke"
-                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPressed}" />
-                                            <Setter Target="ContentPresenter.Foreground"
-                                                    Value="{ThemeResource ToggleButtonForegroundCheckedPressed}" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPressed}" />
+                                            <Setter Target="ContentPresenter.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
                                             <Setter Target="KudosIcon.Opacity"
                                                     Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
-                                            <PointerDownThemeAnimation Storyboard.TargetName="BackgroundVisual" />
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="CheckedDisabled">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.Fill"
-                                                    Value="{ThemeResource ToggleButtonRevealBackgroundCheckedDisabled}" />
-                                            <Setter Target="BackgroundVisual.Stroke"
-                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedDisabled}" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
+                                            <Setter Target="RootGrid.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
                                             <Setter Target="ContentPresenter.Foreground"
-                                                    Value="{ThemeResource ToggleButtonForegroundCheckedDisabled}" />
+                                                    Value="{ThemeResource ButtonForegroundDisabled}" />
                                             <Setter Target="KudosIcon.Opacity"
                                                     Value="1" />
                                         </VisualState.Setters>
@@ -1079,31 +1098,37 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+                            
 
-                            <Ellipse x:Name="BackgroundVisual"
-                                     Fill="{TemplateBinding Background}"
-                                     Stroke="{TemplateBinding BorderBrush}"
-                                     StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}"
-                                     Grid.ColumnSpan="2" />
-
-                            <ContentControl x:Name="KudosOutlineIcon" 
+                            <ContentControl x:Name="KudosOutlineIcon"
+                                            Foreground="#FFF53327"
                                             Width="16"
                                             Height="16"
-                                            Margin="0,0,4,0"
-                                            Style="{StaticResource IconKudosOutlineStyle}" />
+                                            Margin="0,-2,6,2"
+                                            Style="{StaticResource IconKudosOutlineStyle}"
+                                            RenderTransformOrigin="0.5,0.5">
+                                <ContentControl.RenderTransform>
+                                    <CompositeTransform />
+                                </ContentControl.RenderTransform>
+                            </ContentControl>
 
-                            <ContentControl x:Name="KudosIcon" 
+                            <ContentControl x:Name="KudosIcon"
+                                            Foreground="#FFF53327"
                                             Width="16"
                                             Height="16"
-                                            Margin="0,0,4,0"
-                                            Opacity="0" 
-                                            Style="{StaticResource IconKudosStyle}" />
+                                            Margin="0,-2,6,2"
+                                            Opacity="0"
+                                            Style="{StaticResource IconKudosStyle}"
+                                            RenderTransformOrigin="0.5,0.5">
+                                <ContentControl.RenderTransform>
+                                    <CompositeTransform />
+                                </ContentControl.RenderTransform>
+                            </ContentControl>
 
                             <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"
                                               ContentTransitions="{TemplateBinding ContentTransitions}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Padding="{TemplateBinding Padding}"
                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                               AutomationProperties.AccessibilityView="Raw" 
