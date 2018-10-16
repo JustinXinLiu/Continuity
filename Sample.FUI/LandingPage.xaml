@@ -7,7 +7,7 @@
       mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" Padding="40">
-        <controls:FluentButton Content="XAML LIGHT" />
+        <controls:FluentButton Content="XAML LIGHT" Click="FluentButton_Click"/>
         
         <Rectangle x:Name="MyRectangle" Width="200" Height="200" Fill="LightGreen" HorizontalAlignment="Left" x:Load="False" />
     </Grid>

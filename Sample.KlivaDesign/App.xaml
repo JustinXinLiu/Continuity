@@ -1673,14 +1673,25 @@
                     Value="Transparent" />
             <Setter Property="ScaleTickBrush"
                     Value="Transparent" />
+            <!--
+            removed because these properties are removed in newer versions of UWP Community Toolkit
             <Setter Property="UnitBrush"
                     Value="Transparent" />
             <Setter Property="ValueBrush"
-                    Value="Transparent" />
+                    Value="Transparent" />-->
             <Setter Property="NeedleWidth"
                     Value="0" />
             <Setter Property="TickLength"
                     Value="0" />
         </Style>
+
+        <ResourceDictionary x:Key="RadialGaugeTheme">
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="RadialGaugeForegroundBrush" Color="Transparent"/>
+                    <SolidColorBrush x:Key="RadialGaugeAccentBrush" Color="Transparent"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
