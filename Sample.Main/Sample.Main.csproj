@@ -11,7 +11,7 @@
     <AssemblyName>Sample.Main</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -104,7 +104,6 @@
     <Compile Include="Services\Player\PlayerService.cs" />
     <Compile Include="Services\Player\DesignTimePlayerService.cs" />
     <Compile Include="Services\Player\IPlayerService.cs" />
-    <Compile Include="Styles\Custom.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\PlayersViewModel.cs" />
     <Compile Include="Views\PlayersView.xaml.cs">
@@ -168,13 +167,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.1</Version>
+      <Version>6.1.9</Version>
     </PackageReference>
     <PackageReference Include="MvvmLight">
-      <Version>5.3.0</Version>
+      <Version>5.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>10.0.3</Version>
+      <Version>11.0.2</Version>
     </PackageReference>
     <PackageReference Include="Template10">
       <Version>1.1.13-preview-20161207</Version>
