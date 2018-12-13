@@ -11,7 +11,7 @@
     <AssemblyName>Sample.Navigation</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -188,10 +188,6 @@
     <ProjectReference Include="..\Continuity\Continuity.csproj">
       <Project>{5e49ec20-db7e-4846-bc93-118731b5bc1c}</Project>
       <Name>Continuity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExpressionBuilder\ExpressionBuilder\ExpressionBuilder.csproj">
-      <Project>{97f79cb4-fb7b-4dc3-8a08-28fa5694a73c}</Project>
-      <Name>ExpressionBuilder</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

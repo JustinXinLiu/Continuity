@@ -274,18 +274,16 @@ namespace Continuity.Extensions
         public static Task ChangeViewAsync(this ScrollViewer scrollViewer, double? horizontalOffset, double? verticalOffset, float? zoomFactor, bool disableAniamtion)
         {
             var taskSource = new TaskCompletionSource<bool>();
-            EventHandler<ScrollViewerViewChangedEventArgs> onViewChanged = null;
 
-            onViewChanged = (sender, e) =>
+            void OnViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
             {
-                if (e.IsIntermediate)
-                    return;
+                if (e.IsIntermediate) return;
 
-                scrollViewer.ViewChanged -= onViewChanged;
+                scrollViewer.ViewChanged -= OnViewChanged;
                 taskSource.SetResult(true);
-            };
+            }
 
-            scrollViewer.ViewChanged += onViewChanged;
+            scrollViewer.ViewChanged += OnViewChanged;
             scrollViewer.ChangeView(horizontalOffset, verticalOffset, zoomFactor, disableAniamtion);
 
             return taskSource.Task;
@@ -316,7 +314,7 @@ namespace Continuity.Extensions
 
         public static Vector2 GetDesiredSize(this UIElement element)
         {
-            element.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            element.Measure(new Size(double.PositiveInfinity, height: Double.PositiveInfinity));
             return element.DesiredSize.ToVector2();
         }
 

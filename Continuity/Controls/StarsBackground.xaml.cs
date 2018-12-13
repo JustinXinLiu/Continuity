@@ -1,5 +1,6 @@
 ﻿using Continuity.Extensions;
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using Windows.Devices.Sensors;
 using Windows.UI.Composition;
@@ -118,6 +119,8 @@ namespace Continuity.Controls
 
         private async void OnInclinometerReadingChanged(Inclinometer sender, InclinometerReadingChangedEventArgs e)
         {
+            Debug.WriteLine($"RollDegrees: {e.Reading.RollDegrees} -- PitchDegrees: {e.Reading.PitchDegrees}");
+
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 _reading.InsertVector3("Offset", new Vector3(e.Reading.RollDegrees, e.Reading.PitchDegrees, 0.0f));

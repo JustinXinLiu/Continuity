@@ -11,7 +11,7 @@
     <AssemblyName>Continuity</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -109,13 +109,7 @@
     <Compile Include="Controls\AdaptiveGridView\AdaptiveGridView.cs" />
     <Compile Include="Controls\AdaptiveGridView\AdaptiveGridViewItem.Properties.cs" />
     <Compile Include="Controls\AdaptiveGridView\AdaptiveGridViewItem.cs" />
-    <Compile Include="Controls\CardView\CardView.cs" />
-    <Compile Include="Controls\CardView\CardViewItem.cs" />
     <Compile Include="Controls\FluentButton\FluentButton.cs" />
-    <Compile Include="Controls\FluentNavigationView\FluentNavigationViewItem.cs" />
-    <Compile Include="Controls\FluentNavigationView\FluentNavigationView.cs" />
-    <Compile Include="Controls\ParallaxListView\ParallaxListView.cs" />
-    <Compile Include="Controls\ParallaxListView\ParallaxListViewItem.cs" />
     <Compile Include="Controls\StarsBackground.xaml.cs">
       <DependentUpon>StarsBackground.xaml</DependentUpon>
     </Compile>
@@ -158,10 +152,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.1</Version>
+      <Version>6.1.9</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>2.0.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.0</Version>
@@ -173,17 +170,11 @@
       <Version>2.3.0-beta2</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">
-      <Version>1.21.0</Version>
+      <Version>1.23.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\AdaptiveGridView\AdaptiveGridView.Properties.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExpressionBuilder\ExpressionBuilder\ExpressionBuilder.csproj">
-      <Project>{97f79cb4-fb7b-4dc3-8a08-28fa5694a73c}</Project>
-      <Name>ExpressionBuilder</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

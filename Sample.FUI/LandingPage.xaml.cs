@@ -11,15 +11,15 @@ namespace Sample.FUI
         {
             InitializeComponent();
 
-            Loaded += async (s, e) =>
-            {
-                FindName("MyRectangle");
-                MyRectangle.EnableFluidVisibilityAnimation();
-                MyRectangle.Visibility = Visibility.Collapsed;
-                await Task.Delay(2000);
+            //Loaded += async (s, e) =>
+            //{
+            //    FindName("MyRectangle");
+            //    MyRectangle.EnableFluidVisibilityAnimation();
+            //    MyRectangle.Visibility = Visibility.Collapsed;
+            //    await Task.Delay(2000);
 
-                MyRectangle.Visibility = Visibility.Visible;
-            };
+            //    MyRectangle.Visibility = Visibility.Visible;
+            //};
         }
     }
 }

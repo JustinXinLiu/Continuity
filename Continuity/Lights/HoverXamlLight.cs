@@ -6,8 +6,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using System.Numerics;
-using EF = ExpressionBuilder.ExpressionFunctions;
-using ExpressionBuilder;
+using Microsoft.Toolkit.Uwp.UI.Animations.Expressions;
+using EF = Microsoft.Toolkit.Uwp.UI.Animations.Expressions.ExpressionFunctions;
 
 namespace Continuity.Lights
 {
