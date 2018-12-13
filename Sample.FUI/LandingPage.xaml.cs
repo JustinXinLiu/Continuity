@@ -21,5 +21,10 @@ namespace Sample.FUI
             //    MyRectangle.Visibility = Visibility.Visible;
             //};
         }
+
+        private void FluentButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage), null);
+        }
     }
 }

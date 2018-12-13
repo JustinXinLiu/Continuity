@@ -12,8 +12,8 @@ using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Shapes;
 using Continuity.Extensions;
-using ExpressionBuilder;
-using EF = ExpressionBuilder.ExpressionFunctions;
+using Microsoft.Toolkit.Uwp.UI.Animations.Expressions;
+using EF = Microsoft.Toolkit.Uwp.UI.Animations.Expressions.ExpressionFunctions;
 
 namespace Sample.Navigation
 {

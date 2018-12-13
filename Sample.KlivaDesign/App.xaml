@@ -1,23 +1,30 @@
 ﻿<Application x:Class="Sample.KlivaDesign.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="using:Sample.KlivaDesign"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             RequestedTheme="Light"
-             mc:Ignorable="d">
+             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+             mc:Ignorable="d"
+             RequestedTheme="Light">
 
     <Application.Resources>
         <FontFamily x:Key="MaterialDesignFont">/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons</FontFamily>
 
-        <Style x:Key="IconBaseStyle" TargetType="ContentControl">
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="MaxWidth" Value="24" />
-            <Setter Property="MaxHeight" Value="24" />
-            <Setter Property="MinWidth" Value="0" />
-            <Setter Property="MinHeight" Value="0" />
+        <Style x:Key="IconBaseStyle"
+               TargetType="ContentControl">
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="MaxWidth"
+                    Value="24" />
+            <Setter Property="MaxHeight"
+                    Value="24" />
+            <Setter Property="MinWidth"
+                    Value="0" />
+            <Setter Property="MinHeight"
+                    Value="0" />
         </Style>
 
         <Style x:Key="IconCloseStyle"
@@ -125,8 +132,10 @@
         <Style x:Key="IconCommentStyle"
                BasedOn="{StaticResource IconBaseStyle}"
                TargetType="ContentControl">
-            <Setter Property="Width" Value="16" />
-            <Setter Property="Height" Value="16" />
+            <Setter Property="Width"
+                    Value="16" />
+            <Setter Property="Height"
+                    Value="16" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ContentControl">
@@ -141,30 +150,49 @@
             </Setter>
         </Style>
 
-        <Style x:Key="PaneIconMaterialTextBlock" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource MaterialDesignFont}" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Foreground" Value="White" />
+        <Style x:Key="PaneIconMaterialTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource MaterialDesignFont}" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Foreground"
+                    Value="White" />
         </Style>
 
-        <Style x:Key="FlipViewNoButtonStyle" TargetType="FlipView">
-            <Setter Property="Background" Value="{ThemeResource FlipViewBackground}" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="TabNavigation" Value="Once" />
-            <Setter Property="IsTabStop" Value="False" />
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
-            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False" />
-            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False" />
-            <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="True" />
-            <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled" Value="True" />
-            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
-            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
-            <Setter Property="UseSystemFocusVisuals" Value="False" />
+        <Style x:Key="FlipViewNoButtonStyle"
+               TargetType="FlipView">
+            <Setter Property="Background"
+                    Value="{ThemeResource FlipViewBackground}" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="TabNavigation"
+                    Value="Once" />
+            <Setter Property="IsTabStop"
+                    Value="False" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                    Value="Hidden" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                    Value="Hidden" />
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled"
+                    Value="False" />
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled"
+                    Value="False" />
+            <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled"
+                    Value="True" />
+            <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled"
+                    Value="True" />
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
+                    Value="False" />
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
+                    Value="True" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="False" />
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
-                        <StackPanel AreScrollSnapPointsRegular="True" Orientation="Vertical" />
+                        <StackPanel AreScrollSnapPointsRegular="True"
+                                    Orientation="Vertical" />
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
@@ -172,25 +200,25 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="FlipView">
                         <Grid Background="{TemplateBinding Background}"
-                              BorderBrush="{TemplateBinding BorderBrush}"
-                              BorderThickness="{TemplateBinding BorderThickness}">
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              BorderBrush="{TemplateBinding BorderBrush}">
                             <ScrollViewer x:Name="ScrollingHost"
-                                          Padding="{TemplateBinding Padding}"
                                           AutomationProperties.AccessibilityView="Raw"
                                           BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
                                           HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                           HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
                                           HorizontalSnapPointsType="MandatorySingle"
                                           IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                          IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
                                           IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-                                          IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
                                           IsTabStop="False"
                                           IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-                                          IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                          IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                          Padding="{TemplateBinding Padding}"
                                           TabNavigation="{TemplateBinding TabNavigation}"
-                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
                                           VerticalSnapPointsType="MandatorySingle"
+                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                           ZoomMode="Disabled">
                                 <ItemsPresenter />
                             </ScrollViewer>
@@ -200,26 +228,38 @@
             </Setter>
         </Style>
 
-        <Style x:Key="FlipViewItemNoSwipeStyle" TargetType="FlipViewItem">
-            <Setter Property="ManipulationMode" Value="None" />
+        <Style x:Key="FlipViewItemNoSwipeStyle"
+               TargetType="FlipViewItem">
+            <Setter Property="ManipulationMode"
+                    Value="None" />
         </Style>
 
-        <Style x:Key="ButtonMapPointStyle" TargetType="Button">
-            <Setter Property="Width" Value="36" />
-            <Setter Property="Height" Value="36" />
-            <Setter Property="Background" Value="#FFF53327" />
-            <Setter Property="BorderBrush" Value="#FFFFF1E9" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="12" />
-            <Setter Property="UseSystemFocusVisuals" Value="False" />
-            <Setter Property="FocusVisualMargin" Value="-3" />
+        <Style x:Key="ButtonMapPointStyle"
+               TargetType="Button">
+            <Setter Property="Width"
+                    Value="36" />
+            <Setter Property="Height"
+                    Value="36" />
+            <Setter Property="Background"
+                    Value="#FFF53327" />
+            <Setter Property="BorderBrush"
+                    Value="#FFFFF1E9" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalAlignment"
+                    Value="Stretch" />
+            <Setter Property="Padding"
+                    Value="12" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="False" />
+            <Setter Property="FocusVisualMargin"
+                    Value="-3" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid x:Name="RootGrid"
-                              d:DesignHeight="24"
-                              d:DesignWidth="24">
+                              d:DesignWidth="24"
+                              d:DesignHeight="24">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
@@ -232,15 +272,20 @@
                                     <VisualState x:Name="Normal" />
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Value="0.95" />
-                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Value="0.95" />
-                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Value="1.1" />
-                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Value="1.1" />
+                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                    Value="0.95" />
+                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                    Value="0.95" />
+                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                    Value="1.1" />
+                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                    Value="1.1" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="Outer.(UIElement.Opacity)" Value="1" />
+                                            <Setter Target="Outer.(UIElement.Opacity)"
+                                                    Value="1" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Disabled" />
@@ -249,15 +294,15 @@
 
                             <Ellipse x:Name="Outer"
                                      Fill="{TemplateBinding BorderBrush}"
-                                     Opacity="0.85"
-                                     RenderTransformOrigin="0.5,0.5">
+                                     RenderTransformOrigin="0.5,0.5"
+                                     Opacity="0.85">
                                 <Ellipse.RenderTransform>
                                     <CompositeTransform />
                                 </Ellipse.RenderTransform>
                             </Ellipse>
                             <Ellipse x:Name="Inner"
-                                     Margin="{TemplateBinding Padding}"
                                      Fill="{TemplateBinding Background}"
+                                     Margin="{TemplateBinding Padding}"
                                      RenderTransformOrigin="0.5,0.5">
                                 <Ellipse.RenderTransform>
                                     <CompositeTransform />
@@ -269,22 +314,32 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ButtonMapPinStyle" TargetType="Button">
-            <Setter Property="Width" Value="36" />
-            <Setter Property="Height" Value="36" />
-            <Setter Property="Background" Value="#FF6EC120" />
-            <Setter Property="BorderBrush" Value="#FFF2FFE5" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="8" />
-            <Setter Property="UseSystemFocusVisuals" Value="False" />
-            <Setter Property="FocusVisualMargin" Value="-3" />
+        <Style x:Key="ButtonMapPinStyle"
+               TargetType="Button">
+            <Setter Property="Width"
+                    Value="36" />
+            <Setter Property="Height"
+                    Value="36" />
+            <Setter Property="Background"
+                    Value="#FF6EC120" />
+            <Setter Property="BorderBrush"
+                    Value="#FFF2FFE5" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalAlignment"
+                    Value="Stretch" />
+            <Setter Property="Padding"
+                    Value="8" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="False" />
+            <Setter Property="FocusVisualMargin"
+                    Value="-3" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid x:Name="RootGrid"
-                              d:DesignHeight="24"
-                              d:DesignWidth="24">
+                              d:DesignWidth="24"
+                              d:DesignHeight="24">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
@@ -297,15 +352,20 @@
                                     <VisualState x:Name="Normal" />
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Value="0.95" />
-                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Value="0.95" />
-                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Value="1.1" />
-                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Value="1.1" />
+                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                    Value="0.95" />
+                                            <Setter Target="Inner.(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                    Value="0.95" />
+                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                                                    Value="1.1" />
+                                            <Setter Target="Outer.(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                                                    Value="1.1" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="Outer.(UIElement.Opacity)" Value="1" />
+                                            <Setter Target="Outer.(UIElement.Opacity)"
+                                                    Value="1" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Disabled" />
@@ -314,18 +374,18 @@
 
                             <Ellipse x:Name="Outer"
                                      Fill="{TemplateBinding BorderBrush}"
-                                     Opacity="0.85"
-                                     RenderTransformOrigin="0.5,0.5">
+                                     RenderTransformOrigin="0.5,0.5"
+                                     Opacity="0.85">
                                 <Ellipse.RenderTransform>
                                     <CompositeTransform />
                                 </Ellipse.RenderTransform>
                             </Ellipse>
                             <Path x:Name="Inner"
-                                  Margin="{TemplateBinding Padding}"
-                                  Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
                                   Fill="{TemplateBinding Background}"
+                                  Margin="{TemplateBinding Padding}"
                                   RenderTransformOrigin="0.5,0.5"
                                   Stretch="Uniform"
+                                  Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
                                   UseLayoutRounding="False">
                                 <Path.RenderTransform>
                                     <CompositeTransform />
@@ -337,18 +397,30 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ButtonIconStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Width" Value="48" />
-            <Setter Property="Height" Value="48" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="UseSystemFocusVisuals" Value="False" />
-            <Setter Property="Padding" Value="14" />
+        <Style x:Key="ButtonIconStyle"
+               TargetType="Button">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Width"
+                    Value="48" />
+            <Setter Property="Height"
+                    Value="48" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="False" />
+            <Setter Property="Padding"
+                    Value="14" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -371,30 +443,30 @@
                                             <DoubleAnimation Storyboard.TargetName="PART_HoverVisual"
                                                              Storyboard.TargetProperty="Opacity"
                                                              To="0.5" />
-                                            <DoubleAnimation d:IsOptimized="True"
+                                            <DoubleAnimation Duration="0"
                                                              Storyboard.TargetName="ContentPresenter"
                                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
                                                              To="1.1"
-                                                             Duration="0" />
-                                            <DoubleAnimation d:IsOptimized="True"
+                                                             d:IsOptimized="True" />
+                                            <DoubleAnimation Duration="0"
                                                              Storyboard.TargetName="ContentPresenter"
                                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
                                                              To="1.1"
-                                                             Duration="0" />
+                                                             d:IsOptimized="True" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
-                                            <DoubleAnimation d:IsOptimized="True"
+                                            <DoubleAnimation Duration="0"
                                                              Storyboard.TargetName="ContentPresenter"
                                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
                                                              To="1.2"
-                                                             Duration="0" />
-                                            <DoubleAnimation d:IsOptimized="True"
+                                                             d:IsOptimized="True" />
+                                            <DoubleAnimation Duration="0"
                                                              Storyboard.TargetName="ContentPresenter"
                                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
                                                              To="1.2"
-                                                             Duration="0" />
+                                                             d:IsOptimized="True" />
                                             <DoubleAnimation Storyboard.TargetName="PART_HoverVisual"
                                                              Storyboard.TargetProperty="Opacity"
                                                              To="0.65" />
@@ -402,21 +474,21 @@
                                     </VisualState>
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
-                                            <ColorAnimation d:IsOptimized="True"
-                                                            Storyboard.TargetName="ContentPresenter"
-                                                            Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                            <ColorAnimation Duration="0"
                                                             To="#FF3E4244"
-                                                            Duration="0" />
+                                                            Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="ContentPresenter"
+                                                            d:IsOptimized="True" />
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="FocusStates">
                                     <VisualState x:Name="Focused">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="PART_FocusVisual"
+                                            <DoubleAnimation Duration="0"
+                                                             Storyboard.TargetName="PART_FocusVisual"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             To="1"
-                                                             Duration="0" />
+                                                             To="1" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Unfocused" />
@@ -459,60 +531,78 @@
         </Style>
 
         <Style TargetType="ListViewItem">
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="Background" Value="{ThemeResource ListViewItemBackground}" />
-            <Setter Property="Foreground" Value="#FFBCBCBC" />
-            <Setter Property="TabNavigation" Value="Local" />
-            <Setter Property="IsHoldingEnabled" Value="True" />
-            <Setter Property="Padding" Value="12,0,12,0" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
-            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}" />
-            <Setter Property="AllowDrop" Value="False" />
-            <Setter Property="UseSystemFocusVisuals" Value="True" />
-            <Setter Property="FocusVisualMargin" Value="0" />
-            <Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource ListViewItemFocusVisualPrimaryBrush}" />
-            <Setter Property="FocusVisualPrimaryThickness" Value="2" />
-            <Setter Property="FocusVisualSecondaryBrush" Value="{ThemeResource ListViewItemFocusVisualSecondaryBrush}" />
-            <Setter Property="FocusVisualSecondaryThickness" Value="1" />
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize"
+                    Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="Background"
+                    Value="{ThemeResource ListViewItemBackground}" />
+            <Setter Property="Foreground"
+                    Value="#FFBCBCBC" />
+            <Setter Property="TabNavigation"
+                    Value="Local" />
+            <Setter Property="IsHoldingEnabled"
+                    Value="True" />
+            <Setter Property="Padding"
+                    Value="12,0,12,0" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="MinWidth"
+                    Value="{ThemeResource ListViewItemMinWidth}" />
+            <Setter Property="MinHeight"
+                    Value="{ThemeResource ListViewItemMinHeight}" />
+            <Setter Property="AllowDrop"
+                    Value="False" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="True" />
+            <Setter Property="FocusVisualMargin"
+                    Value="0" />
+            <Setter Property="FocusVisualPrimaryBrush"
+                    Value="{ThemeResource ListViewItemFocusVisualPrimaryBrush}" />
+            <Setter Property="FocusVisualPrimaryThickness"
+                    Value="2" />
+            <Setter Property="FocusVisualSecondaryBrush"
+                    Value="{ThemeResource ListViewItemFocusVisualSecondaryBrush}" />
+            <Setter Property="FocusVisualSecondaryThickness"
+                    Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter x:Name="Root"
-                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                               CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
-                                               CheckBrush="{ThemeResource ListViewItemCheckBrush}"
-                                               CheckMode="{ThemeResource ListViewItemCheckMode}"
-                                               ContentMargin="{TemplateBinding Padding}"
-                                               ContentTransitions="{TemplateBinding ContentTransitions}"
+                        <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}"
+                                               x:Name="Root"
                                                Control.IsTemplateFocusTarget="True"
-                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
-                                               DragBackground="{ThemeResource ListViewItemDragBackground}"
-                                               DragForeground="{ThemeResource ListViewItemDragForeground}"
-                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
-                                               FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
-                                               FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
                                                FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
                                                FocusVisualPrimaryBrush="{TemplateBinding FocusVisualPrimaryBrush}"
                                                FocusVisualPrimaryThickness="{TemplateBinding FocusVisualPrimaryThickness}"
                                                FocusVisualSecondaryBrush="{TemplateBinding FocusVisualSecondaryBrush}"
                                                FocusVisualSecondaryThickness="{TemplateBinding FocusVisualSecondaryThickness}"
+                                               SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}"
+                                               CheckBrush="{ThemeResource ListViewItemCheckBrush}"
+                                               CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
+                                               DragBackground="{ThemeResource ListViewItemDragBackground}"
+                                               DragForeground="{ThemeResource ListViewItemDragForeground}"
+                                               FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
+                                               FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
                                                PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
                                                PointerOverBackground="#FF0B0F11"
                                                PointerOverForeground="White"
-                                               PressedBackground="#FFFA291C"
-                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
-                                               RevealBackground="{ThemeResource ListViewItemRevealBackground}"
-                                               RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"
-                                               RevealBorderThickness="0"
                                                SelectedBackground="#FFF53327"
                                                SelectedForeground="White"
                                                SelectedPointerOverBackground="#FFF53327"
+                                               PressedBackground="#FFFA291C"
                                                SelectedPressedBackground="#FFFA291C"
-                                               SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}">
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               ContentMargin="{TemplateBinding Padding}"
+                                               CheckMode="{ThemeResource ListViewItemCheckMode}"
+                                               RevealBackground="{ThemeResource ListViewItemRevealBackground}"
+                                               RevealBorderThickness="0"
+                                               RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}">
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -521,30 +611,35 @@
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="PointerOver" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="PointerOver" />
                                         </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="PointerOverSelected">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="PointerOver" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="PointerOver" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="PointerOverPressed">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="PressedSelected">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -554,7 +649,8 @@
 
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.RevealBorderThickness" Value="0" />
+                                            <Setter Target="Root.RevealBorderThickness"
+                                                    Value="0" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -566,49 +662,54 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ListViewItemCustomRevealStyle" TargetType="ListViewItem">
-            <Setter Property="Background" Value="#FF1D2126" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="6,4" />
+        <Style x:Key="ListViewItemCustomRevealStyle"
+               TargetType="ListViewItem">
+            <Setter Property="Background"
+                    Value="#FF1D2126" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="Padding"
+                    Value="0" />
+            <Setter Property="Margin"
+                    Value="6,4" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter x:Name="Root"
-                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                               CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
-                                               CheckBrush="{ThemeResource ListViewItemCheckBrush}"
-                                               CheckMode="{ThemeResource ListViewItemCheckMode}"
-                                               ContentMargin="{TemplateBinding Padding}"
-                                               ContentTransitions="{TemplateBinding ContentTransitions}"
-                                               Control.IsTemplateFocusTarget="True"
+                        <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}"
+                                               x:Name="Root"
                                                CornerRadius="16"
-                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
-                                               DragBackground="{ThemeResource ListViewItemDragBackground}"
-                                               DragForeground="{ThemeResource ListViewItemDragForeground}"
-                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
-                                               FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
-                                               FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
+                                               Control.IsTemplateFocusTarget="True"
                                                FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
                                                FocusVisualPrimaryBrush="{TemplateBinding FocusVisualPrimaryBrush}"
                                                FocusVisualPrimaryThickness="{TemplateBinding FocusVisualPrimaryThickness}"
                                                FocusVisualSecondaryBrush="{TemplateBinding FocusVisualSecondaryBrush}"
                                                FocusVisualSecondaryThickness="{TemplateBinding FocusVisualSecondaryThickness}"
+                                               SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}"
+                                               CheckBrush="{ThemeResource ListViewItemCheckBrush}"
+                                               CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
+                                               DragBackground="{ThemeResource ListViewItemDragBackground}"
+                                               DragForeground="{ThemeResource ListViewItemDragForeground}"
+                                               FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
+                                               FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
                                                PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
                                                PointerOverBackground="#FF182127"
                                                PointerOverForeground="White"
-                                               PressedBackground="#FF0B0F11"
-                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
-                                               RevealBackground="{ThemeResource ListViewItemRevealBackground}"
-                                               RevealBackgroundShowsAboveContent="False"
-                                               RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"
-                                               RevealBorderThickness="0"
                                                SelectedBackground="#FFF4F4F4"
                                                SelectedForeground="#FF182127"
                                                SelectedPointerOverBackground="#FFF4F4F4"
+                                               PressedBackground="#FF0B0F11"
                                                SelectedPressedBackground="#FFF4F4F4"
-                                               SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}">
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               ContentMargin="{TemplateBinding Padding}"
+                                               CheckMode="{ThemeResource ListViewItemCheckMode}"
+                                               RevealBackground="{ThemeResource ListViewItemRevealBackground}"
+                                               RevealBorderThickness="0"
+                                               RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"
+                                               RevealBackgroundShowsAboveContent="False">
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -617,30 +718,35 @@
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="PointerOver" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="PointerOver" />
                                         </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="PointerOverSelected">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="PointerOver" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="PointerOver" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="PointerOverPressed">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="PressedSelected">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="Root.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -650,7 +756,8 @@
 
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.RevealBorderThickness" Value="0" />
+                                            <Setter Target="Root.RevealBorderThickness"
+                                                    Value="0" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -662,20 +769,34 @@
             </Setter>
         </Style>
 
-        <Style x:Key="RadioButtonMenuRevealStyle" TargetType="RadioButton">
-            <Setter Property="Background" Value="{ThemeResource ToggleButtonRevealBackground}" />
-            <Setter Property="Foreground" Value="#FF2A3037" />
-            <Setter Property="BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
-            <Setter Property="Padding" Value="12" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="UseSystemFocusVisuals" Value="True" />
-            <Setter Property="FocusVisualMargin" Value="-3" />
-            <Setter Property="GroupName" Value="Menu" />
-            <Setter Property="MinWidth" Value="0" />
+        <Style x:Key="RadioButtonMenuRevealStyle"
+               TargetType="RadioButton">
+            <Setter Property="Background"
+                    Value="{ThemeResource ToggleButtonRevealBackground}" />
+            <Setter Property="Foreground"
+                    Value="#FF2A3037" />
+            <Setter Property="BorderBrush"
+                    Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
+            <Setter Property="Padding"
+                    Value="12" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight"
+                    Value="Normal" />
+            <Setter Property="FontSize"
+                    Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="True" />
+            <Setter Property="FocusVisualMargin"
+                    Value="-3" />
+            <Setter Property="GroupName"
+                    Value="Menu" />
+            <Setter Property="MinWidth"
+                    Value="0" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
@@ -689,10 +810,14 @@
                                     </VisualState>
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)" Value="PointerOver" />
-                                            <Setter Target="BackgroundVisual.Fill" Value="{ThemeResource ToggleButtonRevealBackgroundPointerOver}" />
-                                            <Setter Target="BackgroundVisual.Stroke" Value="{ThemeResource ToggleButtonRevealBorderBrushPointerOver}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundPointerOver}" />
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPointerOver}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushPointerOver}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundPointerOver}" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -701,10 +826,14 @@
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)" Value="Pressed" />
-                                            <Setter Target="BackgroundVisual.Fill" Value="{ThemeResource ToggleButtonRevealBackgroundPressed}" />
-                                            <Setter Target="BackgroundVisual.Stroke" Value="{ThemeResource ToggleButtonRevealBorderBrushPressed}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundPressed}" />
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="Pressed" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundPressed}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushPressed}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundPressed}" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -713,16 +842,22 @@
                                     </VisualState>
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.Fill" Value="{ThemeResource ToggleButtonRevealBackgroundDisabled}" />
-                                            <Setter Target="BackgroundVisual.Stroke" Value="{ThemeResource ToggleButtonRevealBorderBrushDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundDisabled}" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundDisabled}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundDisabled}" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Checked">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.Fill" Value="#FFF53327" />
-                                            <Setter Target="BackgroundVisual.Stroke" Value="{ThemeResource ToggleButtonRevealBorderBrushChecked}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundChecked}" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushChecked}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundChecked}" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -731,10 +866,14 @@
                                     </VisualState>
                                     <VisualState x:Name="CheckedPointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)" Value="PointerOver" />
-                                            <Setter Target="BackgroundVisual.Fill" Value="#FFF53327" />
-                                            <Setter Target="BackgroundVisual.Stroke" Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPointerOver}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPointerOver}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -743,10 +882,14 @@
                                     </VisualState>
                                     <VisualState x:Name="CheckedPressed">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.(RevealBrush.State)" Value="Pressed" />
-                                            <Setter Target="BackgroundVisual.Fill" Value="#CCF53327" />
-                                            <Setter Target="BackgroundVisual.Stroke" Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPressed}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedPressed}" />
+                                            <Setter Target="BackgroundVisual.(RevealBrush.State)"
+                                                    Value="Pressed" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="#CCF53327" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPressed}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundCheckedPressed}" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -755,9 +898,12 @@
                                     </VisualState>
                                     <VisualState x:Name="CheckedDisabled">
                                         <VisualState.Setters>
-                                            <Setter Target="BackgroundVisual.Fill" Value="{ThemeResource ToggleButtonRevealBackgroundCheckedDisabled}" />
-                                            <Setter Target="BackgroundVisual.Stroke" Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedDisabled}" />
+                                            <Setter Target="BackgroundVisual.Fill"
+                                                    Value="{ThemeResource ToggleButtonRevealBackgroundCheckedDisabled}" />
+                                            <Setter Target="BackgroundVisual.Stroke"
+                                                    Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ToggleButtonForegroundCheckedDisabled}" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -768,64 +914,78 @@
                                      Stroke="{TemplateBinding BorderBrush}"
                                      StrokeThickness="{ThemeResource ToggleButtonRevealBorderThemeThickness}" />
                             <ContentPresenter x:Name="ContentPresenter"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
                                               Padding="{TemplateBinding Padding}"
                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              AutomationProperties.AccessibilityView="Raw"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              ContentTransitions="{TemplateBinding ContentTransitions}"
-                                              Foreground="{TemplateBinding Foreground}" />
+                                              AutomationProperties.AccessibilityView="Raw" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="ToggleButtonKudosStyle" TargetType="ToggleButton">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="BorderBrush" Value="{ThemeResource ButtonRevealBorderBrush}" />
-            <Setter Property="BorderThickness" Value="{ThemeResource ButtonRevealBorderThemeThickness}" />
-            <Setter Property="Padding" Value="8" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="UseSystemFocusVisuals" Value="True" />
-            <Setter Property="FocusVisualMargin" Value="-3" />
+        <Style x:Key="ToggleButtonKudosStyle"
+               TargetType="ToggleButton">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="BorderBrush"
+                    Value="{ThemeResource ButtonRevealBorderBrush}" />
+            <Setter Property="BorderThickness"
+                    Value="{ThemeResource ButtonRevealBorderThemeThickness}" />
+            <Setter Property="Padding"
+                    Value="8" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="FontSize"
+                    Value="12" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="True" />
+            <Setter Property="FocusVisualMargin"
+                    Value="-3" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
                         <Grid x:Name="RootGrid"
-                              Padding="{TemplateBinding Padding}"
                               Background="{TemplateBinding Background}"
                               BorderBrush="{TemplateBinding BorderBrush}"
-                              BorderThickness="{TemplateBinding BorderThickness}">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              Padding="{TemplateBinding Padding}">
+                            
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0"
-                                                          From="CheckedPointerOver"
+                                        <VisualTransition From="CheckedPointerOver"
+                                                          GeneratedDuration="0"
                                                           To="Checked">
                                             <VisualTransition.GeneratedEasingFunction>
                                                 <CubicEase EasingMode="EaseOut" />
                                             </VisualTransition.GeneratedEasingFunction>
                                             <Storyboard>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KudosOutlineIcon" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
-                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-15" />
-                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                                                                               Storyboard.TargetName="KudosOutlineIcon">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                          Value="-15" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4"
+                                                                          Value="0" />
                                                 </DoubleAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="KudosIcon" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
-                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-15" />
-                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                                                                               Storyboard.TargetName="KudosIcon">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                          Value="-15" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4"
+                                                                          Value="0" />
                                                 </DoubleAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualTransition>
@@ -839,8 +999,10 @@
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver" />
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
                                             <!--<Setter Target="RootGrid.BorderBrush"
                                                     Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />-->
                                         </VisualState.Setters>
@@ -852,9 +1014,12 @@
 
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed" />
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPressed}" />
-                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
+                                                    Value="Pressed" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPressed}" />
+                                            <Setter Target="RootGrid.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -864,14 +1029,18 @@
 
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
-                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
+                                            <Setter Target="RootGrid.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ButtonForegroundDisabled}" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Checked">
                                         <VisualState.Setters>
-                                            <Setter Target="KudosIcon.Opacity" Value="1" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -880,10 +1049,14 @@
                                     </VisualState>
                                     <VisualState x:Name="CheckedPointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver" />
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
-                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
-                                            <Setter Target="KudosIcon.Opacity" Value="1" />
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
+                                            <Setter Target="ContentPresenter.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -892,10 +1065,14 @@
                                     </VisualState>
                                     <VisualState x:Name="CheckedPressed">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed" />
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPressed}" />
-                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
-                                            <Setter Target="KudosIcon.Opacity" Value="1" />
+                                            <Setter Target="RootGrid.(RevealBrush.State)"
+                                                    Value="Pressed" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundPressed}" />
+                                            <Setter Target="ContentPresenter.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -904,49 +1081,58 @@
                                     </VisualState>
                                     <VisualState x:Name="CheckedDisabled">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
-                                            <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
-                                            <Setter Target="KudosIcon.Opacity" Value="1" />
+                                            <Setter Target="RootGrid.Background"
+                                                    Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
+                                            <Setter Target="RootGrid.BorderBrush"
+                                                    Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ButtonForegroundDisabled}" />
+                                            <Setter Target="KudosIcon.Opacity"
+                                                    Value="1" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
 
                             <ContentControl x:Name="KudosOutlineIcon"
+                                            Foreground="#FFF53327"
                                             Width="16"
                                             Height="16"
                                             Margin="0,-2,6,2"
-                                            Foreground="#FFF53327"
-                                            RenderTransformOrigin="0.5,0.5"
-                                            Style="{StaticResource IconKudosOutlineStyle}">
+                                            Style="{StaticResource IconKudosOutlineStyle}"
+                                            RenderTransformOrigin="0.5,0.5">
                                 <ContentControl.RenderTransform>
                                     <CompositeTransform />
                                 </ContentControl.RenderTransform>
                             </ContentControl>
 
                             <ContentControl x:Name="KudosIcon"
+                                            Foreground="#FFF53327"
                                             Width="16"
                                             Height="16"
                                             Margin="0,-2,6,2"
-                                            Foreground="#FFF53327"
                                             Opacity="0"
-                                            RenderTransformOrigin="0.5,0.5"
-                                            Style="{StaticResource IconKudosStyle}">
+                                            Style="{StaticResource IconKudosStyle}"
+                                            RenderTransformOrigin="0.5,0.5">
                                 <ContentControl.RenderTransform>
                                     <CompositeTransform />
                                 </ContentControl.RenderTransform>
                             </ContentControl>
 
                             <ContentPresenter x:Name="ContentPresenter"
-                                              Grid.Column="1"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              AutomationProperties.AccessibilityView="Raw"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              ContentTransitions="{TemplateBinding ContentTransitions}" />
+                                              AutomationProperties.AccessibilityView="Raw" 
+                                              Grid.Column="1" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -957,26 +1143,46 @@
         <CornerRadius x:Key="ComboBoxItemCornerRadius">8</CornerRadius>
 
         <Style TargetType="ComboBox">
-            <Setter Property="Padding" Value="12,8" />
-            <Setter Property="MinWidth" Value="{ThemeResource ComboBoxThemeMinWidth}" />
-            <Setter Property="Foreground" Value="#FFF4F4F4" />
-            <Setter Property="Background" Value="#CCF53327" />
-            <Setter Property="BorderBrush" Value="#FFBCBCBC" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="TabNavigation" Value="Once" />
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
-            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
-            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True" />
-            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
-            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding"
+                    Value="12,8" />
+            <Setter Property="MinWidth"
+                    Value="{ThemeResource ComboBoxThemeMinWidth}" />
+            <Setter Property="Foreground"
+                    Value="#FFF4F4F4" />
+            <Setter Property="Background"
+                    Value="#CCF53327" />
+            <Setter Property="BorderBrush"
+                    Value="#FFBCBCBC" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="TabNavigation"
+                    Value="Once" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                    Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.HorizontalScrollMode"
+                    Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollMode"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled"
+                    Value="True" />
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
+                    Value="False" />
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
+                    Value="True" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalAlignment"
+                    Value="Top" />
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -991,17 +1197,19 @@
                             <Grid.Resources>
                                 <Storyboard x:Key="OverlayOpeningAnimation">
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0" />
-                                        <SplineDoubleKeyFrame KeySpline="0.1,0.9 0.2,1.0"
-                                                              KeyTime="0:0:0.383"
+                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0"
+                                                                Value="0.0" />
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.383"
+                                                              KeySpline="0.1,0.9 0.2,1.0"
                                                               Value="1.0" />
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
                                 <Storyboard x:Key="OverlayClosingAnimation">
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0" />
-                                        <SplineDoubleKeyFrame KeySpline="0.1,0.9 0.2,1.0"
-                                                              KeyTime="0:0:0.216"
+                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0"
+                                                                Value="1.0" />
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.216"
+                                                              KeySpline="0.1,0.9 0.2,1.0"
                                                               Value="0.0" />
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
@@ -1022,11 +1230,15 @@
                                     <VisualState x:Name="PointerOver">
 
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBackgroundPointerOver}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                           Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxBackgroundPointerOver}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBorderBrushPointerOver}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                           Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxBorderBrushPointerOver}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -1034,11 +1246,15 @@
                                     <VisualState x:Name="Pressed">
 
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBackgroundPressed}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                           Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxBackgroundPressed}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBorderBrushPressed}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                           Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxBorderBrushPressed}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -1046,23 +1262,35 @@
                                     <VisualState x:Name="Disabled">
 
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBackgroundDisabled}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                           Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxBackgroundDisabled}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                           Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundDisabled}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxForegroundDisabled}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundDisabled}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxForegroundDisabled}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextBlock" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxForegroundDisabled}}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextBlock"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxForegroundDisabled}}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropDownGlyph" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxDropDownGlyphForegroundDisabled}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropDownGlyph"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxDropDownGlyphForegroundDisabled}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -1075,17 +1303,25 @@
                                                              Storyboard.TargetProperty="Opacity"
                                                              To="1"
                                                              Duration="0" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBackground" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBackgroundBorderBrushFocused}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBackground"
+                                                                           Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxBackgroundBorderBrushFocused}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundFocused}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxForegroundFocused}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextBlock" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxForegroundFocused}}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextBlock"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxForegroundFocused}}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropDownGlyph" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxDropDownGlyphForegroundFocused}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropDownGlyph"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxDropDownGlyphForegroundFocused}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -1096,14 +1332,20 @@
                                                              Storyboard.TargetProperty="Opacity"
                                                              To="1"
                                                              Duration="0" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundFocusedPressed}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxForegroundFocusedPressed}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextBlock" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForegroundFocusedPressed}}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextBlock"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForegroundFocusedPressed}}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropDownGlyph" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxDropDownGlyphForegroundFocusedPressed}" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropDownGlyph"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{ThemeResource ComboBoxDropDownGlyphForegroundFocusedPressed}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -1128,32 +1370,32 @@
                                     <VisualState x:Name="Opened">
 
                                         <Storyboard>
-                                            <SplitOpenThemeAnimation ClosedTargetName="ContentPresenter"
+                                            <SplitOpenThemeAnimation OpenedTargetName="PopupBorder"
+                                                                     ClosedTargetName="ContentPresenter"
                                                                      OffsetFromCenter="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOffset}"
-                                                                     OpenedLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOpenedHeight}"
-                                                                     OpenedTargetName="PopupBorder" />
+                                                                     OpenedLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOpenedHeight}" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Closed">
 
                                         <Storyboard>
-                                            <SplitCloseThemeAnimation ClosedTargetName="ContentPresenter"
+                                            <SplitCloseThemeAnimation OpenedTargetName="PopupBorder"
+                                                                      ClosedTargetName="ContentPresenter"
                                                                       OffsetFromCenter="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOffset}"
-                                                                      OpenedLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOpenedHeight}"
-                                                                      OpenedTargetName="PopupBorder" />
+                                                                      OpenedLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOpenedHeight}" />
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
 
                             </VisualStateManager.VisualStateGroups>
                             <ContentPresenter x:Name="HeaderContentPresenter"
-                                              Margin="{ThemeResource ComboBoxHeaderThemeMargin}"
                                               x:DeferLoadStrategy="Lazy"
-                                              Content="{TemplateBinding Header}"
-                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              Margin="{ThemeResource ComboBoxHeaderThemeMargin}"
                                               FlowDirection="{TemplateBinding FlowDirection}"
                                               FontWeight="{ThemeResource ComboBoxHeaderThemeFontWeight}"
-                                              Visibility="Collapsed" />
+                                              Visibility="Collapsed"
+                                              Content="{TemplateBinding Header}"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}" />
                             <Border x:Name="Background"
                                     Grid.Row="1"
                                     Grid.ColumnSpan="2"
@@ -1167,54 +1409,54 @@
                                     Background="{ThemeResource ComboBoxBackgroundUnfocused}"
                                     BorderBrush="{ThemeResource ComboBoxBackgroundBorderBrushUnfocused}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{StaticResource ComboBoxCornerRadius}"
-                                    Opacity="0" />
+                                    Opacity="0"
+                                    CornerRadius="{StaticResource ComboBoxCornerRadius}" />
                             <ContentPresenter x:Name="ContentPresenter"
                                               Grid.Row="1"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <TextBlock x:Name="PlaceholderTextBlock"
-                                           Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForeground}}"
-                                           Text="{TemplateBinding PlaceholderText}" />
+                                           Text="{TemplateBinding PlaceholderText}"
+                                           Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForeground}}" />
                             </ContentPresenter>
                             <Path x:Name="DropDownGlyph"
-                                  Grid.Row="1"
-                                  Grid.Column="1"
                                   Width="8"
                                   Height="8"
+                                  Stretch="Uniform"
+                                  Data="M7 10l5 5 5-5z"
+                                  Grid.Row="1"
+                                  Grid.Column="1"
+                                  IsHitTestVisible="False"
                                   Margin="-4,0,16,0"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Center"
                                   AutomationProperties.AccessibilityView="Raw"
-                                  Data="M7 10l5 5 5-5z"
                                   Fill="#FFF4F4F4"
-                                  IsHitTestVisible="False"
-                                  Stretch="Uniform"
                                   UseLayoutRounding="False" />
                             <Popup x:Name="Popup">
                                 <Border x:Name="PopupBorder"
-                                        Margin="-6,0,0,0"
-                                        HorizontalAlignment="Stretch"
                                         Background="#FF1E2428"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="0"
-                                        CornerRadius="{StaticResource ComboBoxCornerRadius}">
+                                        CornerRadius="{StaticResource ComboBoxCornerRadius}"
+                                        Margin="-6,0,0,0"
+                                        HorizontalAlignment="Stretch">
                                     <ScrollViewer x:Name="ScrollViewer"
-                                                  MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownContentMinWidth}"
-                                                  AutomationProperties.AccessibilityView="Raw"
-                                                  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
                                                   Foreground="{ThemeResource ComboBoxDropDownForeground}"
-                                                  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                  MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownContentMinWidth}"
+                                                  VerticalSnapPointsType="OptionalSingle"
+                                                  VerticalSnapPointsAlignment="Near"
                                                   HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-                                                  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                                  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                                  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                                   IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
                                                   IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-                                                  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                                                  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-                                                  VerticalSnapPointsAlignment="Near"
-                                                  VerticalSnapPointsType="OptionalSingle"
-                                                  ZoomMode="Disabled">
+                                                  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                                  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                                  ZoomMode="Disabled"
+                                                  AutomationProperties.AccessibilityView="Raw">
                                         <ItemsPresenter Margin="{ThemeResource ComboBoxDropdownContentMargin}" />
                                     </ScrollViewer>
                                 </Border>
@@ -1226,24 +1468,32 @@
         </Style>
 
         <Style TargetType="ComboBoxItem">
-            <Setter Property="Foreground" Value="#FFF4F4F4" />
-            <Setter Property="Background" Value="{ThemeResource ComboBoxItemRevealBackground}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrush}" />
-            <Setter Property="BorderThickness" Value="{ThemeResource ComboBoxItemRevealBorderThemeThickness}" />
-            <Setter Property="TabNavigation" Value="Local" />
-            <Setter Property="Padding" Value="12,8" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="UseSystemFocusVisuals" Value="True" />
+            <Setter Property="Foreground"
+                    Value="#FFF4F4F4" />
+            <Setter Property="Background"
+                    Value="{ThemeResource ComboBoxItemRevealBackground}" />
+            <Setter Property="BorderBrush"
+                    Value="{ThemeResource ComboBoxItemRevealBorderBrush}" />
+            <Setter Property="BorderThickness"
+                    Value="{ThemeResource ComboBoxItemRevealBorderThemeThickness}" />
+            <Setter Property="TabNavigation"
+                    Value="Local" />
+            <Setter Property="Padding"
+                    Value="12,8" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="True" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBoxItem">
                         <Grid x:Name="LayoutRoot"
-                              Margin="6,2"
                               Background="{TemplateBinding Background}"
                               BorderBrush="{TemplateBinding BorderBrush}"
                               BorderThickness="{TemplateBinding BorderThickness}"
                               Control.IsTemplateFocusTarget="True"
-                              CornerRadius="{StaticResource ComboBoxItemCornerRadius}">
+                              CornerRadius="{StaticResource ComboBoxItemCornerRadius}"
+                              Margin="6,2">
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -1255,10 +1505,14 @@
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver" />
-                                            <Setter Target="LayoutRoot.Background" Value="#66F53327" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushPointerOver}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="#FFF4F4F4" />
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="#66F53327" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushPointerOver}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="#FFF4F4F4" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -1268,18 +1522,25 @@
 
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemRevealBackgroundDisabled}" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundDisabled}" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="{ThemeResource ComboBoxItemRevealBackgroundDisabled}" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ComboBoxItemForegroundDisabled}" />
                                         </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.Background" Value="#FFF53327" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushPressed}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="#FFF4F4F4" />
-                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushPressed}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="#FFF4F4F4" />
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -1289,9 +1550,12 @@
 
                                     <VisualState x:Name="Selected">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.Background" Value="#FFF53327" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushSelected}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="#FFF4F4F4" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushSelected}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="#FFF4F4F4" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -1300,24 +1564,34 @@
                                     </VisualState>
                                     <VisualState x:Name="SelectedUnfocused">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.Background" Value="#CCF53327" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedUnfocused}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="#FFF4F4F4" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="#CCF53327" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedUnfocused}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="#FFF4F4F4" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="SelectedDisabled">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemRevealBackgroundSelectedDisabled}" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedDisabled}" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="{ThemeResource ComboBoxItemRevealBackgroundSelectedDisabled}" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedDisabled}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="{ThemeResource ComboBoxItemForegroundSelectedDisabled}" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="SelectedPointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.Background" Value="#FFF53327" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedPointerOver}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="#FFF4F4F4" />
-                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedPointerOver}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="#FFF4F4F4" />
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)"
+                                                    Value="PointerOver" />
                                         </VisualState.Setters>
 
                                         <Storyboard>
@@ -1326,10 +1600,14 @@
                                     </VisualState>
                                     <VisualState x:Name="SelectedPressed">
                                         <VisualState.Setters>
-                                            <Setter Target="LayoutRoot.Background" Value="#FFF53327" />
-                                            <Setter Target="LayoutRoot.BorderBrush" Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedPressed}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="#FFF4F4F4" />
-                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed" />
+                                            <Setter Target="LayoutRoot.Background"
+                                                    Value="#FFF53327" />
+                                            <Setter Target="LayoutRoot.BorderBrush"
+                                                    Value="{ThemeResource ComboBoxItemRevealBorderBrushSelectedPressed}" />
+                                            <Setter Target="ContentPresenter.Foreground"
+                                                    Value="#FFF4F4F4" />
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)"
+                                                    Value="Pressed" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -1337,25 +1615,27 @@
                                     <VisualState x:Name="InputModeDefault" />
                                     <VisualState x:Name="TouchInputMode">
                                         <VisualState.Setters>
-                                            <Setter Target="ContentPresenter.Margin" Value="{ThemeResource ComboBoxItemThemeTouchPadding}" />
+                                            <Setter Target="ContentPresenter.Margin"
+                                                    Value="{ThemeResource ComboBoxItemThemeTouchPadding}" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="GameControllerInputMode">
                                         <VisualState.Setters>
-                                            <Setter Target="ContentPresenter.Margin" Value="{ThemeResource ComboBoxItemThemeGameControllerPadding}" />
+                                            <Setter Target="ContentPresenter.Margin"
+                                                    Value="{ThemeResource ComboBoxItemThemeGameControllerPadding}" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
 
                             </VisualStateManager.VisualStateGroups>
                             <ContentPresenter x:Name="ContentPresenter"
-                                              Margin="{TemplateBinding Padding}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Foreground="{TemplateBinding Foreground}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              ContentTransitions="{TemplateBinding ContentTransitions}"
-                                              Foreground="{TemplateBinding Foreground}" />
+                                              Margin="{TemplateBinding Padding}" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -1363,23 +1643,55 @@
         </Style>
 
         <Style TargetType="controls:RadialGauge">
-            <Setter Property="Width" Value="160" />
-            <Setter Property="Height" Value="160" />
-            <Setter Property="Minimum" Value="0" />
-            <Setter Property="Maximum" Value="100" />
-            <Setter Property="StepSize" Value="1" />
-            <Setter Property="IsInteractive" Value="False" />
-            <Setter Property="TickSpacing" Value="24" />
-            <Setter Property="ScaleWidth" Value="6" />
-            <Setter Property="MinAngle" Value="180" />
-            <Setter Property="MaxAngle" Value="45" />
-            <Setter Property="Unit" Value="Units" />
-            <Setter Property="ScaleBrush" Value="#FFBCBCBC" />
-            <Setter Property="TrailBrush" Value="#CCF53327" />
-            <Setter Property="TickBrush" Value="Transparent" />
-            <Setter Property="ScaleTickBrush" Value="Transparent" />
-            <Setter Property="NeedleWidth" Value="0" />
-            <Setter Property="TickLength" Value="0" />
+            <Setter Property="Width"
+                    Value="160" />
+            <Setter Property="Height"
+                    Value="160" />
+            <Setter Property="Minimum"
+                    Value="0" />
+            <Setter Property="Maximum"
+                    Value="100" />
+            <Setter Property="StepSize"
+                    Value="1" />
+            <Setter Property="IsInteractive"
+                    Value="False" />
+            <Setter Property="TickSpacing"
+                    Value="24" />
+            <Setter Property="ScaleWidth"
+                    Value="6" />
+            <Setter Property="MinAngle"
+                    Value="180" />
+            <Setter Property="MaxAngle"
+                    Value="45" />
+            <Setter Property="Unit"
+                    Value="Units" />
+            <Setter Property="ScaleBrush"
+                    Value="#FFBCBCBC" />
+            <Setter Property="TrailBrush"
+                    Value="#CCF53327" />
+            <Setter Property="TickBrush"
+                    Value="Transparent" />
+            <Setter Property="ScaleTickBrush"
+                    Value="Transparent" />
+            <!--
+            removed because these properties are removed in newer versions of UWP Community Toolkit
+            <Setter Property="UnitBrush"
+                    Value="Transparent" />
+            <Setter Property="ValueBrush"
+                    Value="Transparent" />-->
+            <Setter Property="NeedleWidth"
+                    Value="0" />
+            <Setter Property="TickLength"
+                    Value="0" />
         </Style>
+
+        <ResourceDictionary x:Key="RadialGaugeTheme">
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="RadialGaugeForegroundBrush" Color="Transparent"/>
+                    <SolidColorBrush x:Key="RadialGaugeAccentBrush" Color="Transparent"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
