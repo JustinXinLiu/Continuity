@@ -1,0 +1,138 @@
+﻿<Page x:Class="Sample.Lottie.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+      xmlns:controls="using:Continuity.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+      xmlns:local="using:Sample.Lottie"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+
+
+    <Grid Background="#FFEEEEEE">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              ColumnSpacing="16"
+              RowSpacing="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <controls:FlipToggleButton x:Name="L"
+                                       Grid.Column="2"
+                                       BorderBrush="#FFF62E66"
+                                       CheckedBackground="White"
+                                       Content="L"
+                                       IsChecked="True"
+                                       PointerOverBackground="#FFF62E66">
+                <controls:FlipToggleButton.CheckedContent>
+                    <Grid />
+                </controls:FlipToggleButton.CheckedContent>
+            </controls:FlipToggleButton>
+            <controls:FlipToggleButton x:Name="O"
+                                       Grid.Row="1"
+                                       Grid.Column="2"
+                                       BorderBrush="#FFFFD836"
+                                       CheckedBackground="White"
+                                       Content="O"
+                                       IsChecked="True"
+                                       PointerOverBackground="#FFFFD836">
+                <controls:FlipToggleButton.CheckedContent>
+                    <Grid />
+                </controls:FlipToggleButton.CheckedContent>
+            </controls:FlipToggleButton>
+            <controls:FlipToggleButton x:Name="T1"
+                                       Grid.Row="2"
+                                       Grid.Column="2"
+                                       BorderBrush="#FF72C30E"
+                                       CheckedBackground="White"
+                                       Content="T"
+                                       IsChecked="True"
+                                       PointerOverBackground="#FF72C30E">
+                <controls:FlipToggleButton.CheckedContent>
+                    <Grid />
+                </controls:FlipToggleButton.CheckedContent>
+            </controls:FlipToggleButton>
+            <controls:FlipToggleButton x:Name="T2"
+                                       Grid.Row="3"
+                                       Grid.Column="2"
+                                       BorderBrush="#FF905F52"
+                                       CheckedBackground="White"
+                                       Content="T"
+                                       IsChecked="True"
+                                       PointerOverBackground="#FF905F52">
+                <controls:FlipToggleButton.CheckedContent>
+                    <Grid />
+                </controls:FlipToggleButton.CheckedContent>
+            </controls:FlipToggleButton>
+            <controls:FlipToggleButton x:Name="I"
+                                       Grid.Row="3"
+                                       Grid.Column="3"
+                                       BorderBrush="#FF0E99C3"
+                                       CheckedBackground="White"
+                                       Content="I"
+                                       IsChecked="True"
+                                       PointerOverBackground="#FF0E99C3">
+                <controls:FlipToggleButton.CheckedContent>
+                    <Grid />
+                </controls:FlipToggleButton.CheckedContent>
+            </controls:FlipToggleButton>
+            <controls:FlipToggleButton x:Name="E"
+                                       Grid.Row="3"
+                                       Grid.Column="4"
+                                       BorderBrush="#FFD81EFB"
+                                       CheckedBackground="White"
+                                       Content="E"
+                                       IsChecked="True"
+                                       PointerOverBackground="#FFD81EFB">
+                <controls:FlipToggleButton.CheckedContent>
+                    <Grid />
+                </controls:FlipToggleButton.CheckedContent>
+            </controls:FlipToggleButton>
+        </Grid>
+
+        <controls:FloatingButton x:Name="Go"
+                                 Grid.Row="2"
+                                 Grid.Column="1"
+                                 Margin="0,80,0,24"
+                                 extensions:VisualExtensions.NormalizedCenterPoint="0.5,0.5,0"
+                                 Click="OnGoClick"
+                                 Content="Go">
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation From="0,-200,0"
+                                                 To="0,0,0"
+                                                 Duration="0:0:0.8" />
+                <animations:ScaleAnimation From="0.6"
+                                           To="1"
+                                           Duration="0:0:0.8" />
+                <animations:OpacityAnimation From="0"
+                                             To="1"
+                                             Duration="0:0:0.8" />
+            </animations:Implicit.ShowAnimations>
+        </controls:FloatingButton>
+    </Grid>
+</Page>
