@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Continuity.Controls;
+using Microsoft.UI.Xaml.Controls;
+using Continuity.Extensions;
+using System.Linq;
 
 namespace Sample.Lottie
 {
@@ -26,7 +29,7 @@ namespace Sample.Lottie
             }
         }
 
-        private async void OnGoClick(object sender, RoutedEventArgs e) => 
+        private async void OnGoClick(object sender, RoutedEventArgs e) =>
             await FlipToggleButtonsAsync();
 
         private async Task FlipToggleButtonsAsync(int duration = 50)
@@ -39,13 +42,21 @@ namespace Sample.Lottie
 
             foreach (var toggle in Toggles)
             {
-                toggle.Checked += (s,e) =>
-                {
+                var player = toggle.Children().OfType<AnimatedVisualPlayer>().Single();
 
+                toggle.Checked += async (s, e) =>
+                {
+                    if (!player.IsPlaying)
+                    {
+                        player.Opacity = 1;
+                        player.AutoPlay = true;
+                    }
+
+                    player.Resume();
                 };
                 toggle.Unchecked += (s, e) =>
                 {
-
+                    player.Pause();
                 };
             }
         }

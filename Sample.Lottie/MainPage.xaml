@@ -6,7 +6,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
       xmlns:local="using:Sample.Lottie"
+      xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:winui="using:Microsoft.UI.Xaml.Controls"
       mc:Ignorable="d">
 
 
@@ -50,7 +52,9 @@
                                        IsChecked="True"
                                        PointerOverBackground="#FFF62E66">
                 <controls:FlipToggleButton.CheckedContent>
-                    <Grid />
+                    <winui:AnimatedVisualPlayer AutoPlay="False" Opacity="0">
+                        <lottie:LottieVisualSource UriSource="ms-appx:///Assets/LottieFiles/1370-confetti.json" />
+                    </winui:AnimatedVisualPlayer>
                 </controls:FlipToggleButton.CheckedContent>
             </controls:FlipToggleButton>
             <controls:FlipToggleButton x:Name="O"
@@ -62,7 +66,9 @@
                                        IsChecked="True"
                                        PointerOverBackground="#FFFFD836">
                 <controls:FlipToggleButton.CheckedContent>
-                    <Grid />
+                    <winui:AnimatedVisualPlayer AutoPlay="False" Opacity="0">
+                        <lottie:LottieVisualSource UriSource="ms-appx:///Assets/LottieFiles/714-water-loader.json" />
+                    </winui:AnimatedVisualPlayer>
                 </controls:FlipToggleButton.CheckedContent>
             </controls:FlipToggleButton>
             <controls:FlipToggleButton x:Name="T1"
@@ -74,7 +80,9 @@
                                        IsChecked="True"
                                        PointerOverBackground="#FF72C30E">
                 <controls:FlipToggleButton.CheckedContent>
-                    <Grid />
+                    <winui:AnimatedVisualPlayer AutoPlay="False" Opacity="0">
+                        <lottie:LottieVisualSource UriSource="ms-appx:///Assets/LottieFiles/985-phonological.json" />
+                    </winui:AnimatedVisualPlayer>
                 </controls:FlipToggleButton.CheckedContent>
             </controls:FlipToggleButton>
             <controls:FlipToggleButton x:Name="T2"
@@ -86,7 +94,9 @@
                                        IsChecked="True"
                                        PointerOverBackground="#FF905F52">
                 <controls:FlipToggleButton.CheckedContent>
-                    <Grid />
+                    <winui:AnimatedVisualPlayer AutoPlay="False" Opacity="0">
+                        <lottie:LottieVisualSource UriSource="ms-appx:///Assets/LottieFiles/427-happy-birthday.json" />
+                    </winui:AnimatedVisualPlayer>
                 </controls:FlipToggleButton.CheckedContent>
             </controls:FlipToggleButton>
             <controls:FlipToggleButton x:Name="I"
@@ -98,7 +108,9 @@
                                        IsChecked="True"
                                        PointerOverBackground="#FF0E99C3">
                 <controls:FlipToggleButton.CheckedContent>
-                    <Grid />
+                    <winui:AnimatedVisualPlayer AutoPlay="False" Opacity="0">
+                        <lottie:LottieVisualSource UriSource="ms-appx:///Assets/LottieFiles/43-emoji-wink.json" />
+                    </winui:AnimatedVisualPlayer>
                 </controls:FlipToggleButton.CheckedContent>
             </controls:FlipToggleButton>
             <controls:FlipToggleButton x:Name="E"
@@ -110,7 +122,9 @@
                                        IsChecked="True"
                                        PointerOverBackground="#FFD81EFB">
                 <controls:FlipToggleButton.CheckedContent>
-                    <Grid />
+                    <winui:AnimatedVisualPlayer AutoPlay="False" Opacity="0">
+                        <lottie:LottieVisualSource UriSource="ms-appx:///Assets/LottieFiles/51-preloader.json" />
+                    </winui:AnimatedVisualPlayer>
                 </controls:FlipToggleButton.CheckedContent>
             </controls:FlipToggleButton>
         </Grid>
